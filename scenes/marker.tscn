@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://go3uoaxvmabe"]
+
+[ext_resource type="Texture2D" uid="uid://cs8gdb5suhtdi" path="res://icon.svg" id="1_h3ns6"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Marker" type="TextureRect" parent="."]
+offset_left = -32.0
+offset_top = -11.0
+offset_right = 32.0
+offset_bottom = 11.0
+pivot_offset = Vector2(32, 11)
+texture = ExtResource("1_h3ns6")
+expand_mode = 1

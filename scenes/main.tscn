@@ -60,11 +60,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RhythmDisplay" type="MarginContainer" parent="UI/RootContainer"]
-layout_mode = 0
-offset_left = 538.0
-offset_top = 136.0
-offset_right = 1238.0
-offset_bottom = 836.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -350.0
+offset_right = 350.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 4
 script = ExtResource("9_ytxmj")
 marker = ExtResource("10_avcd2")
@@ -75,7 +82,32 @@ texture = ExtResource("11_21nqa")
 expand_mode = 3
 script = ExtResource("9_w5njq")
 
-[node name="Markers" type="Control" parent="UI/RootContainer/RhythmDisplay/RecordIcon"]
+[node name="TextureRect" type="TextureRect" parent="UI/RootContainer/RhythmDisplay/RecordIcon"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -712.0
+offset_top = -5.0
+offset_right = -350.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_t1owy")
+
+[node name="CenterAnchor" type="Control" parent="UI/RootContainer/RhythmDisplay/RecordIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Markers" type="Control" parent="UI/RootContainer/RhythmDisplay/RecordIcon/CenterAnchor"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,17 +121,8 @@ offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterAnchor" type="Control" parent="UI/RootContainer/RhythmDisplay/RecordIcon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/RootContainer/RhythmDisplay/RecordIcon/CenterAnchor"]
+[node name="TextureRect2" type="TextureRect" parent="UI/RootContainer/RhythmDisplay/RecordIcon/CenterAnchor"]
+modulate = Color(0.482353, 0.482353, 0.482353, 1)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

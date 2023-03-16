@@ -14,8 +14,11 @@ extends Node
 signal Tick(timeSeconds, timeBeats)
 signal SyncUpdate(timeInBeats,delta)
 
+signal PhaseSwitch
+
 @export var stream : AudioStreamOggVorbis
 @export var syncUpdateRate = 1.0
+@export var phaseSwitchRate = 8.0
 
 
 var time_begin
@@ -24,6 +27,7 @@ var time_delay
 var bpm
 var bps
 var nextSyncUpdate = 0.0
+var nextPhaseUpdate = 7.0
 var time
 var timeInBeats = 0
 
@@ -61,4 +65,5 @@ func calculateTime():
 		emit_signal("SyncUpdate",snapped(timeInBeats,syncUpdateRate),syncUpdateRate)
 	
 
-
+		if is_zero_approx( fposmod(snapped(timeInBeats,syncUpdateRate),8)):
+			emit_signal("PhaseSwitch")

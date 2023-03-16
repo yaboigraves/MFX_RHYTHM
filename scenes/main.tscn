@@ -29,6 +29,7 @@ stream = ExtResource("2_pdwic")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
+volume_db = -20.0
 
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("3_3xqna")
@@ -136,5 +137,6 @@ grow_horizontal = 0
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_t1owy")
 
+[connection signal="PhaseSwitch" from="Metronome" to="UI/RootContainer/RhythmDisplay" method="_on_metronome_phase_switch"]
 [connection signal="Tick" from="Metronome" to="UI/RootContainer/RhythmDisplay/RecordIcon" method="_on_metronome_tick"]
 [connection signal="Hit" from="PlayerInputHandler" to="." method="_on_player_input_handler_hit"]

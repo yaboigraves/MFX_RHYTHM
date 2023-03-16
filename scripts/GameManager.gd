@@ -5,6 +5,9 @@ extends Node
 signal RecordedHit
 
 
+#be really dumb here just to prototype
+
+
 #so lets start by just assuming we want to spawn a 
 func _on_player_input_handler_hit(index) -> void:
 	display.SpawnMarker(index,$Metronome.timeInBeats)

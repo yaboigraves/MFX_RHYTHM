@@ -34,6 +34,7 @@ var timeInBeats = 0
 
 func _ready() -> void:
 	set_process(false)
+	$AudipPlayer.stream = stream
 	Start()
 	
 func Start():

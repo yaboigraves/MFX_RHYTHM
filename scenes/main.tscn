@@ -1,31 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnxuemo8bd7pl"]
+[gd_scene load_steps=11 format=3 uid="uid://bnxuemo8bd7pl"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
 [ext_resource type="Script" path="res://scripts/PlayerInputHandler.gd" id="3_3xqna"]
+[ext_resource type="AudioStream" uid="uid://r2s0eoif2lis" path="res://scenes/devonwho-purple-91bpm.ogg" id="3_jvkht"]
 [ext_resource type="AudioStream" uid="uid://ckop5njatgp7c" path="res://scripts/bd-02.wav" id="4_va1oi"]
 [ext_resource type="AudioStream" uid="uid://cqvgtmwkxt6v3" path="res://scripts/hh-02.wav" id="5_i0vcd"]
 [ext_resource type="AudioStream" uid="uid://dqsfpfxut1pr3" path="res://scripts/rim+cy2.wav" id="6_u8ewd"]
 [ext_resource type="AudioStream" uid="uid://ow4dlydebw1w" path="res://scripts/sd-01.wav" id="7_4b261"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="8_n5iqg"]
-[ext_resource type="Script" path="res://scenes/RadialDisplay.gd" id="9_w5njq"]
-[ext_resource type="Script" path="res://scripts/RhythmDisplay.gd" id="9_ytxmj"]
-[ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="10_avcd2"]
-[ext_resource type="Texture2D" uid="uid://dob4hubvkja0x" path="res://14.png" id="11_21nqa"]
-
-[sub_resource type="Gradient" id="Gradient_ykwei"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_t1owy"]
-gradient = SubResource("Gradient_ykwei")
+[ext_resource type="PackedScene" uid="uid://k0xmbgkh6qsr" path="res://radial_rhythm_display.tscn" id="13_yd0xq"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("display")]
 script = ExtResource("8_n5iqg")
-display = NodePath("UI/RootContainer/RhythmDisplay")
+display = NodePath("")
 
 [node name="Metronome" type="Node" parent="."]
 script = ExtResource("1_mpivx")
-stream = ExtResource("2_pdwic")
+stream = ExtResource("3_jvkht")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
@@ -60,83 +52,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RhythmDisplay" type="MarginContainer" parent="UI/RootContainer"]
+[node name="RadialRhythmDisplay" parent="UI/RootContainer" instance=ExtResource("13_yd0xq")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -350.0
-offset_right = 350.0
-offset_bottom = 350.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 4
-script = ExtResource("9_ytxmj")
-marker = ExtResource("10_avcd2")
-
-[node name="RecordIcon" type="TextureRect" parent="UI/RootContainer/RhythmDisplay"]
-layout_mode = 2
-texture = ExtResource("11_21nqa")
-expand_mode = 3
-script = ExtResource("9_w5njq")
-
-[node name="TextureRect" type="TextureRect" parent="UI/RootContainer/RhythmDisplay/RecordIcon"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -712.0
-offset_top = -5.0
-offset_right = -350.0
-offset_bottom = 5.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_t1owy")
-
-[node name="CenterAnchor" type="Control" parent="UI/RootContainer/RhythmDisplay/RecordIcon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+offset_left = -505.5
+offset_top = -505.5
+offset_right = 505.5
+offset_bottom = 505.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Markers" type="Control" parent="UI/RootContainer/RhythmDisplay/RecordIcon/CenterAnchor"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -350.0
-offset_right = 350.0
-offset_bottom = 350.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect2" type="TextureRect" parent="UI/RootContainer/RhythmDisplay/RecordIcon/CenterAnchor"]
-modulate = Color(0.482353, 0.482353, 0.482353, 1)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -362.0
-offset_top = -5.0
-offset_bottom = 5.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_t1owy")
-
-[connection signal="PhaseSwitch" from="Metronome" to="UI/RootContainer/RhythmDisplay" method="_on_metronome_phase_switch"]
-[connection signal="Tick" from="Metronome" to="UI/RootContainer/RhythmDisplay/RecordIcon" method="_on_metronome_tick"]
+[connection signal="SpawnHit" from="." to="UI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
+[connection signal="Tick" from="Metronome" to="UI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]
+[connection signal="Escape" from="PlayerInputHandler" to="UI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Hit" from="PlayerInputHandler" to="." method="_on_player_input_handler_hit"]

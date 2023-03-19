@@ -12,7 +12,9 @@ offset_right = 100.0
 offset_bottom = 100.0
 script = ExtResource("1_vay8g")
 marker = ExtResource("2_fhsth")
-centerOffset = 0.15
+outerOffset = 0.9
+beatDivisonColors = Color(1, 0.862745, 0.839216, 0.615686)
+laneLineResolution = 90
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

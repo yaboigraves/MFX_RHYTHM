@@ -65,6 +65,7 @@ offset_right = 505.5
 offset_bottom = 505.5
 grow_horizontal = 2
 grow_vertical = 2
+beatsPerRotation = 16
 
 [connection signal="SpawnHit" from="." to="UI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="Tick" from="Metronome" to="UI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]

@@ -1,6 +1,10 @@
 class_name RadialRhythmDisplay
 extends Control
 
+#so this is a base protoype that can be extended to whatever is needed
+#lets make another one for a rhythm demo specifically now
+
+
 @export var origin : Vector2 = Vector2.RIGHT
 
 @export var marker : PackedScene
@@ -40,9 +44,10 @@ func _ready() -> void:
 	CreateLaneLines()
 	CreateBeatGridLines()
 
-	
+
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 	%Arm.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
+
 
 func CreateBeatGridLines():
 	for i in range(beatsPerRotation):

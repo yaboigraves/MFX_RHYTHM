@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8ohv0w8ksihf"]
+
+[ext_resource type="Script" path="res://scenes/InputWindowRadialRhythmDisplay.gd" id="1_ifxlp"]
+[ext_resource type="Texture2D" uid="uid://dhf0km4u7ccxo" path="res://scenes/14.png" id="3_djovw"]
+[ext_resource type="Texture2D" uid="uid://cs8gdb5suhtdi" path="res://icon.svg" id="4_qhvc4"]
+
+[node name="InputWindowRadialRhythmDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 100.0
+script = ExtResource("1_ifxlp")
+origin = Vector2(1, 2.08165e-12)
+outerOffset = 0.9
+rhythmArmVisible = false
+laneMargins = 50
+beatsPerRotation = 16
+laneLineResolution = 90
+laneColors = Array[Color]([Color(0.929412, 0, 0, 1), Color(0, 0, 0.984314, 1), Color(0, 0.968627, 0, 1)])
+backgroundColor = Color(0.145098, 0.145098, 0.145098, 1)
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_djovw")
+expand_mode = 1
+
+[node name="CenterPivot" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineRenderers" type="Control" parent="CenterPivot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Markers" type="Control" parent="CenterPivot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ArmContainer" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Arm" type="TextureRect" parent="ArmContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(2.08165e-12, 5)
+texture = ExtResource("4_qhvc4")
+expand_mode = 1

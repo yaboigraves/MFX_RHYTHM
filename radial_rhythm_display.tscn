@@ -11,10 +11,13 @@ anchors_preset = 0
 offset_right = 100.0
 offset_bottom = 100.0
 script = ExtResource("1_vay8g")
+origin = Vector2(1, 2.08165e-12)
 marker = ExtResource("2_fhsth")
 outerOffset = 0.9
-beatDivisonColors = Color(1, 0.862745, 0.839216, 0.615686)
+laneMargins = 50
 laneLineResolution = 90
+laneColors = Array[Color]([Color(0.929412, 0, 0, 1), Color(0, 0, 0.984314, 1), Color(0, 0.968627, 0, 1)])
+backgroundColor = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -70,7 +73,6 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 3.14159
 
 [node name="Arm" type="TextureRect" parent="ArmContainer"]
 unique_name_in_owner = true

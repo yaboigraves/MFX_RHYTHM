@@ -65,6 +65,7 @@ offset_right = 505.5
 offset_bottom = 505.5
 grow_horizontal = 2
 grow_vertical = 2
+beatDivisonColors = Color(0.980392, 0.921569, 0.843137, 1)
 beatsPerRotation = 16
 
 [connection signal="SpawnHit" from="." to="UI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]

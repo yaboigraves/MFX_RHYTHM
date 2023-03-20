@@ -1,30 +1,28 @@
 class_name RadialRhythmDisplay
 extends Control
 
+@export var origin : Vector2 = Vector2.RIGHT
+
 @export var marker : PackedScene
 @export var numLanes : int = 3
 
 @export_range(0,1) var centerOffset: float = 0.1
 @export_range(0,1) var outerOffset: float = 0.8
 
-
-@onready var totalLanesSize:float
-
 @export var rhythmArmVisible: bool = true
-@export var backgroundSpins: bool = false
-
 
 @export var laneMargins = 20
 @export var beatDivisonColors: Color = Color.ANTIQUE_WHITE
 @export var beatsPerRotation:int = 8
 
 @export var laneLineResolution = 45
-@onready var laneSize : float 
 
-@export var startingPosition : Vector2 = Vector2.LEFT
+@export var laneColors: Array[Color]
+@export var backgroundColor : Color
 
+var totalLanesSize:float
+var laneSize : float 
 var markers = []
-
 var startDist : float 
 var endDist : float
 
@@ -38,14 +36,13 @@ func _ready() -> void:
 	totalLanesSize = endDist - startDist
 	laneSize = totalLanesSize/numLanes
 	
-	
 	CreateLaneLinesBackground()
 	CreateLaneLines()
 	CreateBeatGridLines()
 
 	
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
-	%Arm.rotation =  ((timeBeats * PI)/(beatsPerRotation/2.0))
+	%Arm.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 
 func CreateBeatGridLines():
 	for i in range(beatsPerRotation):
@@ -61,7 +58,7 @@ func CreateLaneLinesBackground():
 	var laneLine = Line2D.new()
 	laneLine.width = totalLanesSize
 	laneLine.end_cap_mode = Line2D.LINE_CAP_ROUND
-	laneLine.default_color = Color.DARK_GRAY
+	laneLine.default_color = backgroundColor
 	
 	for i in range(laneLineResolution):
 		laneLine.add_point( Vector2(startDist + (totalLanesSize/2.0),0).rotated(i * ((2 * PI)/ laneLineResolution)))
@@ -75,14 +72,11 @@ func CreateLaneLines():
 		var laneLine = Line2D.new()
 		laneLine.width = laneSize - laneMargins
 		laneLine.end_cap_mode = Line2D.LINE_CAP_ROUND
-		#okie doke
-		#so if we know the lane size, we want each of these to be laneSize/2 + (laneSize * i)
+		laneLine.default_color = laneColors[j]
+		
 		for i in range(laneLineResolution):
 			laneLine.add_point(Vector2(startDist + (laneSize/2.0) + (j * laneSize),0).rotated(i * (2*PI)/ laneLineResolution))
-#			laneLine.add_point( Vector2(startDist + (laneSize * i),0).rotated(i * ((2 * PI)/ laneLineResolution)))
-		
 		laneLine.add_point(Vector2(startDist + (laneSize/2.0) + (j * laneSize),0).rotated(0 * (2*PI)/ laneLineResolution))
-		
 		
 		%LineRenderers.add_child(laneLine)
 
@@ -92,7 +86,7 @@ func SpawnMarker(index,beatPosition: float):
 		%CenterPivot/Markers.add_child(markerInst)
 		var beatPos = fposmod(beatPosition,beatsPerRotation)/beatsPerRotation
 		beatPos *= 2 * PI
-		markerInst.position = Vector2(-(startDist + (laneSize/2.0) + (index* laneSize)),0).rotated(beatPos)
+		markerInst.position = (origin * (startDist + (laneSize/2.0) + (index * laneSize))).rotated(beatPos)
 		markers.append(markerInst)
 		return markerInst
 
@@ -106,7 +100,6 @@ func ClearAllMarkers():
 	for marker in markers:
 		marker.queue_free()
 	markers.clear()
-	
 	
 #===DEBUG===
 func _on_main_spawn_hit(index, timeInBeats) -> void:

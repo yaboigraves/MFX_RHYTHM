@@ -26,8 +26,24 @@ func _ready():
 
 
 func DrawInputWindows():
-	pass
-
+	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
+	for index in range(numLanes):
+		var poly = Polygon2D.new()
+		
+			
+		var topBound = origin.rotated(-windowSizeRadians)
+		var bottomBound = origin.rotated(windowSizeRadians)
+		
+		var points : PackedVector2Array = [
+			topBound * (startDist + (laneMargins/2.0) +  + (index * laneSize)) , 
+			topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (index * laneSize)), 
+			bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (index * laneSize)), 
+			bottomBound *(startDist + (laneMargins/2.0) + (index * laneSize)) 
+		]
+		
+		poly.set_polygon(points)
+		
+		%InputWindows.add_child(poly)
 
 func SpawnMarker(index,beatPosition: float):
 	#so to start lets just like, draw a polygon at all

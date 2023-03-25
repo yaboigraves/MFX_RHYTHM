@@ -64,7 +64,10 @@ func calculateTime():
 	if timeInBeats >= nextSyncUpdate:
 		nextSyncUpdate = snapped(timeInBeats,syncUpdateRate) + syncUpdateRate
 		emit_signal("SyncUpdate",snapped(timeInBeats,syncUpdateRate),syncUpdateRate)
-	
 
 		if is_zero_approx( fposmod(snapped(timeInBeats,syncUpdateRate),8)):
 			emit_signal("PhaseSwitch")
+
+
+func GetTimeInBeatsWithLatency():
+	pass

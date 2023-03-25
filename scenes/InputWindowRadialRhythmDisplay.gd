@@ -3,6 +3,7 @@ extends RadialRhythmDisplay
 
 @export var windowSize : float = 0.015625
 
+@export var markerColors: Array[Color]
 
 #ok fist things first
 #we gotta change how spawning markers works
@@ -28,9 +29,10 @@ func _ready():
 func DrawInputWindows():
 	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
 	for index in range(numLanes):
-		var poly = Polygon2D.new()
-		
-			
+		var poly = OutlinedPolygon2D.new()
+		poly.outlineWidth = 10
+		poly.color =  markerColors[index]
+		poly.color.a = 0.5
 		var topBound = origin.rotated(-windowSizeRadians)
 		var bottomBound = origin.rotated(windowSizeRadians)
 		
@@ -41,14 +43,15 @@ func DrawInputWindows():
 			bottomBound *(startDist + (laneMargins/2.0) + (index * laneSize)) 
 		]
 		
+		
 		poly.set_polygon(points)
 		
 		%InputWindows.add_child(poly)
 
 func SpawnMarker(index,beatPosition: float):
 	#so to start lets just like, draw a polygon at all
-	var poly = Polygon2D.new()
-	
+	var poly = OutlinedPolygon2D.new()
+	poly.outlineWidth = 0
 	#OK
 	#so...
 	#first we gotta figure out where our anchor is
@@ -75,7 +78,7 @@ func SpawnMarker(index,beatPosition: float):
 		bottomBound *(startDist + (laneMargins/2.0) + (index * laneSize)) 
 	]
 	
-	
+	poly.color = markerColors[index]
 	poly.set_polygon(points)
 	%Markers.add_child(poly)
 	

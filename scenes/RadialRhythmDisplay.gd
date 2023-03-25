@@ -62,6 +62,7 @@ func CreateBeatGridLines():
 func CreateLaneLinesBackground():
 	var laneLine = Line2D.new()
 	laneLine.width = totalLanesSize
+	laneLine.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	laneLine.end_cap_mode = Line2D.LINE_CAP_ROUND
 	laneLine.default_color = backgroundColor
 	
@@ -76,7 +77,7 @@ func CreateLaneLines():
 	for j in range(0,numLanes):
 		var laneLine = Line2D.new()
 		laneLine.width = laneSize - laneMargins
-		laneLine.end_cap_mode = Line2D.LINE_CAP_ROUND
+	
 		laneLine.default_color = laneColors[j]
 		
 		for i in range(laneLineResolution):

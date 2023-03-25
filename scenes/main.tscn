@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnxuemo8bd7pl"]
+[gd_scene load_steps=19 format=3 uid="uid://bnxuemo8bd7pl"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -6,14 +6,20 @@
 [ext_resource type="AudioStream" uid="uid://r2s0eoif2lis" path="res://scenes/devonwho-purple-91bpm.ogg" id="3_jvkht"]
 [ext_resource type="AudioStream" uid="uid://ckop5njatgp7c" path="res://scripts/bd-02.wav" id="4_va1oi"]
 [ext_resource type="AudioStream" uid="uid://cqvgtmwkxt6v3" path="res://scripts/hh-02.wav" id="5_i0vcd"]
+[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="5_nqyvc"]
 [ext_resource type="AudioStream" uid="uid://dqsfpfxut1pr3" path="res://scripts/rim+cy2.wav" id="6_u8ewd"]
 [ext_resource type="AudioStream" uid="uid://ow4dlydebw1w" path="res://scripts/sd-01.wav" id="7_4b261"]
+[ext_resource type="Script" path="res://scenes/Player.gd" id="8_cslea"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="8_n5iqg"]
+[ext_resource type="Script" path="res://scripts/GameMode.gd" id="8_r1w7j"]
+[ext_resource type="Script" path="res://scripts/RecordState.gd" id="9_cr7vw"]
+[ext_resource type="Script" path="res://scripts/VerifyState.gd" id="10_5eqh6"]
 [ext_resource type="PackedScene" uid="uid://b8ohv0w8ksihf" path="res://input_windowradial_rhythm_display.tscn" id="11_oivm5"]
+[ext_resource type="Script" path="res://scripts/IdleState.gd" id="11_yjrf7"]
 [ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="12_cuo1v"]
 [ext_resource type="PackedScene" uid="uid://k0xmbgkh6qsr" path="res://radial_rhythm_display.tscn" id="13_yd0xq"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("display")]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("display")]
 script = ExtResource("8_n5iqg")
 display = NodePath("")
 
@@ -23,30 +29,11 @@ stream = ExtResource("3_jvkht")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
-volume_db = -20.0
+volume_db = -80.0
 
-[node name="PlayerInputHandler" type="Node" parent="."]
-script = ExtResource("3_3xqna")
+[node name="RadialUI" type="CanvasLayer" parent="."]
 
-[node name="DrumPlayer1" type="AudioStreamPlayer" parent="PlayerInputHandler"]
-stream = ExtResource("4_va1oi")
-max_polyphony = 4
-
-[node name="DrumPlayer2" type="AudioStreamPlayer" parent="PlayerInputHandler"]
-stream = ExtResource("5_i0vcd")
-max_polyphony = 4
-
-[node name="DrumPlayer3" type="AudioStreamPlayer" parent="PlayerInputHandler"]
-stream = ExtResource("6_u8ewd")
-max_polyphony = 4
-
-[node name="DrumPlayer4" type="AudioStreamPlayer" parent="PlayerInputHandler"]
-stream = ExtResource("7_4b261")
-max_polyphony = 4
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="RootContainer" type="Control" parent="UI"]
+[node name="RootContainer" type="Control" parent="RadialUI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,7 +41,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RadialRhythmDisplay" parent="UI/RootContainer" instance=ExtResource("13_yd0xq")]
+[node name="RadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("13_yd0xq")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -68,19 +55,60 @@ offset_right = 505.5
 offset_bottom = 505.5
 grow_horizontal = 2
 grow_vertical = 2
-beatsPerRotation = 16
 
-[node name="InputWindowRadialRhythmDisplay" parent="UI/RootContainer" instance=ExtResource("11_oivm5")]
+[node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("11_oivm5")]
 offset_left = 455.0
 offset_top = 38.0
 offset_right = 1375.0
 offset_bottom = 958.0
 marker = ExtResource("12_cuo1v")
+beatsPerRotation = 8
 
-[connection signal="SpawnHit" from="." to="UI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
-[connection signal="SpawnHit" from="." to="UI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
-[connection signal="Tick" from="Metronome" to="UI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]
-[connection signal="Tick" from="Metronome" to="UI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_tick"]
-[connection signal="Escape" from="PlayerInputHandler" to="UI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
-[connection signal="Escape" from="PlayerInputHandler" to="UI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]
-[connection signal="Hit" from="PlayerInputHandler" to="." method="_on_player_input_handler_hit"]
+[node name="GameMode" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("8_r1w7j")
+player = NodePath("Player")
+
+[node name="Player" type="Node" parent="GameMode"]
+script = ExtResource("8_cslea")
+
+[node name="PlayerStateMachine" type="Node" parent="GameMode/Player"]
+unique_name_in_owner = true
+script = ExtResource("5_nqyvc")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
+script = ExtResource("11_yjrf7")
+
+[node name="RecordState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
+script = ExtResource("9_cr7vw")
+
+[node name="VerifyState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
+script = ExtResource("10_5eqh6")
+
+[node name="PlayerInputHandler" type="Node" parent="GameMode/Player"]
+script = ExtResource("3_3xqna")
+
+[node name="DrumPlayer1" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
+stream = ExtResource("4_va1oi")
+max_polyphony = 4
+
+[node name="DrumPlayer2" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
+stream = ExtResource("5_i0vcd")
+max_polyphony = 4
+
+[node name="DrumPlayer3" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
+stream = ExtResource("6_u8ewd")
+max_polyphony = 4
+
+[node name="DrumPlayer4" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
+stream = ExtResource("7_4b261")
+max_polyphony = 4
+
+[connection signal="SpawnHit" from="." to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
+[connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
+[connection signal="PhaseSwitch" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_phase_switch"]
+[connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]
+[connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_tick"]
+[connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
+[connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]
+[connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/Player" method="_on_player_input_handler_hit"]

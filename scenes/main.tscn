@@ -24,6 +24,7 @@ script = ExtResource("8_n5iqg")
 display = NodePath("")
 
 [node name="Metronome" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_mpivx")
 stream = ExtResource("3_jvkht")
 
@@ -61,8 +62,8 @@ offset_left = 455.0
 offset_top = 38.0
 offset_right = 1375.0
 offset_bottom = 958.0
+windowSize = 0.016
 marker = ExtResource("12_cuo1v")
-beatsPerRotation = 8
 
 [node name="GameMode" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("8_r1w7j")
@@ -109,6 +110,10 @@ max_polyphony = 4
 [connection signal="PhaseSwitch" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_phase_switch"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_tick"]
+[connection signal="BeatPhaseCallback" from="GameMode" to="Metronome" method="_on_game_mode_beat_phase_callback"]
+[connection signal="SpawnMarker" from="GameMode/Player/PlayerStateMachine/RecordState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]
+[connection signal="DestroyHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_destroy_hit"]
+[connection signal="OnExit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/Player" method="_on_player_input_handler_hit"]

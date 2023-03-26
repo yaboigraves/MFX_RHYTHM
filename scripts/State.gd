@@ -1,6 +1,9 @@
 class_name State
 extends Node
 
+signal OnEnter()
+signal OnExit()
+
 var state_machine : StateMachine = null:
 	set(value):
 		state_machine = value
@@ -25,9 +28,9 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	print("entered state ", name)
-	pass
+	emit_signal("OnEnter")
 
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
 func exit() -> void:
-	pass
+	emit_signal("OnExit")

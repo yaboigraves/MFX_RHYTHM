@@ -31,6 +31,9 @@ var nextPhaseUpdate = 7.0
 var time
 var timeInBeats = 0
 
+#TODO: this only supports one callback per beat, must be an array
+var callbacks = {}
+
 
 func _ready() -> void:
 	set_process(false)
@@ -64,10 +67,31 @@ func calculateTime():
 	if timeInBeats >= nextSyncUpdate:
 		nextSyncUpdate = snapped(timeInBeats,syncUpdateRate) + syncUpdateRate
 		emit_signal("SyncUpdate",snapped(timeInBeats,syncUpdateRate),syncUpdateRate)
+		print(timeInBeats)
+		ProcessCallbacks()
+		
 
-		if is_zero_approx( fposmod(snapped(timeInBeats,syncUpdateRate),8)):
-			emit_signal("PhaseSwitch")
+		#this is probably legacy
+#		if is_zero_approx( fposmod(snapped(timeInBeats,syncUpdateRate),8)):
+#			emit_signal("PhaseSwitch")
+
+
+func ProcessCallbacks():
+	if callbacks.has(snapped(timeInBeats,syncUpdateRate)):
+		callbacks[snapped(timeInBeats,syncUpdateRate)].call()
+		callbacks.erase(snapped(timeInBeats,syncUpdateRate))
 
 
 func GetTimeInBeatsWithLatency():
 	pass
+
+
+
+
+func _on_game_mode_beat_phase_callback(durationInBeats, callback:Callable) -> void:
+	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats
+	callbacks[callbackTime] = callback
+	
+	
+	
+

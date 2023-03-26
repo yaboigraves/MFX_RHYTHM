@@ -1,23 +1,12 @@
 extends Node
 
 
-#so lets build the main gameplay loop
-#we need a game manager state machine!
-
-#each player can have a state machine
-# record - verify - idle
-
-#we sust switch each stat
-
 #game ideas 
 #1. free loop mode, just make and edit loops 
 #2. one at a time (or X at a time mode)
 	#players go back and forth adding x beats to the loop
 	#whoever cant do it after adding a beat loses
 #3. skate/horse mode (self explanitory original idea)
-
-#hits should be abstract enough to handle all of these
-#as should the phase system
 
 
 
@@ -28,7 +17,9 @@ signal RecordedHit
 signal SpawnHit(index,timeInBeats)
 
 
-#be really dumb here just to prototype
+
+func _ready() -> void:
+	$GameMode.Start()
 
 
 #so lets start by just assuming we want to spawn a 

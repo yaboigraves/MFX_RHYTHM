@@ -50,16 +50,14 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	emit_signal("transitioned", state.name)
 
 
-func _on_metronome_phase_switch() -> void:
+func phase_switch() -> void:
 	var currentStateIndex = state.get_index()
 	
 	var nextState = get_child( (currentStateIndex + 1) % get_child_count() ).name
 	
 	var args = {}
-	
 
 	if nextState == "VerifyState":
-		print("ahhhh")
 		args["hits"] = state.hits
 	
 	transition_to( get_child( (currentStateIndex + 1) % get_child_count() ).name, args)

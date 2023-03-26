@@ -27,6 +27,7 @@ extends Control
 var totalLanesSize:float
 var laneSize : float 
 var markers = []
+
 var startDist : float 
 var endDist : float
 
@@ -87,12 +88,12 @@ func CreateLaneLines():
 		%LineRenderers.add_child(laneLine)
 
 
-func SpawnMarker(index,beatPosition: float):
+func SpawnMarker(hit:Hit):
 		var markerInst = marker.instantiate()
 		%CenterPivot/Markers.add_child(markerInst)
-		var beatPos = fposmod(beatPosition,beatsPerRotation)/beatsPerRotation
+		var beatPos = fposmod(hit.beatPosition,beatsPerRotation)/beatsPerRotation
 		beatPos *= 2 * PI
-		markerInst.position = (origin * (startDist + (laneSize/2.0) + (index * laneSize))).rotated(beatPos)
+		markerInst.position = (origin * (startDist + (laneSize/2.0) + (hit.laneIndex * laneSize))).rotated(beatPos)
 		markers.append(markerInst)
 		return markerInst
 
@@ -107,9 +108,7 @@ func ClearAllMarkers():
 		marker.queue_free()
 	markers.clear()
 	
-#===DEBUG===
-func _on_main_spawn_hit(index, timeInBeats) -> void:
-	SpawnMarker(index,timeInBeats)
+
 
 func _on_player_input_handler_escape() -> void:
 	ClearAllMarkers()

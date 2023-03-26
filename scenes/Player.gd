@@ -20,14 +20,17 @@ var stateMachine : StateMachine
 
 #so its a layer above the player below the game manager
 
-
 func _ready():
 	stateMachine = %PlayerStateMachine as StateMachine
 	
-
 func StartInputSequence():
-	pass
+	print("starting ", name, " input sequence")
+	stateMachine.transition_to("RecordState")
 	
+func MoveToNextPhase():
+	stateMachine.phase_switch()
 
 func _on_player_input_handler_hit(index) -> void:
-	print(index)
+	var hit = Hit.new(index,%Metronome.timeInBeats)
+	stateMachine.state.HandleHit(hit)
+	

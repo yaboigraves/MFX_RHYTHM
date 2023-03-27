@@ -4,6 +4,10 @@ extends Node
 #cool so the player can act as the central hub for all player based stuff
 #game state stuff can be handled a layer above, seems good
 
+#so players can internally control their phase timings
+#not game modes
+signal BeatPhaseCallback(durationInBeats:float,callback:Callable)
+
 var stateMachine : StateMachine
 
 #so the state machine shouldn't get talked to by the metronome
@@ -26,9 +30,12 @@ func _ready():
 func StartInputSequence():
 	print("starting ", name, " input sequence")
 	stateMachine.transition_to("RecordState")
+	emit_signal("BeatPhaseCallback",stateMachine.state.duration,MoveToNextPhase)
+	
 	
 func MoveToNextPhase():
-	stateMachine.phase_switch()
+	stateMachine.iterate_to_next_state()
+	emit_signal("BeatPhaseCallback",stateMachine.state.duration,MoveToNextPhase)
 
 func _on_player_input_handler_hit(index) -> void:
 	var hit = Hit.new(index,%Metronome.timeInBeats)

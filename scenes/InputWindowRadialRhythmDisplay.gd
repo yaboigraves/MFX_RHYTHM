@@ -1,6 +1,8 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
+@export var rules: GameModeRules
+
 @export var windowSize : float = 0.015625
 
 @export var markerColors: Array[Color]
@@ -13,8 +15,11 @@ var markerHitMap: Dictionary
 
 
 func _ready():
+	beatsPerRotation = rules.loopBeatSize
 	super._ready()
 	DrawInputWindows()
+	
+	
 	
 
 func DrawInputWindows():

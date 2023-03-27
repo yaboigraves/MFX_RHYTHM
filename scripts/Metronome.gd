@@ -86,12 +86,8 @@ func GetTimeInBeatsWithLatency():
 	pass
 
 
-
-
-func _on_game_mode_beat_phase_callback(durationInBeats, callback:Callable) -> void:
+func _on_player_beat_phase_callback(durationInBeats, callback) -> void:
 	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats
 	callbacks[callbackTime] = callback
 	
 	
-	
-

@@ -4,6 +4,11 @@ extends Node
 signal OnEnter()
 signal OnExit()
 
+
+func _ready() -> void:
+	initialize()
+	
+	
 var state_machine : StateMachine = null:
 	set(value):
 		state_machine = value

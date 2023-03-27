@@ -23,22 +23,19 @@ extends Node
 #we can pass a closure pretty easily to say hey, switch the game mode after 8 beats
 
 
-signal BeatPhaseCallback(durationInBeats:float,callback:Callable)
 
 #so after x beats we do blank
-
 @export var player: Player
+@export var rules : GameModeRules
 
 
 func Start():
-	print("starting game mode")
-	
-	emit_signal("BeatPhaseCallback",4,MoveToNextPhase)
+
 	player.StartInputSequence()
 
+
 func MoveToNextPhase():
-	print("move to next phase!")
-	emit_signal("BeatPhaseCallback",4,MoveToNextPhase)
+
 	player.MoveToNextPhase()
 	
 func End():

@@ -15,6 +15,11 @@ var hits = [
 	[]
 ]
 
+func initialize():
+	super.initialize()
+	duration = rules.loopBeatSize
+	print(duration)
+
 func enter(_msg = {}):
 	super.enter()
 	hits = [

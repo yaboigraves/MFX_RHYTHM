@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GameModeRules" load_steps=2 format=3 uid="uid://d1vpqdwupvf48"]
+
+[ext_resource type="Script" path="res://scripts/GameModeRules.gd" id="1_q861u"]
+
+[resource]
+script = ExtResource("1_q861u")
+windowSize = 0.016
+loopBeatSize = 8.0

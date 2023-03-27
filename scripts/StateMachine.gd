@@ -22,6 +22,7 @@ func _ready() -> void:
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
 		child.state_machine = self
+		
 	state.enter()
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
@@ -50,15 +51,21 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	emit_signal("transitioned", state.name)
 
 
-func phase_switch() -> void:
+
+func iterate_to_next_state() -> void:
 	var currentStateIndex = state.get_index()
 	
-	var nextState = get_child( (currentStateIndex + 1) % get_child_count() ).name
+	var nextState = get_child( (currentStateIndex + 1) % get_child_count() )
 	
 	var args = {}
 
-	if nextState == "VerifyState":
+	if nextState.name == "VerifyState":
 		args["hits"] = state.hits
+	
+	if nextState.name == "IdleState":
+		if is_zero_approx(nextState.duration):
+			currentStateIndex = currentStateIndex + 1 % get_child_count()
+			
 	
 	transition_to( get_child( (currentStateIndex + 1) % get_child_count() ).name, args)
 

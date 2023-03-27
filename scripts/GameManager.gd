@@ -8,6 +8,10 @@ extends Node
 	#whoever cant do it after adding a beat loses
 #3. skate/horse mode (self explanitory original idea)
 
+#cool so overall we just need to tie in from some gameplay rules
+#lets make a resource for that that we can just load and plug into
+#we can get stuff like input window size, num beats, etc
+#gamemoderules
 
 
 @export var display : RhythmDisplay
@@ -19,7 +23,7 @@ signal SpawnHit(index,timeInBeats)
 
 
 func _ready() -> void:
-	$GameMode.Start()
+	%GameMode.Start()
 
 
 #so lets start by just assuming we want to spawn a 

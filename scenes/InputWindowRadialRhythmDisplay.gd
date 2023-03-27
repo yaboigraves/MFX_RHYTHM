@@ -45,7 +45,6 @@ func DrawInputWindows():
 		%InputWindows.add_child(poly)
 
 func SpawnMarker(hit:Hit):
-
 	var poly = OutlinedPolygon2D.new()
 	poly.outlineWidth = 8
 

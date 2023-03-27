@@ -8,8 +8,8 @@
 [node name="InputWindowRadialRhythmDisplay" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_right = 1000.0
+offset_bottom = 1000.0
 script = ExtResource("1_ifxlp")
 markerColors = Array[Color]([Color(0.992157, 0, 0, 1), Color(0, 0.886275, 0, 1), Color(0, 0, 0.937255, 1), Color(0.984314, 1, 0, 1)])
 origin = Vector2(1, 2.08165e-12)
@@ -112,6 +112,17 @@ anchor_right = 0.6
 anchor_bottom = 0.6
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PhaseText" type="RichTextLabel" parent="HUD"]
+layout_direction = 3
+layout_mode = 1
+offset_right = 51.0
+offset_bottom = 51.0
+theme_override_font_sizes/normal_font_size = 22
+text = "REC"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="CharacterIcon" type="TextureRect" parent="HUD"]
 layout_mode = 1

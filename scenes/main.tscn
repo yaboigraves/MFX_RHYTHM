@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://bnxuemo8bd7pl"]
+[gd_scene load_steps=19 format=3 uid="uid://bnxuemo8bd7pl"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
 [ext_resource type="Script" path="res://scripts/PlayerInputHandler.gd" id="3_3xqna"]
-[ext_resource type="AudioStream" uid="uid://r2s0eoif2lis" path="res://scenes/devonwho-purple-91bpm.ogg" id="3_jvkht"]
 [ext_resource type="AudioStream" uid="uid://ckop5njatgp7c" path="res://scripts/bd-02.wav" id="4_va1oi"]
 [ext_resource type="AudioStream" uid="uid://cqvgtmwkxt6v3" path="res://scripts/hh-02.wav" id="5_i0vcd"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="5_nqyvc"]
@@ -27,11 +26,10 @@ display = NodePath("")
 [node name="Metronome" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_mpivx")
-stream = ExtResource("3_jvkht")
+stream = ExtResource("2_pdwic")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
-volume_db = -80.0
 
 [node name="GameMode" type="Node" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
@@ -120,6 +118,7 @@ marker = ExtResource("12_cuo1v")
 [connection signal="BeatPhaseCallback" from="GameMode/Player" to="Metronome" method="_on_player_beat_phase_callback"]
 [connection signal="SpawnMarker" from="GameMode/Player/PlayerStateMachine/RecordState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]
 [connection signal="DestroyHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_destroy_hit"]
+[connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_missed_hit"]
 [connection signal="OnExit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]

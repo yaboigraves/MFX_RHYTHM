@@ -47,7 +47,7 @@ func DrawInputWindows():
 func SpawnMarker(hit:Hit):
 
 	var poly = OutlinedPolygon2D.new()
-	poly.outlineWidth = 0
+	poly.outlineWidth = 8
 
 	var beatPos = fposmod(hit.time,beatsPerRotation)/beatsPerRotation
 	beatPos *= 2 * PI
@@ -88,7 +88,6 @@ func ClearAllMarkers():
 func _on_player_input_handler_escape() -> void:
 	ClearAllMarkers()
 
-
 func _on_record_state_spawn_marker(hit:Hit) -> void:
 	SpawnMarker(hit)
 
@@ -97,3 +96,6 @@ func _on_verify_state_destroy_hit(hit) -> void:
 	markers.erase(markerHitMap[hit])
 	markerHitMap[hit].queue_free()
 	
+
+func _on_verify_state_missed_hit(hit) -> void:
+	markerHitMap[hit].modulate = Color(1,1,1,0.25)

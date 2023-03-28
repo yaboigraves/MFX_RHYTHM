@@ -1,17 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8ohv0w8ksihf"]
+[gd_scene load_steps=6 format=3 uid="uid://b8ohv0w8ksihf"]
 
 [ext_resource type="Script" path="res://scenes/InputWindowRadialRhythmDisplay.gd" id="1_ifxlp"]
+[ext_resource type="PackedScene" uid="uid://g2ik3l7smbib" path="res://scenes/radial_metronome_dot.tscn" id="2_r0ylq"]
 [ext_resource type="Texture2D" uid="uid://dhf0km4u7ccxo" path="res://scenes/14.png" id="3_djovw"]
 [ext_resource type="Texture2D" uid="uid://cs8gdb5suhtdi" path="res://icon.svg" id="4_qhvc4"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://bitDefault.png" id="4_qs8om"]
 
 [node name="InputWindowRadialRhythmDisplay" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1000.0
-offset_bottom = 1000.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ifxlp")
 markerColors = Array[Color]([Color(0.992157, 0, 0, 1), Color(0, 0.886275, 0, 1), Color(0, 0, 0.937255, 1), Color(0.984314, 1, 0, 1)])
+radialMetronomeDot = ExtResource("2_r0ylq")
 origin = Vector2(1, 2.08165e-12)
 numLanes = 4
 outerOffset = 0.9
@@ -104,8 +114,9 @@ pivot_offset = Vector2(2.08165e-12, 5)
 texture = ExtResource("4_qhvc4")
 expand_mode = 1
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="CenterContainer" parent="."]
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.4
 anchor_top = 0.4
 anchor_right = 0.6
@@ -113,23 +124,32 @@ anchor_bottom = 0.6
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CharacterIcon" type="TextureRect" parent="HUD"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_qs8om")
+expand_mode = 1
+
 [node name="PhaseText" type="RichTextLabel" parent="HUD"]
 layout_direction = 3
-layout_mode = 1
-offset_right = 51.0
-offset_bottom = 51.0
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 22
-text = "REC"
+bbcode_enabled = true
+text = "[center]REC"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="CharacterIcon" type="TextureRect" parent="HUD"]
+[node name="Metronome" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_qs8om")
-expand_mode = 1

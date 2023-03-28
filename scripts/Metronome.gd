@@ -13,6 +13,7 @@ extends Node
 
 signal Tick(timeSeconds, timeBeats)
 signal SyncUpdate(timeInBeats,delta)
+signal BeatUpdate(timeInBeats)
 
 signal PhaseSwitch
 
@@ -27,6 +28,7 @@ var time_delay
 var bpm
 var bps
 var nextSyncUpdate = 0.0
+var nextBeatUpdate = 0.0
 var nextPhaseUpdate = 7.0
 var time
 var timeInBeats = 0
@@ -63,11 +65,16 @@ func calculateTime():
 	#so what we really want is this time converted into beats
 	emit_signal("Tick",time,timeInBeats)
 	
+	if timeInBeats >= nextBeatUpdate:
+		nextBeatUpdate = snapped(timeInBeats + 1, syncUpdateRate)
+		emit_signal("BeatUpdate",timeInBeats)
+
+
 	#sync update part
 	if timeInBeats >= nextSyncUpdate:
 		nextSyncUpdate = snapped(timeInBeats,syncUpdateRate) + syncUpdateRate
 		emit_signal("SyncUpdate",snapped(timeInBeats,syncUpdateRate),syncUpdateRate)
-		print(timeInBeats)
+#		print(timeInBeats)
 		ProcessCallbacks()
 		
 

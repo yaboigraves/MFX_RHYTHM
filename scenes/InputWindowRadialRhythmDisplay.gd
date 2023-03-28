@@ -7,21 +7,38 @@ extends RadialRhythmDisplay
 
 @export var markerColors: Array[Color]
 
+@export var radialMetronomeDot : PackedScene
+
+var metronomeDots = []
+
 var markerHitMap: Dictionary
+
+var stateTextMap = {
+	"IdleState": "WAIT",
+	"RecordState":"REC",
+	"VerifyState":"PLAY"
+}
 
 #ok fist things first
 #we gotta change how spawning markers works
-
-
 
 func _ready():
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()
 	DrawInputWindows()
-	
+	DrawMetronomeDots()
 	
 	
 
+func DrawMetronomeDots():
+	for i in range(beatsPerRotation):
+		var metronomeDot = radialMetronomeDot.instantiate()
+		metronomeDot.position = origin.rotated((i *2*PI)/beatsPerRotation) * 100
+		metronomeDot.position -= metronomeDot.size/2.0
+		$Metronome.add_child(metronomeDot)
+		metronomeDots.append(metronomeDot)
+		
+		
 func DrawInputWindows():
 	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
 	for index in range(numLanes):
@@ -98,3 +115,27 @@ func _on_verify_state_destroy_hit(hit) -> void:
 
 func _on_verify_state_missed_hit(hit) -> void:
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
+
+
+var currentStateDuration
+func _on_player_state_machine_transitioned(state) -> void:
+	currentStateDuration = state.duration
+	$HUD/PhaseText.text = stateTextMap[state.name]
+	
+#ehhh this is like a state thing....
+func _on_metronome_beat_update(timeInBeats) -> void:
+	UpdateMetronome(timeInBeats)
+
+#this needs a little work
+#doesnt work with the variant idle phase length
+func UpdateMetronome(timeInBeats):
+	var metronomeIndex = fposmod(int(timeInBeats),currentStateDuration)/currentStateDuration
+	
+	print(rules.loopBeatSize * metronomeIndex)
+	
+	for dot in metronomeDots:
+		dot.modulate = Color(1,1,1,0)
+
+	for i in range((rules.loopBeatSize * metronomeIndex)):
+		metronomeDots[i].modulate = Color(1,1,1,1)
+

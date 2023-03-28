@@ -112,8 +112,6 @@ offset_left = 0.379969
 offset_top = 0.0199985
 offset_right = -0.380112
 offset_bottom = -0.0200448
-grow_horizontal = 2
-grow_vertical = 2
 rules = ExtResource("6_ev767")
 windowSize = 0.016
 marker = ExtResource("12_cuo1v")
@@ -122,10 +120,12 @@ outerOffset = 1.0
 
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
+[connection signal="BeatUpdate" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_beat_update"]
 [connection signal="PhaseSwitch" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_phase_switch"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_tick"]
 [connection signal="BeatPhaseCallback" from="GameMode/Player" to="Metronome" method="_on_player_beat_phase_callback"]
+[connection signal="transitioned" from="GameMode/Player/PlayerStateMachine" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_state_machine_transitioned"]
 [connection signal="SpawnMarker" from="GameMode/Player/PlayerStateMachine/RecordState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]
 [connection signal="DestroyHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_destroy_hit"]
 [connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_missed_hit"]

@@ -138,7 +138,7 @@ func UpdateMetronome(timeInBeats):
 #	print(rules.loopBeatSize * metronomeIndex)
 	
 	for dot in metronomeDots:
-		dot.modulate = Color(1,1,1,0)
+		dot.modulate = Color(1,1,1,0.2)
 
 	for i in range((rules.loopBeatSize * metronomeIndex)):
 		metronomeDots[i].modulate = Color(1,1,1,1)

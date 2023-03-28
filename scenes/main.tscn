@@ -120,6 +120,8 @@ outerOffset = 1.0
 
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
+[connection signal="BeatUpdate" from="Metronome" to="GameMode" method="_on_metronome_beat_update"]
+[connection signal="BeatUpdate" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_beat_update"]
 [connection signal="PhaseSwitch" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_phase_switch"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]

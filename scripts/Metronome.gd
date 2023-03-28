@@ -67,8 +67,8 @@ func calculateTime():
 	
 	if timeInBeats >= nextBeatUpdate:
 		nextBeatUpdate = snapped(timeInBeats + 1, syncUpdateRate)
-		emit_signal("BeatUpdate",timeInBeats)
-
+#		emit_signal("BeatUpdate",timeInBeats)
+		call_deferred("emit_signal","BeatUpdate",timeInBeats)
 
 	#sync update part
 	if timeInBeats >= nextSyncUpdate:

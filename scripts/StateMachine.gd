@@ -63,3 +63,7 @@ func iterate_to_next_state() -> void:
 	transition_to( get_child( (currentStateIndex + 1) % get_child_count() ).name, args)
 
 
+
+func _on_metronome_beat_update(timeInBeats) -> void:
+	state.progress += 1
+	

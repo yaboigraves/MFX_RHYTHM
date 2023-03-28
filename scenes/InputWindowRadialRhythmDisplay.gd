@@ -117,21 +117,25 @@ func _on_verify_state_missed_hit(hit) -> void:
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
 
 
-var currentStateDuration
+var currentState
+var phaseStart
 func _on_player_state_machine_transitioned(state) -> void:
-	currentStateDuration = state.duration
+	currentState = state
 	$HUD/PhaseText.text = stateTextMap[state.name]
 	
 #ehhh this is like a state thing....
 func _on_metronome_beat_update(timeInBeats) -> void:
 	UpdateMetronome(timeInBeats)
-
+	
 #this needs a little work
 #doesnt work with the variant idle phase length
+
 func UpdateMetronome(timeInBeats):
-	var metronomeIndex = fposmod(int(timeInBeats),currentStateDuration)/currentStateDuration
 	
-	print(rules.loopBeatSize * metronomeIndex)
+#	var metronomeIndex = fposmod(int(timeInBeats),currentStateDuration)/currentStateDuration
+
+	var metronomeIndex = currentState.progress/currentState.duration
+#	print(rules.loopBeatSize * metronomeIndex)
 	
 	for dot in metronomeDots:
 		dot.modulate = Color(1,1,1,0)

@@ -23,6 +23,7 @@ var stateTextMap = {
 #we gotta change how spawning markers works
 
 func _ready():
+	windowSize = rules.windowSize
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()
 	DrawInputWindows()

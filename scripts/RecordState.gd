@@ -29,6 +29,11 @@ func enter(_msg = {}):
 		[]
 	]
 
+func HasAnyHits():
+	for hitLane in hits:
+		if hitLane.size() > 0:
+			return true
+	return false
 
 func HandleHit(hit: Hit):
 	print("record state handling hit")

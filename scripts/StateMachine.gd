@@ -53,8 +53,11 @@ func iterate_to_next_state() -> void:
 	var args = {}
 
 	if nextState.name == "VerifyState":
-		args["hits"] = state.hits
-	
+		if(state.HasAnyHits()):
+			args["hits"] = state.hits
+		else:
+			transition_to(get_child(currentStateIndex).name,args)
+			return
 	if nextState.name == "IdleState":
 		if is_zero_approx(nextState.duration):
 			currentStateIndex = currentStateIndex + 1 % get_child_count()

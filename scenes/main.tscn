@@ -66,7 +66,7 @@ rules = ExtResource("6_ev767")
 [node name="VerifyState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
 script = ExtResource("10_5eqh6")
 rules = ExtResource("6_ev767")
-duration = 2.08165e-12
+duration = -1.0
 
 [node name="PlayerInputHandler" type="Node" parent="GameMode/Player"]
 script = ExtResource("3_3xqna")
@@ -311,7 +311,6 @@ offset_top = 0.0199985
 offset_right = -0.380112
 offset_bottom = -0.0200448
 rules = ExtResource("6_ev767")
-windowSize = 0.008
 marker = ExtResource("12_cuo1v")
 centerOffset = 0.3
 outerOffset = 1.0

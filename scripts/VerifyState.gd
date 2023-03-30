@@ -8,6 +8,7 @@ signal ComboUpdate(combo)
 
 var targetHits
 var combo = 0 :
+	
 	set(value):
 		combo = value
 		emit_signal("ComboUpdate",combo)
@@ -43,8 +44,9 @@ func HandleHit(hit:Hit):
 func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):
 		return false
-
-	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= 0.25:
+	
+	#TODO: so this 0.25 is obviously incorrect and needs to be tied in to actual size
+	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize * 2 * 10) :
 		var goodHit = targetHits[hit.laneIndex]
 
 		return true
@@ -54,8 +56,8 @@ func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
 		for hit in targetHits[i]:
-			if(hit.time + rules.loopBeatSize + 0.25 <= %Metronome.timeInBeats):
 			
+			if(hit.time + rules.loopBeatSize + (rules.windowSize * 2 * 10) <= %Metronome.timeInBeats):
 				missedHits.append(hit)
 				emit_signal("MissedHit",hit)
 				combo = 0

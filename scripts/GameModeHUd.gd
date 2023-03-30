@@ -35,3 +35,9 @@ func _on_verify_state_combo_update(combo) -> void:
 		$Control/ComboText.text = '\n' + str(combo)
 	else:
 		$Control/ComboText.visible = false
+
+
+func _on_player_input_handler_hit(index) -> void:
+#	get_node("Control/VBoxContainer/HBoxContainer/DrumIcon" + str(index + 1)).modulate = Color.GREEN_YELLOW
+#	#probably do a tween here too
+	pass

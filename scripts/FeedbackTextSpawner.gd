@@ -1,6 +1,9 @@
 class_name FeedBackTextSpawner
 extends Node
 
+#TOCO: Maybe show this above the characters head
+#shrink the indicators or pulse them on hits or something
+
 @export var niceTex:Texture
 @export var missTex:Texture
 @export var oopsTex:Texture

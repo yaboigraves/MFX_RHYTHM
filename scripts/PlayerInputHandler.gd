@@ -11,9 +11,9 @@ func _process(delta: float) -> void:
 			get_child(i-1).play()
 			HandleHit(i-1)
 	
-	if Input.is_action_just_pressed("Cancel"):
-		emit_signal("Escape")
-	
+#	if Input.is_action_just_pressed("Cancel"):
+#		emit_signal("Escape")
+#
 func HandleHit(index : int):
 	emit_signal("Hit",index)
 	

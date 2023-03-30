@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bnxuemo8bd7pl"]
+[gd_scene load_steps=29 format=3 uid="uid://bnxuemo8bd7pl"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://head_3.png" id="19_420lq"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://bitMiss.png" id="20_kmktu"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://head_2.png" id="21_i54xg"]
+[ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://whiteBox.png" id="24_66ev6"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="24_turlm"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("display")]
@@ -65,6 +66,7 @@ rules = ExtResource("6_ev767")
 [node name="VerifyState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
 script = ExtResource("10_5eqh6")
 rules = ExtResource("6_ev767")
+duration = 2.08165e-12
 
 [node name="PlayerInputHandler" type="Node" parent="GameMode/Player"]
 script = ExtResource("3_3xqna")
@@ -150,6 +152,106 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("17_3gx0n")
 expand_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DrumIcon1" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 0.415686, 0.403922, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("24_66ev6")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon1/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("24_turlm")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]A"
+fit_content = true
+
+[node name="DrumIcon2" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.360784, 1, 0.407843, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("24_66ev6")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon2/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("24_turlm")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]S"
+fit_content = true
+
+[node name="DrumIcon3" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.470588, 0.470588, 0.933333, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("24_66ev6")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon3/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("24_turlm")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]D"
+fit_content = true
+
+[node name="DrumIcon4" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("24_66ev6")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameMode/GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon4/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("24_turlm")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]F"
+fit_content = true
 
 [node name="ComboText" type="RichTextLabel" parent="GameMode/GameModeHUD/Control"]
 visible = false
@@ -240,4 +342,5 @@ backgroundColor = Color(0, 0, 0, 1)
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/Player" method="_on_player_input_handler_hit"]
+[connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/GameModeHUD" method="_on_player_input_handler_hit"]
 [connection signal="timeout" from="GameMode/GameModeHUD/CharResetTimer" to="GameMode/GameModeHUD" method="_on_char_reset_timer_timeout"]

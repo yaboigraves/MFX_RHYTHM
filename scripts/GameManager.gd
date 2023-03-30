@@ -21,7 +21,6 @@ signal RecordedHit
 signal SpawnHit(index,timeInBeats)
 
 
-
 func _ready() -> void:
 	%GameMode.Start()
 

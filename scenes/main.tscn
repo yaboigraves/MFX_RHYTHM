@@ -93,9 +93,12 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -539.0
-offset_right = 400.0
+offset_left = 50.0
+offset_top = -447.0
+offset_right = 350.0
+offset_bottom = -50.0
 grow_vertical = 0
+alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
 custom_minimum_size = Vector2(300, 300)
@@ -106,7 +109,7 @@ texture = ExtResource("16_xqbdj")
 expand_mode = 5
 
 [node name="TextureRect2" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -150,7 +153,7 @@ offset_top = 0.0199985
 offset_right = -0.380112
 offset_bottom = -0.0200448
 rules = ExtResource("6_ev767")
-windowSize = 0.016
+windowSize = 0.008
 marker = ExtResource("12_cuo1v")
 centerOffset = 0.3
 outerOffset = 1.0
@@ -166,7 +169,9 @@ outerOffset = 1.0
 [connection signal="BeatPhaseCallback" from="GameMode/Player" to="Metronome" method="_on_player_beat_phase_callback"]
 [connection signal="transitioned" from="GameMode/Player/PlayerStateMachine" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_state_machine_transitioned"]
 [connection signal="SpawnMarker" from="GameMode/Player/PlayerStateMachine/RecordState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]
+[connection signal="BadHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_bad_hit"]
 [connection signal="DestroyHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_destroy_hit"]
+[connection signal="GoodHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_good_hit"]
 [connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_missed_hit"]
 [connection signal="OnExit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]

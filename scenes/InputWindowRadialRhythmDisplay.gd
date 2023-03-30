@@ -108,12 +108,14 @@ func _on_record_state_spawn_marker(hit:Hit) -> void:
 	SpawnMarker(hit)
 
 
-func _on_verify_state_destroy_hit(hit) -> void:
-	markers.erase(markerHitMap[hit])
-	markerHitMap[hit].queue_free()
+
 	
 
 func _on_verify_state_missed_hit(hit) -> void:
+	
+	var pivotPos =  %InputWindows.global_position +  Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)
+	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
+
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
 
 
@@ -143,3 +145,20 @@ func UpdateMetronome(timeInBeats):
 	for i in range((rules.loopBeatSize * metronomeIndex)):
 		metronomeDots[i].modulate = Color(1,1,1,1)
 
+
+
+func _on_verify_state_bad_hit(hit) -> void:
+#	markers.erase(markerHitMap[hit])
+#	markerHitMap[hit].queue_free()
+	var pivotPos =  %InputWindows.global_position +  Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)
+	
+	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
+
+
+func _on_verify_state_good_hit(hit) -> void:
+
+	var pivotPos =  %InputWindows.global_position +  Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)
+	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
+
+	markers.erase(markerHitMap[hit])
+	markerHitMap[hit].queue_free()

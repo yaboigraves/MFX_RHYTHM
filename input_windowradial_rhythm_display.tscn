@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ohv0w8ksihf"]
+[gd_scene load_steps=11 format=3 uid="uid://b8ohv0w8ksihf"]
 
 [ext_resource type="Script" path="res://scenes/InputWindowRadialRhythmDisplay.gd" id="1_ifxlp"]
 [ext_resource type="PackedScene" uid="uid://g2ik3l7smbib" path="res://scenes/radial_metronome_dot.tscn" id="2_r0ylq"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cs8gdb5suhtdi" path="res://icon.svg" id="4_qhvc4"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://bitDefault.png" id="4_qs8om"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="6_swbru"]
+[ext_resource type="Script" path="res://scripts/FeedbackTextSpawner.gd" id="7_8e7hb"]
+[ext_resource type="Texture2D" uid="uid://dtcj2tsrjk5hh" path="res://oops.png" id="8_6e6ot"]
+[ext_resource type="Texture2D" uid="uid://kre5odkpf0jn" path="res://nice!.png" id="8_gcy1e"]
+[ext_resource type="Texture2D" uid="uid://0eiif3piswe5" path="res://miss.png" id="9_5qcb2"]
 
 [node name="InputWindowRadialRhythmDisplay" type="Control"]
 layout_mode = 3
@@ -155,3 +159,10 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FeedbackTextSpawner" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_8e7hb")
+niceTex = ExtResource("8_gcy1e")
+missTex = ExtResource("9_5qcb2")
+oopsTex = ExtResource("8_6e6ot")

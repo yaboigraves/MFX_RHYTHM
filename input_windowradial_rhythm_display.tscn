@@ -34,7 +34,7 @@ rhythmArmVisible = false
 laneMargins = 25
 beatsPerRotation = 4
 laneLineResolution = 90
-laneColors = Array[Color]([Color(1, 0.894118, 0.87451, 0.831373), Color(1, 0.894118, 0.87451, 0.831373), Color(1, 0.894118, 0.87451, 0.831373), Color(1, 0.894118, 0.87451, 0.831373)])
+laneColors = Array[Color]([Color(0.313726, 0.313726, 0.313726, 1)])
 backgroundColor = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="Background" type="TextureRect" parent="."]

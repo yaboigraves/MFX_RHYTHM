@@ -79,7 +79,7 @@ func CreateLaneLines():
 		var laneLine = Line2D.new()
 		laneLine.width = laneSize - laneMargins
 	
-		laneLine.default_color = laneColors[j]
+		laneLine.default_color = laneColors[0]
 		
 		for i in range(laneLineResolution):
 			laneLine.add_point(Vector2(startDist + (laneSize/2.0) + (j * laneSize),0).rotated(i * (2*PI)/ laneLineResolution))

@@ -4,9 +4,14 @@ signal DestroyHit(hit:Hit)
 signal MissedHit(hit:Hit)
 signal GoodHit(hit:Hit)
 signal BadHit(hit:Hit)
-
+signal ComboUpdate(combo)
 
 var targetHits
+var combo = 0 :
+	set(value):
+		combo = value
+		emit_signal("ComboUpdate",combo)
+	
 
 func initialize():
 	super.initialize()
@@ -15,6 +20,12 @@ func initialize():
 func enter(_msg := {}) -> void:
 	super.enter()
 	targetHits = _msg["hits"]
+	combo = 0
+	
+func exit():
+	super.exit()
+	await get_tree().create_timer(1).timeout
+	combo = 0
 	
 func update(_delta: float):
 	CheckForMissedHits()
@@ -22,21 +33,11 @@ func update(_delta: float):
 
 func HandleHit(hit:Hit):
 	if CheckHit(hit):
-		print("good!!!")
-		#ok so here we want to emit signals that will effect player state
-		#combos and whatnot, health, etc
-		#basically we want a tug of war for each round
-		#staying above a certain threshold is how you win
-		#display this with like a custom component or something
-		#honestly just a slider will work to start
-		#we need feedback text too for hits, experiment with placement
-		#for now lets just do good/bad hits existing and getting handled at all
-		#a bad is an oops, a miss is a miss
-		#spawn the rect for now
+		combo += 1
 		emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
 		
 	else:
-		print("Bad!!!@")
+		combo = 0
 		emit_signal("BadHit",hit)
 	
 func CheckHit(hit:Hit):
@@ -54,9 +55,10 @@ func CheckForMissedHits():
 	for i in range(4):
 		for hit in targetHits[i]:
 			if(hit.time + rules.loopBeatSize + 0.25 <= %Metronome.timeInBeats):
-				print("miss!")
+			
 				missedHits.append(hit)
 				emit_signal("MissedHit",hit)
+				combo = 0
 			
 	for hit in missedHits:
 		targetHits[hit.laneIndex].erase(hit)

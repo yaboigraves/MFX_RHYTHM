@@ -27,6 +27,7 @@ var time_delay
 
 var bpm
 var bps
+var spb
 var nextSyncUpdate = 0.0
 var nextBeatUpdate = 0.0
 var nextPhaseUpdate = 7.0
@@ -46,7 +47,8 @@ func Start():
 	time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
 	bpm = stream.bpm
-	bps = bpm/60
+	bps = bpm/60.0
+	spb = 60.0/bpm
 	$AudipPlayer.play()
 	set_process(true)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnxuemo8bd7pl"]
+[gd_scene load_steps=22 format=3 uid="uid://bnxuemo8bd7pl"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://scripts/IdleState.gd" id="11_yjrf7"]
 [ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="12_cuo1v"]
 [ext_resource type="PackedScene" uid="uid://k0xmbgkh6qsr" path="res://radial_rhythm_display.tscn" id="13_yd0xq"]
+[ext_resource type="Script" path="res://scripts/GameModeHUd.gd" id="16_ot7g3"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://bitDefault.png" id="16_xqbdj"]
 [ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://p1I.png" id="17_3gx0n"]
 
@@ -79,6 +80,7 @@ stream = ExtResource("7_4b261")
 max_polyphony = 4
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
+script = ExtResource("16_ot7g3")
 
 [node name="Control" type="Control" parent="GameMode/GameModeHUD"]
 layout_mode = 3
@@ -100,15 +102,33 @@ offset_bottom = -50.0
 grow_vertical = 0
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
+[node name="Pivot" type="Control" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CharacterIcon" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer/Pivot"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 150)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("16_xqbdj")
 expand_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
+[node name="PlayerIcon" type="TextureRect" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -162,6 +182,7 @@ outerOffset = 1.0
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_beat_update"]
+[connection signal="BeatUpdate" from="Metronome" to="GameMode/GameModeHUD" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_beat_update"]
 [connection signal="PhaseSwitch" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_phase_switch"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]

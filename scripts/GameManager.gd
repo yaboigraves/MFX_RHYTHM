@@ -21,11 +21,17 @@ signal RecordedHit
 signal SpawnHit(index,timeInBeats)
 
 
-
 func _ready() -> void:
 	%GameMode.Start()
 
-
+func _process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("Cancel"):
+		get_tree().quit()
+	
+	if Input.is_action_just_pressed("Reload"):
+		get_tree().reload_current_scene()
+		
 #so lets start by just assuming we want to spawn a 
 func _on_player_input_handler_hit(index) -> void:
 #	display.SpawnMarker(index,$Metronome.timeInBeats)

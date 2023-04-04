@@ -1,6 +1,9 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
+#couple of fixes required here
+#mainly, we need to actually be able to change where stuff spawns from
+
 @export var rules: GameModeRules
 
 @export var windowSize : float = 0.015625
@@ -71,10 +74,11 @@ func SpawnMarker(hit:Hit):
 
 	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
 
-	var topBound = origin.rotated(rotation - beatPos-windowSizeRadians)
-	var bottomBound = origin.rotated(rotation - beatPos+windowSizeRadians)
 
-	var pivot = origin.rotated(rotation - beatPos) * (startDist + (laneSize/2.0) + (hit.laneIndex * laneSize))
+	var topBound = origin.rotated( origin.angle() + rotation - beatPos-windowSizeRadians)
+	var bottomBound = origin.rotated(origin.angle()  +rotation - beatPos+windowSizeRadians)
+
+	var pivot = origin.rotated(origin.angle()  +rotation - beatPos) * (startDist + (laneSize/2.0) + (hit.laneIndex * laneSize))
 
 	var points : PackedVector2Array = [
 		topBound * (startDist + (laneMargins/2.0) +  + (hit.laneIndex * laneSize)) , 
@@ -114,7 +118,7 @@ func _on_record_state_spawn_marker(hit:Hit) -> void:
 
 func _on_verify_state_missed_hit(hit) -> void:
 	
-	var pivotPos =  %InputWindows.global_position +  Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
 
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
@@ -151,14 +155,14 @@ func UpdateMetronome(timeInBeats):
 func _on_verify_state_bad_hit(hit) -> void:
 #	markers.erase(markerHitMap[hit])
 #	markerHitMap[hit].queue_free()
-	var pivotPos =  %InputWindows.global_position +  Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)).rotated(origin.angle())
 	
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
 
 
 func _on_verify_state_good_hit(hit) -> void:
 
-	var pivotPos =  %InputWindows.global_position +  Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
 
 	markers.erase(markerHitMap[hit])

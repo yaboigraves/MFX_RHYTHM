@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cejd1lk5iddo4"
+path="res://.godot/imported/kik deep.WAV-03573e141ecd97e94cc59828b15d8ef8.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/kiks/kik deep.WAV"
+dest_files=["res://.godot/imported/kik deep.WAV-03573e141ecd97e94cc59828b15d8ef8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

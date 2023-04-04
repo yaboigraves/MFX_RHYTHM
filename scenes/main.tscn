@@ -4,12 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/mfrh.ogg" id="3_0onyw"]
 [ext_resource type="Script" path="res://scripts/PlayerInputHandler.gd" id="3_3xqna"]
-[ext_resource type="AudioStream" uid="uid://ckop5njatgp7c" path="res://scripts/bd-02.wav" id="4_va1oi"]
-[ext_resource type="AudioStream" uid="uid://cqvgtmwkxt6v3" path="res://scripts/hh-02.wav" id="5_i0vcd"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="5_nqyvc"]
 [ext_resource type="Resource" uid="uid://d1vpqdwupvf48" path="res://scripts/LabGameModeRules.tres" id="6_ev767"]
-[ext_resource type="AudioStream" uid="uid://dqsfpfxut1pr3" path="res://scripts/rim+cy2.wav" id="6_u8ewd"]
-[ext_resource type="AudioStream" uid="uid://ow4dlydebw1w" path="res://scripts/sd-01.wav" id="7_4b261"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="8_cslea"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="8_n5iqg"]
 [ext_resource type="Script" path="res://scripts/GameMode.gd" id="8_r1w7j"]
@@ -18,7 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://b8ohv0w8ksihf" path="res://input_windowradial_rhythm_display.tscn" id="11_oivm5"]
 [ext_resource type="Script" path="res://scripts/IdleState.gd" id="11_yjrf7"]
 [ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="12_cuo1v"]
+[ext_resource type="AudioStream" uid="uid://bjmfkrf2453ja" path="res://audio/drums/ch4chDrums/kiks/kik natrual.WAV" id="13_88tj3"]
 [ext_resource type="PackedScene" uid="uid://k0xmbgkh6qsr" path="res://radial_rhythm_display.tscn" id="13_yd0xq"]
+[ext_resource type="AudioStream" uid="uid://cb5nu4p7rgd57" path="res://audio/drums/ch4chDrums/hats/brush.WAV" id="14_jynds"]
+[ext_resource type="AudioStream" uid="uid://covnd5thoavfe" path="res://audio/drums/ch4chDrums/snares/snare crunch.WAV" id="15_1wjff"]
+[ext_resource type="AudioStream" uid="uid://d0kc2vyaeyrtq" path="res://audio/drums/ch4chDrums/perc/808tom.WAV" id="16_i1jd3"]
 [ext_resource type="Script" path="res://scripts/GameModeHUd.gd" id="16_ot7g3"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://bitDefault.png" id="16_xqbdj"]
 [ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://p1I.png" id="17_3gx0n"]
@@ -40,6 +40,7 @@ stream = ExtResource("3_0onyw")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
+bus = &"background"
 
 [node name="GameMode" type="Node" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
@@ -72,20 +73,28 @@ duration = -1.0
 script = ExtResource("3_3xqna")
 
 [node name="DrumPlayer1" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("4_va1oi")
+stream = ExtResource("13_88tj3")
+mix_target = 2
 max_polyphony = 4
+bus = &"drums"
 
 [node name="DrumPlayer2" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("5_i0vcd")
+stream = ExtResource("14_jynds")
+mix_target = 2
 max_polyphony = 4
+bus = &"drums"
 
 [node name="DrumPlayer3" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("6_u8ewd")
+stream = ExtResource("15_1wjff")
+mix_target = 2
 max_polyphony = 4
+bus = &"drums"
 
 [node name="DrumPlayer4" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("7_4b261")
+stream = ExtResource("16_i1jd3")
+mix_target = 2
 max_polyphony = 4
+bus = &"drums"
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
 script = ExtResource("16_ot7g3")

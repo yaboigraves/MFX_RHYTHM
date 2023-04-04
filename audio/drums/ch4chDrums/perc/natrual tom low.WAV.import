@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://m06xf4y8exol"
+path="res://.godot/imported/natrual tom low.WAV-521523a9e6c42cfbba1eb581d5522e4c.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/perc/natrual tom low.WAV"
+dest_files=["res://.godot/imported/natrual tom low.WAV-521523a9e6c42cfbba1eb581d5522e4c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

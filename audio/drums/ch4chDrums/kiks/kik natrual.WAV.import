@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjmfkrf2453ja"
+path="res://.godot/imported/kik natrual.WAV-4b89ec39ace7a315c5b9e7cee1761ce1.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/kiks/kik natrual.WAV"
+dest_files=["res://.godot/imported/kik natrual.WAV-4b89ec39ace7a315c5b9e7cee1761ce1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

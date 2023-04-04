@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://doecadlhgamca"
+path="res://.godot/imported/kik thump.WAV-1ffd4d73106abe4adf831e28fe88d06e.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/kiks/kik thump.WAV"
+dest_files=["res://.godot/imported/kik thump.WAV-1ffd4d73106abe4adf831e28fe88d06e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

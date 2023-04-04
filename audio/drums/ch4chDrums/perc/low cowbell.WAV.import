@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dyday2s2ryphy"
+path="res://.godot/imported/low cowbell.WAV-4a9522cdeca7639408dd37157c0b6942.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/perc/low cowbell.WAV"
+dest_files=["res://.godot/imported/low cowbell.WAV-4a9522cdeca7639408dd37157c0b6942.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

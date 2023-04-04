@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tq8jh2jg72n7"
+path="res://.godot/imported/snare tight.WAV-62144a9be0bf51adc386eaabb83c8845.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/snares/snare tight.WAV"
+dest_files=["res://.godot/imported/snare tight.WAV-62144a9be0bf51adc386eaabb83c8845.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

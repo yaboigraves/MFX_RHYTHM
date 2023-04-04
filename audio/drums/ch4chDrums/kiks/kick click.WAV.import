@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dr4vsun67clxv"
+path="res://.godot/imported/kick click.WAV-6fb8c9ef7f9b3618dcfdb6e9e4ea313c.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/kiks/kick click.WAV"
+dest_files=["res://.godot/imported/kick click.WAV-6fb8c9ef7f9b3618dcfdb6e9e4ea313c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

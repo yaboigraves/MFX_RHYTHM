@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvuk22tsa01uy"
+path="res://.godot/imported/snare ping2.WAV-71b48c47a652959a7670c8a58a781b8f.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/snares/snare ping2.WAV"
+dest_files=["res://.godot/imported/snare ping2.WAV-71b48c47a652959a7670c8a58a781b8f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

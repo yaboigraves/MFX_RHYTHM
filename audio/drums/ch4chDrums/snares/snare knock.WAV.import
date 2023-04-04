@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ck5iq0c30bieh"
+path="res://.godot/imported/snare knock.WAV-7a84abf087c1db643b626ad69145cc7b.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/snares/snare knock.WAV"
+dest_files=["res://.godot/imported/snare knock.WAV-7a84abf087c1db643b626ad69145cc7b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

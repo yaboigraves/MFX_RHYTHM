@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvnkcxfgsyedi"
+path="res://.godot/imported/cl hat natrual.WAV-4c6d79b32bd84d402471e02ccc79e555.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/hats/cl hat natrual.WAV"
+dest_files=["res://.godot/imported/cl hat natrual.WAV-4c6d79b32bd84d402471e02ccc79e555.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

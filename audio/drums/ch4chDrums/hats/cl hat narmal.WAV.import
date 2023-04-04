@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://co1hgteuqse2s"
+path="res://.godot/imported/cl hat narmal.WAV-dcbc3b302cfd198a28e11312c7ea5440.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/hats/cl hat narmal.WAV"
+dest_files=["res://.godot/imported/cl hat narmal.WAV-dcbc3b302cfd198a28e11312c7ea5440.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c8vao7y6cfgxe"
+path="res://.godot/imported/kik ghost 2.WAV-0b58f852fca701a1645ab366b409a5fa.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/kiks/kik ghost 2.WAV"
+dest_files=["res://.godot/imported/kik ghost 2.WAV-0b58f852fca701a1645ab366b409a5fa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

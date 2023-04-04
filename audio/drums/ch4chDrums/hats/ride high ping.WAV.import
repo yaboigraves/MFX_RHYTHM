@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxcfcsti2rinw"
+path="res://.godot/imported/ride high ping.WAV-1b1a900b17af91710bf52f6b1ac058e4.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/hats/ride high ping.WAV"
+dest_files=["res://.godot/imported/ride high ping.WAV-1b1a900b17af91710bf52f6b1ac058e4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

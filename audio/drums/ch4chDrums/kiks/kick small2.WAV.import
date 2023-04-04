@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bclbf0h6uddmp"
+path="res://.godot/imported/kick small2.WAV-3abaae099c20bceb268a59f74c271bc0.sample"
+
+[deps]
+
+source_file="res://audio/drums/ch4chDrums/kiks/kick small2.WAV"
+dest_files=["res://.godot/imported/kick small2.WAV-3abaae099c20bceb268a59f74c271bc0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -46,6 +46,8 @@ func CheckHit(hit:Hit):
 		return false
 	
 	#TODO: so this 0.25 is obviously incorrect and needs to be tied in to actual size
+	#i dont think this is correct either
+	#really take a good look at this math
 	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize * 2 * 10) :
 		var goodHit = targetHits[hit.laneIndex]
 

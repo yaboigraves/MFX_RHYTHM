@@ -13,6 +13,18 @@ extends Node
 #we can get stuff like input window size, num beats, etc
 #gamemoderules
 
+#so the main main todos here are to handle the weirdness that can handle by doing slightly early inputs
+#i think technically, we ought to allow input in the idle state right near the end as a beggining of an input
+#same with the end of the record state, if you do an input and its like super close to a target hit, we should just kind of switch the mode pre-emptively
+#so technically there's like a buffer area thats the size of the window input BEFORE the phase starts technically
+
+#we dont want to trigger anything neccessarily, just buffer I guess
+#we could also technically start the mode early, but that seems bad to me
+#better to just open the window ON hit being received rather than doing it in state
+#the window might be small or not needed
+
+#so to start lets make it so that hits at the very end of the idle state can be buffered, or at least can count towards a record state
+
 
 @export var display : RhythmDisplay
 

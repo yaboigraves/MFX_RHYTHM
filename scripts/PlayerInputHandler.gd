@@ -43,3 +43,9 @@ func _print_midi_info(midi_event: InputEventMIDI):
 		if midi_event.pitch - 36 < 4:
 			get_child(midi_event.pitch - 36).play()
 			HandleHit(midi_event.pitch - 36)
+
+
+func _on_input_spoofer_spoof_hit(lane, time) -> void:
+	pass # Replace with function body.
+	HandleHit(3 - lane)
+	get_child(3-lane).play()

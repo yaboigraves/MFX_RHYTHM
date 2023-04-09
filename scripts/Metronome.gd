@@ -32,7 +32,7 @@ var nextSyncUpdate = 0.0
 var nextBeatUpdate = 0.0
 var nextPhaseUpdate = 7.0
 var time
-var timeInBeats = 0
+var timeInBeats = 0.0001
 
 #TODO: this only supports one callback per beat, must be an array
 var callbacks = {}
@@ -80,9 +80,6 @@ func calculateTime():
 		ProcessCallbacks()
 		
 
-		#this is probably legacy
-#		if is_zero_approx( fposmod(snapped(timeInBeats,syncUpdateRate),8)):
-#			emit_signal("PhaseSwitch")
 
 
 func ProcessCallbacks():

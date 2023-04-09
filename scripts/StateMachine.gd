@@ -53,6 +53,9 @@ func iterate_to_next_state() -> void:
 	var args = {}
 
 	if nextState.name == "VerifyState":
+		if state.buffer.size() > 0:
+			args["hitBuffer"] = state.buffer
+		
 		if(state.HasAnyHits()):
 			args["hits"] = state.hits
 		else:
@@ -61,7 +64,10 @@ func iterate_to_next_state() -> void:
 	if nextState.name == "IdleState":
 		if is_zero_approx(nextState.duration):
 			currentStateIndex = currentStateIndex + 1 % get_child_count()
-			
+	
+	if nextState.name == "RecordState":
+		if state.buffer.size() > 0:
+			args["hitBuffer"] = state.buffer
 	
 	transition_to( get_child( (currentStateIndex + 1) % get_child_count() ).name, args)
 

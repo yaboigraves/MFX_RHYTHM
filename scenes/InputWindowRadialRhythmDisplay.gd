@@ -3,6 +3,23 @@ extends RadialRhythmDisplay
 
 #couple of fixes required here
 #mainly, we need to actually be able to change where stuff spawns from
+#gotta flip the order of the lanes here, im very confident left to right is the way to go
+#so the OUTER lane is actually index 0
+
+#ok goals for today
+#control over what control indexes map to what lane, ideally via a dictionary and not indexes
+#buffer areas for input, so that you can do earlyish hits
+#better UI feedback for hits
+
+#lets fuckin GOOOOO
+
+#something worth experimenting with is a testing profile object too
+#so I can just plug in a drumset and a sample
+
+#lets do those 3 things today
+
+#k to start
+
 
 @export var rules: GameModeRules
 
@@ -68,6 +85,20 @@ func DrawInputWindows():
 func SpawnMarker(hit:Hit):
 	var poly = OutlinedPolygon2D.new()
 	poly.outlineWidth = 8
+	#so lets just make a reversed bool
+	
+	#for now lets just do the math
+	
+	var indexPos = (numLanes - 1) - hit.laneIndex
+	
+	#so we want
+	#0 -> 3
+	#1 -> 2
+	
+	
+	
+	print(indexPos)
+	
 
 	var beatPos = fposmod(hit.time,beatsPerRotation)/beatsPerRotation
 	beatPos *= 2 * PI
@@ -78,16 +109,16 @@ func SpawnMarker(hit:Hit):
 	var topBound = origin.rotated( origin.angle() + rotation - beatPos-windowSizeRadians)
 	var bottomBound = origin.rotated(origin.angle()  +rotation - beatPos+windowSizeRadians)
 
-	var pivot = origin.rotated(origin.angle()  +rotation - beatPos) * (startDist + (laneSize/2.0) + (hit.laneIndex * laneSize))
+	var pivot = origin.rotated(origin.angle()  +rotation - beatPos) * (startDist + (laneSize/2.0) + ( ((numLanes - 1)- hit.laneIndex) * laneSize))
 
 	var points : PackedVector2Array = [
-		topBound * (startDist + (laneMargins/2.0) +  + (hit.laneIndex * laneSize)) , 
-		topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (hit.laneIndex * laneSize)), 
-		bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (hit.laneIndex * laneSize)), 
-		bottomBound *(startDist + (laneMargins/2.0) + (hit.laneIndex * laneSize)) 
+		topBound * (startDist + (laneMargins/2.0) +  + (indexPos* laneSize)) , 
+		topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (indexPos * laneSize)), 
+		bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (indexPos * laneSize)), 
+		bottomBound *(startDist + (laneMargins/2.0) + (indexPos* laneSize)) 
 	]
 	
-	poly.color = markerColors[hit.laneIndex]
+	poly.color = markerColors[indexPos]
 	poly.set_polygon(points)
 	%Markers.add_child(poly)
 	
@@ -118,7 +149,7 @@ func _on_record_state_spawn_marker(hit:Hit) -> void:
 
 func _on_verify_state_missed_hit(hit) -> void:
 	
-	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)).rotated(origin.angle())
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1) -hit.laneIndex) * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
 
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
@@ -153,16 +184,13 @@ func UpdateMetronome(timeInBeats):
 
 
 func _on_verify_state_bad_hit(hit) -> void:
-#	markers.erase(markerHitMap[hit])
-#	markerHitMap[hit].queue_free()
-	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)).rotated(origin.angle())
-	
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + ((numLanes - 1) -hit.laneIndex * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
 
 
 func _on_verify_state_good_hit(hit) -> void:
 
-	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (hit.laneIndex * laneSize )),0)).rotated(origin.angle())
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
 
 	markers.erase(markerHitMap[hit])

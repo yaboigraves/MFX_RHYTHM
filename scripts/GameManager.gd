@@ -25,6 +25,9 @@ extends Node
 
 #so to start lets make it so that hits at the very end of the idle state can be buffered, or at least can count towards a record state
 
+#ok so some rough ideas are sketched out but I REALLY need a way to inject test code in
+#so lets do this, lets be smart and make an input spoofer that will just spawn hits
+
 
 @export var display : RhythmDisplay
 

@@ -23,6 +23,13 @@ func enter(_msg := {}) -> void:
 	targetHits = _msg["hits"]
 	combo = 0
 	
+	if _msg.has("hitBuffer"):
+		print('we got a buffer, process it')
+		var hitBuffer = _msg.hitBuffer
+		
+		for hit in hitBuffer:
+			emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
+	
 func exit():
 	super.exit()
 	await get_tree().create_timer(1).timeout

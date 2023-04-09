@@ -184,7 +184,7 @@ func UpdateMetronome(timeInBeats):
 
 
 func _on_verify_state_bad_hit(hit) -> void:
-	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + ((numLanes - 1) -hit.laneIndex * laneSize )),0)).rotated(origin.angle())
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
 
 

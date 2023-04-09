@@ -4,6 +4,7 @@
 resource_name = "Compressor"
 
 [resource]
+bus/0/mute = true
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_bgkk1")
 bus/0/effect/0/enabled = true
 bus/1/name = &"drums"

@@ -5,6 +5,8 @@ extends Node
 
 #we probably want to map these to phases
 
+@export var inputSpoofProfiles: Array[InputSpoofProfile]
+
 @export var spoofInput = false
 @export var lane1Hits : Array[float]
 @export var lane2Hits : Array[float]
@@ -64,3 +66,18 @@ func _on_verify_state_on_enter() -> void:
 
 func _on_verify_state_on_exit() -> void:
 	set_process(false)
+
+
+func FindProfileByStateName(stateName:  String):
+	for profile in inputSpoofProfiles:
+		if profile.stateName == stateName:
+			return profile
+
+func _on_player_state_machine_transitioned(state) -> void:
+	var profile = FindProfileByStateName(state.name)
+	
+	if profile:
+		roundHits = [[] + profile.lane1Inputs, [] + profile.lane2Inputs, [] + profile.lane3Inputs, [] + profile.lane4Inputs]
+		set_process(true)
+	else:
+		set_process(false)

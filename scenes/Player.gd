@@ -1,6 +1,7 @@
 class_name Player
 extends Node
 
+@export var gameRules:GameModeRules
 #cool so the player can act as the central hub for all player based stuff
 #game state stuff can be handled a layer above, seems good
 
@@ -32,7 +33,9 @@ func StartInputSequence():
 	stateMachine.transition_to("RecordState")
 	emit_signal("BeatPhaseCallback",stateMachine.state.duration,MoveToNextPhase)
 	
-	
+#so honestly I think we want to just cut this short by the input window
+#its small as fuck normally
+
 func MoveToNextPhase():
 	stateMachine.iterate_to_next_state()
 	emit_signal("BeatPhaseCallback",stateMachine.state.duration,MoveToNextPhase)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InputSpoofProfile" load_steps=2 format=3 uid="uid://csq1wtf3q5esm"]
+
+[ext_resource type="Script" path="res://scripts/testing/InputSpoofProfile.gd" id="1_k3j31"]
+
+[resource]
+script = ExtResource("1_k3j31")
+stateName = "VerifyState"
+lane1Inputs = Array[float]([0.0])
+lane2Inputs = Array[float]([2.0, 3.0])
+lane3Inputs = Array[float]([])
+lane4Inputs = Array[float]([])

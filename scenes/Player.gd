@@ -26,6 +26,7 @@ func MoveToNextPhase():
 	stateMachine.iterate_to_next_state()
 	emit_signal("BeatPhaseCallback",stateMachine.state.duration ,MoveToNextPhase, true)
 
+
 func _on_player_input_handler_hit(index) -> void:
 	var hit = Hit.new(index,%Metronome.timeInBeats)
 	print("hit has index", hit.laneIndex)

@@ -28,7 +28,7 @@ func MoveToNextPhase():
 
 
 func _on_player_input_handler_hit(index) -> void:
-	var hit = Hit.new(index,%Metronome.timeInBeats)
+	var hit = Hit.new(index,%Metronome.timeInBeats,stateMachine.state.startTime)
 	print("hit has index", hit.laneIndex)
 	stateMachine.state.HandleHit(hit)
 	

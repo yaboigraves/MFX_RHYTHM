@@ -44,5 +44,5 @@ func HandleHit(hit: Hit):
 
 
 func _on_input_spoofer_spoof_hit(lane, time) -> void:
-	var spoofHit = Hit.new(lane,time)
+	var spoofHit = Hit.new(lane,time, startTime)
 	HandleHit(spoofHit)

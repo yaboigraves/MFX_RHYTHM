@@ -20,26 +20,12 @@ func _ready() -> void:
 	set_process(false)
 
 
-
-
-#so yeah lets rework how this actually checks time and whatnot
-#perhaps we can just get a ref to the current state we're tracking
-#and we can use its duration?
-
 func _process(delta: float) -> void:
-	#so now	
-#	var time = fposmod(%Metronome.timeInBeats,4.0)
-
 	for i in range(4):
 		var hitSpoofs = roundHits[i]
 		if hitSpoofs.size() > 0 and hitSpoofs[0] <= %Metronome.timeInBeats:
-			#print("spoofing input to lane", i + 1)
-			print("spoof ", hitSpoofs[0],  " ", %Metronome.timeInBeats)
 			emit_signal("SpoofHit",i+ 1,hitSpoofs[0])
 			hitSpoofs.pop_front()
-
-
-
 
 
 func _on_verify_state_on_exit() -> void:

@@ -3,8 +3,14 @@ extends RefCounted
 
 var laneIndex : int 
 var time : float
+var roundStartTime : float
 
-func _init(laneIndex,time) -> void:
+var roundTime:float:
+	get:
+		return time - roundStartTime
+
+func _init(laneIndex,time, roundStartTime) -> void:
 	self.laneIndex = laneIndex
 	self.time = time 
-	
+	self.roundStartTime = roundStartTime
+

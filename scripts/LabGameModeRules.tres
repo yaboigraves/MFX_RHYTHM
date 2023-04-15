@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_q861u")
 windowSize = 0.016
-loopBeatSize = 4.0
+loopBeatSize = 8.0

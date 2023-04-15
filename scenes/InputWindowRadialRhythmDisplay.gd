@@ -85,23 +85,12 @@ func DrawInputWindows():
 func SpawnMarker(hit:Hit):
 	var poly = OutlinedPolygon2D.new()
 	poly.outlineWidth = 8
-	#so lets just make a reversed bool
-	
-	#for now lets just do the math
-	
+
 	var indexPos = (numLanes - 1) - hit.laneIndex
-	
-	#so we want
-	#0 -> 3
-	#1 -> 2
-	
-	
-	
-	print(indexPos)
-	
 
 	var beatPos = fposmod(hit.time,beatsPerRotation)/beatsPerRotation
-	beatPos *= 2 * PI
+	beatPos = PI
+#	beatPos *= 2 * PI
 
 	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
 
@@ -124,13 +113,39 @@ func SpawnMarker(hit:Hit):
 	
 	markers.append(poly)
 	markerHitMap[hit] = poly
+
 	
+	
+#so perhaps what we want to do here is go over all of the markers
+#and update their positions 
+#yeah because if we wanna do like slide back stuff later with markers this will be important
+
+#so lets just update them individually instead
+
+#this requires a bit of a rewrite but it should be ok
+#alternatively we offset them but thats too much state to update
 
 
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
-	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
+#	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 	
+	#so we want to go over the markerhit map keys
+	#so once again we're presented with this issue of absolute time vs round time
+	#this ought to be packed into a hit honestly
+	#the start time of the round it was in
+	#so lets do that
 	
+	for hit in markerHitMap.keys():
+		#so time beats is absolt
+		print(timeBeats - hit.roundStartTime - hit.time)
+		#so the idea is we want to take the time, find its percentage of the current round
+		#im struggin to figure this out
+		#go for a run 
+		#clear ya head
+		markerHitMap[hit].rotation = (timeBeats - hit.roundStartTime - hit.time) / (2 * PI)
+
+		
+		
 func ClearAllMarkers():
 	super.ClearAllMarkers()
 	markerHitMap.clear()
@@ -182,10 +197,20 @@ func _on_verify_state_bad_hit(hit) -> void:
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
 
 
+#so the issue is that all of them are rotating as children of markers
+#which is efficient but not idea
+
+#perhaps instead of doing that, we move each individual one?
+#that way we have greater control...
+#def want that
+
 func _on_verify_state_good_hit(hit) -> void:
 
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
-
-	markers.erase(markerHitMap[hit])
 	markerHitMap[hit].queue_free()
+	markers.erase(markerHitMap[hit])
+	markerHitMap[hit].modulate = Color(1,1,1,0.25)
+	markerHitMap.erase(hit)
+
+	

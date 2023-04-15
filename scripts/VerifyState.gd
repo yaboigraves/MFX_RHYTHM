@@ -48,7 +48,8 @@ func CheckHit(hit:Hit):
 		var goodHit = targetHits[hit.laneIndex]
 
 		return true
-		
+
+#this feels off lets see
 func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):

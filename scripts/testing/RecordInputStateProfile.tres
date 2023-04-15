@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_520xd")
 stateName = "RecordState"
-lane1Inputs = Array[float]([2.0])
-lane2Inputs = Array[float]([])
+lane1Inputs = Array[float]([])
+lane2Inputs = Array[float]([2.0])
 lane3Inputs = Array[float]([])
 lane4Inputs = Array[float]([])

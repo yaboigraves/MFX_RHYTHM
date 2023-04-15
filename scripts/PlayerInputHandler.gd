@@ -46,6 +46,6 @@ func _print_midi_info(midi_event: InputEventMIDI):
 
 
 func _on_input_spoofer_spoof_hit(lane, time) -> void:
-	pass # Replace with function body.
+	print("player got lane ", lane)
 	HandleHit(3 - lane)
 	get_child(3-lane).play()

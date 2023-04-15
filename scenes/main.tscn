@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c1iimdsfk4vu"]
+[gd_scene load_steps=33 format=3 uid="uid://bnxuemo8bd7pl"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -104,6 +104,7 @@ bus = &"drums"
 [node name="InputSpoofer" type="Node" parent="GameMode/Player/PlayerInputHandler"]
 script = ExtResource("17_sy8do")
 inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("18_0qwl4"), ExtResource("19_07p40"), ExtResource("20_5lv43")])
+spoofInput = true
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
 script = ExtResource("16_ot7g3")

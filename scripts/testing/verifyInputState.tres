@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_bks6y")
-stateName = "IdleState"
-lane1Inputs = Array[float]([])
+stateName = "VerifyState"
+lane1Inputs = Array[float]([0.0])
 lane2Inputs = Array[float]([])
 lane3Inputs = Array[float]([])
 lane4Inputs = Array[float]([])

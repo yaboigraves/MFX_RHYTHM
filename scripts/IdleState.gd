@@ -24,6 +24,7 @@ func enter(args ={}):
 
 func CheckIfHitInBufferZone(hit:Hit):
 	print(startTime + duration)
+	print('ahhhhh')
 	#so if the hit time is less than the window 
 	
 	if CheckIfInBufferZone(hit.time):
@@ -31,4 +32,5 @@ func CheckIfHitInBufferZone(hit:Hit):
 	
 
 func HandleHit(hit):
-	CheckIfHitInBufferZone(hit)
+	#CheckIfHitInBufferZone(hit)
+	pass

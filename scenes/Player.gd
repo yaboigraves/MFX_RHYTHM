@@ -28,19 +28,26 @@ var stateMachine : StateMachine
 func _ready():
 	stateMachine = %PlayerStateMachine as StateMachine
 	
+#so this fundamentally breaks stuff a bit
+#I think the sync update was cool but this isn't gonna work for micro window stuff
+#so basically, we want a continous check for these in an update func, not fixed update
+
+#ok so input phases work a bit different now
+
 func StartInputSequence():
 	print("starting ", name, " input sequence")
 	stateMachine.transition_to("RecordState")
-	emit_signal("BeatPhaseCallback",stateMachine.state.duration,MoveToNextPhase)
+	emit_signal("BeatPhaseCallback",stateMachine.state.duration - gameRules.windowSize,MoveToNextPhase)
 	
 #so honestly I think we want to just cut this short by the input window
 #its small as fuck normally
 
 func MoveToNextPhase():
 	stateMachine.iterate_to_next_state()
-	emit_signal("BeatPhaseCallback",stateMachine.state.duration,MoveToNextPhase)
+	emit_signal("BeatPhaseCallback",stateMachine.state.duration - gameRules.windowSize,MoveToNextPhase)
 
 func _on_player_input_handler_hit(index) -> void:
 	var hit = Hit.new(index,%Metronome.timeInBeats)
+	print("hit has index", hit.laneIndex)
 	stateMachine.state.HandleHit(hit)
 	

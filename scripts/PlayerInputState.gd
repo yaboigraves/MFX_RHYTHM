@@ -21,5 +21,5 @@ func HandleHit(hit: Hit):
 
 	
 func CheckIfInBufferZone(hitTime):
-	if startTime + duration - hitTime < 0.3:
+	if startTime + duration - hitTime < rules.windowSize * 10:
 		return true

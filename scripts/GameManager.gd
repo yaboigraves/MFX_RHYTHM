@@ -28,6 +28,20 @@ extends Node
 #ok so some rough ideas are sketched out but I REALLY need a way to inject test code in
 #so lets do this, lets be smart and make an input spoofer that will just spawn hits
 
+#4/9
+#there appears to be a good deal of refuse accumulated in this codebase 
+#phases look decent
+#I think what really ought to be done today is proper testing of input windows
+#so lets do that
+#create a test case that has a miss in it first
+
+#ok overall this buffer system fuckin sucks
+#honestly, input starts at the 0, but ends when the new input window starts
+#you're never going to want to do a fresh input at the start of a record phase
+#it's just not a thing you do in this game
+#so lets just switch phases earlier, and deal with the fallout
+#completly cut this bs buffer system out
+
 
 @export var display : RhythmDisplay
 

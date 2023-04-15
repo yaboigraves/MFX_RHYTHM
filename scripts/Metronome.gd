@@ -10,6 +10,17 @@ extends Node
 
 #this should clean up alot of awkwardness with the queue
 
+#TODO: rewrite the callbacks system to suport an update based approach
+#sync update is great but doesnt work for the fact that technically states change not on beat
+#we just want to fake that they open and close like that
+#so basically, input states change literally the second you can possibly make a valid input
+#buffer stuff is cringe, unneccessary
+#should be alot cleaner after this too, we ought to do a big cleanup after this
+#once phases are good and we get some thorough testing in, I feel good about moving to some UI polish
+#after the basic UI polish is done, we can go to adding vs mode
+#at that point I feel comfortable releasing this as a little private demo and then hard pivoting to the other project
+
+
 
 signal Tick(timeSeconds, timeBeats)
 signal SyncUpdate(timeInBeats,delta)
@@ -36,6 +47,7 @@ var timeInBeats = 0.0001
 
 #TODO: this only supports one callback per beat, must be an array
 var callbacks = {}
+var updateCallbacks = {}
 
 
 func _ready() -> void:
@@ -78,22 +90,42 @@ func calculateTime():
 		emit_signal("SyncUpdate",snapped(timeInBeats,syncUpdateRate),syncUpdateRate)
 #		print(timeInBeats)
 		ProcessCallbacks()
-		
-
-
+	
+	ProcessUpdateCallbacks()
+	
+#update callbacks are added in as objects?
+func ProcessUpdateCallbacks():
+	for callbackTime in updateCallbacks.keys():
+		if timeInBeats >= callbackTime:
+			updateCallbacks[callbackTime].call()
+			updateCallbacks.erase(callbackTime)
+			print("swithing phase at ", callbackTime)
 
 func ProcessCallbacks():
 	if callbacks.has(snapped(timeInBeats,syncUpdateRate)):
 		callbacks[snapped(timeInBeats,syncUpdateRate)].call()
 		callbacks.erase(snapped(timeInBeats,syncUpdateRate))
+		
+
+	
 
 
 func GetTimeInBeatsWithLatency():
 	pass
 
+#so this approach IS accumulating floating point roundoff error
+#we probably want an actual snap based approach to this
+#cant just do the adding
 
+#this is worth coming back to and doing a good job on
+#so lets close up shop for now then come back to this
+#TODO: create a system that does this but doesnt break due to floating point error
+#probably just feed in the actual rounded beat values, but then round back
+#maybe add a third arg for the window adjustment?? then do it the old way
 func _on_player_beat_phase_callback(durationInBeats, callback) -> void:
-	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats
-	callbacks[callbackTime] = callback
-	
+	#old sync update methodf
+	#	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats
+	#	callbacks[callbackTime] = callback
+	var callbackTime = timeInBeats + durationInBeats
+	updateCallbacks[callbackTime] = callback
 	

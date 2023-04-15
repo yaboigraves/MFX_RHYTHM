@@ -23,12 +23,15 @@ func enter(_msg := {}) -> void:
 	targetHits = _msg["hits"]
 	combo = 0
 	
-	if _msg.has("hitBuffer"):
-		print('we got a buffer, process it')
-		var hitBuffer = _msg.hitBuffer
-		
-		for hit in hitBuffer:
-			emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
+	#something is wrong with the way this buffer is getting processed
+#	if _msg.has("hitBuffer"):
+#		print('we got a buffer, process it')
+#		var hitBuffer = _msg.hitBuffer
+#
+#
+#		for hit in hitBuffer:
+#			print("processing hit from ", hit.laneIndex)
+#			emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
 	
 func exit():
 	super.exit()
@@ -55,7 +58,7 @@ func CheckHit(hit:Hit):
 	#TODO: so this 0.25 is obviously incorrect and needs to be tied in to actual size
 	#i dont think this is correct either
 	#really take a good look at this math
-	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize * 2 * 10) :
+	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize  * 10) :
 		var goodHit = targetHits[hit.laneIndex]
 
 		return true
@@ -66,7 +69,7 @@ func CheckForMissedHits():
 	for i in range(4):
 		for hit in targetHits[i]:
 			
-			if(hit.time + rules.loopBeatSize + (rules.windowSize * 2 * 10) <= %Metronome.timeInBeats):
+			if(hit.time + rules.loopBeatSize + (rules.windowSize  * 10) <= %Metronome.timeInBeats):
 				missedHits.append(hit)
 				emit_signal("MissedHit",hit)
 				combo = 0

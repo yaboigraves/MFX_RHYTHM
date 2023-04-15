@@ -45,32 +45,34 @@ func HasAnyHits():
 
 func HandleHit(hit: Hit):
 	
-	var keepGoing = true
-	#so we actually wanna check if we're in the buffa zone
-	if CheckIfInBufferZone(hit.time):
-		print("we are in da buffa zone during a record state")
-		#so basically we have the state to actually handle this here
-		#we wanna basically borrow the check hit function from the verify state
-		#if we verify a hit, we actually are going to lock normal input, and only accept pseudo verify hits
-		#we want to add to a buffer once again though,
-		#specifically just check the start of the arrays
-		
-
-		for i in range(3):
-			if(hits[i].size() > 0):
-				print("there are some hits here")
-				if abs(hits[i][0].time + 4 - hit.time) < 0.1:
-					print("to the buffer you go")				
-					buffer.append(hit)
-					keepGoing = false
-				else:
-					hits[hit.laneIndex].append(hit)
-					emit_signal("SpawnMarker",hit)
-					return
-	
-	if keepGoing:
-		hits[hit.laneIndex].append(hit)
-		emit_signal("SpawnMarker",hit)
+#	var keepGoing = true
+#	#so we actually wanna check if we're in the buffa zone
+#	if CheckIfInBufferZone(hit.time):
+#		print("we are in da buffa zone during a record state")
+#		#so basically we have the state to actually handle this here
+#		#we wanna basically borrow the check hit function from the verify state
+#		#if we verify a hit, we actually are going to lock normal input, and only accept pseudo verify hits
+#		#we want to add to a buffer once again though,
+#		#specifically just check the start of the arrays
+#
+#
+#		for i in range(3):
+#			if(hits[i].size() > 0):
+#				print(hits[i][0].time + 4.0)
+#				print(hit.time)
+#				print(abs(hits[i][0].time + 4.0 - hit.time))
+#				if abs(hits[i][0].time + 4 - hit.time) < rules.windowSize * 10:
+#					print("to the buffer you go")				
+#					buffer.append(hit)
+#					keepGoing = false
+#				else:
+#					hits[hit.laneIndex].append(hit)
+#					emit_signal("SpawnMarker",hit)
+#
+#
+#	if keepGoing:
+	hits[hit.laneIndex].append(hit)
+	emit_signal("SpawnMarker",hit)
 	
 	
 	

@@ -13,7 +13,6 @@ var combo = 0 :
 		combo = value
 		emit_signal("ComboUpdate",combo)
 	
-
 func initialize():
 	super.initialize()
 	duration = rules.loopBeatSize
@@ -22,16 +21,6 @@ func enter(_msg := {}) -> void:
 	super.enter()
 	targetHits = _msg["hits"]
 	combo = 0
-	
-	#something is wrong with the way this buffer is getting processed
-#	if _msg.has("hitBuffer"):
-#		print('we got a buffer, process it')
-#		var hitBuffer = _msg.hitBuffer
-#
-#
-#		for hit in hitBuffer:
-#			print("processing hit from ", hit.laneIndex)
-#			emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
 	
 func exit():
 	super.exit()
@@ -54,16 +43,12 @@ func HandleHit(hit:Hit):
 func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):
 		return false
-	
-	#TODO: so this 0.25 is obviously incorrect and needs to be tied in to actual size
-	#i dont think this is correct either
-	#really take a good look at this math
+
 	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize  * 10) :
 		var goodHit = targetHits[hit.laneIndex]
 
 		return true
 		
-
 func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
@@ -76,6 +61,3 @@ func CheckForMissedHits():
 			
 	for hit in missedHits:
 		targetHits[hit.laneIndex].erase(hit)
-	
-	
-	

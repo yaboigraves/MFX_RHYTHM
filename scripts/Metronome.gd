@@ -31,6 +31,7 @@ signal PhaseSwitch
 @export var stream : AudioStreamOggVorbis
 @export var syncUpdateRate = 1.0
 @export var phaseSwitchRate = 8.0
+@export var rules : GameModeRules
 
 
 var time_begin
@@ -44,6 +45,14 @@ var nextBeatUpdate = 0.0
 var nextPhaseUpdate = 7.0
 var time
 var timeInBeats = 0.0001
+
+#integer experiments
+
+#how does this work
+#it can be used to do calculations for future time
+#root time we grab is still a float
+#but we just never wanna do math with that
+#so this is a non floating point value that just truncates a certain level of detail
 
 #TODO: this only supports one callback per beat, must be an array
 var callbacks = {}
@@ -76,6 +85,8 @@ func calculateTime():
 	# May be below 0 (did not begin yet).
 	time = max(0, time)
 	timeInBeats = time * bps
+	
+	
 	#so what we really want is this time converted into beats
 	emit_signal("Tick",time,timeInBeats)
 	
@@ -91,12 +102,18 @@ func calculateTime():
 #		print(timeInBeats)
 		ProcessCallbacks()
 	
+
 	ProcessUpdateCallbacks()
 	
 #update callbacks are added in as objects?
+
+#ok lets jump into this
+#so update callbacks need the ability to anchor to the closest beat 
 func ProcessUpdateCallbacks():
 	for callbackTime in updateCallbacks.keys():
+
 		if timeInBeats >= callbackTime:
+			
 			updateCallbacks[callbackTime].call()
 			updateCallbacks.erase(callbackTime)
 			print("swithing phase at ", callbackTime)
@@ -107,25 +124,7 @@ func ProcessCallbacks():
 		callbacks.erase(snapped(timeInBeats,syncUpdateRate))
 		
 
-	
-
-
-func GetTimeInBeatsWithLatency():
-	pass
-
-#so this approach IS accumulating floating point roundoff error
-#we probably want an actual snap based approach to this
-#cant just do the adding
-
-#this is worth coming back to and doing a good job on
-#so lets close up shop for now then come back to this
-#TODO: create a system that does this but doesnt break due to floating point error
-#probably just feed in the actual rounded beat values, but then round back
-#maybe add a third arg for the window adjustment?? then do it the old way
-func _on_player_beat_phase_callback(durationInBeats, callback) -> void:
-	#old sync update methodf
-	#	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats
-	#	callbacks[callbackTime] = callback
-	var callbackTime = timeInBeats + durationInBeats
+func _on_player_beat_phase_callback(durationInBeats, callback, anchorToNearestBeat = false) -> void:
+	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - rules.windowSize
 	updateCallbacks[callbackTime] = callback
-	
+

@@ -11,17 +11,6 @@ extends Node
 #all game modes are gonna have phases
 #yada yada
 
-#so start is going to initially create a looping player sequence
-
-#so the question is how we use the metronome I guess
-
-#the metronome needs to be stopped and started BY the game mode
-#so yeah I guess we can emit from the game mode?
-#the game mode can request a certain length of beats and then receive a callback
-
-#basically we can say tell me something in 8 beats via a call back
-#we can pass a closure pretty easily to say hey, switch the game mode after 8 beats
-
 
 
 #so after x beats we do blank

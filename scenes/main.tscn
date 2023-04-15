@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bnxuemo8bd7pl"]
+[gd_scene load_steps=32 format=3 uid="uid://c1iimdsfk4vu"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" path="res://scripts/IdleState.gd" id="11_yjrf7"]
 [ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="12_cuo1v"]
 [ext_resource type="AudioStream" uid="uid://bjmfkrf2453ja" path="res://audio/drums/ch4chDrums/kiks/kik natrual.WAV" id="13_88tj3"]
-[ext_resource type="PackedScene" uid="uid://k0xmbgkh6qsr" path="res://radial_rhythm_display.tscn" id="13_yd0xq"]
 [ext_resource type="AudioStream" uid="uid://cb5nu4p7rgd57" path="res://audio/drums/ch4chDrums/hats/brush.WAV" id="14_jynds"]
 [ext_resource type="AudioStream" uid="uid://covnd5thoavfe" path="res://audio/drums/ch4chDrums/snares/snare crunch.WAV" id="15_1wjff"]
 [ext_resource type="AudioStream" uid="uid://d0kc2vyaeyrtq" path="res://audio/drums/ch4chDrums/perc/808tom.WAV" id="16_i1jd3"]
@@ -41,6 +40,7 @@ display = NodePath("")
 unique_name_in_owner = true
 script = ExtResource("1_mpivx")
 stream = ExtResource("3_0onyw")
+rules = ExtResource("6_ev767")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
@@ -104,7 +104,6 @@ bus = &"drums"
 [node name="InputSpoofer" type="Node" parent="GameMode/Player/PlayerInputHandler"]
 script = ExtResource("17_sy8do")
 inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("18_0qwl4"), ExtResource("19_07p40"), ExtResource("20_5lv43")])
-spoofInput = true
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
 script = ExtResource("16_ot7g3")
@@ -304,21 +303,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("13_yd0xq")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -505.5
-offset_top = -505.5
-offset_right = 505.5
-offset_bottom = 505.5
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("11_oivm5")]
 layout_mode = 1
 anchors_preset = -1
@@ -330,21 +314,18 @@ offset_left = 0.379969
 offset_top = 0.0199985
 offset_right = -0.380112
 offset_bottom = -0.0200448
-windowSize = 0.016
 marker = ExtResource("12_cuo1v")
 centerOffset = 0.3
 outerOffset = 1.0
 laneColors = Array[Color]([Color(0.533333, 0.533333, 0.533333, 1)])
 backgroundColor = Color(0, 0, 0, 1)
 
-[connection signal="SpawnHit" from="." to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode/GameModeHUD" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_beat_update"]
 [connection signal="PhaseSwitch" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_phase_switch"]
-[connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_metronome_tick"]
 [connection signal="Tick" from="Metronome" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_metronome_tick"]
 [connection signal="BeatPhaseCallback" from="GameMode/Player" to="Metronome" method="_on_player_beat_phase_callback"]
 [connection signal="transitioned" from="GameMode/Player/PlayerStateMachine" to="GameMode/Player/PlayerInputHandler/InputSpoofer" method="_on_player_state_machine_transitioned"]
@@ -359,7 +340,6 @@ backgroundColor = Color(0, 0, 0, 1)
 [connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_missed_hit"]
 [connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_missed_hit"]
 [connection signal="OnExit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]
-[connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/RadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/Player" method="_on_player_input_handler_hit"]
 [connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/GameModeHUD" method="_on_player_input_handler_hit"]

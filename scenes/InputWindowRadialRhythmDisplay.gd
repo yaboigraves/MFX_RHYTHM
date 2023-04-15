@@ -165,15 +165,9 @@ func _on_player_state_machine_transitioned(state) -> void:
 func _on_metronome_beat_update(timeInBeats) -> void:
 	UpdateMetronome(timeInBeats)
 	
-#this needs a little work
-#doesnt work with the variant idle phase length
 
 func UpdateMetronome(timeInBeats):
-	
-#	var metronomeIndex = fposmod(int(timeInBeats),currentStateDuration)/currentStateDuration
-
 	var metronomeIndex = currentState.progress/currentState.duration
-#	print(rules.loopBeatSize * metronomeIndex)
 	
 	for dot in metronomeDots:
 		dot.modulate = Color(1,1,1,0.2)

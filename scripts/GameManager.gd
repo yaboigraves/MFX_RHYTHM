@@ -41,6 +41,33 @@ extends Node
 #it's just not a thing you do in this game
 #so lets just switch phases earlier, and deal with the fallout
 #completly cut this bs buffer system out
+#ay ok that was way simple than i thought
+
+#so now all that needs to be done is create the "bad window"
+#this is when you do a hit thats close to the input, but enough to actually cancel out an input in that lane
+#if you do an input and any hits are in the dead zone, you miss
+#we want to encourage people swinging though so careful
+#this should just be a way to penalize full on mistimes
+#I guess another approach, is to close input for a brief period after missing
+#that feels bad though
+#yeah just check a threshold
+#lets assume its outside the window * 2
+#the fucked bit, is that this CAN occur before a phase starts
+#i guess that counts as an input then though
+#so thats a different kind of mistake
+#assume thats fine
+#so this exists only in the verify state
+
+#so when we check a hit, see if its within that extra bad threshold
+#this is to prevent spamming mainly
+
+#some characters can maybe open extra bonus windows offset
+#thats a cool idea
+#maybe a swing character?
+#anyways, lets first do some project cleanup
+#lotta commented code
+
+
 
 
 @export var display : RhythmDisplay
@@ -61,12 +88,3 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Reload"):
 		get_tree().reload_current_scene()
 		
-#so lets start by just assuming we want to spawn a 
-func _on_player_input_handler_hit(index) -> void:
-#	display.SpawnMarker(index,$Metronome.timeInBeats)
-	#look at the metronome time for the hit
-	
-	#TODO: we need to factor in the audio latency here
-	#add the latency to the time the beat is detected, we need to wait till it actually plays
-	emit_signal("SpawnHit",index,$Metronome.timeInBeats)
-	

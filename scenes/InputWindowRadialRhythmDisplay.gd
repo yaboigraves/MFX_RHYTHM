@@ -156,6 +156,7 @@ func _on_verify_state_missed_hit(hit) -> void:
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
 
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
+	markerHitMap.erase(hit)
 
 
 var currentState
@@ -196,9 +197,9 @@ func _on_verify_state_good_hit(hit) -> void:
 
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
-	markerHitMap[hit].queue_free()
+	#markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
-	markerHitMap[hit].modulate = Color(1,1,1,0.25)
+
 	markerHitMap.erase(hit)
 
 	

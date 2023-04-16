@@ -49,13 +49,14 @@ func CheckHit(hit:Hit):
 
 		return true
 
-#this feels off lets see
+#aha! so this is indeed fucked up
+
 func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
 		for hit in targetHits[i]:
 			
-			if(hit.time + rules.loopBeatSize + (rules.windowSize  * 10) <= %Metronome.timeInBeats):
+			if(hit.time + rules.loopBeatSize + (rules.windowSize * 2.0 * 10) <= %Metronome.timeInBeats):
 				missedHits.append(hit)
 				emit_signal("MissedHit",hit)
 				combo = 0

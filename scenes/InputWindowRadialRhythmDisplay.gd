@@ -129,20 +129,8 @@ func SpawnMarker(hit:Hit):
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 	
-	#so we want to go over the markerhit map keys
-	#so once again we're presented with this issue of absolute time vs round time
-	#this ought to be packed into a hit honestly
-	#the start time of the round it was in
-	#so lets do that
-	
 	for hit in markerHitMap.keys():
-		#so time beats is absolt
-		print(timeBeats - hit.roundStartTime - hit.time)
-		#so the idea is we want to take the time, find its percentage of the current round
-		#im struggin to figure this out
-		#go for a run 
-		#clear ya head
-		markerHitMap[hit].rotation = (timeBeats - hit.roundStartTime - hit.time) / (2 * PI)
+		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 
 		
 		

@@ -104,7 +104,6 @@ bus = &"drums"
 [node name="InputSpoofer" type="Node" parent="GameMode/Player/PlayerInputHandler"]
 script = ExtResource("17_sy8do")
 inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("18_0qwl4"), ExtResource("19_07p40"), ExtResource("20_5lv43")])
-spoofInput = true
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
 script = ExtResource("16_ot7g3")

@@ -44,7 +44,19 @@ func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):
 		return false
 
-	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize  * 10) :
+	#lets look at the actual math here
+	#so the time of the beat - target time 
+	#so the difference must be less than 10 * the window size
+	#which is dumb
+	#so lets just fix some of this input code I think
+	
+	#SO
+	#the good way to think about the window is just raw size, then divide by 2 when neccessary
+	#so the raw size is what we move forawrd with now
+	#lets assume the raw size is 0.5 beats
+	#ok first things first lets draw this right
+	
+	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize) :
 		var goodHit = targetHits[hit.laneIndex]
 
 		return true
@@ -56,7 +68,7 @@ func CheckForMissedHits():
 	for i in range(4):
 		for hit in targetHits[i]:
 			
-			if(hit.time + rules.loopBeatSize + (rules.windowSize * 2.0 * 10) <= %Metronome.timeInBeats):
+			if(hit.time + rules.loopBeatSize + (rules.windowSize ) <= %Metronome.timeInBeats):
 				missedHits.append(hit)
 				emit_signal("MissedHit",hit)
 				combo = 0

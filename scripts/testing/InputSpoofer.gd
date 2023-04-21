@@ -7,6 +7,8 @@ extends Node
 
 #so lets fix this cause its just broken
 
+#shieeet we may have to lie way more than I thought here
+
 @export var inputSpoofProfiles: Array[InputSpoofProfile]
 
 @export var spoofInput = false
@@ -25,6 +27,7 @@ func _process(delta: float) -> void:
 		var hitSpoofs = roundHits[i]
 		if hitSpoofs.size() > 0 and hitSpoofs[0] <= %Metronome.timeInBeats:
 			emit_signal("SpoofHit",i+ 1,hitSpoofs[0])
+			print("spootinf a hit at ", hitSpoofs[0])
 			hitSpoofs.pop_front()
 
 
@@ -37,10 +40,13 @@ func FindProfileByStateName(stateName:  String):
 		if profile.stateName == stateName:
 			return profile
 
+#this is broken
 func _on_player_state_machine_transitioned(state) -> void:
 
 	if spoofInput == false: 
 		return
+		
+		
 	
 	var profile = FindProfileByStateName(state.name)
 	

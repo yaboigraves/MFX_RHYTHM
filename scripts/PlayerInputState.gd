@@ -10,6 +10,7 @@ var startTime: float
 
 
 func enter(args ={}):
+
 	super.enter()
 	progress = 0.0
 	startTime = %Metronome.timeInBeats

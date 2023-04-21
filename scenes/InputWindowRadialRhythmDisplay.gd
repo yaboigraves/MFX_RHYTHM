@@ -23,11 +23,11 @@ extends RadialRhythmDisplay
 
 @export var rules: GameModeRules
 
-@export var windowSize : float = 0.015625
-
 @export var markerColors: Array[Color]
 
 @export var radialMetronomeDot : PackedScene
+
+
 
 var metronomeDots = []
 
@@ -43,11 +43,14 @@ var stateTextMap = {
 #we gotta change how spawning markers works
 
 func _ready():
-	windowSize = rules.windowSize
+	
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()
+	
 	DrawInputWindows()
+	#DrawBadZone()
 	DrawMetronomeDots()
+	
 	
 	
 
@@ -59,16 +62,61 @@ func DrawMetronomeDots():
 		$Metronome.add_child(metronomeDot)
 		metronomeDots.append(metronomeDot)
 		
-		
+
+#so this math may be wrong?
+
+func DrawBadZone():
+	#so the bad zone is basically an area right outside the windows 
+	#uses very similar drawing codde
+	var windowSizeRadians = (PI) * (rules.windowSize/beatsPerRotation)
+	#we just wanna draw one big one
+	var poly = OutlinedPolygon2D.new()
+	poly.outlineWidth = 1
+	poly.color = Color.DARK_RED
+	poly.color.a = 1
+	
+	
+	var topBound = origin.rotated(windowSizeRadians/2.0 )
+	var bottomBound = origin.rotated(windowSizeRadians *2.0)
+	
+	
+	
+	var points : PackedVector2Array = [
+		topBound * (startDist + (laneMargins/2.0) +  + ( laneSize)) , 
+		topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (laneSize)), 
+		bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (laneSize)), 
+		bottomBound *(startDist + (laneMargins/2.0) + (laneSize)) 
+	]
+	
+	
+	poly.set_polygon(points)
+	
+	%InputWindows.add_child(poly)
+
 func DrawInputWindows():
-	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
+	#so if we know that its 0.1 beats wide
+	#that means we want a 0.1 slice of the total size
+	#8 beats per rotation * 0.1 beats
+	
+	#this doesnt really make sense
+	#2 pi represents 8 beats
+	#so this should actually fluctuate with size duh
+
+	var windowSizeRadians = 2 * (PI) * (rules.windowSize/beatsPerRotation)
 	for index in range(numLanes):
 		var poly = OutlinedPolygon2D.new()
 		poly.outlineWidth = 10
 		poly.color =  markerColors[index]
 		poly.color.a = 0.5
-		var topBound = origin.rotated(-windowSizeRadians)
-		var bottomBound = origin.rotated(windowSizeRadians)
+		
+		#so technically
+		#the range is getting made twice as large as it should here
+		#the window size radians should be divided by 2 here
+		var topBound = origin.rotated(-windowSizeRadians/2.0)
+		var bottomBound = origin.rotated(windowSizeRadians/2.0)
+		
+
+		
 		
 		var points : PackedVector2Array = [
 			topBound * (startDist + (laneMargins/2.0) +  + (index * laneSize)) , 
@@ -92,8 +140,8 @@ func SpawnMarker(hit:Hit):
 	beatPos = PI
 #	beatPos *= 2 * PI
 
-	var windowSizeRadians = 2 * PI *( (beatsPerRotation * windowSize) / beatsPerRotation)
-
+	#var windowSizeRadians = 2 * PI *( (beatsPerRotation * rules.windowSize) / beatsPerRotation)
+	var windowSizeRadians = (2 * (PI) * (rules.windowSize/beatsPerRotation)) / 2.0
 
 	var topBound = origin.rotated( origin.angle() + rotation - beatPos-windowSizeRadians)
 	var bottomBound = origin.rotated(origin.angle()  +rotation - beatPos+windowSizeRadians)
@@ -128,7 +176,6 @@ func SpawnMarker(hit:Hit):
 
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
-	
 	for hit in markerHitMap.keys():
 		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 
@@ -145,16 +192,13 @@ func _on_player_input_handler_escape() -> void:
 
 func _on_record_state_spawn_marker(hit:Hit) -> void:
 	SpawnMarker(hit)
-
-
-
 	
 
 func _on_verify_state_missed_hit(hit) -> void:
 	
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1) -hit.laneIndex) * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
-
+	markerHitMap[hit].queue_free()
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
 	markerHitMap.erase(hit)
 
@@ -194,12 +238,10 @@ func _on_verify_state_bad_hit(hit) -> void:
 #def want that
 
 func _on_verify_state_good_hit(hit) -> void:
-
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
-	#markerHitMap[hit].queue_free()
+	markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
-
 	markerHitMap.erase(hit)
 
 	

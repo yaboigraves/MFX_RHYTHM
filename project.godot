@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
+driver/driver="ASIO"
 driver/output_latency=5
 
 [display]

@@ -105,7 +105,8 @@ func ClearMarker(markerInst):
 
 func ClearAllMarkers():
 	for marker in markers:
-		marker.queue_free()
+		if marker != null:
+			marker.queue_free()
 	markers.clear()
 	
 

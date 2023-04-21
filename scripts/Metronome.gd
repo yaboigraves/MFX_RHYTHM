@@ -21,6 +21,15 @@ extends Node
 #at that point I feel comfortable releasing this as a little private demo and then hard pivoting to the other project
 
 
+#ahhh
+#ok
+#so technically
+#even though we start the thing early
+#the rhythm seems to desync now
+#duh
+#well
+#hm
+
 
 signal Tick(timeSeconds, timeBeats)
 signal SyncUpdate(timeInBeats,delta)
@@ -124,7 +133,9 @@ func ProcessCallbacks():
 		callbacks.erase(snapped(timeInBeats,syncUpdateRate))
 		
 
+#so this is apparently not working, state is actually not changing early enough
+#the issue is we actually need to do the full rules windodw size I think
 func _on_player_beat_phase_callback(durationInBeats, callback, anchorToNearestBeat = false) -> void:
-	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - rules.windowSize
+	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - (rules.windowSize * 2.0)
 	updateCallbacks[callbackTime] = callback
 

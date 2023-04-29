@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmyg3x515if1b"]
+
+[ext_resource type="Shader" path="res://scenes/UI/Test3dSprites.gdshader" id="1_xr8jt"]
+[ext_resource type="Texture2D" uid="uid://bc4d64ntftfbq" path="res://Illustration (1).png" id="2_k4phk"]
+[ext_resource type="Texture2D" uid="uid://cw84lvnhue3n4" path="res://borderThang.png" id="4_l3ikk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5h8dm"]
+shader = ExtResource("1_xr8jt")
+shader_parameter/line_color = Quaternion(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
+
+[node name="MangaFrame" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="NinePatchRect" parent="Control"]
+clip_children = 2
+material = SubResource("ShaderMaterial_5h8dm")
+layout_mode = 0
+offset_left = -3.0
+offset_top = 3.0
+offset_right = 977.0
+offset_bottom = 365.0
+texture = ExtResource("4_l3ikk")
+region_rect = Rect2(-21.6404, -22.154, 1299.79, 456)
+patch_margin_left = 200
+patch_margin_top = 91
+patch_margin_right = 261
+patch_margin_bottom = 91
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/TextureRect"]
+position = Vector2(534, 759)
+scale = Vector2(3.05428, 3.05428)
+texture = ExtResource("2_k4phk")

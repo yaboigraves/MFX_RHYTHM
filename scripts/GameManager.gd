@@ -68,8 +68,6 @@ extends Node
 #lotta commented code
 
 
-
-
 @export var display : RhythmDisplay
 
 signal RecordedHit

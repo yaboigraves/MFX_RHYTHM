@@ -6,9 +6,12 @@ signal GoodHit(hit:Hit)
 signal BadHit(hit:Hit)
 signal ComboUpdate(combo)
 
+signal HitProcessed(hit: Hit, hitResult : HitResult)
+
+
 var targetHits
+
 var combo = 0 :
-	
 	set(value):
 		combo = value
 		emit_signal("ComboUpdate",combo)
@@ -31,37 +34,38 @@ func update(_delta: float):
 	CheckForMissedHits()
 
 
+#so lets just emit the same signal for literally all of these and just package the result enum
 func HandleHit(hit:Hit):
-	if CheckHit(hit):
-		combo += 1
-		emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
-		
-	else:
-		combo = 0
-		emit_signal("BadHit",hit)
+	var hitResult = CheckHit(hit)
+	match hitResult:
+		HitResult.GOOD:
+			combo += 1
+			emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
+#			emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
+		HitResult.MISS:
+			combo = 0
+			emit_signal("HitProcessed",hit, hitResult)			
+		HitResult.DESTROY_MISS:
+			combo = 0
+			emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
+#	
 	
+	
+	
+
+
 func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):
-		return false
+		return HitResult.MISS
 
-	#lets look at the actual math here
-	#so the time of the beat - target time 
-	#so the difference must be less than 10 * the window size
-	#which is dumb
-	#so lets just fix some of this input code I think
+	var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize))
+	if hitDifference <= rules.windowSize :
+		return HitResult.GOOD
 	
-	#SO
-	#the good way to think about the window is just raw size, then divide by 2 when neccessary
-	#so the raw size is what we move forawrd with now
-	#lets assume the raw size is 0.5 beats
-	#ok first things first lets draw this right
+	elif hitDifference < rules.windowSize + rules.badZoneSize:
+		return HitResult.DESTROY_MISS
 	
-	if abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize)) <= (rules.windowSize) :
-		var goodHit = targetHits[hit.laneIndex]
 
-		return true
-
-#aha! so this is indeed fucked up
 
 func CheckForMissedHits():
 	var missedHits = []

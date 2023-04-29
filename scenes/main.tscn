@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c1iimdsfk4vu"]
+[gd_scene load_steps=32 format=3 uid="uid://c1iimdsfk4vu"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://head_2.png" id="21_i54xg"]
 [ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://whiteBox.png" id="24_66ev6"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="24_turlm"]
-[ext_resource type="PackedScene" uid="uid://dmyg3x515if1b" path="res://scenes/UI/MangaFrame.tscn" id="32_tlmdb"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("display")]
 script = ExtResource("8_n5iqg")
@@ -322,10 +321,6 @@ outerOffset = 1.0
 laneColors = Array[Color]([Color(0.533333, 0.533333, 0.533333, 1)])
 backgroundColor = Color(0, 0, 0, 1)
 
-[node name="MangaFrame" parent="RadialUI/RootContainer" instance=ExtResource("32_tlmdb")]
-position = Vector2(651, 255)
-scale = Vector2(0.531028, 0.531028)
-
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode" method="_on_metronome_beat_update"]
 [connection signal="BeatUpdate" from="Metronome" to="GameMode/Player/PlayerStateMachine" method="_on_metronome_beat_update"]
@@ -343,6 +338,7 @@ scale = Vector2(0.531028, 0.531028)
 [connection signal="DestroyHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_destroy_hit"]
 [connection signal="GoodHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_good_hit"]
 [connection signal="GoodHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_good_hit"]
+[connection signal="HitProcessed" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_hit_processed"]
 [connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_missed_hit"]
 [connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_missed_hit"]
 [connection signal="OnExit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]

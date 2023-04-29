@@ -48,7 +48,7 @@ func _ready():
 	super._ready()
 	
 	DrawInputWindows()
-	#DrawBadZone()
+	DrawBadZone()
 	DrawMetronomeDots()
 	
 	
@@ -63,35 +63,21 @@ func DrawMetronomeDots():
 		metronomeDots.append(metronomeDot)
 		
 
-#so this math may be wrong?
 
+#cool this is drawing propelry now
+#so lets add this to game rules and make it configabble
 func DrawBadZone():
-	#so the bad zone is basically an area right outside the windows 
-	#uses very similar drawing codde
-	var windowSizeRadians = (PI) * (rules.windowSize/beatsPerRotation)
-	#we just wanna draw one big one
-	var poly = OutlinedPolygon2D.new()
-	poly.outlineWidth = 1
-	poly.color = Color.DARK_RED
-	poly.color.a = 1
 	
+	var windowSizeRadians = 2 * (PI) * (rules.badZoneSize/beatsPerRotation)
+
 	
-	var topBound = origin.rotated(windowSizeRadians/2.0 )
-	var bottomBound = origin.rotated(windowSizeRadians *2.0)
-	
-	
-	
-	var points : PackedVector2Array = [
-		topBound * (startDist + (laneMargins/2.0) +  + ( laneSize)) , 
-		topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (laneSize)), 
-		bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (laneSize)), 
-		bottomBound *(startDist + (laneMargins/2.0) + (laneSize)) 
-	]
-	
-	
-	poly.set_polygon(points)
-	
-	%InputWindows.add_child(poly)
+	var line = Line2D.new()
+	var edge = Vector2(-500,0)
+	edge = edge.rotated(-windowSizeRadians)
+	line.points = [Vector2(0,0), edge]	
+	%CenterPivot/LineRenderers.add_child(line)
+
+
 
 func DrawInputWindows():
 	#so if we know that its 0.1 beats wide
@@ -228,7 +214,7 @@ func UpdateMetronome(timeInBeats):
 func _on_verify_state_bad_hit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
-
+	
 
 #so the issue is that all of them are rotating as children of markers
 #which is efficient but not idea
@@ -244,4 +230,19 @@ func _on_verify_state_good_hit(hit) -> void:
 	markers.erase(markerHitMap[hit])
 	markerHitMap.erase(hit)
 
-	
+func onDestroyMiss(hit):
+	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
+	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
+	markerHitMap[hit].queue_free()
+	markers.erase(markerHitMap[hit])
+	markerHitMap.erase(hit)
+
+
+func _on_verify_state_hit_processed(hit, hitResult) -> void:
+	match hitResult:
+		HitResult.GOOD:
+			_on_verify_state_good_hit(hit)
+		HitResult.MISS:		
+			_on_verify_state_bad_hit(hit)
+		HitResult.DESTROY_MISS:
+			onDestroyMiss(hit)

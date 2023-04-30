@@ -1,13 +1,9 @@
 class_name InputSpoofer
 extends Node
 
-#so the input spoofer exposes a public set of values we can just fuck with and inject
-
-#we probably want to map these to phases
-
-#so lets fix this cause its just broken
-
-#shieeet we may have to lie way more than I thought here
+#this is literally broken
+#so it might be good to add this to lab mode as a ui you can queue up
+#thats maybe like "training mode actually"
 
 @export var inputSpoofProfiles: Array[InputSpoofProfile]
 

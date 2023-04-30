@@ -1,11 +1,14 @@
 class_name PlayerInputState
 extends State
 
+signal HitProcessed(hit: Hit, hitResult : HitResult)
+
 @export var rules : GameModeRules
+@export var duration: float = 4.0
+
 
 var progress : float
 var startTime: float
-@export var duration: float = 4.0
 
 
 
@@ -17,7 +20,8 @@ func enter(args ={}):
 	
 	
 func HandleHit(hit: Hit):
-	print("Hit ", hit)
+	pass
+	
 
 
 	

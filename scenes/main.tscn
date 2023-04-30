@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c1iimdsfk4vu"]
+[gd_scene load_steps=33 format=3 uid="uid://c1iimdsfk4vu"]
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
@@ -14,20 +14,21 @@
 [ext_resource type="PackedScene" uid="uid://b8ohv0w8ksihf" path="res://input_windowradial_rhythm_display.tscn" id="11_oivm5"]
 [ext_resource type="Script" path="res://scripts/IdleState.gd" id="11_yjrf7"]
 [ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="12_cuo1v"]
-[ext_resource type="AudioStream" uid="uid://bjmfkrf2453ja" path="res://audio/drums/ch4chDrums/kiks/kik natrual.WAV" id="13_88tj3"]
-[ext_resource type="AudioStream" uid="uid://cb5nu4p7rgd57" path="res://audio/drums/ch4chDrums/hats/brush.WAV" id="14_jynds"]
-[ext_resource type="AudioStream" uid="uid://covnd5thoavfe" path="res://audio/drums/ch4chDrums/snares/snare crunch.WAV" id="15_1wjff"]
-[ext_resource type="AudioStream" uid="uid://d0kc2vyaeyrtq" path="res://audio/drums/ch4chDrums/perc/808tom.WAV" id="16_i1jd3"]
 [ext_resource type="Script" path="res://scripts/GameModeHUd.gd" id="16_ot7g3"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://bitDefault.png" id="16_xqbdj"]
 [ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://p1I.png" id="17_3gx0n"]
 [ext_resource type="Script" path="res://scripts/testing/InputSpoofer.gd" id="17_sy8do"]
+[ext_resource type="AudioStream" uid="uid://doecadlhgamca" path="res://audio/drums/ch4chDrums/kiks/kik thump.WAV" id="18_0pyd4"]
 [ext_resource type="Resource" uid="uid://ejolia4q0ylc" path="res://scripts/testing/RecordInputStateProfile.tres" id="18_0qwl4"]
 [ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://dojo1.png" id="18_e0yho"]
 [ext_resource type="Resource" uid="uid://bbl10oiwp1iwv" path="res://scripts/testing/verifyInputState.tres" id="19_07p40"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://head_3.png" id="19_420lq"]
+[ext_resource type="AudioStream" uid="uid://co1hgteuqse2s" path="res://audio/drums/ch4chDrums/hats/cl hat narmal.WAV" id="19_jy2ta"]
 [ext_resource type="Resource" uid="uid://csq1wtf3q5esm" path="res://scripts/testing/idleInputState.tres" id="20_5lv43"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://bitMiss.png" id="20_kmktu"]
+[ext_resource type="AudioStream" uid="uid://cmgch7thvq11j" path="res://audio/drums/ch4chDrums/snares/snare1.WAV" id="20_x0tyh"]
+[ext_resource type="Script" path="res://scripts/PlayerAudioDirector.gd" id="21_3bqm2"]
+[ext_resource type="AudioStream" uid="uid://bspr4iwwcht1c" path="res://audio/drums/ch4chDrums/hats/ophat go.WAV" id="21_4esmv"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://head_2.png" id="21_i54xg"]
 [ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://whiteBox.png" id="24_66ev6"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="24_turlm"]
@@ -77,33 +78,38 @@ duration = -1.0
 [node name="PlayerInputHandler" type="Node" parent="GameMode/Player"]
 script = ExtResource("3_3xqna")
 
-[node name="DrumPlayer1" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("13_88tj3")
-mix_target = 2
-max_polyphony = 4
-bus = &"drums"
-
-[node name="DrumPlayer2" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("14_jynds")
-mix_target = 2
-max_polyphony = 4
-bus = &"drums"
-
-[node name="DrumPlayer3" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("15_1wjff")
-mix_target = 2
-max_polyphony = 4
-bus = &"drums"
-
-[node name="DrumPlayer4" type="AudioStreamPlayer" parent="GameMode/Player/PlayerInputHandler"]
-stream = ExtResource("16_i1jd3")
-mix_target = 2
-max_polyphony = 4
-bus = &"drums"
-
 [node name="InputSpoofer" type="Node" parent="GameMode/Player/PlayerInputHandler"]
 script = ExtResource("17_sy8do")
 inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("18_0qwl4"), ExtResource("19_07p40"), ExtResource("20_5lv43")])
+
+[node name="PlayerAudioDirector" type="Node" parent="GameMode/Player"]
+script = ExtResource("21_3bqm2")
+
+[node name="DrumsAudio" type="Node" parent="GameMode/Player/PlayerAudioDirector"]
+
+[node name="DrumPlayer1" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("18_0pyd4")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[node name="DrumPlayer2" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("19_jy2ta")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[node name="DrumPlayer3" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("20_x0tyh")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[node name="DrumPlayer4" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("21_4esmv")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
 script = ExtResource("16_ot7g3")
@@ -331,16 +337,12 @@ backgroundColor = Color(0, 0, 0, 1)
 [connection signal="BeatPhaseCallback" from="GameMode/Player" to="Metronome" method="_on_player_beat_phase_callback"]
 [connection signal="transitioned" from="GameMode/Player/PlayerStateMachine" to="GameMode/Player/PlayerInputHandler/InputSpoofer" method="_on_player_state_machine_transitioned"]
 [connection signal="transitioned" from="GameMode/Player/PlayerStateMachine" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_state_machine_transitioned"]
+[connection signal="HitProcessed" from="GameMode/Player/PlayerStateMachine/RecordState" to="GameMode/Player/PlayerAudioDirector" method="_on_record_state_hit_processed"]
 [connection signal="SpawnMarker" from="GameMode/Player/PlayerStateMachine/RecordState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]
-[connection signal="BadHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_bad_hit"]
-[connection signal="BadHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_bad_hit"]
 [connection signal="ComboUpdate" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_combo_update"]
-[connection signal="DestroyHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_destroy_hit"]
-[connection signal="GoodHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_good_hit"]
-[connection signal="GoodHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_good_hit"]
+[connection signal="HitProcessed" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/Player/PlayerAudioDirector" method="_on_verify_state_hit_processed"]
+[connection signal="HitProcessed" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_hit_processed"]
 [connection signal="HitProcessed" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_hit_processed"]
-[connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="GameMode/GameModeHUD" method="_on_verify_state_missed_hit"]
-[connection signal="MissedHit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_missed_hit"]
 [connection signal="OnExit" from="GameMode/Player/PlayerStateMachine/VerifyState" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]
 [connection signal="Escape" from="GameMode/Player/PlayerInputHandler" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_player_input_handler_escape"]
 [connection signal="Hit" from="GameMode/Player/PlayerInputHandler" to="GameMode/Player" method="_on_player_input_handler_hit"]

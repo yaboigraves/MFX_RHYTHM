@@ -1,11 +1,5 @@
 extends PlayerInputState
 
-#so the record state can hold input for a round
-#the verify state can then be passed that data in the transition
-#record state doesnt need to store anything
-
-#so yeah we need a class for hits
-
 signal SpawnMarker(hit:Hit)
 
 var buffer : Array[Hit]
@@ -40,8 +34,8 @@ func HasAnyHits():
 func HandleHit(hit: Hit):
 	hits[hit.laneIndex].append(hit)
 	emit_signal("SpawnMarker",hit)
+	emit_signal("HitProcessed",hit,HitResult.GOOD)
 	
-
 
 func _on_input_spoofer_spoof_hit(lane, time) -> void:
 	var spoofHit = Hit.new(lane,time, startTime)

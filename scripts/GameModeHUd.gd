@@ -13,15 +13,19 @@ func _on_metronome_beat_update(timeInBeats) -> void:
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_callback(func() : $Control/VBoxContainer/Pivot/CharacterIcon.scale = Vector2.ONE)
 
-func _on_verify_state_bad_hit(hit) -> void:
+
+
+
+
+func onBadHit() -> void:
 	$Control/VBoxContainer/Pivot/CharacterIcon.texture = badCharIcon
 	$CharResetTimer.start()
 
-func _on_verify_state_good_hit(hit) -> void:
+func onGoodHit() -> void:
 	$Control/VBoxContainer/Pivot/CharacterIcon.texture = goodCharIcon
 	$CharResetTimer.start()
 	
-func _on_verify_state_missed_hit(hit) -> void:
+func onMissHit() -> void:
 	$Control/VBoxContainer/Pivot/CharacterIcon.texture = missCharIcon
 	$CharResetTimer.start()
 
@@ -41,3 +45,13 @@ func _on_player_input_handler_hit(index) -> void:
 #	get_node("Control/VBoxContainer/HBoxContainer/DrumIcon" + str(index + 1)).modulate = Color.GREEN_YELLOW
 #	#probably do a tween here too
 	pass
+
+
+func _on_verify_state_hit_processed(hit, hitResult) -> void:
+	match hitResult:
+		HitResult.GOOD:
+			onGoodHit()
+		HitResult.MISS:
+			onMissHit()
+		HitResult.DESTROY_MISS:
+			onBadHit()

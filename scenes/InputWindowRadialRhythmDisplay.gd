@@ -39,21 +39,15 @@ var stateTextMap = {
 	"VerifyState":"PLAY"
 }
 
-#ok fist things first
-#we gotta change how spawning markers works
 
 func _ready():
-	
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()
 	
 	DrawInputWindows()
-	DrawBadZone()
+	#DrawBadZone()
 	DrawMetronomeDots()
 	
-	
-	
-
 func DrawMetronomeDots():
 	for i in range(beatsPerRotation):
 		var metronomeDot = radialMetronomeDot.instantiate()
@@ -63,31 +57,15 @@ func DrawMetronomeDots():
 		metronomeDots.append(metronomeDot)
 		
 
-
-#cool this is drawing propelry now
-#so lets add this to game rules and make it configabble
 func DrawBadZone():
-	
 	var windowSizeRadians = 2 * (PI) * (rules.badZoneSize/beatsPerRotation)
-
-	
 	var line = Line2D.new()
 	var edge = Vector2(-500,0)
 	edge = edge.rotated(-windowSizeRadians)
 	line.points = [Vector2(0,0), edge]	
 	%CenterPivot/LineRenderers.add_child(line)
 
-
-
 func DrawInputWindows():
-	#so if we know that its 0.1 beats wide
-	#that means we want a 0.1 slice of the total size
-	#8 beats per rotation * 0.1 beats
-	
-	#this doesnt really make sense
-	#2 pi represents 8 beats
-	#so this should actually fluctuate with size duh
-
 	var windowSizeRadians = 2 * (PI) * (rules.windowSize/beatsPerRotation)
 	for index in range(numLanes):
 		var poly = OutlinedPolygon2D.new()
@@ -95,22 +73,16 @@ func DrawInputWindows():
 		poly.color =  markerColors[index]
 		poly.color.a = 0.5
 		
-		#so technically
-		#the range is getting made twice as large as it should here
-		#the window size radians should be divided by 2 here
 		var topBound = origin.rotated(-windowSizeRadians/2.0)
 		var bottomBound = origin.rotated(windowSizeRadians/2.0)
 		
 
-		
-		
 		var points : PackedVector2Array = [
 			topBound * (startDist + (laneMargins/2.0) +  + (index * laneSize)) , 
 			topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (index * laneSize)), 
 			bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (index * laneSize)), 
 			bottomBound *(startDist + (laneMargins/2.0) + (index * laneSize)) 
 		]
-		
 		
 		poly.set_polygon(points)
 		
@@ -149,23 +121,11 @@ func SpawnMarker(hit:Hit):
 	markerHitMap[hit] = poly
 
 	
-	
-#so perhaps what we want to do here is go over all of the markers
-#and update their positions 
-#yeah because if we wanna do like slide back stuff later with markers this will be important
-
-#so lets just update them individually instead
-
-#this requires a bit of a rewrite but it should be ok
-#alternatively we offset them but thats too much state to update
-
-
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 	for hit in markerHitMap.keys():
 		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 
-		
 		
 func ClearAllMarkers():
 	super.ClearAllMarkers()
@@ -181,7 +141,6 @@ func _on_record_state_spawn_marker(hit:Hit) -> void:
 	
 
 func _on_verify_state_missed_hit(hit) -> void:
-	
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1) -hit.laneIndex) * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
 	markerHitMap[hit].queue_free()
@@ -211,19 +170,12 @@ func UpdateMetronome(timeInBeats):
 
 
 
-func _on_verify_state_bad_hit(hit) -> void:
+func onBadHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
 	
 
-#so the issue is that all of them are rotating as children of markers
-#which is efficient but not idea
-
-#perhaps instead of doing that, we move each individual one?
-#that way we have greater control...
-#def want that
-
-func _on_verify_state_good_hit(hit) -> void:
+func onGoodHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
 	markerHitMap[hit].queue_free()
@@ -241,8 +193,8 @@ func onDestroyMiss(hit):
 func _on_verify_state_hit_processed(hit, hitResult) -> void:
 	match hitResult:
 		HitResult.GOOD:
-			_on_verify_state_good_hit(hit)
+			onGoodHit(hit)
 		HitResult.MISS:		
-			_on_verify_state_bad_hit(hit)
+			onBadHit(hit)
 		HitResult.DESTROY_MISS:
 			onDestroyMiss(hit)

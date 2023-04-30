@@ -1,13 +1,8 @@
 extends PlayerInputState
 
-signal DestroyHit(hit:Hit)
-signal MissedHit(hit:Hit)
-signal GoodHit(hit:Hit)
-signal BadHit(hit:Hit)
 signal ComboUpdate(combo)
 
-signal HitProcessed(hit: Hit, hitResult : HitResult)
-
+#processing actually only happens here jk
 
 var targetHits
 
@@ -34,24 +29,18 @@ func update(_delta: float):
 	CheckForMissedHits()
 
 
-#so lets just emit the same signal for literally all of these and just package the result enum
 func HandleHit(hit:Hit):
 	var hitResult = CheckHit(hit)
 	match hitResult:
 		HitResult.GOOD:
 			combo += 1
 			emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
-#			emit_signal("GoodHit",targetHits[hit.laneIndex].pop_front())
 		HitResult.MISS:
 			combo = 0
 			emit_signal("HitProcessed",hit, hitResult)			
 		HitResult.DESTROY_MISS:
 			combo = 0
 			emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
-#	
-	
-	
-	
 
 
 func CheckHit(hit:Hit):
@@ -66,15 +55,13 @@ func CheckHit(hit:Hit):
 		return HitResult.DESTROY_MISS
 	
 
-
 func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
 		for hit in targetHits[i]:
-			
 			if(hit.time + rules.loopBeatSize + (rules.windowSize ) <= %Metronome.timeInBeats):
 				missedHits.append(hit)
-				emit_signal("MissedHit",hit)
+				emit_signal("HitProcessed",hit, HitResult.DESTROY_MISS)
 				combo = 0
 			
 	for hit in missedHits:

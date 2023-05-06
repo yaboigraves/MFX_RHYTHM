@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
-[ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/mfrh.ogg" id="3_0onyw"]
 [ext_resource type="Script" path="res://scripts/PlayerInputHandler.gd" id="3_3xqna"]
+[ext_resource type="AudioStream" uid="uid://cjql2uesnyd3e" path="res://audio/sumoJugleTest2.ogg" id="3_8cea0"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="5_nqyvc"]
 [ext_resource type="Resource" uid="uid://d1vpqdwupvf48" path="res://scripts/LabGameModeRules.tres" id="6_ev767"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="8_cslea"]
@@ -40,7 +40,7 @@ display = NodePath("")
 [node name="Metronome" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_mpivx")
-stream = ExtResource("3_0onyw")
+stream = ExtResource("3_8cea0")
 rules = ExtResource("6_ev767")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]

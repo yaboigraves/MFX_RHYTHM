@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ipxhohij3wed"
+path="res://.godot/imported/bastrd - Anthology - 16 sun.ogg-1cc77857f9fc97972a598dd38aad4378.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 16 sun.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 16 sun.ogg-1cc77857f9fc97972a598dd38aad4378.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

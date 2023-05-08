@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://gppjquvrcc17"
+path="res://.godot/imported/kick-20 west.wav-eda589834e60147262743ddc1acb774f.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-20 west.wav"
+dest_files=["res://.godot/imported/kick-20 west.wav-eda589834e60147262743ddc1acb774f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

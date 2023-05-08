@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cacnacw6jli8s"
+path="res://.godot/imported/bastrd - Anthology - 08 neon glow lamps.ogg-71c13eb81a233dd276ac543c43bf312e.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 08 neon glow lamps.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 08 neon glow lamps.ogg-71c13eb81a233dd276ac543c43bf312e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

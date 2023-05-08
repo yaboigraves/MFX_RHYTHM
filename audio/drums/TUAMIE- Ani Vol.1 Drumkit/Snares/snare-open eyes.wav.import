@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cvdc2jnghhchn"
+path="res://.godot/imported/snare-open eyes.wav-32253a3bdeb0ed86c396a27877ff782f.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-open eyes.wav"
+dest_files=["res://.godot/imported/snare-open eyes.wav-32253a3bdeb0ed86c396a27877ff782f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

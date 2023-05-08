@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bov3f2rsfm47w"
+path="res://.godot/imported/kick-wesley chapel.wav-814fbd7071490854b7e2a6bb14eddf2c.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-wesley chapel.wav"
+dest_files=["res://.godot/imported/kick-wesley chapel.wav-814fbd7071490854b7e2a6bb14eddf2c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

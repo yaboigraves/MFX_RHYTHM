@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2ncvsqel1niy"
+path="res://.godot/imported/kick-panola.wav-26867f136fe99b9d86475cd7959849fe.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-panola.wav"
+dest_files=["res://.godot/imported/kick-panola.wav-26867f136fe99b9d86475cd7959849fe.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

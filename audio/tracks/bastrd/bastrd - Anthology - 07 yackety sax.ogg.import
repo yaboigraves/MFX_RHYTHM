@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b0hie0ikdk0yu"
+path="res://.godot/imported/bastrd - Anthology - 07 yackety sax.ogg-616e5db44b739b8ab955c5773313f907.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 07 yackety sax.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 07 yackety sax.ogg-616e5db44b739b8ab955c5773313f907.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

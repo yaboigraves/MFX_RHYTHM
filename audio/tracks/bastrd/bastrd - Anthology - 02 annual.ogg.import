@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b8rhaiwrh4b3y"
+path="res://.godot/imported/bastrd - Anthology - 02 annual.ogg-7bef0a8910d141d75c2e7c6ec037d7fc.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 02 annual.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 02 annual.ogg-7bef0a8910d141d75c2e7c6ec037d7fc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

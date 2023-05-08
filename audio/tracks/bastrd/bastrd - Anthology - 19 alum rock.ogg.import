@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b1gjdii8ge5e1"
+path="res://.godot/imported/bastrd - Anthology - 19 alum rock.ogg-b4091ae3264713b02e8f51d3d0615103.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 19 alum rock.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 19 alum rock.ogg-b4091ae3264713b02e8f51d3d0615103.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

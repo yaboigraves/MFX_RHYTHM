@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7nl4n8wv1eqd"
+path="res://.godot/imported/snare- simplicity.wav-308cba6645e120a875df4607f03f4e3d.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare- simplicity.wav"
+dest_files=["res://.godot/imported/snare- simplicity.wav-308cba6645e120a875df4607f03f4e3d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

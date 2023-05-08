@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bxj2pff52rcjj"
+path="res://.godot/imported/bastrd - Anthology - 20 santa teresa.ogg-f72b34bba1cb7ab8404935eeab719a9e.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 20 santa teresa.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 20 santa teresa.ogg-f72b34bba1cb7ab8404935eeab719a9e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

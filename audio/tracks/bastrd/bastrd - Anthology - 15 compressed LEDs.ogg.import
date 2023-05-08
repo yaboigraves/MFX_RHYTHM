@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://sfbpbstwiaoc"
+path="res://.godot/imported/bastrd - Anthology - 15 compressed LEDs.ogg-431032f7c650da209f3f9c603fc6462b.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 15 compressed LEDs.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 15 compressed LEDs.ogg-431032f7c650da209f3f9c603fc6462b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c6se0apnj63yw"
+path="res://.godot/imported/bastrd - Anthology - 11 north pole.ogg-6933af7aee59b710c97a5d58f86cb30e.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 11 north pole.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 11 north pole.ogg-6933af7aee59b710c97a5d58f86cb30e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

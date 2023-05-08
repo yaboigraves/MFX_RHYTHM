@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dylvcmxvmw18m"
+path="res://.godot/imported/KICK-towards augusta.wav-7ef2c72327446f00eb3b83504d03edb2.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/KICK-towards augusta.wav"
+dest_files=["res://.godot/imported/KICK-towards augusta.wav-7ef2c72327446f00eb3b83504d03edb2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

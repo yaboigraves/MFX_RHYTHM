@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://btpydhwsu3ciw"
+path="res://.godot/imported/bastrd - Anthology - 09 no idea.ogg-399ddeebe2b91edb1fb93dc5ac01786d.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 09 no idea.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 09 no idea.ogg-399ddeebe2b91edb1fb93dc5ac01786d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

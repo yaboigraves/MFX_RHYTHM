@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbh3a1l41fbq2"
+path="res://.godot/imported/hat-nigella seeds.wav-6da6d98f0f0a2c7ae23f999e099ee56f.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Hi-Hats/hat-nigella seeds.wav"
+dest_files=["res://.godot/imported/hat-nigella seeds.wav-6da6d98f0f0a2c7ae23f999e099ee56f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

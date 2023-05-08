@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ccjdkocl7gac"
+path="res://.godot/imported/perc-k.wav-1fcd6f013bd9f688690a08a8ef22ec0a.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Perc/perc-k.wav"
+dest_files=["res://.godot/imported/perc-k.wav-1fcd6f013bd9f688690a08a8ef22ec0a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

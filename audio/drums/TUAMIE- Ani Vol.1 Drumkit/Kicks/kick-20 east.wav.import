@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://i3xbc7w8orbj"
+path="res://.godot/imported/kick-20 east.wav-e2be4e589f8611168802670b3ded09e4.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-20 east.wav"
+dest_files=["res://.godot/imported/kick-20 east.wav-e2be4e589f8611168802670b3ded09e4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

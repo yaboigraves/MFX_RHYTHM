@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://5pjgkib7i5n3"
+path="res://.godot/imported/bastrd - Anthology - 06 dum.ogg-deea322486e91cb54cc0f2b2fee3a9d0.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 06 dum.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 06 dum.ogg-deea322486e91cb54cc0f2b2fee3a9d0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

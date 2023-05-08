@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3proeqdo3x5h"
+path="res://.godot/imported/snare-presuasion.wav-a870ceeb2a37487025d2b4550a59417b.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-presuasion.wav"
+dest_files=["res://.godot/imported/snare-presuasion.wav-a870ceeb2a37487025d2b4550a59417b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

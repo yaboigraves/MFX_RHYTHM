@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bocd6fmhlbxkk"
+path="res://.godot/imported/snare-goodnight text.wav-5387ad7613b33c2046d6df5335ce25d7.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-goodnight text.wav"
+dest_files=["res://.godot/imported/snare-goodnight text.wav-5387ad7613b33c2046d6df5335ce25d7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

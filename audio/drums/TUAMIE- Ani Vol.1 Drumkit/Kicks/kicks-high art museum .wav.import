@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcrwgx3s56paq"
+path="res://.godot/imported/kicks-high art museum .wav-9c226da31d5d695a6f6edf3022d55fcf.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kicks-high art museum .wav"
+dest_files=["res://.godot/imported/kicks-high art museum .wav-9c226da31d5d695a6f6edf3022d55fcf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

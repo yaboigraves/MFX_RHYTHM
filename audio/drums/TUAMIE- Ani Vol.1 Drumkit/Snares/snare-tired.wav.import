@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://daib68hyeoohf"
+path="res://.godot/imported/snare-tired.wav-820ac27d6de572d23b6ce0134cca6496.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-tired.wav"
+dest_files=["res://.godot/imported/snare-tired.wav-820ac27d6de572d23b6ce0134cca6496.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dmr5dwyyfcn7b"
+path="res://.godot/imported/bastrd - Anthology - 05 involuntary.ogg-8ed263e0efb19796cdb3e4162b01f608.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 05 involuntary.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 05 involuntary.ogg-8ed263e0efb19796cdb3e4162b01f608.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

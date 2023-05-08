@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vc8375gvojo"
+path="res://.godot/imported/kick-south dekalb.wav-3469ed880eeb1d1549ec003a22d8a1d3.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-south dekalb.wav"
+dest_files=["res://.godot/imported/kick-south dekalb.wav-3469ed880eeb1d1549ec003a22d8a1d3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

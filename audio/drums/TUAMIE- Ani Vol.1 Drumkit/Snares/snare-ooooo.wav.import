@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c16wvsx2g45xy"
+path="res://.godot/imported/snare-ooooo.wav-57c99b40ec4fefdbb82efa1c9998d219.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-ooooo.wav"
+dest_files=["res://.godot/imported/snare-ooooo.wav-57c99b40ec4fefdbb82efa1c9998d219.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

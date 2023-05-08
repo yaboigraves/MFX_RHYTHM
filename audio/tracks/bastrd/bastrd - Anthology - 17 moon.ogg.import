@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://creqvp2kb5hkq"
+path="res://.godot/imported/bastrd - Anthology - 17 moon.ogg-40b64eb59c4116e2585bdb38d35fe5af.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 17 moon.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 17 moon.ogg-40b64eb59c4116e2585bdb38d35fe5af.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

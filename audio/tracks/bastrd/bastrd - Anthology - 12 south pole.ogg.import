@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bte6yaw8jhpkn"
+path="res://.godot/imported/bastrd - Anthology - 12 south pole.ogg-4b94e1affb8e257658eba4ca9cc0b045.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/tracks/bastrd/bastrd - Anthology - 12 south pole.ogg"
+dest_files=["res://.godot/imported/bastrd - Anthology - 12 south pole.ogg-4b94e1affb8e257658eba4ca9cc0b045.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

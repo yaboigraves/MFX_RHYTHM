@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
+[ext_resource type="AudioStream" uid="uid://jvj4dnfoknls" path="res://audio/sumoJugleTest1.ogg" id="3_2sjks"]
 [ext_resource type="Script" path="res://scripts/PlayerInputHandler.gd" id="3_3xqna"]
-[ext_resource type="AudioStream" uid="uid://cjql2uesnyd3e" path="res://audio/sumoJugleTest2.ogg" id="3_8cea0"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="5_nqyvc"]
 [ext_resource type="Resource" uid="uid://d1vpqdwupvf48" path="res://scripts/LabGameModeRules.tres" id="6_ev767"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="8_cslea"]
@@ -18,15 +18,15 @@
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://bitDefault.png" id="16_xqbdj"]
 [ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://p1I.png" id="17_3gx0n"]
 [ext_resource type="Script" path="res://scripts/testing/InputSpoofer.gd" id="17_sy8do"]
-[ext_resource type="AudioStream" uid="uid://doecadlhgamca" path="res://audio/drums/ch4chDrums/kiks/kik thump.WAV" id="18_0pyd4"]
 [ext_resource type="Resource" uid="uid://ejolia4q0ylc" path="res://scripts/testing/RecordInputStateProfile.tres" id="18_0qwl4"]
 [ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://dojo1.png" id="18_e0yho"]
+[ext_resource type="AudioStream" uid="uid://dm31vd4bb70sl" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-eav.wav" id="18_h6a4j"]
 [ext_resource type="Resource" uid="uid://bbl10oiwp1iwv" path="res://scripts/testing/verifyInputState.tres" id="19_07p40"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://head_3.png" id="19_420lq"]
-[ext_resource type="AudioStream" uid="uid://co1hgteuqse2s" path="res://audio/drums/ch4chDrums/hats/cl hat narmal.WAV" id="19_jy2ta"]
+[ext_resource type="AudioStream" uid="uid://q5wdu1wk63e8" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Hi-Hats/hat-curry.wav" id="19_sl7u2"]
 [ext_resource type="Resource" uid="uid://csq1wtf3q5esm" path="res://scripts/testing/idleInputState.tres" id="20_5lv43"]
+[ext_resource type="AudioStream" uid="uid://cfull8txyvmx3" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-am pm .wav" id="20_jebko"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://bitMiss.png" id="20_kmktu"]
-[ext_resource type="AudioStream" uid="uid://cmgch7thvq11j" path="res://audio/drums/ch4chDrums/snares/snare1.WAV" id="20_x0tyh"]
 [ext_resource type="Script" path="res://scripts/PlayerAudioDirector.gd" id="21_3bqm2"]
 [ext_resource type="AudioStream" uid="uid://bspr4iwwcht1c" path="res://audio/drums/ch4chDrums/hats/ophat go.WAV" id="21_4esmv"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://head_2.png" id="21_i54xg"]
@@ -40,7 +40,7 @@ display = NodePath("")
 [node name="Metronome" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_mpivx")
-stream = ExtResource("3_8cea0")
+stream = ExtResource("3_2sjks")
 rules = ExtResource("6_ev767")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
@@ -88,19 +88,19 @@ script = ExtResource("21_3bqm2")
 [node name="DrumsAudio" type="Node" parent="GameMode/Player/PlayerAudioDirector"]
 
 [node name="DrumPlayer1" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("18_0pyd4")
+stream = ExtResource("18_h6a4j")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"
 
 [node name="DrumPlayer2" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("19_jy2ta")
+stream = ExtResource("19_sl7u2")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"
 
 [node name="DrumPlayer3" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("20_x0tyh")
+stream = ExtResource("20_jebko")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"

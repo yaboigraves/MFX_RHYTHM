@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://du6booad8eu0r"
+path="res://.godot/imported/hat-sesame seed.wav-31c070b48c4cd6f660d6ff959e0151c9.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Hi-Hats/hat-sesame seed.wav"
+dest_files=["res://.godot/imported/hat-sesame seed.wav-31c070b48c4cd6f660d6ff959e0151c9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

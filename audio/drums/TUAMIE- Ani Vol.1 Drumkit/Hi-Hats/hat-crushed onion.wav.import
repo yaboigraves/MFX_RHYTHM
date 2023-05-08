@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxsglxrqhuuf4"
+path="res://.godot/imported/hat-crushed onion.wav-5cfd7136a87682a71b3862bea6af7dc9.sample"
+
+[deps]
+
+source_file="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Hi-Hats/hat-crushed onion.wav"
+dest_files=["res://.godot/imported/hat-crushed onion.wav-5cfd7136a87682a71b3862bea6af7dc9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

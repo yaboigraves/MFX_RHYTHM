@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Metronome.gd" id="1_mpivx"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
-[ext_resource type="AudioStream" uid="uid://jvj4dnfoknls" path="res://audio/sumoJugleTest1.ogg" id="3_2sjks"]
+[ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/mfrh.ogg" id="3_1rj7j"]
 [ext_resource type="Script" path="res://scripts/PlayerInputHandler.gd" id="3_3xqna"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="5_nqyvc"]
 [ext_resource type="Resource" uid="uid://d1vpqdwupvf48" path="res://scripts/LabGameModeRules.tres" id="6_ev767"]
@@ -28,7 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cfull8txyvmx3" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-am pm .wav" id="20_jebko"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://bitMiss.png" id="20_kmktu"]
 [ext_resource type="Script" path="res://scripts/PlayerAudioDirector.gd" id="21_3bqm2"]
-[ext_resource type="AudioStream" uid="uid://bspr4iwwcht1c" path="res://audio/drums/ch4chDrums/hats/ophat go.WAV" id="21_4esmv"]
+[ext_resource type="AudioStream" uid="uid://cs5bpm2t21tiv" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Perc/perc-l.wav" id="21_c606m"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://head_2.png" id="21_i54xg"]
 [ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://whiteBox.png" id="24_66ev6"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="24_turlm"]
@@ -40,7 +40,7 @@ display = NodePath("")
 [node name="Metronome" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_mpivx")
-stream = ExtResource("3_2sjks")
+stream = ExtResource("3_1rj7j")
 rules = ExtResource("6_ev767")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
@@ -106,7 +106,7 @@ max_polyphony = 4
 bus = &"drums"
 
 [node name="DrumPlayer4" type="AudioStreamPlayer" parent="GameMode/Player/PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("21_4esmv")
+stream = ExtResource("21_c606m")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"

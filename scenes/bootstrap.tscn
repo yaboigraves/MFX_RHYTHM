@@ -1,18 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://f8ouow1oji1p"]
 
+[ext_resource type="Script" path="res://scenes/bootstrap.gd" id="1_j334o"]
 [ext_resource type="PackedScene" uid="uid://d104uhmv1ql6y" path="res://scenes/main_menu.tscn" id="1_r0851"]
 [ext_resource type="Script" path="res://scenes/MenuAudioManager.gd" id="2_qrn54"]
-[ext_resource type="AudioStream" uid="uid://5pjgkib7i5n3" path="res://audio/tracks/bastrd/bastrd - Anthology - 06 dum.ogg" id="3_bgryo"]
 
 [node name="Bootstrap" type="Node"]
-
-[node name="MainMenu" parent="." instance=ExtResource("1_r0851")]
+script = ExtResource("1_j334o")
 
 [node name="MenuAudioManager" type="Node" parent="."]
 script = ExtResource("2_qrn54")
 
 [node name="Ch1" type="AudioStreamPlayer" parent="MenuAudioManager"]
-stream = ExtResource("3_bgryo")
 autoplay = true
 
 [node name="Ch2" type="AudioStreamPlayer" parent="MenuAudioManager"]
+
+[node name="MainMenu" parent="." instance=ExtResource("1_r0851")]
+
+[connection signal="LoadLabMode" from="MainMenu" to="." method="_on_main_menu_load_lab_mode"]

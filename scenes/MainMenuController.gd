@@ -2,6 +2,8 @@ extends Control
 
 @export var firstSelected: Node
 
+signal LoadLabMode
+
 #ok cool so there's a good amount to do here obviously
 #first things first is we want to get basic functionality
 #primarily what this looks like is first getting lab mode working
@@ -19,6 +21,8 @@ extends Control
 
 #lets add some like general back button shit too I guess
 
+#so we do have some modicum of like Ui state here
+#handle it later I suppose?
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +32,13 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action("Cancel"):
 		get_tree().quit()
+	if event.is_action("Back"):
+		print("back press do something later")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func OnLabModePress() -> void:
+	emit_signal("LoadLabMode")

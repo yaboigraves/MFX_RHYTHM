@@ -1,34 +1,48 @@
-[gd_scene load_steps=11 format=3 uid="uid://d104uhmv1ql6y"]
+[gd_scene load_steps=10 format=3 uid="uid://d104uhmv1ql6y"]
 
 [ext_resource type="Texture2D" uid="uid://db5nce76d2ald" path="res://recordstoreconcept.png" id="1_asr3e"]
 [ext_resource type="Script" path="res://scenes/MainMenuController.gd" id="1_j5cn7"]
-[ext_resource type="Script" path="res://scenes/MainMenuOptionsButton.gd" id="3_aqkjy"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="3_rxo04"]
 [ext_resource type="Script" path="res://scenes/MainButtonsNavigationController.gd" id="4_yh2v0"]
-[ext_resource type="StyleBox" uid="uid://b6cve5oc3vkj3" path="res://scripts/MainMenuButtonStyleBox.tres" id="5_dwcvw"]
-[ext_resource type="ButtonGroup" uid="uid://dg0xujngn5clo" path="res://scripts/new_button_group.tres" id="5_p2d13"]
-[ext_resource type="Texture2D" uid="uid://cvybp0m1ur83l" path="res://scripts/5ac3377f2741e0cd361e52213305ecd8.png" id="6_lx0aq"]
+[ext_resource type="PackedScene" uid="uid://bsx3h574nyod2" path="res://menu_root_button.tscn" id="5_fy7vr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym28w"]
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.439216, 0.647059, 0.733333, 1)
-skew = Vector2(0.1, 0.1)
-border_color = Color(0, 0, 0, 0.580392)
-border_blend = true
-corner_detail = 5
-shadow_size = 5
-shadow_offset = Vector2(5, 5)
+[sub_resource type="ButtonGroup" id="ButtonGroup_xr3bn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_neaww"]
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.439216, 0.647059, 0.733333, 1)
-skew = Vector2(0.1, 0.1)
-border_color = Color(0, 0, 0, 0.580392)
-border_blend = true
-corner_detail = 5
-shadow_offset = Vector2(5, 5)
+[sub_resource type="Animation" id="Animation_04idu"]
+resource_name = "comeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 15.455),
+"update": 0,
+"values": [Vector2(-679, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6n66g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_32xw2"]
+_data = {
+"RESET": SubResource("Animation_6n66g"),
+"comeIn": SubResource("Animation_04idu")
+}
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("firstSelected")]
 layout_mode = 3
@@ -38,7 +52,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j5cn7")
-firstSelected = NodePath("MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton")
+firstSelected = NodePath("MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -96,126 +110,26 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 282.0
+offset_right = 416.0
+offset_bottom = 486.0
 grow_vertical = 2
 theme_override_constants/separation = 25
 script = ExtResource("4_yh2v0")
 
-[node name="MenuRootButton" type="Button" parent="MenuContainer/MainOptionsContainer/MainButtons"]
-custom_minimum_size = Vector2(0, 100)
+[node name="SinglePlayer" parent="MenuContainer/MainOptionsContainer/MainButtons" instance=ExtResource("5_fy7vr")]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_rxo04")
-theme_override_font_sizes/font_size = 37
-theme_override_styles/normal = ExtResource("5_dwcvw")
-theme_override_styles/hover = ExtResource("5_dwcvw")
-theme_override_styles/pressed = ExtResource("5_dwcvw")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_ym28w")
-theme_override_styles/focus = SubResource("StyleBoxFlat_neaww")
-toggle_mode = true
-button_group = ExtResource("5_p2d13")
-text = " Single Player"
-icon = ExtResource("6_lx0aq")
-alignment = 0
-text_overrun_behavior = 1
-icon_alignment = 2
-script = ExtResource("3_aqkjy")
+button_group = SubResource("ButtonGroup_xr3bn")
 
-[node name="SubMenu" type="Control" parent="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 50.0
-offset_right = 223.0
-offset_bottom = 174.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="SubMenu" parent="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer" index="0"]
+scale = Vector2(1, 1)
 
-[node name="ColorRect" type="ColorRect" parent="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton/SubMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.227451, 0.913725, 1, 1)
+[node name="Button2" parent="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer/SubMenu/TextureRect/VBoxContainer" index="1"]
+disabled = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton/SubMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Button" type="Button" parent="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton/SubMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Lab Mode"
-
-[node name="Button2" type="Button" parent="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton/SubMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Challenge Tower"
-
-[node name="MultiPlayer3" type="Button" parent="MenuContainer/MainOptionsContainer/MainButtons"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme_override_styles/normal = ExtResource("5_dwcvw")
-toggle_mode = true
-button_group = ExtResource("5_p2d13")
-text = "single player"
-script = ExtResource("3_aqkjy")
-
-[node name="SubMenu" type="Control" parent="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 50.0
-offset_right = 223.0
-offset_bottom = 174.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3/SubMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.227451, 0.913725, 1, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3/SubMenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Button" type="Button" parent="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3/SubMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Lab Mode"
-
-[node name="Button2" type="Button" parent="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3/SubMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Challenge Tower"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuContainer/MainOptionsContainer/MainButtons"]
+libraries = {
+"": SubResource("AnimationLibrary_32xw2")
+}
 
 [node name="Exit" type="Button" parent="MenuContainer/MainOptionsContainer"]
 layout_mode = 1
@@ -230,7 +144,6 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Exit"
 
-[connection signal="pressed" from="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton" to="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton" method="_on_pressed"]
-[connection signal="toggled" from="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton" to="MenuContainer/MainOptionsContainer/MainButtons/MenuRootButton" method="_on_toggled"]
-[connection signal="pressed" from="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3" to="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3" method="_on_pressed"]
-[connection signal="toggled" from="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3" to="MenuContainer/MainOptionsContainer/MainButtons/MultiPlayer3" method="_on_toggled"]
+[connection signal="pressed" from="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer/SubMenu/TextureRect/VBoxContainer/Button" to="." method="OnLabModePress"]
+
+[editable path="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer"]

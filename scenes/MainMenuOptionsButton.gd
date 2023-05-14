@@ -12,7 +12,13 @@ func _on_pressed() -> void:
 	pass
 
 func _on_toggled(button_pressed: bool) -> void:
-
-	$SubMenu/AnimationPlayer.play("grow")
-	$SubMenu.set_visible(button_pressed)
-	disabled = button_pressed
+	
+	print(button_pressed)
+	if button_pressed:
+		if not $SubMenu.visible:
+			$SubMenu/AnimationPlayer.play("grow")
+			$SubMenu.set_visible(true)
+		else:
+			$SubMenu.set_visible(false)
+	else:
+		$SubMenu.set_visible(false)

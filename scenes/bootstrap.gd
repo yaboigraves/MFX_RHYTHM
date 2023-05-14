@@ -1,5 +1,12 @@
 extends Node
 
+#ok so lets think about how we want to do input
+#i've learned "mode" modules for input are really good ideas
+#so reify the logic for input to a main menu input manager
+#and just re-use actions
+#ez
+
+
 #this is our always loaded root object
 #basically just does level loading
 

@@ -1,11 +1,39 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsx3h574nyod2"]
+[gd_scene load_steps=11 format=3 uid="uid://cbofpiilootfk"]
 
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="1_tegke"]
 [ext_resource type="StyleBox" uid="uid://b6cve5oc3vkj3" path="res://scripts/MainMenuButtonStyleBox.tres" id="2_xnmol"]
-[ext_resource type="ButtonGroup" uid="uid://dg0xujngn5clo" path="res://scripts/new_button_group.tres" id="3_8ams0"]
-[ext_resource type="Texture2D" uid="uid://cvybp0m1ur83l" path="res://scripts/5ac3377f2741e0cd361e52213305ecd8.png" id="4_md03l"]
+[ext_resource type="ButtonGroup" uid="uid://dg0xujngn5clo" path="res://scripts/MainMenuButtons.tres" id="3_iyb0t"]
+[ext_resource type="Texture2D" uid="uid://de7l3xglr18t6" path="res://1p.png" id="4_52177"]
 [ext_resource type="Script" path="res://scenes/MainMenuOptionsButton.gd" id="5_ai2qy"]
 [ext_resource type="Texture2D" uid="uid://b7u8p3u7t8lk3" path="res://dialogBox.png" id="6_683uk"]
+[ext_resource type="Theme" uid="uid://bl2o4ky35migj" path="res://mf_menu_theme.tres" id="7_5lkhw"]
+
+[sub_resource type="Animation" id="Animation_yy82a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_dplhi"]
 resource_name = "grow"
@@ -35,33 +63,6 @@ tracks/1/keys = {
 "values": [0.785398, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_yy82a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sf88a"]
 _data = {
 "RESET": SubResource("Animation_yy82a"),
@@ -70,6 +71,8 @@ _data = {
 
 [node name="MenuRootButton" type="Button"]
 custom_minimum_size = Vector2(0, 150)
+offset_right = 443.0
+offset_bottom = 150.0
 theme_override_fonts/font = ExtResource("1_tegke")
 theme_override_font_sizes/font_size = 37
 theme_override_styles/normal = ExtResource("2_xnmol")
@@ -78,10 +81,11 @@ theme_override_styles/pressed = ExtResource("2_xnmol")
 theme_override_styles/disabled = ExtResource("2_xnmol")
 theme_override_styles/focus = ExtResource("2_xnmol")
 toggle_mode = true
-button_group = ExtResource("3_8ams0")
+button_group = ExtResource("3_iyb0t")
 text = "SINGLE PLAYER"
-icon = ExtResource("4_md03l")
+icon = ExtResource("4_52177")
 icon_alignment = 2
+expand_icon = true
 script = ExtResource("5_ai2qy")
 
 [node name="SubMenu" type="Control" parent="."]
@@ -94,7 +98,6 @@ offset_left = 50.0
 offset_right = 223.0
 offset_bottom = 174.0
 grow_horizontal = 0
-scale = Vector2(1e-05, 1)
 
 [node name="TextureRect" type="TextureRect" parent="SubMenu"]
 layout_mode = 1
@@ -103,7 +106,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -4.0
 offset_top = 7.0
-offset_right = 144.0
+offset_right = 257.0
 offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -111,22 +114,26 @@ texture = ExtResource("6_683uk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubMenu/TextureRect"]
 layout_mode = 2
-offset_left = 69.0
-offset_top = 24.0
-offset_right = 286.0
-offset_bottom = 247.0
+offset_left = 114.0
+offset_top = 20.0
+offset_right = 346.0
+offset_bottom = 243.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="Button" type="Button" parent="SubMenu/TextureRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
+theme = ExtResource("7_5lkhw")
 text = "Lab Mode"
 
 [node name="Button2" type="Button" parent="SubMenu/TextureRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
+theme = ExtResource("7_5lkhw")
 text = "Challenge Tower"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubMenu"]

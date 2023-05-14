@@ -4,6 +4,15 @@ extends Control
 
 signal LoadLabMode
 
+#major goal for this system right now is just to support lab mode
+#we should lay some good foundation down for the future though
+#just so we can actuall have a build you can control
+#and we can start working on like an actual loop
+
+#basically menu -> lab mode -> (in game pause) -> menu
+#start with that
+#lab don't even worry about character select yet
+
 #ok cool so there's a good amount to do here obviously
 #first things first is we want to get basic functionality
 #primarily what this looks like is first getting lab mode working

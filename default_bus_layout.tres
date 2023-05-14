@@ -4,13 +4,14 @@
 resource_name = "Compressor"
 
 [resource]
+bus/0/volume_db = -8.39965
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_bgkk1")
 bus/0/effect/0/enabled = true
 bus/1/name = &"background"
 bus/1/solo = false
-bus/1/mute = true
+bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -11.952
+bus/1/volume_db = -2.51026
 bus/1/send = &"background 2"
 bus/2/name = &"drums"
 bus/2/solo = false

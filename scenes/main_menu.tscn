@@ -1,12 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://d104uhmv1ql6y"]
+[gd_scene load_steps=10 format=3 uid="uid://d104uhmv1ql6y"]
 
 [ext_resource type="Texture2D" uid="uid://db5nce76d2ald" path="res://recordstoreconcept.png" id="1_asr3e"]
 [ext_resource type="Script" path="res://scenes/MainMenuController.gd" id="1_j5cn7"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="3_rxo04"]
-[ext_resource type="Texture2D" uid="uid://b4fk7s6w0s1cs" path="res://menutitle.png" id="4_cg5j4"]
 [ext_resource type="Script" path="res://scenes/MainButtonsNavigationController.gd" id="4_yh2v0"]
-[ext_resource type="PackedScene" uid="uid://cbofpiilootfk" path="res://menu_root_button.tscn" id="5_fy7vr"]
-[ext_resource type="Theme" uid="uid://bl2o4ky35migj" path="res://mf_menu_theme.tres" id="7_ut20a"]
+[ext_resource type="PackedScene" uid="uid://bsx3h574nyod2" path="res://menu_root_button.tscn" id="5_fy7vr"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_oqxo5"]
+
+[sub_resource type="Animation" id="Animation_6n66g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_04idu"]
+resource_name = "comeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 15.455),
+"update": 0,
+"values": [Vector2(-679, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_32xw2"]
+_data = {
+"RESET": SubResource("Animation_6n66g"),
+"comeIn": SubResource("Animation_04idu")
+}
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("firstSelected")]
 layout_mode = 3
@@ -44,7 +80,6 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/LogoContainer"]
-visible = false
 layout_mode = 0
 offset_right = 1068.0
 offset_bottom = 455.0
@@ -64,14 +99,6 @@ scroll_active = false
 autowrap_mode = 0
 shortcut_keys_enabled = false
 
-[node name="TextureRect" type="TextureRect" parent="MenuContainer/LogoContainer"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-texture = ExtResource("4_cg5j4")
-expand_mode = 3
-
 [node name="MainOptionsContainer" type="Control" parent="MenuContainer"]
 layout_mode = 1
 anchor_top = 0.5
@@ -84,24 +111,25 @@ layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 416.0
-offset_bottom = 4252.5
+offset_bottom = 486.0
 grow_vertical = 2
 theme_override_constants/separation = 25
 script = ExtResource("4_yh2v0")
 
 [node name="SinglePlayer" parent="MenuContainer/MainOptionsContainer/MainButtons" instance=ExtResource("5_fy7vr")]
 layout_mode = 2
-theme = ExtResource("7_ut20a")
+button_group = SubResource("ButtonGroup_oqxo5")
+
+[node name="SubMenu" parent="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer" index="0"]
+scale = Vector2(1, 1)
 
 [node name="Button2" parent="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer/SubMenu/TextureRect/VBoxContainer" index="1"]
 disabled = true
 
-[node name="SinglePlayer2" parent="MenuContainer/MainOptionsContainer/MainButtons" instance=ExtResource("5_fy7vr")]
-layout_mode = 2
-theme = ExtResource("7_ut20a")
-
-[node name="Button2" parent="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer2/SubMenu/TextureRect/VBoxContainer" index="1"]
-disabled = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuContainer/MainOptionsContainer/MainButtons"]
+libraries = {
+"": SubResource("AnimationLibrary_32xw2")
+}
 
 [node name="Exit" type="Button" parent="MenuContainer/MainOptionsContainer"]
 layout_mode = 1
@@ -117,7 +145,5 @@ grow_vertical = 0
 text = "Exit"
 
 [connection signal="pressed" from="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer/SubMenu/TextureRect/VBoxContainer/Button" to="." method="OnLabModePress"]
-[connection signal="pressed" from="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer2/SubMenu/TextureRect/VBoxContainer/Button" to="." method="OnLabModePress"]
 
 [editable path="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer"]
-[editable path="MenuContainer/MainOptionsContainer/MainButtons/SinglePlayer2"]

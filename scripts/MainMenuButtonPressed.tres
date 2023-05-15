@@ -1,11 +1,10 @@
-[gd_resource type="StyleBoxFlat" format=3 uid="uid://x6lbbu17axkb"]
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://crmpym8w7dilv"]
 
 [resource]
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.439216, 0.647059, 0.733333, 1)
 border_color = Color(0, 0, 0, 0.580392)
-border_blend = true
 corner_detail = 5
 shadow_size = 5
 shadow_offset = Vector2(5, 5)

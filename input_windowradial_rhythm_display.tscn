@@ -31,13 +31,15 @@ markerColors = Array[Color]([Color(0.992157, 0, 0, 1), Color(0, 0.886275, 0, 1),
 radialMetronomeDot = ExtResource("2_r0ylq")
 origin = Vector2(-1, 0)
 numLanes = 4
+centerOffset = 0.255
 outerOffset = 0.9
 rhythmArmVisible = false
-laneMargins = 25
+laneMargins = 15
+beatDivisonColors = Color(0, 0.921569, 0.843137, 1)
 beatsPerRotation = 4
 laneLineResolution = 90
 laneColors = Array[Color]([Color(0.313726, 0.313726, 0.313726, 1)])
-backgroundColor = Color(0.145098, 0.145098, 0.145098, 1)
+backgroundColor = Color(0.603922, 0.603922, 0.603922, 1)
 
 [node name="Control" type="Control" parent="."]
 visible = false

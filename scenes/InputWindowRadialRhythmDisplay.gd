@@ -1,33 +1,12 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
-#couple of fixes required here
-#mainly, we need to actually be able to change where stuff spawns from
-#gotta flip the order of the lanes here, im very confident left to right is the way to go
-#so the OUTER lane is actually index 0
-
-#ok goals for today
-#control over what control indexes map to what lane, ideally via a dictionary and not indexes
-#buffer areas for input, so that you can do earlyish hits
-#better UI feedback for hits
-
-#lets fuckin GOOOOO
-
-#something worth experimenting with is a testing profile object too
-#so I can just plug in a drumset and a sample
-
-#lets do those 3 things today
-
-#k to start
-
 
 @export var rules: GameModeRules
 
 @export var markerColors: Array[Color]
 
 @export var radialMetronomeDot : PackedScene
-
-
 
 var metronomeDots = []
 
@@ -39,14 +18,56 @@ var stateTextMap = {
 	"VerifyState":"PLAY"
 }
 
+#cool so this can now be used to create arc sections
+#it needs to be obviously a little more kitted but yea i like it
+#lets add a color field?
+func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD):
+	var poly = OutlinedPolygon2D.new()
+	poly.outlineWidth = 10
+	poly.color = color
+	poly.color.a = 0.5
+	var windowSizeRadians = 2 * (PI) * (rules.windowSize/beatsPerRotation)
+
+	var topBound = origin.rotated(-windowSizeRadians/2.0)
+	var bottomBound = origin.rotated(windowSizeRadians/2.0)
+	
+	var closeMult =  (startDist + (laneMargins/2.0) +  + (index * laneSize))
+	var farMult = (startDist + (laneMargins/-2.0)+ (laneSize) + (index * laneSize))
+
+	var arcRadius = 22
+	#so rotate by 5 multiples of that dif from 0 the actual max
+	var arcSizeDelta = windowSizeRadians/(2.0 * arcRadius)
+	
+	var rotationMax = windowSizeRadians/2.0
+	
+	var arcPoints = []
+
+	for i in range(arcRadius):
+		arcPoints.append((origin.rotated(rotationMax - (i * arcSizeDelta))   ) * closeMult)
+	arcPoints.append(origin * closeMult)
+	for i in range(arcRadius + 1):
+		arcPoints.append((origin.rotated( -(i * arcSizeDelta))   ) * closeMult)
+	
+	for i in range(arcRadius + 1, 0, -1):
+			arcPoints.append((origin.rotated( -(i * arcSizeDelta))   ) * farMult)
+	arcPoints.append(origin * farMult)
+	for i in range(0,arcRadius + 1):
+		arcPoints.append((origin.rotated( (i * arcSizeDelta))   ) * farMult)
+
+
+	var points: PackedVector2Array = arcPoints	
+
+	poly.set_polygon(points)
+	
+	return poly
 
 func _ready():
 	beatsPerRotation = rules.loopBeatSize
-	super._ready()
-	
+	super._ready()	
 	DrawInputWindows()
 	#DrawBadZone()
 	DrawMetronomeDots()
+
 	
 func DrawMetronomeDots():
 	for i in range(beatsPerRotation):
@@ -65,60 +86,22 @@ func DrawBadZone():
 	line.points = [Vector2(0,0), edge]	
 	%CenterPivot/LineRenderers.add_child(line)
 
+
 func DrawInputWindows():
 	var windowSizeRadians = 2 * (PI) * (rules.windowSize/beatsPerRotation)
 	for index in range(numLanes):
-		var poly = OutlinedPolygon2D.new()
-		poly.outlineWidth = 10
-		poly.color =  markerColors[index]
-		poly.color.a = 0.5
-		
-		var topBound = origin.rotated(-windowSizeRadians/2.0)
-		var bottomBound = origin.rotated(windowSizeRadians/2.0)
-		
+		var shape = CreateArcSection(index, markerColors[index])
+		%InputWindows.add_child(shape)
 
-		var points : PackedVector2Array = [
-			topBound * (startDist + (laneMargins/2.0) +  + (index * laneSize)) , 
-			topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (index * laneSize)), 
-			bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (index * laneSize)), 
-			bottomBound *(startDist + (laneMargins/2.0) + (index * laneSize)) 
-		]
-		
-		poly.set_polygon(points)
-		
-		%InputWindows.add_child(poly)
+
 
 func SpawnMarker(hit:Hit):
-	var poly = OutlinedPolygon2D.new()
-	poly.outlineWidth = 8
-
 	var indexPos = (numLanes - 1) - hit.laneIndex
-
-	var beatPos = fposmod(hit.time,beatsPerRotation)/beatsPerRotation
-	beatPos = PI
-#	beatPos *= 2 * PI
-
-	#var windowSizeRadians = 2 * PI *( (beatsPerRotation * rules.windowSize) / beatsPerRotation)
-	var windowSizeRadians = (2 * (PI) * (rules.windowSize/beatsPerRotation)) / 2.0
-
-	var topBound = origin.rotated( origin.angle() + rotation - beatPos-windowSizeRadians)
-	var bottomBound = origin.rotated(origin.angle()  +rotation - beatPos+windowSizeRadians)
-
-	var pivot = origin.rotated(origin.angle()  +rotation - beatPos) * (startDist + (laneSize/2.0) + ( ((numLanes - 1)- hit.laneIndex) * laneSize))
-
-	var points : PackedVector2Array = [
-		topBound * (startDist + (laneMargins/2.0) +  + (indexPos* laneSize)) , 
-		topBound * (startDist + (laneMargins/-2.0)+ (laneSize) + (indexPos * laneSize)), 
-		bottomBound * (startDist + (laneMargins/-2.0) + (laneSize) + (indexPos * laneSize)), 
-		bottomBound *(startDist + (laneMargins/2.0) + (indexPos* laneSize)) 
-	]
+	var shape = CreateArcSection(indexPos, markerColors[indexPos])
+	%Markers.add_child(shape)
 	
-	poly.color = markerColors[indexPos]
-	poly.set_polygon(points)
-	%Markers.add_child(poly)
-	
-	markers.append(poly)
-	markerHitMap[hit] = poly
+	markers.append(shape)
+	markerHitMap[hit] = shape
 
 	
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
@@ -150,6 +133,7 @@ func _on_verify_state_missed_hit(hit) -> void:
 
 var currentState
 var phaseStart
+
 func _on_player_state_machine_transitioned(state) -> void:
 	currentState = state
 	$HUD/PhaseText.text = stateTextMap[state.name]

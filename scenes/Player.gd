@@ -14,11 +14,12 @@ var stateMachine : StateMachine
 
 func _ready():
 	stateMachine = %PlayerStateMachine as StateMachine
+	
 
 
 func StartInputSequence():
 	print("starting ", name, " input sequence")
-	stateMachine.transition_to("RecordState")
+	stateMachine.transition_to("IdleState")
 	emit_signal("BeatPhaseCallback",stateMachine.state.duration ,MoveToNextPhase, true)
 
 

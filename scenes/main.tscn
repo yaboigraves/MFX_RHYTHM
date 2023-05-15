@@ -322,9 +322,10 @@ offset_right = -0.380112
 offset_bottom = -0.0200448
 markerColors = Array[Color]([Color(0.992157, 0, 0, 0.592157), Color(0, 0.886275, 0, 0.568627), Color(0, 0, 0.937255, 0.67451), Color(0.984314, 1, 0, 0.572549)])
 marker = ExtResource("12_cuo1v")
-centerOffset = 0.3
+centerOffset = 0.269
 outerOffset = 1.0
-laneColors = Array[Color]([Color(0.533333, 0.533333, 0.533333, 1)])
+beatDivisonColors = Color(1, 1, 1, 1)
+laneColors = Array[Color]([Color(0.317647, 0.305882, 0.294118, 1)])
 backgroundColor = Color(0, 0, 0, 1)
 
 [connection signal="SpawnHit" from="." to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_main_spawn_hit"]

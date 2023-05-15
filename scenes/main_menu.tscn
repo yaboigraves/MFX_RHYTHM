@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://d104uhmv1ql6y"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" uid="uid://db5nce76d2ald" path="res://recordstoreconcept.png" id="1_asr3e"]
-[ext_resource type="Script" path="res://scenes/MainMenuController.gd" id="1_j5cn7"]
-[ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://FohrScore.otf" id="3_rxo04"]
-[ext_resource type="Texture2D" uid="uid://b4fk7s6w0s1cs" path="res://menutitle.png" id="4_cg5j4"]
-[ext_resource type="Script" path="res://scenes/MainButtonsNavigationController.gd" id="4_yh2v0"]
-[ext_resource type="PackedScene" uid="uid://cbofpiilootfk" path="res://menu_root_button.tscn" id="5_fy7vr"]
-[ext_resource type="Theme" uid="uid://bl2o4ky35migj" path="res://mf_menu_theme.tres" id="7_ut20a"]
-[ext_resource type="Texture2D" uid="uid://bt80bw1fi544g" path="res://2p.png" id="8_aprjs"]
+[ext_resource type="Texture2D" uid="uid://db5nce76d2ald" path="res://textures/recordstoreconcept.png" id="1_asr3e"]
+[ext_resource type="Script" path="res://scripts/menus/MainMenuController.gd" id="1_j5cn7"]
+[ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="3_rxo04"]
+[ext_resource type="Texture2D" uid="uid://b4fk7s6w0s1cs" path="res://textures/menutitle.png" id="4_cg5j4"]
+[ext_resource type="Script" path="res://scripts/menus/MainButtonsNavigationController.gd" id="4_yh2v0"]
+[ext_resource type="PackedScene" path="res://scenes/menu_root_button.tscn" id="5_fy7vr"]
+[ext_resource type="Theme" path="res://UI/mf_menu_theme.tres" id="7_ut20a"]
+[ext_resource type="Texture2D" uid="uid://bt80bw1fi544g" path="res://textures/2p.png" id="8_aprjs"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("firstSelected")]
 layout_mode = 3

@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmyg3x515if1b"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Shader" path="res://scenes/UI/Test3dSprites.gdshader" id="1_xr8jt"]
-[ext_resource type="Texture2D" uid="uid://bc4d64ntftfbq" path="res://Illustration (1).png" id="2_k4phk"]
-[ext_resource type="Texture2D" uid="uid://cw84lvnhue3n4" path="res://borderThang.png" id="4_l3ikk"]
+[ext_resource type="Shader" path="res://scripts/shaders/Test3dSprites.gdshader" id="1_xr8jt"]
+[ext_resource type="Texture2D" uid="uid://bc4d64ntftfbq" path="res://textures/Illustration (1).png" id="2_k4phk"]
+[ext_resource type="Texture2D" uid="uid://cw84lvnhue3n4" path="res://textures/borderThang.png" id="4_l3ikk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5h8dm"]
 shader = ExtResource("1_xr8jt")

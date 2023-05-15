@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://f8ouow1oji1p"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scenes/bootstrap.gd" id="1_j334o"]
-[ext_resource type="PackedScene" uid="uid://d104uhmv1ql6y" path="res://scenes/main_menu.tscn" id="1_r0851"]
-[ext_resource type="Script" path="res://scenes/MenuAudioManager.gd" id="2_qrn54"]
+[ext_resource type="Script" path="res://scripts/menus/bootstrap.gd" id="1_j334o"]
+[ext_resource type="PackedScene" path="res://scenes/main_menu.tscn" id="1_r0851"]
+[ext_resource type="Script" path="res://scripts/menus/MenuAudioManager.gd" id="2_qrn54"]
 
 [node name="Bootstrap" type="Node"]
 script = ExtResource("1_j334o")

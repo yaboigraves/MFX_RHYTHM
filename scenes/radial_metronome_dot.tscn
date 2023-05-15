@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://g2ik3l7smbib"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Texture2D" uid="uid://b83tu8nn8mt8a" path="res://dot.png" id="1_skvxc"]
-[ext_resource type="Script" path="res://RadialMetronomeDot.gd" id="2_dxaqa"]
+[ext_resource type="Texture2D" uid="uid://b83tu8nn8mt8a" path="res://textures/dot.png" id="1_skvxc"]
+[ext_resource type="Script" path="res://scripts/ui/RadialMetronomeDot.gd" id="2_dxaqa"]
 
 [node name="RadialMetronomeDot" type="TextureRect"]
 anchors_preset = 8

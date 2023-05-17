@@ -1,23 +1,23 @@
-[gd_scene load_steps=33 format=3]
+[gd_scene load_steps=34 format=3 uid="uid://bkl56ty0kexdc"]
 
-[ext_resource type="Script" path="res://scripts/coreBattle/Metronome.gd" id="1_mpivx"]
+[ext_resource type="Script" path="res://scripts/coreBattle/GameManager.gd" id="1_ypkpa"]
+[ext_resource type="Script" path="res://scripts/coreBattle/Metronome.gd" id="2_74kou"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="2_pdwic"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="3_1rj7j"]
-[ext_resource type="Script" path="res://scripts/input/PlayerInputHandler.gd" id="3_3xqna"]
-[ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="5_nqyvc"]
-[ext_resource type="Resource" path="res://resources/LabGameModeRules.tres" id="6_ev767"]
-[ext_resource type="Script" path="res://scripts/coreBattle/Player.gd" id="8_cslea"]
-[ext_resource type="Script" path="res://scripts/coreBattle/GameManager.gd" id="8_n5iqg"]
-[ext_resource type="Script" path="res://scripts/coreBattle/GameMode.gd" id="8_r1w7j"]
-[ext_resource type="Script" path="res://scripts/input/RecordState.gd" id="9_cr7vw"]
-[ext_resource type="Script" path="res://scripts/input/VerifyState.gd" id="10_5eqh6"]
+[ext_resource type="Resource" path="res://resources/LabGameModeRules.tres" id="4_er8n1"]
+[ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="6_48ygq"]
+[ext_resource type="Script" path="res://scripts/coreBattle/Player.gd" id="7_fea62"]
+[ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="8_k6qfb"]
+[ext_resource type="Script" path="res://scripts/input/IdleState.gd" id="9_wop2r"]
+[ext_resource type="Script" path="res://scripts/input/RecordState.gd" id="10_6om7i"]
+[ext_resource type="Script" path="res://scripts/input/VerifyState.gd" id="11_dw7m3"]
 [ext_resource type="PackedScene" path="res://scenes/input_windowradial_rhythm_display.tscn" id="11_oivm5"]
-[ext_resource type="Script" path="res://scripts/input/IdleState.gd" id="11_yjrf7"]
 [ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="12_cuo1v"]
-[ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="16_ot7g3"]
+[ext_resource type="Script" path="res://scripts/input/PlayerInputHandler.gd" id="12_ql4yj"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="16_xqbdj"]
 [ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://textures/p1I.png" id="17_3gx0n"]
 [ext_resource type="Script" path="res://scripts/testing/InputSpoofer.gd" id="17_sy8do"]
+[ext_resource type="Script" path="res://scripts/audio/PlayerAudioDirector.gd" id="17_uxfmt"]
 [ext_resource type="Resource" uid="uid://ejolia4q0ylc" path="res://scripts/testing/RecordInputStateProfile.tres" id="18_0qwl4"]
 [ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://textures/dojo1.png" id="18_e0yho"]
 [ext_resource type="AudioStream" uid="uid://dm31vd4bb70sl" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-eav.wav" id="18_h6a4j"]
@@ -27,21 +27,22 @@
 [ext_resource type="Resource" uid="uid://csq1wtf3q5esm" path="res://scripts/testing/idleInputState.tres" id="20_5lv43"]
 [ext_resource type="AudioStream" uid="uid://cfull8txyvmx3" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-am pm .wav" id="20_jebko"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="20_kmktu"]
-[ext_resource type="Script" path="res://scripts/audio/PlayerAudioDirector.gd" id="21_3bqm2"]
 [ext_resource type="AudioStream" uid="uid://cs5bpm2t21tiv" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Perc/perc-l.wav" id="21_c606m"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://textures/head_2.png" id="21_i54xg"]
+[ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="22_rtgd2"]
 [ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://textures/whiteBox.png" id="24_66ev6"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="24_turlm"]
+[ext_resource type="Script" path="res://scripts/patterns/State.gd" id="31_h7udc"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("display")]
-script = ExtResource("8_n5iqg")
+script = ExtResource("1_ypkpa")
 display = NodePath("")
 
 [node name="Metronome" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_mpivx")
+script = ExtResource("2_74kou")
 stream = ExtResource("3_1rj7j")
-rules = ExtResource("6_ev767")
+rules = ExtResource("4_er8n1")
 
 [node name="AudipPlayer" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource("2_pdwic")
@@ -49,41 +50,40 @@ bus = &"background"
 
 [node name="GameMode" type="Node" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
-script = ExtResource("8_r1w7j")
+script = ExtResource("6_48ygq")
 player = NodePath("Player")
-rules = ExtResource("6_ev767")
 
 [node name="Player" type="Node" parent="GameMode"]
-script = ExtResource("8_cslea")
-gameRules = ExtResource("6_ev767")
+script = ExtResource("7_fea62")
+gameRules = ExtResource("4_er8n1")
 
 [node name="PlayerStateMachine" type="Node" parent="GameMode/Player"]
 unique_name_in_owner = true
-script = ExtResource("5_nqyvc")
+script = ExtResource("8_k6qfb")
 initial_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
-script = ExtResource("11_yjrf7")
-rules = ExtResource("6_ev767")
+script = ExtResource("9_wop2r")
+rules = ExtResource("4_er8n1")
 
 [node name="RecordState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
-script = ExtResource("9_cr7vw")
-rules = ExtResource("6_ev767")
+script = ExtResource("10_6om7i")
+rules = ExtResource("4_er8n1")
 
 [node name="VerifyState" type="Node" parent="GameMode/Player/PlayerStateMachine"]
-script = ExtResource("10_5eqh6")
-rules = ExtResource("6_ev767")
+script = ExtResource("11_dw7m3")
+rules = ExtResource("4_er8n1")
 duration = -1.0
 
 [node name="PlayerInputHandler" type="Node" parent="GameMode/Player"]
-script = ExtResource("3_3xqna")
+script = ExtResource("12_ql4yj")
 
 [node name="InputSpoofer" type="Node" parent="GameMode/Player/PlayerInputHandler"]
 script = ExtResource("17_sy8do")
 inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("18_0qwl4"), ExtResource("19_07p40"), ExtResource("20_5lv43")])
 
 [node name="PlayerAudioDirector" type="Node" parent="GameMode/Player"]
-script = ExtResource("21_3bqm2")
+script = ExtResource("17_uxfmt")
 
 [node name="DrumsAudio" type="Node" parent="GameMode/Player/PlayerAudioDirector"]
 
@@ -112,7 +112,7 @@ max_polyphony = 4
 bus = &"drums"
 
 [node name="GameModeHUD" type="CanvasLayer" parent="GameMode"]
-script = ExtResource("16_ot7g3")
+script = ExtResource("22_rtgd2")
 defaultCharIcon = ExtResource("16_xqbdj")
 goodCharIcon = ExtResource("19_420lq")
 missCharIcon = ExtResource("20_kmktu")
@@ -179,6 +179,7 @@ texture = ExtResource("17_3gx0n")
 expand_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameMode/GameModeHUD/Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -298,6 +299,16 @@ autowrap_mode = 0
 
 [node name="CharResetTimer" type="Timer" parent="GameMode/GameModeHUD"]
 one_shot = true
+
+[node name="LabModeStateMachine" type="Node" parent="GameMode"]
+script = ExtResource("8_k6qfb")
+initial_state = NodePath("PlayerInput")
+
+[node name="PlayerInput" type="Node" parent="GameMode/LabModeStateMachine"]
+script = ExtResource("31_h7udc")
+
+[node name="Pause" type="Node" parent="GameMode/LabModeStateMachine"]
+script = ExtResource("31_h7udc")
 
 [node name="RadialUI" type="CanvasLayer" parent="."]
 

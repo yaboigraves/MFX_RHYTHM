@@ -16,7 +16,14 @@ func _ready():
 	stateMachine = %PlayerStateMachine as StateMachine
 	
 
+#so yeah this logic needs to be hoisted up a level
+# I think we need to just like abstract out this timing shit to the game mode to start
+#logic is really hyper specific there
+#I think we ought to run a func in the manager to basically start the mode
+#all modes have a start func
+#lets go from there
 
+#players ought to maybe own their uis too or something
 func StartInputSequence():
 	print("starting ", name, " input sequence")
 	stateMachine.transition_to("IdleState")

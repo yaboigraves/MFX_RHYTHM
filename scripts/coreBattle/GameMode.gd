@@ -1,31 +1,18 @@
 class_name GameMode
 extends Node
 
-
-#so game mode should become an abstract class
-#for now this will be for sketching and i can abstract it later
-#all game modes need to start
-
-#all game modes need to have win or end conditions
-
-#all game modes are gonna have phases
-#yada yada
-
-
-
-#so after x beats we do blank
 @export var player: Player
 @export var rules : GameModeRules
 
+#so all this is used for is to load in the actual game mode object, this is a chasis
+#idk actually stew on this
 
 func Start():
-
-	player.StartInputSequence()
+	pass
 
 
 func MoveToNextPhase():
-
-	player.MoveToNextPhase()
+	pass
 	
 func End():
 	pass

@@ -5,6 +5,7 @@ extends Node
 @export var missCharIcon : Texture 
 @export var badCharIcon : Texture
 
+#yeah we ought to use this controller more?
 
 
 func _on_metronome_beat_update(timeInBeats) -> void:
@@ -13,6 +14,10 @@ func _on_metronome_beat_update(timeInBeats) -> void:
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_callback(func() : $Control/VBoxContainer/Pivot/CharacterIcon.scale = Vector2.ONE)
 
+
+func TogglePauseUI(toggle:bool):
+	$Control/PauseUI.visible = toggle
+	
 
 
 
@@ -55,3 +60,11 @@ func _on_verify_state_hit_processed(hit, hitResult) -> void:
 			onMissHit()
 		HitResult.DESTROY_MISS:
 			onBadHit()
+
+
+func _on_pause_on_enter() -> void:
+	TogglePauseUI(true)
+
+
+func _on_pause_on_exit() -> void:
+	TogglePauseUI(false)

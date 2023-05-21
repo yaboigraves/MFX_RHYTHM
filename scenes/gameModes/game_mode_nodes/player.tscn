@@ -78,7 +78,7 @@ max_polyphony = 4
 bus = &"drums"
 
 [connection signal="transitioned" from="PlayerStateMachine" to="PlayerInputHandler/InputSpoofer" method="_on_player_state_machine_transitioned"]
-[connection signal="HitProcessed" from="PlayerStateMachine/RecordState" to="PlayerAudioDirector" method="_on_record_state_hit_processed"]
-[connection signal="HitProcessed" from="PlayerStateMachine/VerifyState" to="PlayerAudioDirector" method="_on_verify_state_hit_processed"]
+[connection signal="Goodhit" from="PlayerStateMachine/RecordState" to="PlayerAudioDirector" method="_on_record_state_goodhit"]
+[connection signal="Goodhit" from="PlayerStateMachine/VerifyState" to="PlayerAudioDirector" method="_on_verify_state_goodhit"]
 [connection signal="Hit" from="PlayerInputHandler" to="." method="_on_player_input_handler_hit"]
 [connection signal="SpoofHit" from="PlayerInputHandler/InputSpoofer" to="PlayerInputHandler" method="_on_input_spoofer_spoof_hit"]

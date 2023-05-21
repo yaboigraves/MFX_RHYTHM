@@ -13,7 +13,6 @@ signal transitioned(state)
 func _ready() -> void:
 
 	await owner.ready
-	
 
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
@@ -25,7 +24,9 @@ func _ready() -> void:
 	
 	if autostart:
 		state.enter()
-
+		set_process(true)
+		set_physics_process(true)
+		set_process_unhandled_input(true)
 
 #this is a unique functionality now too i guess
 func StartMachine():
@@ -35,12 +36,15 @@ func StartMachine():
 	state.enter()
 
 
+
 # The state machine subscribes to node callbacks and delegates them to the state objects.
 func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
 func _process(delta: float) -> void:
 	state.update(delta)
+
+
 
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)

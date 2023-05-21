@@ -71,17 +71,27 @@ var updateCallbacks = {}
 func _ready() -> void:
 	set_process(false)
 	$AudipPlayer.stream = stream
-	#Start()
+
 	
 func Start():
 	time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
+	nextSyncUpdate = 0.0
+	nextBeatUpdate = 0.0
+	nextPhaseUpdate = 7.0
 	bpm = stream.bpm
 	bps = bpm/60.0
 	spb = 60.0/bpm
+	timeInBeats = 0
 	$AudipPlayer.play()
 	set_process(true)
 
+func Stop():
+	$AudipPlayer.stop()
+	set_process(false)
+	callbacks.clear()
+	updateCallbacks.clear()
+	
 	
 func _process(delta):
 	calculateTime()
@@ -104,7 +114,7 @@ func calculateTime():
 #		emit_signal("BeatUpdate",timeInBeats)
 		call_deferred("emit_signal","BeatUpdate",timeInBeats)
 
-	#sync update part
+
 	if timeInBeats >= nextSyncUpdate:
 		nextSyncUpdate = snapped(timeInBeats,syncUpdateRate) + syncUpdateRate
 		emit_signal("SyncUpdate",snapped(timeInBeats,syncUpdateRate),syncUpdateRate)
@@ -120,9 +130,7 @@ func calculateTime():
 #so update callbacks need the ability to anchor to the closest beat 
 func ProcessUpdateCallbacks():
 	for callbackTime in updateCallbacks.keys():
-
 		if timeInBeats >= callbackTime:
-			
 			updateCallbacks[callbackTime].call()
 			updateCallbacks.erase(callbackTime)
 			print("swithing phase at ", callbackTime)
@@ -133,9 +141,10 @@ func ProcessCallbacks():
 		callbacks.erase(snapped(timeInBeats,syncUpdateRate))
 		
 
-#so this is apparently not working, state is actually not changing early enough
-#the issue is we actually need to do the full rules windodw size I think
 func _on_player_beat_phase_callback(durationInBeats, callback, anchorToNearestBeat = false) -> void:
 	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - (rules.windowSize * 2.0)
+	
+	print(callbackTime)
+	
 	updateCallbacks[callbackTime] = callback
 

@@ -3,7 +3,6 @@ extends RhythmGameStateNode
 
 
 
-#this needs ALOT of stuff removed
 
 @export var gameRules:GameModeRules
 #cool so the player can act as the central hub for all player based stuff
@@ -13,61 +12,28 @@ extends RhythmGameStateNode
 #not game modes
 signal BeatPhaseCallback(durationInBeats:float,callback:Callable)
 signal SpawnMarker(hit:Hit)
-signal TurnDone
-
+signal HitProcessed(hit: Hit, hitResult : HitResult)
 
 
 var stateMachine : StateMachine
+
+#cool so lets move the scheduling logic up to the game mode now
 
 
 func _ready():
 	super._ready()
 	stateMachine = %PlayerStateMachine as StateMachine
-	
+	stateMachine.StartMachine()
 
 
-#so states need to end now..
-#lets get a basic loop going 
-#once the record state ends we want to be notified
-func StartTurn():
-	stateMachine.transition_to("RecordState")
-	
-	#i guess rhythm game nodes ought to be able to access the ui too?
-	#yeah lift the state up for stuff like calling markers
-	
+func StartRecording(gameState: GameState):
+	stateMachine.transition_to("RecordState", {"gameState" : gameState})
 
+func StartVerifying(gameState: GameState):
+	stateMachine.transition_to("VerifyState", {"gameState" : gameState})
 
-#func StartInputSequence():
-#	print("starting ", name, " input sequence")
-#	stateMachine.transition_to("IdleState")
-#	emit_signal("BeatPhaseCallback",stateMachine.state.duration ,MoveToNextPhase, true)
-#
-
-#func MoveToNextPhase():
-#	stateMachine.iterate_to_next_state()
-#	emit_signal("BeatPhaseCallback",stateMachine.state.duration ,MoveToNextPhase, true)
-
-#once again metronome caching issues
-#lets just cache these all with metronome refs, or build it into a rhythm game base node component
-#probably just bake it in as a base node function
-#for game state info
-
-#this is good still
-
-#ok we have a game loop again
-#good start
-#it needs to be easier to actually script from lab mode
-#but its pretty decent so far
-#i think record state just going into verify makes sense
-#good for now
-#i guess I can come back to this later!
-#overall next steps are cleaning up, tying the ui in more succintly
-#then pause
-
-#we really do need liek a game state version of the players round
-#if we can just pass that to the UI at the start of every round and bind to it
-#thats probably way smarter
-#that way states can still control it and UI and whoever else can just listen
+func GoIdle():
+	stateMachine.transition_to("IdleState")
 
 func _on_player_input_handler_hit(index) -> void:
 	var hit = Hit.new(index,metronome.timeInBeats,stateMachine.state.startTime)

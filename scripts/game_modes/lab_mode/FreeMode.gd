@@ -5,31 +5,42 @@ extends GameModeState
 
 
 func enter(_msg := {}) -> void:
-	#so whenever we get entered i guess we override that
-	print(state_machine)
 	super.enter()
-	print("free mode starting")
-	
 	metronome.Start()
-	#metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, EvaluateNextState, true)
-	
-	#honestly its not bad if the player states handle callbacks...
-	#just know we probably need to encapsulate a players "turn"
-	#i think thats what is missing
-	#yeah lets handle player turns that way better
-	
-	#yeah so players can store their turns
-	#and let us know when they done
-	player.StartTurn()
-	
-	
-	
-#okkkkk lets go so we just constantly put the player into record
-func EvaluateNextState():
-	#metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, EvaluateNextState, true)
-	print("this is where we would do game mode logic")
+	player.StartRecording(currentGameState)
+	metronome._on_player_beat_phase_callback(8, HandleRecordStateEnd, true)
 
-#player one has done their turn, what do we do now
+func exit():
+	metronome.Stop()
 
-func _on_player_1_turn_done() -> void:
-	player.StartTurn()
+	#turn off the player state machines
+	player.GoIdle()
+	
+	%InputWindowRadialRhythmDisplay.ClearAllMarkers()
+	#cleat the ui
+
+#i guess we can actually just allow you to like stop the current loop
+#then pick a new song
+#that makes more sense...
+#in battle you should be able to just like no contest by holding or pressing it
+#theres literally no reason to do pause
+#yeah fuck that
+
+func update(delta):
+	if Input.is_action_just_pressed("Pause"):
+		state_machine.transition_to("Pause")
+
+func HandleRecordStateEnd():
+	#get the hits from the player?
+	player.StartVerifying(currentGameState)
+	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleVerifyStateEnd, true)
+	
+
+func HandleVerifyStateEnd():
+	var nextGameState : GameState = GameState.new(8)
+	currentGameState = nextGameState
+	player.StartRecording(currentGameState)
+	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
+
+
+

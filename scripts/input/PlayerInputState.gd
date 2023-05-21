@@ -4,7 +4,12 @@ extends State
 #so this might actually handle some scheduling?
 #we ought to be able to schedule them to auto exit?
 
-signal HitProcessed(hit: Hit, hitResult : HitResult)
+#so this can get replaced with requests for audio
+#signal HitProcessed(hit: Hit, hitResult : HitResult)
+
+signal Goodhit(hit:Hit)
+signal BadHit(hit:Hit)
+signal Missedhit(hit:Hit)
 
 @export var rules : GameModeRules
 @export var duration: float = 4.0

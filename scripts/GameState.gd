@@ -14,5 +14,15 @@ var lengthInBeats: int
 #nah the callbakc works
 #we ought to be able to change length anyways
 
+#ok so the first thing that can happen is gamestate contains a set of recorded hits
+
+var recordedHits = [
+	[],
+	[],
+	[],
+	[]
+]
+
+
 func _init(lengthInBeats: int):
 	self.lengthInBeats = lengthInBeats

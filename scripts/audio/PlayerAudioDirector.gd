@@ -22,3 +22,11 @@ func _on_verify_state_hit_processed(hit, hitResult) -> void:
 		HitResult.GOOD:
 			$DrumsAudio.get_child(hit.laneIndex).play()
 
+
+
+func _on_record_state_goodhit(hit) -> void:
+	$DrumsAudio.get_child(hit.laneIndex).play()
+
+
+func _on_verify_state_goodhit(hit) -> void:
+	$DrumsAudio.get_child(hit.laneIndex).play()

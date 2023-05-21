@@ -208,6 +208,23 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[node name="PauseUI" type="Control" parent="GameModeHUD/Control"]
+visible = false
+layout_mode = 1
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameModeHUD/Control/PauseUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="CharResetTimer" type="Timer" parent="GameModeHUD"]
 one_shot = true
 
@@ -233,6 +250,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("13_15825")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.236
@@ -258,7 +276,7 @@ script = ExtResource("16_sxfox")
 [node name="Player1" parent="PlayerManager" instance=ExtResource("15_i4eir")]
 
 [connection signal="timeout" from="GameModeHUD/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]
-[connection signal="OnEnter" from="LabModeStateMachine/FreeMode" to="." method="OnGameModeStateEntered"]
+[connection signal="OnEnter" from="LabModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_enter"]
+[connection signal="OnExit" from="LabModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_exit"]
+[connection signal="HitProcessed" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_hit_processed"]
 [connection signal="SpawnMarker" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]
-[connection signal="TurnDone" from="PlayerManager/Player1" to="LabModeStateMachine/FreeMode" method="_on_player_1_turn_done"]
-[connection signal="TurnDone" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="ClearAllMarkers"]

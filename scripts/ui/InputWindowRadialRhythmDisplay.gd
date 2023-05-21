@@ -8,6 +8,9 @@ extends RadialRhythmDisplay
 
 @export var radialMetronomeDot : PackedScene
 
+
+@onready var metronome:Metronome = get_node("/root/GameManager/Metronome") as Metronome
+
 var metronomeDots = []
 
 var markerHitMap: Dictionary
@@ -67,7 +70,8 @@ func _ready():
 	DrawInputWindows()
 	#DrawBadZone()
 	DrawMetronomeDots()
-
+	metronome.Tick.connect(_on_metronome_tick)
+	#connect this shit dynamically
 	
 func DrawMetronomeDots():
 	for i in range(beatsPerRotation):
@@ -119,6 +123,7 @@ func ClearAllMarkers():
 func _on_player_input_handler_escape() -> void:
 	ClearAllMarkers()
 
+#
 func _on_record_state_spawn_marker(hit:Hit) -> void:
 	SpawnMarker(hit)
 	
@@ -144,6 +149,7 @@ func _on_metronome_beat_update(timeInBeats) -> void:
 	
 
 func UpdateMetronome(timeInBeats):
+	
 	var metronomeIndex = currentState.progress/currentState.duration
 	
 	for dot in metronomeDots:

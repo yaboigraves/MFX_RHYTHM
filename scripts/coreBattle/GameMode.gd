@@ -1,5 +1,5 @@
 class_name GameMode
-extends Node
+extends RhythmGameStateNode
 
 @export var player: Player
 @export var rules : GameModeRules

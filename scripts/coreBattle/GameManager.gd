@@ -67,6 +67,9 @@ extends Node
 #anyways, lets first do some project cleanup
 #lotta commented code
 
+#honestly just have the radial ui exist in all the scenes too it'll be easier to connect to ui endpoints in game code then
+
+#this can handle the menu shit later too
 
 @export var display : RhythmDisplay
 
@@ -75,8 +78,9 @@ signal RecordedHit
 signal SpawnHit(index,timeInBeats)
 
 
+
 func _ready() -> void:
-	%GameMode.Start()
+	$GameModeManager.StartGame()
 
 func _process(delta: float) -> void:
 	

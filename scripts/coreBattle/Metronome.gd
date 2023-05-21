@@ -71,7 +71,7 @@ var updateCallbacks = {}
 func _ready() -> void:
 	set_process(false)
 	$AudipPlayer.stream = stream
-	Start()
+	#Start()
 	
 func Start():
 	time_begin = Time.get_ticks_usec()

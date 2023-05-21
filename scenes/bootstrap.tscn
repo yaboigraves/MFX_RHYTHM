@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://cq82wn3onppkn"]
 
 [ext_resource type="Script" path="res://scripts/menus/bootstrap.gd" id="1_j334o"]
-[ext_resource type="PackedScene" path="res://scenes/main_menu.tscn" id="1_r0851"]
+[ext_resource type="PackedScene" uid="uid://dms7u2orrtnyb" path="res://scenes/main_menu.tscn" id="1_r0851"]
 [ext_resource type="Script" path="res://scripts/menus/MenuAudioManager.gd" id="2_qrn54"]
 
 [node name="Bootstrap" type="Node"]

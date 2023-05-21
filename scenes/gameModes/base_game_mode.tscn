@@ -1,0 +1,255 @@
+[gd_scene load_steps=16 format=3 uid="uid://c7gm8nfuap5kt"]
+
+[ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="1_wohi7"]
+[ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="2_nandj"]
+[ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="4_u23p1"]
+[ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="18_00llf"]
+[ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="19_kiubr"]
+[ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="20_n6e1c"]
+[ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="21_jflfn"]
+[ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://textures/head_2.png" id="22_gagc1"]
+[ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://textures/dojo1.png" id="23_4aumj"]
+[ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://textures/p1I.png" id="24_cvvox"]
+[ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://textures/whiteBox.png" id="25_wemdm"]
+[ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="26_d7fg4"]
+[ext_resource type="Script" path="res://scripts/patterns/State.gd" id="27_f0ylr"]
+[ext_resource type="PackedScene" path="res://scenes/input_windowradial_rhythm_display.tscn" id="28_le3bw"]
+[ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="29_5cwq3"]
+
+[node name="GameMode" type="Node" node_paths=PackedStringArray("player")]
+script = ExtResource("1_wohi7")
+player = NodePath("PlayerManager/Player")
+
+[node name="GameModeHUD" type="CanvasLayer" parent="."]
+script = ExtResource("18_00llf")
+defaultCharIcon = ExtResource("19_kiubr")
+goodCharIcon = ExtResource("20_n6e1c")
+missCharIcon = ExtResource("21_jflfn")
+badCharIcon = ExtResource("22_gagc1")
+
+[node name="Control" type="Control" parent="GameModeHUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameModeHUD/Control"]
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("23_4aumj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameModeHUD/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -397.0
+offset_right = 300.0
+grow_vertical = 0
+alignment = 2
+
+[node name="Pivot" type="Control" parent="GameModeHUD/Control/VBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CharacterIcon" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/Pivot"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 150)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("19_kiubr")
+expand_mode = 5
+
+[node name="PlayerIcon" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("24_cvvox")
+expand_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameModeHUD/Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="DrumIcon1" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 0.415686, 0.403922, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("25_wemdm")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon1/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("26_d7fg4")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]A"
+fit_content = true
+
+[node name="DrumIcon2" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.360784, 1, 0.407843, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("25_wemdm")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon2/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("26_d7fg4")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]S"
+fit_content = true
+
+[node name="DrumIcon3" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.470588, 0.470588, 0.933333, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("25_wemdm")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon3/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("26_d7fg4")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]D"
+fit_content = true
+
+[node name="DrumIcon4" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("25_wemdm")
+
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon4/CenterContainer"]
+custom_minimum_size = Vector2(64, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("26_d7fg4")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]F"
+fit_content = true
+
+[node name="ComboText" type="RichTextLabel" parent="GameModeHUD/Control"]
+visible = false
+layout_mode = 1
+offset_left = 190.0
+offset_right = 635.0
+offset_bottom = 464.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
+theme_override_fonts/normal_font = ExtResource("26_d7fg4")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "
+0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CharResetTimer" type="Timer" parent="GameModeHUD"]
+one_shot = true
+
+[node name="LabModeStateMachine" type="Node" parent="."]
+script = ExtResource("4_u23p1")
+initial_state = NodePath("PlayerInput")
+
+[node name="PlayerInput" type="Node" parent="LabModeStateMachine"]
+script = ExtResource("27_f0ylr")
+
+[node name="Pause" type="Node" parent="LabModeStateMachine"]
+script = ExtResource("27_f0ylr")
+
+[node name="RadialUI" type="CanvasLayer" parent="."]
+
+[node name="RootContainer" type="Control" parent="RadialUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("28_le3bw")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.236
+anchor_top = 0.031
+anchor_right = 0.764
+anchor_bottom = 0.969
+offset_left = 0.379969
+offset_top = 0.0199985
+offset_right = -0.380112
+offset_bottom = -0.0200448
+markerColors = Array[Color]([Color(0.992157, 0, 0, 0.592157), Color(0, 0.886275, 0, 0.568627), Color(0, 0, 0.937255, 0.67451), Color(0.984314, 1, 0, 0.572549)])
+marker = ExtResource("29_5cwq3")
+centerOffset = 0.269
+outerOffset = 1.0
+beatDivisonColors = Color(1, 1, 1, 1)
+laneColors = Array[Color]([Color(0.317647, 0.305882, 0.294118, 1)])
+backgroundColor = Color(0, 0, 0, 1)
+
+[node name="PlayerManager" type="Node" parent="."]
+
+[node name="Player" parent="PlayerManager" instance=ExtResource("2_nandj")]
+
+[connection signal="timeout" from="GameModeHUD/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]

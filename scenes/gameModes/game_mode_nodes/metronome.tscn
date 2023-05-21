@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlml8pxq43wfm"]
+
+[ext_resource type="Script" path="res://scripts/coreBattle/Metronome.gd" id="1_1owva"]
+[ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="2_merm0"]
+[ext_resource type="Resource" path="res://resources/LabGameModeRules.tres" id="3_g5sje"]
+[ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="4_s8mk1"]
+
+[node name="Metronome" type="Node"]
+script = ExtResource("1_1owva")
+stream = ExtResource("2_merm0")
+rules = ExtResource("3_g5sje")
+
+[node name="AudipPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s8mk1")
+bus = &"background"

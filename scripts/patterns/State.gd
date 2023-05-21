@@ -1,11 +1,12 @@
 class_name State
-extends Node
+extends RhythmGameStateNode
 
 signal OnEnter()
 signal OnExit()
 
 
 func _ready() -> void:
+	super._ready()
 	initialize()
 	
 	

@@ -1,0 +1,84 @@
+[gd_scene load_steps=17 format=3 uid="uid://bp5cbgcpms5fw"]
+
+[ext_resource type="Script" path="res://scripts/coreBattle/Player.gd" id="1_6p015"]
+[ext_resource type="Resource" path="res://resources/LabGameModeRules.tres" id="2_crf4l"]
+[ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="3_ssxma"]
+[ext_resource type="Script" path="res://scripts/input/IdleState.gd" id="4_ktfkr"]
+[ext_resource type="Script" path="res://scripts/input/RecordState.gd" id="5_jjwbh"]
+[ext_resource type="Script" path="res://scripts/input/VerifyState.gd" id="6_7mxss"]
+[ext_resource type="Script" path="res://scripts/input/PlayerInputHandler.gd" id="7_s8ace"]
+[ext_resource type="Script" path="res://scripts/testing/InputSpoofer.gd" id="8_1xwqu"]
+[ext_resource type="Resource" uid="uid://ejolia4q0ylc" path="res://scripts/testing/RecordInputStateProfile.tres" id="9_bbosl"]
+[ext_resource type="Resource" uid="uid://bbl10oiwp1iwv" path="res://scripts/testing/verifyInputState.tres" id="10_d8jmm"]
+[ext_resource type="Resource" uid="uid://csq1wtf3q5esm" path="res://scripts/testing/idleInputState.tres" id="11_77tmj"]
+[ext_resource type="Script" path="res://scripts/audio/PlayerAudioDirector.gd" id="12_u36qw"]
+[ext_resource type="AudioStream" uid="uid://dm31vd4bb70sl" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-eav.wav" id="13_v2q6p"]
+[ext_resource type="AudioStream" uid="uid://q5wdu1wk63e8" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Hi-Hats/hat-curry.wav" id="14_53gdw"]
+[ext_resource type="AudioStream" uid="uid://cfull8txyvmx3" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-am pm .wav" id="15_nu05v"]
+[ext_resource type="AudioStream" uid="uid://cs5bpm2t21tiv" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Perc/perc-l.wav" id="16_k24f6"]
+
+[node name="Player" type="Node"]
+script = ExtResource("1_6p015")
+gameRules = ExtResource("2_crf4l")
+
+[node name="PlayerStateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_ssxma")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("4_ktfkr")
+rules = ExtResource("2_crf4l")
+
+[node name="RecordState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("5_jjwbh")
+rules = ExtResource("2_crf4l")
+player = NodePath("../..")
+
+[node name="VerifyState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_7mxss")
+rules = ExtResource("2_crf4l")
+duration = -1.0
+player = NodePath("../..")
+
+[node name="PlayerInputHandler" type="Node" parent="."]
+script = ExtResource("7_s8ace")
+
+[node name="InputSpoofer" type="Node" parent="PlayerInputHandler"]
+script = ExtResource("8_1xwqu")
+inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("9_bbosl"), ExtResource("10_d8jmm"), ExtResource("11_77tmj")])
+
+[node name="PlayerAudioDirector" type="Node" parent="."]
+script = ExtResource("12_u36qw")
+
+[node name="DrumsAudio" type="Node" parent="PlayerAudioDirector"]
+
+[node name="DrumPlayer1" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("13_v2q6p")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[node name="DrumPlayer2" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("14_53gdw")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[node name="DrumPlayer3" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("15_nu05v")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[node name="DrumPlayer4" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
+stream = ExtResource("16_k24f6")
+mix_target = 2
+max_polyphony = 4
+bus = &"drums"
+
+[connection signal="transitioned" from="PlayerStateMachine" to="PlayerInputHandler/InputSpoofer" method="_on_player_state_machine_transitioned"]
+[connection signal="HitProcessed" from="PlayerStateMachine/RecordState" to="PlayerAudioDirector" method="_on_record_state_hit_processed"]
+[connection signal="HitProcessed" from="PlayerStateMachine/VerifyState" to="PlayerAudioDirector" method="_on_verify_state_hit_processed"]
+[connection signal="Hit" from="PlayerInputHandler" to="." method="_on_player_input_handler_hit"]
+[connection signal="SpoofHit" from="PlayerInputHandler/InputSpoofer" to="PlayerInputHandler" method="_on_input_spoofer_spoof_hit"]

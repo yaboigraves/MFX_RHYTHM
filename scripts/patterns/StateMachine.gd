@@ -3,21 +3,37 @@ extends Node
 
 # Emitted when transitioning to a new state.
 signal transitioned(state)
-
 #Path to the initial active state. We export it to be able to pick the initial state in the inspector.
 @export var initial_state := NodePath()
-
 # The current active state. At the start of the game, we get the `initial_state`.
-@onready var state: State = get_node(initial_state)
+@onready var state: State = get_node(initial_state) as State
+
+@export var autostart : bool = true
 
 func _ready() -> void:
+
 	await owner.ready
-	print("basic ready")
+	
+
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
 		child.state_machine = self
-		
+	
+	set_process(false)
+	set_physics_process(false)
+	set_process_unhandled_input(false)
+	
+	if autostart:
+		state.enter()
+
+
+#this is a unique functionality now too i guess
+func StartMachine():
+	set_process(true)
+	set_physics_process(true)
+	set_process_unhandled_input(true)
 	state.enter()
+
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
 func _unhandled_input(event: InputEvent) -> void:
@@ -44,6 +60,9 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state.enter(msg)
 	emit_signal("transitioned", state)
 	
+
+#this has no place here now
+#and this logic was bad
 
 func iterate_to_next_state() -> void:
 	var currentStateIndex = state.get_index()

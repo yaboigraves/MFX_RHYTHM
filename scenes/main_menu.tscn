@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://dms7u2orrtnyb"]
 
 [ext_resource type="Texture2D" uid="uid://db5nce76d2ald" path="res://textures/recordstoreconcept.png" id="1_asr3e"]
 [ext_resource type="Script" path="res://scripts/menus/MainMenuController.gd" id="1_j5cn7"]

@@ -16,6 +16,9 @@ var labModeScene = preload("res://scenes/main.tscn")
 #we REALLY need to clean this all up a bunch
 #so obviously come back and do so
 
+#lets make a dict that maps to shit to load?
+#or make them serialized, probably better to serialize them
+
 func _on_main_menu_load_lab_mode() -> void:
 	$MainMenu.queue_free()
 	await $MainMenu.tree_exited

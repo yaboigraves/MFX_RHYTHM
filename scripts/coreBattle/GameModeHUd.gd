@@ -68,3 +68,4 @@ func _on_pause_on_enter() -> void:
 
 func _on_pause_on_exit() -> void:
 	TogglePauseUI(false)
+

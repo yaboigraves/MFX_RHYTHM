@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ca0e8s1qmw04e"]
 
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="1_whrbc"]
 [ext_resource type="StyleBox" uid="uid://b6cve5oc3vkj3" path="res://MainMenuButtonStyleBox.tres" id="2_j85tp"]
@@ -14,3 +14,4 @@ Button/styles/focus = ExtResource("3_cl4sp")
 Button/styles/hover = ExtResource("3_mduq1")
 Button/styles/normal = ExtResource("2_j85tp")
 Button/styles/pressed = ExtResource("4_o00ia")
+RichTextLabel/fonts/normal_font = ExtResource("1_whrbc")

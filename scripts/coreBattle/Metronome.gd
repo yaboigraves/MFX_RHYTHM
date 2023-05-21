@@ -70,11 +70,9 @@ var updateCallbacks = {}
 
 func _ready() -> void:
 	set_process(false)
-	
 
-	
+
 func Start():
-	print(stream.resource_path)
 	$AudipPlayer.stream = stream
 	time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()

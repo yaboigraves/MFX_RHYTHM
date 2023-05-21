@@ -5,8 +5,12 @@ extends Node
 @export var missCharIcon : Texture 
 @export var badCharIcon : Texture
 
-#yeah we ought to use this controller more?
+#idk actually its probably bettter if we keep all the hud shit in here
+#just control it better
 
+#we ought to move the player huds into the player objects, makes more sense logically
+
+#yeah we ought to use this controller more?
 
 func _on_metronome_beat_update(timeInBeats) -> void:
 	var tween =create_tween()
@@ -19,23 +23,20 @@ func TogglePauseUI(toggle:bool):
 	$Control/PauseUI.visible = toggle
 	
 
-
-
-
 func onBadHit() -> void:
-	$Control/VBoxContainer/Pivot/CharacterIcon.texture = badCharIcon
-	$CharResetTimer.start()
+	$Control/PlayerContainer/Pivot/CharacterIcon.texture = badCharIcon
+	$Control/CharResetTimer.start()
 
 func onGoodHit() -> void:
-	$Control/VBoxContainer/Pivot/CharacterIcon.texture = goodCharIcon
-	$CharResetTimer.start()
+	$Control/PlayerContainer/Pivot/CharacterIcon.texture = goodCharIcon
+	$Control/CharResetTimer.start()
 	
 func onMissHit() -> void:
-	$Control/VBoxContainer/Pivot/CharacterIcon.texture = missCharIcon
-	$CharResetTimer.start()
+	$Control/PlayerContainer/Pivot/CharacterIcon.texture = missCharIcon
+	$Control/CharResetTimer.start()
 
 func _on_char_reset_timer_timeout() -> void:
-	$Control/VBoxContainer/Pivot/CharacterIcon.texture = defaultCharIcon
+	$Control/PlayerContainer/Pivot/CharacterIcon.texture = defaultCharIcon
 
 
 func _on_verify_state_combo_update(combo) -> void:
@@ -44,12 +45,6 @@ func _on_verify_state_combo_update(combo) -> void:
 		$Control/ComboText.text = '\n' + str(combo)
 	else:
 		$Control/ComboText.visible = false
-
-
-func _on_player_input_handler_hit(index) -> void:
-#	get_node("Control/VBoxContainer/HBoxContainer/DrumIcon" + str(index + 1)).modulate = Color.GREEN_YELLOW
-#	#probably do a tween here too
-	pass
 
 
 func _on_verify_state_hit_processed(hit, hitResult) -> void:
@@ -69,3 +64,13 @@ func _on_pause_on_enter() -> void:
 func _on_pause_on_exit() -> void:
 	TogglePauseUI(false)
 
+
+
+func _on_player_1_hit_processed(hit, hitResult) -> void:
+		match hitResult:
+			HitResult.GOOD:
+				onGoodHit()
+			HitResult.MISS:		
+				onBadHit()
+			HitResult.DESTROY_MISS:
+				onMissHit()

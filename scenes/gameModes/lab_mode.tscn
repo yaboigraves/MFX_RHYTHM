@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://blfd33gvycb3g"]
+[gd_scene load_steps=23 format=3 uid="uid://blfd33gvycb3g"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="1_4tw81"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="4_uu7d5"]
 [ext_resource type="Theme" uid="uid://ca0e8s1qmw04e" path="res://UI/mf_menu_theme.tres" id="11_6m8gb"]
 [ext_resource type="Script" path="res://scripts/ui/TrackSelectLoader.gd" id="12_o3jhx"]
 [ext_resource type="Script" path="res://scripts/game_modes/lab_mode/FreeMode.gd" id="12_r5mt5"]
-[ext_resource type="PackedScene" path="res://scenes/input_windowradial_rhythm_display.tscn" id="13_15825"]
+[ext_resource type="PackedScene" uid="uid://b25q4rbpyn8sc" path="res://scenes/input_windowradial_rhythm_display.tscn" id="13_15825"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="13_oqvsv"]
 [ext_resource type="Script" path="res://scripts/game_modes/GameModeState.gd" id="13_sqhuo"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="14_f8ot0"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="18_a03rc"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="19_k4q16"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="20_36ob5"]
+[ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="20_ks3v0"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="21_cmj30"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://textures/head_2.png" id="22_hnhxy"]
 [ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://textures/dojo1.png" id="23_7im5m"]
@@ -78,7 +79,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("23_7im5m")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameModeHUD/Control"]
+[node name="PlayerContainer" type="VBoxContainer" parent="GameModeHUD/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -88,13 +89,13 @@ offset_right = 300.0
 grow_vertical = 0
 alignment = 2
 
-[node name="Pivot" type="Control" parent="GameModeHUD/Control/VBoxContainer"]
+[node name="Pivot" type="Control" parent="GameModeHUD/Control/PlayerContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CharacterIcon" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/Pivot"]
+[node name="CharacterIcon" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer/Pivot"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 1
@@ -115,7 +116,7 @@ size_flags_vertical = 4
 texture = ExtResource("19_k4q16")
 expand_mode = 5
 
-[node name="PlayerIcon" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer"]
+[node name="PlayerIcon" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer"]
 visible = false
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
@@ -124,18 +125,18 @@ size_flags_vertical = 4
 texture = ExtResource("24_21sb2")
 expand_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameModeHUD/Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameModeHUD/Control/PlayerContainer"]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="DrumIcon1" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+[node name="DrumIcon1" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer"]
 self_modulate = Color(1, 0.415686, 0.403922, 1)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("25_4ocgc")
 
-[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon1"]
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,7 +144,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon1/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon1/CenterContainer"]
 custom_minimum_size = Vector2(64, 2.08165e-12)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -153,13 +154,13 @@ bbcode_enabled = true
 text = "[center]A"
 fit_content = true
 
-[node name="DrumIcon2" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+[node name="DrumIcon2" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer"]
 self_modulate = Color(0.360784, 1, 0.407843, 1)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("25_4ocgc")
 
-[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon2"]
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +168,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon2/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon2/CenterContainer"]
 custom_minimum_size = Vector2(64, 2.08165e-12)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -177,13 +178,13 @@ bbcode_enabled = true
 text = "[center]S"
 fit_content = true
 
-[node name="DrumIcon3" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+[node name="DrumIcon3" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer"]
 self_modulate = Color(0.470588, 0.470588, 0.933333, 1)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("25_4ocgc")
 
-[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon3"]
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,7 +192,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon3/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon3/CenterContainer"]
 custom_minimum_size = Vector2(64, 2.08165e-12)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -201,13 +202,13 @@ bbcode_enabled = true
 text = "[center]D"
 fit_content = true
 
-[node name="DrumIcon4" type="TextureRect" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer"]
+[node name="DrumIcon4" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer"]
 self_modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("25_4ocgc")
 
-[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon4"]
+[node name="CenterContainer" type="CenterContainer" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -215,7 +216,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/VBoxContainer/HBoxContainer/DrumIcon4/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameModeHUD/Control/PlayerContainer/HBoxContainer/DrumIcon4/CenterContainer"]
 custom_minimum_size = Vector2(64, 2.08165e-12)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -244,6 +245,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="PauseUI" type="Control" parent="GameModeHUD/Control"]
+visible = false
 layout_mode = 1
 anchor_left = 0.8
 anchor_right = 1.0
@@ -264,7 +266,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -282,6 +284,20 @@ size_flags_vertical = 3
 script = ExtResource("12_o3jhx")
 tracks = Array[AudioStreamOggVorbis]([ExtResource("13_oqvsv"), ExtResource("14_f8ot0")])
 
+[node name="QuitButton" type="Button" parent="GameModeHUD/Control/PauseUI/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("11_6m8gb")
+text = "QUIT"
+
+[node name="CharResetTimer" type="Timer" parent="GameModeHUD/Control"]
+
 [node name="LabModeStateMachine" type="Node" parent="."]
 script = ExtResource("4_uu7d5")
 initial_state = NodePath("FreeMode")
@@ -289,9 +305,11 @@ autostart = false
 
 [node name="FreeMode" type="Node" parent="LabModeStateMachine"]
 script = ExtResource("12_r5mt5")
+rules = ExtResource("20_ks3v0")
 
 [node name="Pause" type="Node" parent="LabModeStateMachine"]
 script = ExtResource("13_sqhuo")
+rules = ExtResource("20_ks3v0")
 
 [node name="PlayerManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -300,7 +318,10 @@ script = ExtResource("16_sxfox")
 [node name="Player1" parent="PlayerManager" instance=ExtResource("15_i4eir")]
 
 [connection signal="TrackSelected" from="GameModeHUD/Control/PauseUI/Panel/TrackSelect/Tracks" to="LabModeStateMachine/Pause" method="_on_tracks_track_selected"]
+[connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]
+[connection signal="timeout" from="GameModeHUD/Control/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]
 [connection signal="OnEnter" from="LabModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_enter"]
 [connection signal="OnExit" from="LabModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_exit"]
 [connection signal="HitProcessed" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_hit_processed"]
+[connection signal="HitProcessed" from="PlayerManager/Player1" to="GameModeHUD" method="_on_player_1_hit_processed"]
 [connection signal="SpawnMarker" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvgaa17lydwxu"]
+
+[sub_resource type="Gradient" id="Gradient_w67iy"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 0)
+
+[node name="HitParticles" type="CPUParticles2D"]
+emitting = false
+amount = 20
+lifetime = 2.31
+one_shot = true
+explosiveness = 1.0
+randomness = 0.45
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 43.8
+initial_velocity_max = 45.18
+angular_velocity_min = 720.0
+angular_velocity_max = 720.0
+scale_amount_min = 8.45
+scale_amount_max = 9.65
+color_ramp = SubResource("Gradient_w67iy")

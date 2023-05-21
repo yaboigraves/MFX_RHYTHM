@@ -1,17 +1,28 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
+#ok so this needs some love
+#ui feedback is really lacking overall so I just want to spend some time on that
+#we also need a good way to dynamically change length which i dont think works with scheduling right now
+
+#I think we probably need to work on that really quick
+
+#so first thing that would be great would be some pulse
+#that is going to be a tricky thing to do but its def worth
+#that and particle systems for each hit
+
+#lets do the particle system bit
+
 
 @export var rules: GameModeRules
-
 @export var markerColors: Array[Color]
-
 @export var radialMetronomeDot : PackedScene
-
-
+@export var hitParticleSystem : PackedScene
 @onready var metronome:Metronome = get_node("/root/GameManager/Metronome") as Metronome
 
+
 var metronomeDots = []
+var hitParticleSystems = []
 
 var markerHitMap: Dictionary
 
@@ -21,9 +32,7 @@ var stateTextMap = {
 	"VerifyState":"PLAY"
 }
 
-#cool so this can now be used to create arc sections
-#it needs to be obviously a little more kitted but yea i like it
-#lets add a color field?
+
 func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD):
 	var poly = OutlinedPolygon2D.new()
 	poly.outlineWidth = 10
@@ -34,7 +43,7 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD):
 	var topBound = origin.rotated(-windowSizeRadians/2.0)
 	var bottomBound = origin.rotated(windowSizeRadians/2.0)
 	
-	var closeMult =  (startDist + (laneMargins/2.0) +  + (index * laneSize))
+	var closeMult =  (startDist + (laneMargins/2.0) + (index * laneSize))
 	var farMult = (startDist + (laneMargins/-2.0)+ (laneSize) + (index * laneSize))
 
 	var arcRadius = 22
@@ -69,9 +78,10 @@ func _ready():
 	super._ready()	
 	DrawInputWindows()
 	#DrawBadZone()
-	DrawMetronomeDots()
+	#DrawMetronomeDots()
 	metronome.Tick.connect(_on_metronome_tick)
 	#connect this shit dynamically
+	SpawnParticleSystems()
 	
 func DrawMetronomeDots():
 	for i in range(beatsPerRotation):
@@ -80,7 +90,7 @@ func DrawMetronomeDots():
 		metronomeDot.position -= metronomeDot.size/2.0
 		$Metronome.add_child(metronomeDot)
 		metronomeDots.append(metronomeDot)
-		
+	
 
 func DrawBadZone():
 	var windowSizeRadians = 2 * (PI) * (rules.badZoneSize/beatsPerRotation)
@@ -98,7 +108,17 @@ func DrawInputWindows():
 		%InputWindows.add_child(shape)
 
 
-
+func SpawnParticleSystems():
+	var i = 0
+	for window in %InputWindows.get_children():
+		
+		var pSystem = hitParticleSystem.instantiate()
+		window.add_child(pSystem)
+		var closeMult =  (startDist + (laneSize/2.0) + (i * laneSize))
+		pSystem.position = origin * closeMult
+		i+=1
+		hitParticleSystems.append(pSystem)
+	
 func SpawnMarker(hit:Hit):
 	var indexPos = (numLanes - 1) - hit.laneIndex
 	var shape = CreateArcSection(indexPos, markerColors[indexPos])
@@ -142,28 +162,11 @@ var phaseStart
 func _on_player_state_machine_transitioned(state) -> void:
 	currentState = state
 	$HUD/PhaseText.text = stateTextMap[state.name]
-	
-#ehhh this is like a state thing....
-func _on_metronome_beat_update(timeInBeats) -> void:
-	UpdateMetronome(timeInBeats)
-	
-
-func UpdateMetronome(timeInBeats):
-	
-	var metronomeIndex = currentState.progress/currentState.duration
-	
-	for dot in metronomeDots:
-		dot.modulate = Color(1,1,1,0.2)
-
-	for i in range((rules.loopBeatSize * metronomeIndex)):
-		metronomeDots[i].modulate = Color(1,1,1,1)
-
 
 
 func onBadHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
-	
 
 func onGoodHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
@@ -171,6 +174,7 @@ func onGoodHit(hit) -> void:
 	markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
 	markerHitMap.erase(hit)
+	hitParticleSystems[3 - hit.laneIndex].restart()
 
 func onDestroyMiss(hit):
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
@@ -178,7 +182,6 @@ func onDestroyMiss(hit):
 	markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
 	markerHitMap.erase(hit)
-
 
 func _on_verify_state_hit_processed(hit, hitResult) -> void:
 	match hitResult:

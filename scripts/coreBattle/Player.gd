@@ -1,24 +1,13 @@
 class_name Player
 extends RhythmGameStateNode
 
-
-
-
 @export var gameRules:GameModeRules
-#cool so the player can act as the central hub for all player based stuff
-#game state stuff can be handled a layer above, seems good
 
-#so players can internally control their phase timings
-#not game modes
 signal BeatPhaseCallback(durationInBeats:float,callback:Callable)
 signal SpawnMarker(hit:Hit)
 signal HitProcessed(hit: Hit, hitResult : HitResult)
 
-
 var stateMachine : StateMachine
-
-#cool so lets move the scheduling logic up to the game mode now
-
 
 func _ready():
 	super._ready()

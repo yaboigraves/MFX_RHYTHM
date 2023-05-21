@@ -7,12 +7,9 @@ var gameModeDictionary:Dictionary = {
 	GameModeType.LAB_MODE : "res://scenes/gameModes/lab_mode.tscn"
 }
 
-
 @export var currentGameModeType : GameModeType
 
-
 var currentGameMode : GameMode
-
 
 
 func StartGame():

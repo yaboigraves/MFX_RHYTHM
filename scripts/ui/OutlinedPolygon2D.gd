@@ -5,6 +5,10 @@ extends Polygon2D
 #these will look like shit 
 #so yeah why don't we just use a line rendered?
 #they seem to work better and support rounded caps
+#we can extend this to also contain the top and bottom seperation?
+
+var topIndexes : Array[int]
+var bottomIndexes : Array[int]
 
 @export var outlineColor :Color = Color(0,0,0)
 @export var outlineWidth : float = 2.0 

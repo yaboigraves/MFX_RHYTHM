@@ -1,7 +1,6 @@
 class_name FreeMode
 extends GameModeState
 
-
 @onready var player : Player = %PlayerManager.GetPlayer(0) as Player
 
 func enter(_msg := {}) -> void:

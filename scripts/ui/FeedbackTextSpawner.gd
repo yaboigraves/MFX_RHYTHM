@@ -1,6 +1,10 @@
 class_name FeedBackTextSpawner
 extends Node
 
+#yeah this can get absorbed by the indicators
+#the only issue is loading these textures but its not an issue really
+
+
 #TOCO: Maybe show this above the characters head
 #shrink the indicators or pulse them on hits or something
 

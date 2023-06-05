@@ -37,12 +37,14 @@ func HandleBadHit():
 #ok this DOES work now
 #keep in mind we gotta work on moving the outlines as well
 #weirdly the corner isnt in there?
+#so just top seem wrong
 
-
+#ok so lets start with the rotation bit
+#thats gonna take brain so come back to this
 func PulseShapeTween():
 	pass
 	for point in shape.topIndexes:
-		shape.polygon[point] -= Vector2(0,10)
+		shape.polygon[point] -= Vector2(0,50)
 #
-#	for point in shape.bottomIndexes:
-#		shape.polygon[point] -= Vector2(0,10)
+	for point in shape.bottomIndexes:
+		shape.polygon[point] += Vector2(0,50)

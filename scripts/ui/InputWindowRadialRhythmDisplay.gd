@@ -89,7 +89,7 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10
 		pointIndex += 1
 	
 	#skip
-	arcPoints.append(origin * closeMult)
+#	arcPoints.append(origin * closeMult)
 	
 	for i in range(arcRadius + 1):
 		arcPoints.append((origin.rotated( -(i * arcSizeDelta))   ) * closeMult)
@@ -100,7 +100,9 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10
 		arcPoints.append((origin.rotated( -(i * arcSizeDelta))   ) * farMult)
 		poly.bottomIndexes.append(pointIndex)
 		pointIndex += 1
-	arcPoints.append(origin * farMult)
+		
+#	arcPoints.append(origin * farMult)
+	
 	for i in range(0,arcRadius + 1):
 		arcPoints.append((origin.rotated( (i * arcSizeDelta))   ) * farMult)
 		poly.topIndexes.append(pointIndex)

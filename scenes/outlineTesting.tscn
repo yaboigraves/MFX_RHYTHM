@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://cusi2qkqmdsiq"]
 
 [ext_resource type="Shader" path="res://scripts/shaders/OutlineTest2.gdshader" id="1_1ofyn"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="2_u51x1"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="3_womtd"]
+[ext_resource type="Texture2D" uid="uid://gdykqa26cdnu" path="res://scenes/testo.png" id="4_byvaq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ci21y"]
 shader = ExtResource("1_1ofyn")
@@ -31,3 +32,10 @@ material = SubResource("ShaderMaterial_otcx3")
 position = Vector2(1871, 532)
 texture = ExtResource("3_womtd")
 region_rect = Rect2(0, 0, 1000, 1000)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(175, -5, 301, 81, 514, 35, 376, 295, 230, 439, -33, 237, -69, 506, 196, 225, 260, 124, 393, 189)
+width = 100.0
+texture = ExtResource("4_byvaq")
+texture_mode = 1
+joint_mode = 2

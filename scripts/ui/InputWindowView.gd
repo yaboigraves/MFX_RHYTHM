@@ -85,6 +85,7 @@ func HandleBadHit():
 #ok this DOES work now
 #keep in mind we gotta work on moving the outlines as well
 #weirdly the corner isnt in there?
+#so just top seem wrong
 
 var pulseTween
 

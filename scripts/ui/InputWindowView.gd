@@ -6,15 +6,63 @@ extends RefCounted
 #the index will be important
 #primary things are just like functions i suppose
 
+#SO
+#we cant tween this
+#we have to create an animation player
+#and keyframe the positions
+#which is annoying but do able
+
 var index: int
-var shape: Polygon2D
+var shape: OutlinedPolygon2D
 var particleSystem : CPUParticles2D
+
+var animationPlayer : AnimationPlayer
 
 
 func _init(index,shape,particleSystem:):
 	self.index = index 
 	self.shape = shape 
 	self.particleSystem = particleSystem
+	self.animationPlayer = AnimationPlayer.new()
+	self.shape.add_child(self.animationPlayer)
+	
+	
+	#try creating the animation
+	var animation = Animation.new()
+	animation.length = 1
+	animationPlayer.speed_scale = 5
+	
+	animation.add_track(0)
+
+	
+	animation.track_set_path(0, NodePath(":polygon"))
+
+
+
+
+
+	
+	animation.track_insert_key(0,0,shape.polygon)
+
+	
+	
+	var polygonMoved = shape.polygon.duplicate()
+		
+	for top in shape.topIndexes:
+		polygonMoved[top] = polygonMoved[top].rotated(PI/48.0)
+	for top in shape.bottomIndexes:
+		polygonMoved[top] = polygonMoved[top].rotated(-PI/48.0)
+	
+	
+	animation.track_insert_key(0,0.2,polygonMoved)	
+	
+	animation.track_insert_key(0,1,shape.polygon)
+
+	
+	var lib = AnimationLibrary.new()
+	lib.add_animation("lol",animation)
+	animationPlayer.add_animation_library("thing",lib)
+
 	
 
 func HandleGoodHit():
@@ -38,11 +86,8 @@ func HandleBadHit():
 #keep in mind we gotta work on moving the outlines as well
 #weirdly the corner isnt in there?
 
+var pulseTween
 
 func PulseShapeTween():
-	pass
-	for point in shape.topIndexes:
-		shape.polygon[point] -= Vector2(0,10)
-#
-#	for point in shape.bottomIndexes:
-#		shape.polygon[point] -= Vector2(0,10)
+	animationPlayer.stop()
+	animationPlayer.play("thing/lol")

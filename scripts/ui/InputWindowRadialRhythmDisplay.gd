@@ -1,35 +1,9 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
-#OK
-#so
-#some things just really ought to be either nodes or objects
-#particularly, hit indicators
-#as well, the pivot is kind of awkward, but hit indicators ought to be their own thing first
-#mainly because then the particle systems can be managed by them, as well as the eventual pulse
-#the indexing is super fucked on them too so we can create a hand made system for that
-#they technically could be nodes but everything is established in the context of the actual radial
-#so probably just ref counted things to aggregate responsibilities for this to do
+#this has been kind of refactored now
+#im not particularly happy with it by any means but its something
 
-#ok so this needs some love
-#ui feedback is really lacking overall so I just want to spend some time on that
-#we also need a good way to dynamically change length which i dont think works with scheduling right now
-
-#I think we probably need to work on that really quick
-
-#so first thing that would be great would be some pulse
-#that is going to be a tricky thing to do but its def worth
-#that and particle systems for each hit
-
-#lets do the particle system bit
-
-#yeah so I think what this really needs is just some clearer divisions of labor
-#we do seem to have some like "entities" that are repeated
-#namely
-#markers (the ui side)
-#and hit zones (the ui side)
-#these ought to kind of be seperated out from the rest of the ui, though maybe lanes could be this way too
-#They really OUGHT to be
 
 
 @export var rules: GameModeRules
@@ -54,8 +28,11 @@ var stateTextMap = {
 	"VerifyState":"PLAY"
 }
 
+
+
 #this maybe ought to be seperated to like an autoload utilities func or something
 func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10, alpha = 0.5):
+	
 	var poly = OutlinedPolygon2D.new()
 	poly.outlineWidth = outlineWidth
 	poly.color = color
@@ -68,7 +45,7 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10
 	var closeMult =  (startDist + (laneMargins/2.0) + (index * laneSize))
 	var farMult = (startDist + (laneMargins/-2.0)+ (laneSize) + (index * laneSize))
 
-	var arcRadius = 22
+	var arcRadius = 1
 	#so rotate by 5 multiples of that dif from 0 the actual max
 	var arcSizeDelta = windowSizeRadians/(2.0 * arcRadius)
 	
@@ -76,39 +53,47 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10
 	
 	var arcPoints = []
 
-	#so as we do this, we want to keep track of what indexes are on what side
+
+#	for i in range(arcRadius):
+#		arcPoints.append((origin.rotated(rotationMax - (i * arcSizeDelta))   ) * closeMult)
+
+
+	#so maybe to start here we just figure out the tween for this value
+
+	#top right
+	arcPoints.append(origin.rotated((rotationMax)) * closeMult)
+	poly.topIndexes.append(0)
+	poly.topIndexes.append(5)
 	
-	var pointIndex = 0
-	#ok yea so this doesnt work the way i think it does!
-	#gotta pick this up a little later im too small brain for this rn
+	poly.bottomIndexes.append(2)
+	poly.bottomIndexes.append(3)
 	
-	#so this is actually a top index yeah?
-	for i in range(arcRadius):
-		arcPoints.append((origin.rotated(rotationMax - (i * arcSizeDelta))   ) * closeMult)
-		poly.topIndexes.append(pointIndex)
-		pointIndex += 1
 	
-	#skip
+	
+	#..top close values
+
+	#middle right
 	arcPoints.append(origin * closeMult)
 	
-	for i in range(arcRadius + 1):
-		arcPoints.append((origin.rotated( -(i * arcSizeDelta))   ) * closeMult)
-		poly.bottomIndexes.append(pointIndex)
-		pointIndex+= 1
+	#...bottom close values
 	
-	for i in range(arcRadius + 1, 0, -1):
-		arcPoints.append((origin.rotated( -(i * arcSizeDelta))   ) * farMult)
-		poly.bottomIndexes.append(pointIndex)
-		pointIndex += 1
+	#bottom right
+	arcPoints.append(origin.rotated((-rotationMax)) * closeMult)
+	
+	
+	#bottom left
+	arcPoints.append(origin.rotated((-rotationMax)) * farMult)
+	
+	#...far bottom details
+	
+	#middle left
 	arcPoints.append(origin * farMult)
-	for i in range(0,arcRadius + 1):
-		arcPoints.append((origin.rotated( (i * arcSizeDelta))   ) * farMult)
-		poly.topIndexes.append(pointIndex)
-		pointIndex+= 1
+	
+	#...far top details
+	
+	arcPoints.append(origin.rotated((rotationMax)) * farMult)
 
-	var points: PackedVector2Array = arcPoints	
-
-	poly.set_polygon(points)
+	poly.set_polygon(arcPoints)
 	
 	return poly
 
@@ -139,7 +124,7 @@ func DrawInputWindows():
 		var closeMult =  (startDist + (laneSize/2.0) + (index * laneSize))
 		pSystem.position = origin * closeMult
 		
-		var inputWindowView = InputWindowView.new(index,shape,pSystem)
+		var inputWindowView =  InputWindowView.new(index,shape,pSystem)
 		inputWindowViews.append(inputWindowView)
 		
 		%InputWindows.add_child(inputWindowView.shape)

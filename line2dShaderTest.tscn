@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnjkmnja51a71"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/line2dShaderTest.gdshader" id="1_hwd7b"]
+[ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="2_4lrqs"]
+[ext_resource type="Texture2D" uid="uid://bt80bw1fi544g" path="res://textures/2p.png" id="2_5a881"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pbwae"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bfroq"]
+noise = SubResource("FastNoiseLite_pbwae")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xb8uy"]
+shader = ExtResource("1_hwd7b")
+shader_parameter/dissolve_value = 0.291
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_bfroq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m20ms"]
+shader = ExtResource("1_hwd7b")
+shader_parameter/dissolve_value = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vm4wa"]
+shader = ExtResource("1_hwd7b")
+shader_parameter/dissolve_value = null
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_xb8uy")
+position = Vector2(378, 230)
+points = PackedVector2Array(0, 0, 100, 100, 497, 127, 647, 143, 897, 83, 1123, 223, 987, 513, 775, 601, 423, 539, 217, 363, 127, 347, 29, 445, 269, 633, 447, 695, 769, 767, 1033, 729, 1313, 589, 1321, 379, 1305, 79, 1161, -137, 787, -271, 529, -211, 295, -129, 199, -89, 103, -125)
+width = 30.0
+default_color = Color(0, 0, 0, 1)
+texture_mode = 1
+joint_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_m20ms")
+position = Vector2(-487, 406)
+texture = ExtResource("2_4lrqs")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_vm4wa")
+position = Vector2(921, 352)
+antialiased = true
+texture = ExtResource("2_5a881")
+polygon = PackedVector2Array(0, 0, 100, 0, 300, 200)
+internal_vertex_count = 3

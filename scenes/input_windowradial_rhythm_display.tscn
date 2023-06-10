@@ -1,14 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://b25q4rbpyn8sc"]
+[gd_scene load_steps=15 format=3 uid="uid://b25q4rbpyn8sc"]
 
 [ext_resource type="Script" path="res://scripts/ui/InputWindowRadialRhythmDisplay.gd" id="1_ifxlp"]
 [ext_resource type="PackedScene" path="res://scenes/radial_metronome_dot.tscn" id="2_r0ylq"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_v678g"]
-[ext_resource type="Texture2D" uid="uid://dhf0km4u7ccxo" path="res://textures/14.png" id="3_djovw"]
 [ext_resource type="PackedScene" uid="uid://cvgaa17lydwxu" path="res://hit_particles.tscn" id="4_7gr3p"]
 [ext_resource type="Texture2D" uid="uid://cs8gdb5suhtdi" path="res://icon.svg" id="4_qhvc4"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="4_qs8om"]
+[ext_resource type="Resource" uid="uid://c26j51fe8gdv1" path="res://variables/CurrentPhaseProgress.tres" id="5_g6l6d"]
+[ext_resource type="Theme" uid="uid://ca0e8s1qmw04e" path="res://UI/mf_menu_theme.tres" id="6_pcnxj"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="6_swbru"]
 [ext_resource type="Script" path="res://scripts/ui/FeedbackTextSpawner.gd" id="7_8e7hb"]
+[ext_resource type="Texture2D" uid="uid://4fj2j37n7lwi" path="res://scenes/White_Circle.svg.png" id="7_jofdi"]
 [ext_resource type="Texture2D" uid="uid://dtcj2tsrjk5hh" path="res://textures/oops.png" id="8_6e6ot"]
 [ext_resource type="Texture2D" uid="uid://kre5odkpf0jn" path="res://textures/nice!.png" id="8_gcy1e"]
 [ext_resource type="Texture2D" uid="uid://0eiif3piswe5" path="res://textures/miss.png" id="9_5qcb2"]
@@ -20,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = -500.0
-offset_right = 500.0
-offset_bottom = 500.0
+offset_left = -279.5
+offset_top = -279.5
+offset_right = 279.5
+offset_bottom = 279.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ifxlp")
@@ -31,6 +33,7 @@ rules = ExtResource("2_v678g")
 markerColors = Array[Color]([Color(0.992157, 0, 0, 1), Color(0, 0.886275, 0, 1), Color(0, 0, 0.937255, 1), Color(0.984314, 1, 0, 1)])
 radialMetronomeDot = ExtResource("2_r0ylq")
 hitParticleSystem = ExtResource("4_7gr3p")
+currentPhaseProgressVar = ExtResource("5_g6l6d")
 origin = Vector2(-1, 0)
 numLanes = 4
 centerOffset = 0.255
@@ -43,43 +46,88 @@ laneLineResolution = 90
 laneColors = Array[Color]([Color(0.313726, 0.313726, 0.313726, 1)])
 backgroundColor = Color(0.603922, 0.603922, 0.603922, 1)
 
-[node name="Control" type="Control" parent="."]
-visible = false
+[node name="Backplate" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background2" type="ColorRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -550.0
-offset_top = -500.0
-offset_right = 550.0
-offset_bottom = 500.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="TextureRect" parent="."]
+[node name="Plate" type="ColorRect" parent="Backplate"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_djovw")
+
+[node name="PhaseView" type="MarginContainer" parent="Backplate/Plate"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.843
+anchor_top = 0.794
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.162964
+offset_top = 0.273987
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Backplate/Plate/PhaseView"]
+layout_mode = 2
+alignment = 1
+
+[node name="Icons" type="HBoxContainer" parent="Backplate/Plate/PhaseView/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecordIcon" type="TextureRect" parent="Backplate/Plate/PhaseView/VBoxContainer/Icons"]
+modulate = Color(0.988235, 0.839216, 0.796078, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qhvc4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayIcon" type="TextureRect" parent="Backplate/Plate/PhaseView/VBoxContainer/Icons"]
+modulate = Color(0.988235, 0.839216, 0.796078, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qhvc4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PhaseLabel" type="RichTextLabel" parent="Backplate/Plate/PhaseView/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("6_pcnxj")
+theme_override_colors/default_color = Color(0, 0.745098, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]PLAY"
+fit_content = true
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.52549, 0.52549, 0.52549, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_jofdi")
 expand_mode = 1
 
 [node name="CenterPivot" type="Control" parent="."]
@@ -154,6 +202,32 @@ pivot_offset = Vector2(2.08165e-12, 5)
 texture = ExtResource("4_qhvc4")
 expand_mode = 1
 
+[node name="RecordOverlay" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("7_jofdi")
+tint_progress = Color(0.345098, 0.505882, 0.196078, 0.537255)
+
+[node name="VerifyOverlay" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("7_jofdi")
+tint_progress = Color(0.345098, 0.505882, 0.196078, 0.537255)
+
 [node name="HUD" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -171,6 +245,7 @@ texture = ExtResource("4_qs8om")
 expand_mode = 1
 
 [node name="PhaseText" type="RichTextLabel" parent="HUD"]
+visible = false
 layout_direction = 3
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_swbru")

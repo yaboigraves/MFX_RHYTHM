@@ -9,15 +9,7 @@ func enter(_msg := {}) -> void:
 	player.StartRecording(currentGameState)
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
 
-func exit():
-	metronome.Stop()
-	player.GoIdle()
-	%InputWindowRadialRhythmDisplay.ClearAllMarkers()
 
-
-func update(delta):
-	if Input.is_action_just_pressed("Pause"):
-		state_machine.transition_to("Pause")
 
 func HandleRecordStateEnd():
 	player.StartVerifying(currentGameState)
@@ -31,4 +23,12 @@ func HandleVerifyStateEnd():
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
 
 
+func exit():
+	metronome.Stop()
+	player.GoIdle()
+	%InputWindowRadialRhythmDisplay.ClearAllMarkers()
 
+
+func update(delta):
+	if Input.is_action_just_pressed("Pause"):
+		state_machine.transition_to("Pause")

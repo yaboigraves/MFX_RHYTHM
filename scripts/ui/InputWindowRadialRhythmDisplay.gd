@@ -4,12 +4,24 @@ extends RadialRhythmDisplay
 #this has been kind of refactored now
 #im not particularly happy with it by any means but its something
 
+#so the last big ui feature is gonna be this kind of procedural overlay that gets drawn
+#i think the easiest way is just a radial fill image?
+#we can overlay, change its alpha, add a wee texture
+#the middle bit i like the idea of showing the previous phase or something
+#like actually changing the color properly
+#so maybe there's two at once, the center and then the layered one
 
+#i think generalyl we want a callback for like, state progress?
+#this is something we ought to be able to just subscribe to
+#yo this is actually kind of a genius use case for a variables system based on resources?
+#lets see if i can actually make a variable thing
 
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
 @export var radialMetronomeDot : PackedScene
 @export var hitParticleSystem : PackedScene
+@export var currentPhaseProgressVar : FloatVariable
+
 @onready var metronome:Metronome = get_node("/root/GameManager/Metronome") as Metronome
 
 
@@ -27,6 +39,11 @@ var stateTextMap = {
 	"RecordState":"REC",
 	"VerifyState":"PLAY"
 }
+
+func HandleCurrentPhaseProgressChanged():
+	print(currentPhaseProgressVar.Value)
+
+
 
 
 
@@ -101,8 +118,9 @@ func _ready():
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()	
 	DrawInputWindows()
+	#make metronome a resource!!
 	metronome.Tick.connect(_on_metronome_tick)
-
+	currentPhaseProgressVar.OnValueChanged.connect(HandleCurrentPhaseProgressChanged)
 
 #debug
 func DrawBadZone():
@@ -166,7 +184,7 @@ func _on_verify_state_missed_hit(hit) -> void:
 	markerHitMap.erase(hit)
 
 
-func _on_verify_state_hit_processed(hit, hitResult) -> void:
+func OnHitProcessed(hit, hitResult) -> void:
 	match hitResult:
 		HitResult.GOOD:
 			onGoodHit(hit)

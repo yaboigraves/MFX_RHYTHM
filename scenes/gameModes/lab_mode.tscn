@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://blfd33gvycb3g"]
+[gd_scene load_steps=22 format=3 uid="uid://blfd33gvycb3g"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="1_4tw81"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="4_uu7d5"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="13_oqvsv"]
 [ext_resource type="Script" path="res://scripts/game_modes/GameModeState.gd" id="13_sqhuo"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="14_f8ot0"]
-[ext_resource type="PackedScene" uid="uid://go3uoaxvmabe" path="res://scenes/marker.tscn" id="14_t8hvj"]
 [ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="15_i4eir"]
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="16_sxfox"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="18_a03rc"]
@@ -40,22 +39,10 @@ grow_vertical = 2
 [node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer" instance=ExtResource("13_15825")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.236
-anchor_top = 0.031
-anchor_right = 0.764
-anchor_bottom = 0.969
-offset_left = 0.379969
-offset_top = 0.0199985
-offset_right = -0.380112
-offset_bottom = -0.0200448
-markerColors = Array[Color]([Color(0.992157, 0, 0, 0.592157), Color(0, 0.886275, 0, 0.568627), Color(0, 0, 0.937255, 0.67451), Color(0.984314, 1, 0, 0.572549)])
-marker = ExtResource("14_t8hvj")
-centerOffset = 0.269
-outerOffset = 1.0
-beatDivisonColors = Color(1, 1, 1, 1)
-laneColors = Array[Color]([Color(0.317647, 0.305882, 0.294118, 1)])
-backgroundColor = Color(0, 0, 0, 1)
+offset_left = -452.5
+offset_top = -452.5
+offset_right = 452.5
+offset_bottom = 452.5
 
 [node name="GameModeHUD" type="CanvasLayer" parent="."]
 script = ExtResource("18_a03rc")
@@ -322,6 +309,6 @@ script = ExtResource("16_sxfox")
 [connection signal="timeout" from="GameModeHUD/Control/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]
 [connection signal="OnEnter" from="LabModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_enter"]
 [connection signal="OnExit" from="LabModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_exit"]
-[connection signal="HitProcessed" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_verify_state_hit_processed"]
+[connection signal="HitProcessed" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="OnHitProcessed"]
 [connection signal="HitProcessed" from="PlayerManager/Player1" to="GameModeHUD" method="_on_player_1_hit_processed"]
 [connection signal="SpawnMarker" from="PlayerManager/Player1" to="RadialUI/RootContainer/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]

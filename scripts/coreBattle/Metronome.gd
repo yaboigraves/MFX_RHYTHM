@@ -42,6 +42,8 @@ signal PhaseSwitch
 @export var phaseSwitchRate = 8.0
 @export var rules : GameModeRules
 
+@export var currentPhaseProgressVar: FloatVariable
+
 
 var time_begin
 var time_delay
@@ -121,7 +123,7 @@ func calculateTime():
 #		print(timeInBeats)
 		ProcessCallbacks()
 	
-
+	currentPhaseProgressVar.Value = time
 	ProcessUpdateCallbacks()
 	
 #update callbacks are added in as objects?

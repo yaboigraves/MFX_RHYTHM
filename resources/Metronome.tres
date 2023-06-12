@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Metronome" load_steps=5 format=3 uid="uid://b8fsc5xcfn1hq"]
+
+[ext_resource type="Resource" uid="uid://c26j51fe8gdv1" path="res://variables/CurrentPhaseProgress.tres" id="1_bfgsx"]
+[ext_resource type="Script" path="res://scripts/coreBattle/Metronome.gd" id="1_l12jr"]
+[ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_nul11"]
+[ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="4_1ddhh"]
+
+[resource]
+script = ExtResource("1_l12jr")
+stream = ExtResource("4_1ddhh")
+syncUpdateRate = 1.0
+phaseSwitchRate = 8.0
+rules = ExtResource("2_nul11")
+currentPhaseProgressVar = ExtResource("1_bfgsx")

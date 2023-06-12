@@ -6,7 +6,6 @@ signal OnExit()
 
 
 func _ready() -> void:
-	super._ready()
 	initialize()
 	
 	

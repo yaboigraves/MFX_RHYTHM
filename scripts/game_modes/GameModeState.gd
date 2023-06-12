@@ -2,12 +2,12 @@ class_name GameModeState
 extends State
 
 
+
 @export var rules:GameModeRules
-var currentGameState : GameState
+@export var currentGameState : GameState
 #test
 
 func enter(_msg := {}) -> void:
-	currentGameState = GameState.new(rules.loopBeatSize)
 	super.enter()
 
 func update(delta):
@@ -15,6 +15,5 @@ func update(delta):
 		state_machine.transition_to("FreeMode")
 
 func _on_tracks_track_selected(track) -> void:
-	print(track.resource_path)
 	metronome.stream = track
 

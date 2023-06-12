@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://blfd33gvycb3g"]
+[gd_scene load_steps=24 format=3 uid="uid://blfd33gvycb3g"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="1_4tw81"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="4_uu7d5"]
@@ -11,7 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="14_f8ot0"]
 [ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="15_i4eir"]
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="16_sxfox"]
+[ext_resource type="Resource" uid="uid://c3ngdijkl8dx6" path="res://resources/Player1GameState.tres" id="18_2maac"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="18_a03rc"]
+[ext_resource type="Resource" uid="uid://b8fsc5xcfn1hq" path="res://resources/Metronome.tres" id="19_jf2dq"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="19_k4q16"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="20_36ob5"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="20_ks3v0"]
@@ -43,6 +45,7 @@ offset_left = -452.5
 offset_top = -452.5
 offset_right = 452.5
 offset_bottom = 452.5
+playerGameState = ExtResource("18_2maac")
 
 [node name="GameModeHUD" type="CanvasLayer" parent="."]
 script = ExtResource("18_a03rc")
@@ -293,16 +296,20 @@ autostart = false
 [node name="FreeMode" type="Node" parent="LabModeStateMachine"]
 script = ExtResource("12_r5mt5")
 rules = ExtResource("20_ks3v0")
+currentGameState = ExtResource("18_2maac")
+metronome = ExtResource("19_jf2dq")
 
 [node name="Pause" type="Node" parent="LabModeStateMachine"]
 script = ExtResource("13_sqhuo")
 rules = ExtResource("20_ks3v0")
+metronome = ExtResource("19_jf2dq")
 
 [node name="PlayerManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("16_sxfox")
 
 [node name="Player1" parent="PlayerManager" instance=ExtResource("15_i4eir")]
+metronome = ExtResource("19_jf2dq")
 
 [connection signal="TrackSelected" from="GameModeHUD/Control/PauseUI/Panel/TrackSelect/Tracks" to="LabModeStateMachine/Pause" method="_on_tracks_track_selected"]
 [connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]

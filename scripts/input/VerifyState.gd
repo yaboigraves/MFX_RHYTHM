@@ -20,7 +20,7 @@ func enter(_msg := {}) -> void:
 	super.enter()
 	targetHits = _msg["gameState"].recordedHits
 	combo = 0
-	metronome._on_player_beat_phase_callback(8, EvaluateNextState, true)
+	#metronome._on_player_beat_phase_callback(8, EvaluateNextState, true)
 	
 func EvaluateNextState():
 	player.emit_signal("TurnDone")

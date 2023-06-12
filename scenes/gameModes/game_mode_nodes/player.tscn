@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp5cbgcpms5fw"]
+[gd_scene load_steps=18 format=3 uid="uid://bp5cbgcpms5fw"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/Player.gd" id="1_6p015"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_crf4l"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="3_ssxma"]
 [ext_resource type="Script" path="res://scripts/input/IdleState.gd" id="4_ktfkr"]
 [ext_resource type="Script" path="res://scripts/input/RecordState.gd" id="5_jjwbh"]
+[ext_resource type="Resource" uid="uid://b8fsc5xcfn1hq" path="res://resources/Metronome.tres" id="5_rnwdc"]
 [ext_resource type="Script" path="res://scripts/input/VerifyState.gd" id="6_7mxss"]
 [ext_resource type="Script" path="res://scripts/input/PlayerInputHandler.gd" id="7_s8ace"]
 [ext_resource type="Script" path="res://scripts/testing/InputSpoofer.gd" id="8_1xwqu"]
@@ -29,17 +30,20 @@ initial_state = NodePath("IdleState")
 [node name="IdleState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("4_ktfkr")
 rules = ExtResource("2_crf4l")
+metronome = ExtResource("5_rnwdc")
 
 [node name="RecordState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("5_jjwbh")
 rules = ExtResource("2_crf4l")
 player = NodePath("../..")
+metronome = ExtResource("5_rnwdc")
 
 [node name="VerifyState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_7mxss")
 rules = ExtResource("2_crf4l")
 duration = -1.0
 player = NodePath("../..")
+metronome = ExtResource("5_rnwdc")
 
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("7_s8ace")

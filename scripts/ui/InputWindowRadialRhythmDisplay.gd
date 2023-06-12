@@ -1,20 +1,17 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
-#this has been kind of refactored now
-#im not particularly happy with it by any means but its something
+#this is all kind of weird and all
+#honestly I think all of this is really roundabout now that I code it out
+#we should just move the code for this into the player state machine ngl
+#yeah im kind of unhappy with this
+#it was a decent afternoon of experimentation though
+#so tldr, the metronome refactor is good
+#we should just really drive the ui steering from the player state machine
+#the player can get an injection of a ref to the metronome
+#we're good to go
+#this UI shouldn't do any update shit like that
 
-#so the last big ui feature is gonna be this kind of procedural overlay that gets drawn
-#i think the easiest way is just a radial fill image?
-#we can overlay, change its alpha, add a wee texture
-#the middle bit i like the idea of showing the previous phase or something
-#like actually changing the color properly
-#so maybe there's two at once, the center and then the layered one
-
-#i think generalyl we want a callback for like, state progress?
-#this is something we ought to be able to just subscribe to
-#yo this is actually kind of a genius use case for a variables system based on resources?
-#lets see if i can actually make a variable thing
 
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
@@ -22,8 +19,8 @@ extends RadialRhythmDisplay
 @export var hitParticleSystem : PackedScene
 @export var currentPhaseProgressVar : FloatVariable
 
-@onready var metronome:Metronome = get_node("/root/GameManager/Metronome") as Metronome
-
+@export var metronome:Metronome
+@export var playerGameState: GameState
 
 var metronomeDots = []
 
@@ -162,7 +159,8 @@ func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 	for hit in markerHitMap.keys():
 		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
-
+	
+	$RecordOverlay.value = metronome.currentGameState.progress * 100
 		
 func ClearAllMarkers():
 	super.ClearAllMarkers()
@@ -215,5 +213,7 @@ func onDestroyMiss(hit):
 	markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
 	markerHitMap.erase(hit)
+
+
 
 

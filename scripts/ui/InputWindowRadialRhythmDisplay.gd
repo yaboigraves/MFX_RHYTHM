@@ -12,6 +12,11 @@ extends RadialRhythmDisplay
 #we're good to go
 #this UI shouldn't do any update shit like that
 
+#ok so a BUNCH of this code is obfuscated as hell now
+#this ought to get bound to a player and the player steers it
+
+#
+
 
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]

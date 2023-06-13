@@ -71,6 +71,9 @@ extends Node
 
 #this can handle the menu shit later too
 
+#audio is a pretty big concern
+#we def want a core audio engine
+
 @export var display : RhythmDisplay
 
 signal RecordedHit

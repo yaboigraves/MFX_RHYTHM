@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://blfd33gvycb3g"]
+[gd_scene load_steps=25 format=3 uid="uid://blfd33gvycb3g"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="1_4tw81"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="4_uu7d5"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="21_cmj30"]
 [ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://textures/head_2.png" id="22_hnhxy"]
 [ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://textures/dojo1.png" id="23_7im5m"]
+[ext_resource type="Script" path="res://scripts/audio/BattleAudioManager.gd" id="24_1fkbb"]
 [ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://textures/p1I.png" id="24_21sb2"]
 [ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://textures/whiteBox.png" id="25_4ocgc"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="26_f5wts"]
@@ -310,6 +311,9 @@ script = ExtResource("16_sxfox")
 
 [node name="Player1" parent="PlayerManager" instance=ExtResource("15_i4eir")]
 metronome = ExtResource("19_jf2dq")
+
+[node name="BattleAudioManager" type="Node" parent="."]
+script = ExtResource("24_1fkbb")
 
 [connection signal="TrackSelected" from="GameModeHUD/Control/PauseUI/Panel/TrackSelect/Tracks" to="LabModeStateMachine/Pause" method="_on_tracks_track_selected"]
 [connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]

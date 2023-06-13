@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://ddkfpa2om2spr"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/OmariLoop"
+guid = "{8488600d-d560-4ef1-9cc4-333d8183dab0}"
+name = "OmariLoop"

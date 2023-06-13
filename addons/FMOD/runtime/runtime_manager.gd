@@ -101,6 +101,7 @@ func play_one_shot_attached_id(guid: String, node) -> void:
 func play_one_shot(event_asset: EventAsset, position = null) -> void:
 	var guid = event_asset.guid
 	play_one_shot_id(guid, position)
+	
 
 
 func play_one_shot_path(event_path: String, position = null) -> void:

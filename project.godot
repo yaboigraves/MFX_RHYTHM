@@ -20,10 +20,6 @@ config/icon="res://icon.svg"
 buses/default_bus_layout="res://audio/buses/default_bus_layout.tres"
 driver/output_latency=5
 
-[autoload]
-
-RuntimeManager="*res://addons/FMOD/runtime/runtime_manager.gd"
-
 [display]
 
 window/size/viewport_width=1920
@@ -32,10 +28,6 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="METALFINGAZ"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/FMOD/plugin.cfg")
 
 [fmod]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/coreBattle/Metronome.gd" id="1_1owva"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="2_merm0"]
-[ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="3_g5sje"]
+[ext_resource type="Resource" path="res://resources/LabGameModeRules.tres" id="3_g5sje"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="4_s8mk1"]
 
 [node name="Metronome" type="Node"]

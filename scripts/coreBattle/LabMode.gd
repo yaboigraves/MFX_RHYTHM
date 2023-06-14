@@ -1,6 +1,7 @@
 class_name LabMode
 extends GameMode
 
+
 var gameStateHistory : Array[GameState]
 
 var currentGameState : GameState

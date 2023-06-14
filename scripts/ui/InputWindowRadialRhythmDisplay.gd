@@ -1,16 +1,8 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
-#this is all kind of weird and all
-#honestly I think all of this is really roundabout now that I code it out
-#we should just move the code for this into the player state machine ngl
-#yeah im kind of unhappy with this
-#it was a decent afternoon of experimentation though
-#so tldr, the metronome refactor is good
-#we should just really drive the ui steering from the player state machine
-#the player can get an injection of a ref to the metronome
-#we're good to go
-#this UI shouldn't do any update shit like that
+#this has been kind of refactored now
+#im not particularly happy with it by any means but its something
 
 #ok so a BUNCH of this code is obfuscated as hell now
 #this ought to get bound to a player and the player steers it
@@ -24,8 +16,8 @@ extends RadialRhythmDisplay
 @export var hitParticleSystem : PackedScene
 @export var currentPhaseProgressVar : FloatVariable
 
-@export var metronome:Metronome
-@export var playerGameState: GameState
+@onready var metronome:Metronome = get_node("/root/GameManager/Metronome") as Metronome
+
 
 var metronomeDots = []
 
@@ -164,8 +156,7 @@ func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 	for hit in markerHitMap.keys():
 		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
-	
-	$RecordOverlay.value = metronome.currentGameState.progress * 100
+
 		
 func ClearAllMarkers():
 	super.ClearAllMarkers()
@@ -218,7 +209,5 @@ func onDestroyMiss(hit):
 	markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
 	markerHitMap.erase(hit)
-
-
 
 

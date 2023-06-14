@@ -10,6 +10,7 @@ signal HitProcessed(hit: Hit, hitResult : HitResult)
 var stateMachine : StateMachine
 
 func _ready():
+	super._ready()
 	stateMachine = %PlayerStateMachine as StateMachine
 	stateMachine.StartMachine()
 

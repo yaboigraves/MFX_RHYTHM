@@ -1,5 +1,35 @@
 class_name Metronome
-extends Resource
+extends Node
+
+#ok we're going to make room for a discrete timed update
+#this will be used to queue shit irregardless of frame stuff?
+#basically we can schedule functions to run now
+#this will actually be etremly useful for the queue
+#the queue can handle actually dispatching these buffers
+#the metronome just says when to process
+
+#this should clean up alot of awkwardness with the queue
+
+#TODO: rewrite the callbacks system to suport an update based approach
+#sync update is great but doesnt work for the fact that technically states change not on beat
+#we just want to fake that they open and close like that
+#so basically, input states change literally the second you can possibly make a valid input
+#buffer stuff is cringe, unneccessary
+#should be alot cleaner after this too, we ought to do a big cleanup after this
+#once phases are good and we get some thorough testing in, I feel good about moving to some UI polish
+#after the basic UI polish is done, we can go to adding vs mode
+#at that point I feel comfortable releasing this as a little private demo and then hard pivoting to the other project
+
+
+#ahhh
+#ok
+#so technically
+#even though we start the thing early
+#the rhythm seems to desync now
+#duh
+#well
+#hm
+
 
 signal Tick(timeSeconds, timeBeats)
 signal SyncUpdate(timeInBeats,delta)
@@ -12,8 +42,8 @@ signal PhaseSwitch
 @export var phaseSwitchRate = 8.0
 @export var rules : GameModeRules
 
-#cool so now we can calculate this as part of the callbacks?
 @export var currentPhaseProgressVar: FloatVariable
+
 
 var time_begin
 var time_delay
@@ -24,25 +54,28 @@ var spb
 var nextSyncUpdate = 0.0
 var nextBeatUpdate = 0.0
 var nextPhaseUpdate = 7.0
-var time = 0
+var time
 var timeInBeats = 0.0001
 
 #integer experiments
+
+#how does this work
+#it can be used to do calculations for future time
+#root time we grab is still a float
+#but we just never wanna do math with that
+#so this is a non floating point value that just truncates a certain level of detail
 
 #TODO: this only supports one callback per beat, must be an array
 var callbacks = {}
 var updateCallbacks = {}
 
 
-#func _ready() -> void:
-#	set_process(false)
+func _ready() -> void:
+	set_process(false)
 
-var enabled = false
 
 func Start():
-#	#something else should manage this, probably like an audio player object
-#	#cause we want other audio too
-#	$AudipPlayer.stream = stream
+	$AudipPlayer.stream = stream
 	time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
 	nextSyncUpdate = 0.0
@@ -52,20 +85,17 @@ func Start():
 	bps = bpm/60.0
 	spb = 60.0/bpm
 	timeInBeats = 0
-	enabled = true
-	
-#	$AudipPlayer.play()
-#	set_process(true)
+	$AudipPlayer.play()
+	set_process(true)
 
 func Stop():
-#	$AudipPlayer.stop()
-#	set_process(false)
+	$AudipPlayer.stop()
+	set_process(false)
 	callbacks.clear()
 	updateCallbacks.clear()
-	enabled = false
 	
-func update(delta):
-	if not enabled: return
+	
+func _process(delta):
 	calculateTime()
 
 func calculateTime():
@@ -76,6 +106,7 @@ func calculateTime():
 	# May be below 0 (did not begin yet).
 	time = max(0, time)
 	timeInBeats = time * bps
+	
 	
 	#so what we really want is this time converted into beats
 	emit_signal("Tick",time,timeInBeats)
@@ -92,14 +123,8 @@ func calculateTime():
 #		print(timeInBeats)
 		ProcessCallbacks()
 	
-	#currentPhaseProgressVar.Value = time
+	currentPhaseProgressVar.Value = time
 	ProcessUpdateCallbacks()
-	ProcessGameState()
-	
-func ProcessGameState():
-	if currentGameState == null : return
-	currentGameState._process(timeInBeats)
-	
 	
 #update callbacks are added in as objects?
 
@@ -112,25 +137,16 @@ func ProcessUpdateCallbacks():
 			updateCallbacks.erase(callbackTime)
 			print("swithing phase at ", callbackTime)
 
-
 func ProcessCallbacks():
 	if callbacks.has(snapped(timeInBeats,syncUpdateRate)):
 		callbacks[snapped(timeInBeats,syncUpdateRate)].call()
 		callbacks.erase(snapped(timeInBeats,syncUpdateRate))
 		
 
-#so this is actually specifically for phases
-#so we can actually create state for this properly in update I think
-
-
-#the metronome can drive one gamestate at a time
-var currentGameState : GameState
-
-func _on_player_beat_phase_callback(currentGameState:GameState, callback, anchorToNearestBeat = false) -> void:
-	var callbackTime = snapped(timeInBeats,syncUpdateRate) + currentGameState.lengthInBeats - (rules.windowSize * 2.0)
+func _on_player_beat_phase_callback(durationInBeats, callback, anchorToNearestBeat = false) -> void:
+	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - (rules.windowSize * 2.0)
 	
-	self.currentGameState = currentGameState
-	self.currentGameState.StartCurrentState(timeInBeats)
+	print(callbackTime)
 	
 	updateCallbacks[callbackTime] = callback
-	
+

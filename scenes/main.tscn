@@ -1,14 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkl56ty0kexdc"]
+[gd_scene load_steps=4 format=3 uid="uid://bkl56ty0kexdc"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/GameManager.gd" id="1_ypkpa"]
 [ext_resource type="Resource" uid="uid://b8fsc5xcfn1hq" path="res://resources/Metronome.tres" id="3_efwvo"]
-[ext_resource type="EventAsset" uid="uid://c23b3odioro3r" path="res://addons/FMOD/editor/resources/events/{645640d4-d1cc-4fbd-bcd6-5a288536ceec}.tres" id="4_bfeh7"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeManager.gd" id="34_nc3vs"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("display")]
 script = ExtResource("1_ypkpa")
 display = NodePath("")
-event = ExtResource("4_bfeh7")
 
 [node name="GameModeManager" type="Node" parent="."]
 script = ExtResource("34_nc3vs")

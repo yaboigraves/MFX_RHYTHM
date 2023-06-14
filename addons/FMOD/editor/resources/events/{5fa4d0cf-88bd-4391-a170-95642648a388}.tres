@@ -1,9 +1,0 @@
-[gd_resource type="EventAsset" format=3 uid="uid://d3kkij0lowo3"]
-
-[resource]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/mfrh"
-guid = "{5fa4d0cf-88bd-4391-a170-95642648a388}"
-name = "mfrh"

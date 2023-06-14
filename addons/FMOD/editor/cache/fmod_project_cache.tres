@@ -1,22 +1,16 @@
-[gd_resource type="ProjectCache" load_steps=8 format=3 uid="uid://dcykf3hqf3lrg"]
+[gd_resource type="ProjectCache" load_steps=6 format=3 uid="uid://dcykf3hqf3lrg"]
 
 [ext_resource type="BankAsset" uid="uid://cftwwujjigrw2" path="res://addons/FMOD/editor/resources/banks/{3144005e-f05d-4262-a5e5-a0a92803b9fe}.tres" id="1_4h1lj"]
 [ext_resource type="BankAsset" uid="uid://0tmxbn3ngjth" path="res://addons/FMOD/editor/resources/banks/{a959208a-8126-0e20-23ac-2a57d9f0bf66}.tres" id="2_u1ekc"]
 [ext_resource type="BankAsset" uid="uid://cekiw3uey86ph" path="res://addons/FMOD/editor/resources/banks/{731e9f11-a43d-4160-959b-b34d6a8af8fe}.tres" id="3_wp3rq"]
 [ext_resource type="BusAsset" uid="uid://d3yoj6n448eqc" path="res://addons/FMOD/editor/resources/busses/{d5ae2d20-1db6-4e12-9e49-de0876d9192f}.tres" id="4_ipm1b"]
 [ext_resource type="BusAsset" uid="uid://tn6gwi3hyqeu" path="res://addons/FMOD/editor/resources/busses/{4ad700cb-104a-4981-afb4-66dff440b0e3}.tres" id="5_7tow8"]
-[ext_resource type="EventAsset" uid="uid://d3kkij0lowo3" path="res://addons/FMOD/editor/resources/events/{5fa4d0cf-88bd-4391-a170-95642648a388}.tres" id="6_m8fr6"]
-[ext_resource type="EventAsset" uid="uid://c23b3odioro3r" path="res://addons/FMOD/editor/resources/events/{645640d4-d1cc-4fbd-bcd6-5a288536ceec}.tres" id="6_ql0t6"]
 
 [resource]
 banks = {
 "{3144005e-f05d-4262-a5e5-a0a92803b9fe}": ExtResource("1_4h1lj"),
 "{731e9f11-a43d-4160-959b-b34d6a8af8fe}": ExtResource("3_wp3rq"),
 "{a959208a-8126-0e20-23ac-2a57d9f0bf66}": ExtResource("2_u1ekc")
-}
-events = {
-"{5fa4d0cf-88bd-4391-a170-95642648a388}": ExtResource("6_m8fr6"),
-"{645640d4-d1cc-4fbd-bcd6-5a288536ceec}": ExtResource("6_ql0t6")
 }
 busses = {
 "{4ad700cb-104a-4981-afb4-66dff440b0e3}": ExtResource("5_7tow8"),
@@ -40,19 +34,6 @@ bank_tree = [{
 "node_name": "test bank",
 "path": "bank:/test bank",
 "resource": ExtResource("3_wp3rq")
-}]
-event_tree = [{
-"children": [],
-"item_type": 1,
-"node_name": "mfrh",
-"path": "event:/mfrh",
-"resource": ExtResource("6_m8fr6")
-}, {
-"children": [],
-"item_type": 1,
-"node_name": "Omari-cyclin-loop-83-BPM",
-"path": "event:/Omari-cyclin-loop-83-BPM",
-"resource": ExtResource("6_ql0t6")
 }]
 bus_tree = [{
 "children": [{

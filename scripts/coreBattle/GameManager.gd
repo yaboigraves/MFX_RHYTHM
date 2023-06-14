@@ -79,13 +79,10 @@ extends Node
 signal RecordedHit
 
 signal SpawnHit(index,timeInBeats)
- 
-@export var event : EventAsset
+
 
 func _ready() -> void:
 	$GameModeManager.StartGame()
-	RuntimeManager.play_one_shot(event,self)
-	
 
 func _process(delta: float) -> void:
 	

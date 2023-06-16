@@ -8,16 +8,20 @@ var gameModeDictionary:Dictionary = {
 }
 
 @export var currentGameModeType : GameModeType
-
+@export var metronome : Metronome
 var currentGameMode : GameMode
 
 
 func StartGame():
 	LoadGameMode()
 	currentGameMode.Start()
+	set_process(true)
 
 
 func LoadGameMode():
 	currentGameMode = load(gameModeDictionary[currentGameModeType]).instantiate()
 	add_child(currentGameMode)
 
+
+func _process(delta):
+	metronome.calculateTime()

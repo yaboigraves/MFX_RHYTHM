@@ -7,16 +7,13 @@ extends RadialRhythmDisplay
 #ok so a BUNCH of this code is obfuscated as hell now
 #this ought to get bound to a player and the player steers it
 
-#
-
-
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
 @export var radialMetronomeDot : PackedScene
 @export var hitParticleSystem : PackedScene
 @export var currentPhaseProgressVar : FloatVariable
 
-@onready var metronome:Metronome = get_node("/root/GameManager/Metronome") as Metronome
+@export var metronome:Metronome
 
 
 var metronomeDots = []
@@ -35,8 +32,8 @@ var stateTextMap = {
 }
 
 func HandleCurrentPhaseProgressChanged():
-	print(currentPhaseProgressVar.Value)
-
+	#print(currentPhaseProgressVar.Value)
+	pass
 
 
 

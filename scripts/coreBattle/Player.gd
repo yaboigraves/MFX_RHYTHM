@@ -1,7 +1,8 @@
 class_name Player
-extends RhythmGameStateNode
+extends Node
 
 @export var gameRules:GameModeRules
+@export var metronome : Metronome
 
 signal BeatPhaseCallback(durationInBeats:float,callback:Callable)
 signal SpawnMarker(hit:Hit)
@@ -10,7 +11,6 @@ signal HitProcessed(hit: Hit, hitResult : HitResult)
 var stateMachine : StateMachine
 
 func _ready():
-	super._ready()
 	stateMachine = %PlayerStateMachine as StateMachine
 	stateMachine.StartMachine()
 

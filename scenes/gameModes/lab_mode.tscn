@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://blfd33gvycb3g"]
+[gd_scene load_steps=24 format=3 uid="uid://blfd33gvycb3g"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/LabMode.gd" id="1_4tw81"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="4_uu7d5"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="16_sxfox"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="18_a03rc"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="19_k4q16"]
+[ext_resource type="Resource" uid="uid://dfqo2ywh50y1i" path="res://resources/metronome.tres" id="19_ojxhq"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="20_36ob5"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="20_ks3v0"]
 [ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="21_cmj30"]
@@ -26,6 +27,7 @@
 [node name="GameMode" type="Node" node_paths=PackedStringArray("player")]
 script = ExtResource("1_4tw81")
 player = NodePath("PlayerManager/Player1")
+rules = ExtResource("20_ks3v0")
 
 [node name="RadialUI" type="CanvasLayer" parent="."]
 
@@ -293,10 +295,12 @@ autostart = false
 
 [node name="FreeMode" type="Node" parent="LabModeStateMachine"]
 script = ExtResource("12_r5mt5")
+metronome = ExtResource("19_ojxhq")
 rules = ExtResource("20_ks3v0")
 
 [node name="Pause" type="Node" parent="LabModeStateMachine"]
 script = ExtResource("13_sqhuo")
+metronome = ExtResource("19_ojxhq")
 rules = ExtResource("20_ks3v0")
 
 [node name="PlayerManager" type="Node" parent="."]

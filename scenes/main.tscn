@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkl56ty0kexdc"]
+[gd_scene load_steps=4 format=3 uid="uid://bkl56ty0kexdc"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/GameManager.gd" id="1_ypkpa"]
-[ext_resource type="Resource" uid="uid://c26j51fe8gdv1" path="res://variables/CurrentPhaseProgress.tres" id="4_7l0yj"]
-[ext_resource type="PackedScene" uid="uid://dlml8pxq43wfm" path="res://scenes/gameModes/game_mode_nodes/metronome.tscn" id="6_ybdwp"]
+[ext_resource type="Resource" uid="uid://dfqo2ywh50y1i" path="res://resources/metronome.tres" id="3_qi3ju"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeManager.gd" id="34_nc3vs"]
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("display")]
@@ -11,7 +10,4 @@ display = NodePath("")
 
 [node name="GameModeManager" type="Node" parent="."]
 script = ExtResource("34_nc3vs")
-
-[node name="Metronome" parent="." instance=ExtResource("6_ybdwp")]
-unique_name_in_owner = true
-currentPhaseProgressVar = ExtResource("4_7l0yj")
+metronome = ExtResource("3_qi3ju")

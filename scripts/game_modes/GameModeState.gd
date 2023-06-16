@@ -1,10 +1,9 @@
 class_name GameModeState
 extends State
 
-
+@export var metronome: Metronome
 @export var rules:GameModeRules
 var currentGameState : GameState
-#test
 
 func enter(_msg := {}) -> void:
 	currentGameState = GameState.new(rules.loopBeatSize)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b25q4rbpyn8sc"]
+[gd_scene load_steps=16 format=3 uid="uid://b25q4rbpyn8sc"]
 
 [ext_resource type="Script" path="res://scripts/ui/InputWindowRadialRhythmDisplay.gd" id="1_ifxlp"]
 [ext_resource type="PackedScene" path="res://scenes/radial_metronome_dot.tscn" id="2_r0ylq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cs8gdb5suhtdi" path="res://icon.svg" id="4_qhvc4"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="4_qs8om"]
 [ext_resource type="Resource" uid="uid://c26j51fe8gdv1" path="res://variables/CurrentPhaseProgress.tres" id="5_g6l6d"]
+[ext_resource type="Resource" uid="uid://dfqo2ywh50y1i" path="res://resources/metronome.tres" id="6_4rl1s"]
 [ext_resource type="Theme" uid="uid://ca0e8s1qmw04e" path="res://UI/mf_menu_theme.tres" id="6_pcnxj"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="6_swbru"]
 [ext_resource type="Script" path="res://scripts/ui/FeedbackTextSpawner.gd" id="7_8e7hb"]
@@ -34,6 +35,7 @@ markerColors = Array[Color]([Color(0.992157, 0, 0, 1), Color(0, 0.886275, 0, 1),
 radialMetronomeDot = ExtResource("2_r0ylq")
 hitParticleSystem = ExtResource("4_7gr3p")
 currentPhaseProgressVar = ExtResource("5_g6l6d")
+metronome = ExtResource("6_4rl1s")
 origin = Vector2(-1, 0)
 numLanes = 4
 centerOffset = 0.255
@@ -48,6 +50,7 @@ backgroundColor = Color(0.603922, 0.603922, 0.603922, 1)
 
 [node name="Backplate" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -100.0

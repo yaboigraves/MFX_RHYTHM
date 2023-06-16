@@ -14,7 +14,7 @@ signal Missedhit(hit:Hit)
 @export var rules : GameModeRules
 @export var duration: float = 4.0
 @export var player : Node
-
+@export var metronome: Metronome
 
 var progress : float
 var startTime: float
@@ -32,7 +32,7 @@ func enter(args ={}):
 	#we get a state update in the gamemode and a tick in the game mode..
 	#that probably makes more sense...
 	#startTime = get_tree().root.gameState.timeInBeats
-	startTime = get_node("/root/GameManager/Metronome").timeInBeats
+	startTime = metronome.timeInBeats
 	
 	#so when a state gets entered, quue it to end?
 	

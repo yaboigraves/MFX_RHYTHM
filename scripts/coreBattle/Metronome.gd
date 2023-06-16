@@ -1,34 +1,7 @@
 class_name Metronome
-extends Node
+extends Resource
 
-#ok we're going to make room for a discrete timed update
-#this will be used to queue shit irregardless of frame stuff?
-#basically we can schedule functions to run now
-#this will actually be etremly useful for the queue
-#the queue can handle actually dispatching these buffers
-#the metronome just says when to process
-
-#this should clean up alot of awkwardness with the queue
-
-#TODO: rewrite the callbacks system to suport an update based approach
-#sync update is great but doesnt work for the fact that technically states change not on beat
-#we just want to fake that they open and close like that
-#so basically, input states change literally the second you can possibly make a valid input
-#buffer stuff is cringe, unneccessary
-#should be alot cleaner after this too, we ought to do a big cleanup after this
-#once phases are good and we get some thorough testing in, I feel good about moving to some UI polish
-#after the basic UI polish is done, we can go to adding vs mode
-#at that point I feel comfortable releasing this as a little private demo and then hard pivoting to the other project
-
-
-#ahhh
-#ok
-#so technically
-#even though we start the thing early
-#the rhythm seems to desync now
-#duh
-#well
-#hm
+#make this a resource, yada yada
 
 
 signal Tick(timeSeconds, timeBeats)
@@ -70,12 +43,12 @@ var callbacks = {}
 var updateCallbacks = {}
 
 
-func _ready() -> void:
-	set_process(false)
+#func _ready() -> void:
+#	set_process(false)
 
 
 func Start():
-	$AudipPlayer.stream = stream
+#	$AudipPlayer.stream = stream
 	time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
 	nextSyncUpdate = 0.0
@@ -85,12 +58,12 @@ func Start():
 	bps = bpm/60.0
 	spb = 60.0/bpm
 	timeInBeats = 0
-	$AudipPlayer.play()
-	set_process(true)
+#	$AudipPlayer.play()
+#	set_process(true)
 
 func Stop():
-	$AudipPlayer.stop()
-	set_process(false)
+#	$AudipPlayer.stop()
+#	set_process(false)
 	callbacks.clear()
 	updateCallbacks.clear()
 	
@@ -146,7 +119,7 @@ func ProcessCallbacks():
 func _on_player_beat_phase_callback(durationInBeats, callback, anchorToNearestBeat = false) -> void:
 	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - (rules.windowSize * 2.0)
 	
-	print(callbackTime)
+	#print(callbackTime)
 	
 	updateCallbacks[callbackTime] = callback
 

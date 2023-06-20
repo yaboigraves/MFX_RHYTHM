@@ -12,6 +12,7 @@ var gameModeDictionary:Dictionary = {
 var currentGameMode : GameMode
 
 
+
 func StartGame():
 	LoadGameMode()
 	currentGameMode.Start()
@@ -25,3 +26,4 @@ func LoadGameMode():
 
 func _process(delta):
 	metronome.calculateTime()
+	

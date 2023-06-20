@@ -5,10 +5,11 @@ extends GameModeState
 
 func enter(_msg := {}) -> void:
 	super.enter()
-	metronome.Start()
+	
+	battleAudio.PlayBackgroundTrack()
 	player.StartRecording(currentGameState)
+	
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
-
 
 
 func HandleRecordStateEnd():

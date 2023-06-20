@@ -18,6 +18,7 @@ signal Missedhit(hit:Hit)
 
 var progress : float
 var startTime: float
+var endTime: float
 
 func initialize():
 	super.initialize()
@@ -32,15 +33,26 @@ func enter(args ={}):
 	#we get a state update in the gamemode and a tick in the game mode..
 	#that probably makes more sense...
 	#startTime = get_tree().root.gameState.timeInBeats
+	
+	#so the 4 duration is a lie
 	startTime = metronome.timeInBeats
-	
+	duration = rules.loopBeatSize - (rules.windowSize * 2.0)
+	endTime = startTime + duration
+	print(startTime)
+	print(duration)
 	#so when a state gets entered, quue it to end?
+
+func update(_delta:float):
 	
 	
-	
-func HandleHit(hit: Hit):
+	progress = (metronome.timeInBeats - startTime)/(endTime - startTime)
+
+#
+#func HandleHit(hit: Hit):
+#	pass
+#
+func HandleHit(index, time):
 	pass
-	
 
 
 	

@@ -16,6 +16,7 @@ func _ready() -> void:
 
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
+		
 		child.state_machine = self
 	
 	set_process(false)

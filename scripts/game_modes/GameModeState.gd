@@ -3,11 +3,14 @@ extends State
 
 @export var metronome: Metronome
 @export var rules:GameModeRules
+@export var battleAudio: BattleAudioManager
+
 var currentGameState : GameState
 
 func enter(_msg := {}) -> void:
 	currentGameState = GameState.new(rules.loopBeatSize)
 	super.enter()
+	
 
 func update(delta):
 	if Input.is_action_just_pressed("Pause"):

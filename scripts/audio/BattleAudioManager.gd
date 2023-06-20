@@ -1,15 +1,17 @@
 class_name BattleAudioManager
 extends Node
 
-#so battle audio managers will actually listen for metronome start signals and then play audio for the metronome
-#any other audio thats triggered by game mode state can happen here too hypothetically
-#individual players can spawn their own audio for stuff, this is for battle wide stuff
+@export var metronome : Metronome
 
-# Called when the node enters the scene tree for the first time.
+#so we want to basically when the game starts get notified by the metronome
 func _ready() -> void:
-	pass # Replace with function body.
+	print(metronome)
+	$AudioStreamPlayer.stream = metronome.stream
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func PlayBackgroundTrack():
+	metronome.Start()
+	$AudioStreamPlayer.play()
+
+
+

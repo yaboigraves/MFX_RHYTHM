@@ -217,19 +217,27 @@ fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("7_jofdi")
 tint_progress = Color(0.345098, 0.505882, 0.196078, 0.537255)
+radial_initial_angle = 270.0
 
 [node name="VerifyOverlay" type="TextureProgressBar" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 value = 50.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("7_jofdi")
-tint_progress = Color(0.345098, 0.505882, 0.196078, 0.537255)
+tint_progress = Color(0.733333, 0.235294, 0.454902, 0.537255)
+radial_initial_angle = 270.0
 
 [node name="HUD" type="CenterContainer" parent="."]
 layout_mode = 1

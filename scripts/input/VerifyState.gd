@@ -22,6 +22,9 @@ func enter(_msg := {}) -> void:
 	combo = 0
 	metronome._on_player_beat_phase_callback(8, EvaluateNextState, true)
 	
+
+
+	
 func EvaluateNextState():
 	player.emit_signal("TurnDone")
 
@@ -31,10 +34,12 @@ func exit():
 	combo = 0
 	
 func update(_delta: float):
+	super.update(_delta)
 	CheckForMissedHits()
+	player.UpdateVerifyStateProgress(progress)
 
-
-func HandleHit(hit:Hit):
+func HandleHit(index, timeInBeats):
+	var hit = Hit.new(index,timeInBeats, startTime, HitType.VERIFY)
 	var hitResult = CheckHit(hit)
 	match hitResult:
 		HitResult.GOOD:
@@ -49,6 +54,7 @@ func HandleHit(hit:Hit):
 			combo = 0
 			player.emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
 			emit_signal("BadHit",hit)
+
 
 func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):

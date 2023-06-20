@@ -57,6 +57,7 @@ func _on_verify_state_hit_processed(hit, hitResult) -> void:
 			onBadHit()
 
 
+#TODO: refactor these to just be connected
 func _on_pause_on_enter() -> void:
 	TogglePauseUI(true)
 

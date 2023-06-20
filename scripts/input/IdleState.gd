@@ -8,6 +8,6 @@ func enter(args ={}):
 	super.enter(args)
 	buffer = []
 
-func HandleHit(hit):
+func HandleHit(index,timeInBeats):
 	pass
 

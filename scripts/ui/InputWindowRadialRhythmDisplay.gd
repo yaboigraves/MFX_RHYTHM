@@ -31,10 +31,13 @@ var stateTextMap = {
 	"VerifyState":"PLAY"
 }
 
-func HandleCurrentPhaseProgressChanged():
-	#print(currentPhaseProgressVar.Value)
-	pass
 
+
+func SetRecordStateProgressRadial(progress):
+	$RecordOverlay.value = progress * 100.0
+
+func SetVerifyStateProgressRadial(progress):
+	$VerifyOverlay.value = progress * 100.0
 
 
 
@@ -111,7 +114,7 @@ func _ready():
 	DrawInputWindows()
 	#make metronome a resource!!
 	metronome.Tick.connect(_on_metronome_tick)
-	currentPhaseProgressVar.OnValueChanged.connect(HandleCurrentPhaseProgressChanged)
+	#currentPhaseProgressVar.OnValueChanged.connect(HandleCurrentPhaseProgressChanged)
 
 #debug
 func DrawBadZone():

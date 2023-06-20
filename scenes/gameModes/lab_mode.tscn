@@ -293,24 +293,31 @@ script = ExtResource("4_uu7d5")
 initial_state = NodePath("FreeMode")
 autostart = false
 
-[node name="FreeMode" type="Node" parent="LabModeStateMachine"]
+[node name="FreeMode" type="Node" parent="LabModeStateMachine" node_paths=PackedStringArray("battleAudio")]
 script = ExtResource("12_r5mt5")
 metronome = ExtResource("19_ojxhq")
 rules = ExtResource("20_ks3v0")
+battleAudio = NodePath("../../BattleAudioManager")
 
-[node name="Pause" type="Node" parent="LabModeStateMachine"]
+[node name="Pause" type="Node" parent="LabModeStateMachine" node_paths=PackedStringArray("battleAudio")]
 script = ExtResource("13_sqhuo")
 metronome = ExtResource("19_ojxhq")
 rules = ExtResource("20_ks3v0")
+battleAudio = NodePath("../../BattleAudioManager")
 
 [node name="PlayerManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("16_sxfox")
 
-[node name="Player1" parent="PlayerManager" instance=ExtResource("15_i4eir")]
+[node name="Player1" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("15_i4eir")]
+radialUI = NodePath("../../RadialUI/RootContainer/InputWindowRadialRhythmDisplay")
+characterHUD = NodePath("../../GameModeHUD")
 
 [node name="BattleAudioManager" type="Node" parent="."]
 script = ExtResource("24_1fkbb")
+metronome = ExtResource("19_ojxhq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BattleAudioManager"]
 
 [connection signal="TrackSelected" from="GameModeHUD/Control/PauseUI/Panel/TrackSelect/Tracks" to="LabModeStateMachine/Pause" method="_on_tracks_track_selected"]
 [connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]

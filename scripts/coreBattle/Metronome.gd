@@ -3,11 +3,11 @@ extends Resource
 
 #make this a resource, yada yada
 
+signal StreamStarting
 
 signal Tick(timeSeconds, timeBeats)
 signal SyncUpdate(timeInBeats,delta)
 signal BeatUpdate(timeInBeats)
-
 signal PhaseSwitch
 
 @export var stream : AudioStreamOggVorbis
@@ -20,6 +20,7 @@ signal PhaseSwitch
 
 var time_begin
 var time_delay
+var audioPlayer : AudioStreamPlayer
 
 var bpm
 var bps
@@ -47,8 +48,8 @@ var updateCallbacks = {}
 #	set_process(false)
 
 
+
 func Start():
-#	$AudipPlayer.stream = stream
 	time_begin = Time.get_ticks_usec()
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
 	nextSyncUpdate = 0.0
@@ -58,8 +59,8 @@ func Start():
 	bps = bpm/60.0
 	spb = 60.0/bpm
 	timeInBeats = 0
-#	$AudipPlayer.play()
-#	set_process(true)
+	
+		
 
 func Stop():
 #	$AudipPlayer.stop()

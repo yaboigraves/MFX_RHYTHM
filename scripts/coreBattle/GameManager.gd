@@ -74,6 +74,16 @@ extends Node
 #audio is a pretty big concern
 #we def want a core audio engine
 
+#the audio here is really fucking borked
+#this REALLY needs to be next priority to fix
+#a proper audio experience is NECCESSARY and utmost important
+#the ui can become functional and all but none of that will matter
+#lets just get this last element in (phase buttons) and then i really do need to work on timing
+#I cant tell if its my interface glitching or something but i really need to thoroughly test the audio experience here
+#i do need something on this UI pulsing though..
+
+#audio seems fine but is just omega broken on my interface so shrug
+
 @export var display : RhythmDisplay
 
 signal RecordedHit

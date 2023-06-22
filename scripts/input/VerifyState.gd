@@ -1,3 +1,4 @@
+class_name VerifyState
 extends PlayerInputState
 
 signal ComboUpdate(combo)
@@ -21,7 +22,7 @@ func enter(_msg := {}) -> void:
 	targetHits = _msg["gameState"].recordedHits
 	combo = 0
 	metronome._on_player_beat_phase_callback(8, EvaluateNextState, true)
-	
+
 
 
 	

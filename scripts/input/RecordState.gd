@@ -1,3 +1,4 @@
+class_name RecordState
 extends PlayerInputState
 
 var buffer : Array[Hit]
@@ -15,6 +16,7 @@ func initialize():
 func enter(_msg = {}):
 	super.enter()
 	gameState = _msg["gameState"] as GameState
+
 	
 func HasAnyHits():
 	for hitLane in gameState.recordedHits:

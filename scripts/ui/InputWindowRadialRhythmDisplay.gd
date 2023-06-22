@@ -7,6 +7,8 @@ extends RadialRhythmDisplay
 #ok so a BUNCH of this code is obfuscated as hell now
 #this ought to get bound to a player and the player steers it
 
+#so the radials now need a minor facelift
+
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
 @export var radialMetronomeDot : PackedScene
@@ -15,9 +17,8 @@ extends RadialRhythmDisplay
 
 @export var metronome:Metronome
 
-
+var phaseView : PhaseView
 var metronomeDots = []
-
 var inputWindowViews:Array[InputWindowView] = [] 
 
 #obselete in a moment
@@ -31,7 +32,54 @@ var stateTextMap = {
 	"VerifyState":"PLAY"
 }
 
+func _ready():
+	beatsPerRotation = rules.loopBeatSize
+	super._ready()	
+	DrawInputWindows()
+	metronome.Tick.connect(_on_metronome_tick)
+	RefreshOverlaySize()
+	RefreshCenterLabelSize()
+	phaseView = $Backplate/Plate/PhaseView as PhaseView
+	
+#what if states just pass themselves in	
 
+func HandleStateStart(state):
+	print(state)
+	print("eee")
+	phaseView.SetPhase(state)
+
+
+	
+func RefreshCenterLabelSize():
+	$CenterPivot/RecordCenterLabel.size = size * centerOffset
+	#so this is kind of annoying math but it works I guess?	
+	$CenterPivot/RecordCenterLabel.position = ($CenterPivot.size /2.0) - $CenterPivot/RecordCenterLabel.size/2.0
+
+func RefreshOverlaySize():
+	$VerifyOverlay.size = size * centerOffset
+	#so this is kind of annoying math but it works I guess?	
+	$VerifyOverlay.position = (size /2.0) - $VerifyOverlay.size/2.0
+	
+
+
+#TODO: these progress values should maybe actually literally be offset I think
+#that or we slightly rotate the whole thing?
+#we have a slight conflict in the ordering here
+#the record overlay needs to be under this?
+#soo...
+#hm
+#we can fix this with proper z indexing i guess
+
+
+
+#so the order is 
+#background (rim) 0
+#lanes and lane lines 1
+#record overlay 2
+#center label background 3
+#verify overlay 4
+#center spoke and text 5
+#markers 6
 
 func SetRecordStateProgressRadial(progress):
 	$RecordOverlay.value = progress * 100.0
@@ -79,10 +127,6 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10
 	poly.bottomIndexes.append(2)
 	poly.bottomIndexes.append(3)
 	
-	
-	
-	#..top close values
-
 	#middle right
 	arcPoints.append(origin * closeMult)
 	
@@ -108,13 +152,6 @@ func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10
 	
 	return poly
 
-func _ready():
-	beatsPerRotation = rules.loopBeatSize
-	super._ready()	
-	DrawInputWindows()
-	#make metronome a resource!!
-	metronome.Tick.connect(_on_metronome_tick)
-	#currentPhaseProgressVar.OnValueChanged.connect(HandleCurrentPhaseProgressChanged)
 
 #debug
 func DrawBadZone():

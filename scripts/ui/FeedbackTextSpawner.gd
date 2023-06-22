@@ -29,6 +29,7 @@ extends Node
 
 func SpawnHit(targetPos,hitType):
 	var textureRect = TextureRect.new()
+	textureRect.z_index = 6
 	textureRect.size = Vector2(100,100)
 	textureRect.texture = textures[hitType]
 	textureRect.position = targetPos - textureRect.size/2.0

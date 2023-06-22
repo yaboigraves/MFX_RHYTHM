@@ -52,6 +52,6 @@ func UpdateVerifyStateProgress(progress):
 #maybe we can get like a return enum for what to do with it from here
 #that way logic is still in the plyer?
 func _on_player_input_handler_hit(index) -> void:
-	print(AudioServer.get_output_latency() * 1000)
+
 	#so the issue is the time we just hit is actually inaccurate
-	stateMachine.state.HandleHit(index,metronome.timeInBeats + ((AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()) * metronome.bps)) 
+	stateMachine.state.HandleHit(index,metronome.timeInBeats) 

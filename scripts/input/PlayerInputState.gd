@@ -41,6 +41,7 @@ func enter(args ={}):
 	print(startTime)
 	print(duration)
 	#so when a state gets entered, quue it to end?
+	player.radialUI.HandleStateStart(self)
 
 func update(_delta:float):
 	

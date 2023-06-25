@@ -24,6 +24,7 @@ func initialize():
 	super.initialize()
 
 
+
 func enter(args ={}):
 	super.enter()
 	progress = 0.0
@@ -36,17 +37,22 @@ func enter(args ={}):
 	
 	#so the 4 duration is a lie
 	startTime = metronome.timeInBeats
-	duration = rules.loopBeatSize - (rules.windowSize * 2.0)
+	duration = rules.loopBeatSize
 	endTime = startTime + duration
-	print(startTime)
+	print("starting at " ,startTime)
 	print(duration)
 	#so when a state gets entered, quue it to end?
 	player.radialUI.HandleStateStart(self)
+	if not metronome.is_connected("Tick",onMetronomeTick):
+		metronome.Tick.connect(onMetronomeTick)
 
-func update(_delta:float):
-	
-	
-	progress = (metronome.timeInBeats - startTime)/(endTime - startTime)
+func exit():
+	super.exit()
+	metronome.Tick.disconnect(onMetronomeTick)
+
+func onMetronomeTick(timeSeconds,timeBeats):
+	progress = (timeBeats - startTime)/duration
+
 
 #
 #func HandleHit(hit: Hit):

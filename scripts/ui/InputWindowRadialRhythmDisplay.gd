@@ -44,8 +44,8 @@ func _ready():
 #what if states just pass themselves in	
 
 func HandleStateStart(state):
-	print(state)
-	print("eee")
+#	print(state)
+#	print("eee")
 	phaseView.SetPhase(state)
 
 
@@ -191,6 +191,7 @@ func SpawnMarker(hit:Hit):
 	
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
+	
 	for hit in markerHitMap.keys():
 		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 

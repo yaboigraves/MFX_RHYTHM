@@ -10,4 +10,5 @@ display = NodePath("")
 
 [node name="GameModeManager" type="Node" parent="."]
 script = ExtResource("34_nc3vs")
+currentGameModeType = 2
 metronome = ExtResource("3_qi3ju")

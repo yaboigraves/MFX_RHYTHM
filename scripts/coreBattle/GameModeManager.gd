@@ -1,10 +1,11 @@
 class_name GameModeManager
 extends Node
 
-enum GameModeType{ LAB_MODE, TRAINING_MODE }
+enum GameModeType{ LAB_MODE, TRAINING_MODE , VERSUS_MODE}
 
 var gameModeDictionary:Dictionary = {
-	GameModeType.LAB_MODE : "res://scenes/gameModes/lab_mode.tscn"
+	GameModeType.LAB_MODE : "res://scenes/gameModes/lab_mode.tscn",
+	GameModeType.VERSUS_MODE : "res://scenes/gameModes/versus_mode.tscn"
 }
 
 @export var currentGameModeType : GameModeType

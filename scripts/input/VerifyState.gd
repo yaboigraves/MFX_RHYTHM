@@ -37,7 +37,8 @@ func exit():
 func update(_delta: float):
 	super.update(_delta)
 	CheckForMissedHits()
-	player.UpdateVerifyStateProgress(progress)
+	player.VerifyStateProgressUpdate.emit(progress)
+	#player.UpdateVerifyStateProgress(progress)
 
 func HandleHit(index, timeInBeats):
 	var hit = Hit.new(index,timeInBeats, startTime, HitType.VERIFY)
@@ -76,6 +77,7 @@ func CheckForMissedHits():
 			if(hit.time + rules.loopBeatSize + (rules.windowSize ) <= metronome.timeInBeats):
 				missedHits.append(hit)
 				emit_signal("Missedhit",hit)
+				
 				player.emit_signal("HitProcessed",hit, HitResult.DESTROY_MISS)
 				combo = 0
 				

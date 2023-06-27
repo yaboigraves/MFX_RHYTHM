@@ -25,6 +25,5 @@ func LoadGameMode():
 	add_child(currentGameMode)
 
 
-func _process(delta):
-	metronome.calculateTime()
+
 	

@@ -1,13 +1,8 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
-#this has been kind of refactored now
-#im not particularly happy with it by any means but its something
-
-#ok so a BUNCH of this code is obfuscated as hell now
-#this ought to get bound to a player and the player steers it
-
-#so the radials now need a minor facelift
+#so lets go forward with reffing the player
+#and then just listening for stuffs
 
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
@@ -16,6 +11,7 @@ extends RadialRhythmDisplay
 @export var currentPhaseProgressVar : FloatVariable
 
 @export var metronome:Metronome
+@export var player:Player
 
 var phaseView : PhaseView
 var metronomeDots = []
@@ -33,6 +29,7 @@ var stateTextMap = {
 }
 
 func _ready():
+
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()	
 	DrawInputWindows()
@@ -41,6 +38,11 @@ func _ready():
 	RefreshCenterLabelSize()
 	phaseView = $Backplate/Plate/PhaseView as PhaseView
 	
+	player.RecordStateProgressUpdate.connect(SetRecordStateProgressRadial)
+	player.VerifyStateProgressUpdate.connect(SetVerifyStateProgressRadial)
+	
+	player.HitProcessed.connect(OnHitProcessed)
+	player.SpawnMarker.connect(SpawnMarker)
 #what if states just pass themselves in	
 
 func HandleStateStart(state):
@@ -205,8 +207,6 @@ func ClearAllMarkers():
 func _on_player_input_handler_escape() -> void:
 	ClearAllMarkers()
 
-func _on_record_state_spawn_marker(hit:Hit) -> void:
-	SpawnMarker(hit)
 	
 func _on_verify_state_missed_hit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1) -hit.laneIndex) * laneSize )),0)).rotated(origin.angle())

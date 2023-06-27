@@ -43,9 +43,17 @@ var timeInBeats = 0.0001
 var callbacks = {}
 var updateCallbacks = {}
 
+#so the next big feature is indeed a metronome refactor
+#I should branch this so I can rollback
+#but
 
-#func _ready() -> void:
-#	set_process(false)
+#basically, the core way we handle timing needs to be around these samples we're playing/unplaying
+#we dont need a total "length" per say because each timing event is a vaccum
+#this should alleviate alot of the like weird sync issues
+#We can hypothetically let stuff loop too if needed
+#but mostly, it seems like we can start and stop stuff at the right(ish times)
+#so yeah!
+
 
 
 
@@ -60,6 +68,7 @@ func Start():
 	spb = 60.0/bpm
 	timeInBeats = 0
 	
+	
 		
 
 func Stop():
@@ -69,8 +78,7 @@ func Stop():
 	updateCallbacks.clear()
 	
 	
-func _process(delta):
-	calculateTime()
+
 
 func calculateTime():
 	# Obtain from ticks.
@@ -118,6 +126,7 @@ func ProcessCallbacks():
 		
 
 func _on_player_beat_phase_callback(durationInBeats, callback, anchorToNearestBeat = false) -> void:
+	print("time is going to be " , timeInBeats)
 	var callbackTime = snapped(timeInBeats,syncUpdateRate) + durationInBeats - (rules.windowSize * 2.0)
 	
 	#print(callbackTime)

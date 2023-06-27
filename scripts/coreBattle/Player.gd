@@ -19,9 +19,15 @@ extends Node
 #yeah makes sense to me
 #just signal up
 
-signal BeatPhaseCallback(durationInBeats:float,callback:Callable)
+#yeah wait I thought I refactored this
+#the player can just have a ref to steer the uis
+#we dont really need to do this with signals at all
+#lets replace all signal areas with direct function calls
+
 signal SpawnMarker(hit:Hit)
 signal HitProcessed(hit: Hit, hitResult : HitResult)
+signal RecordStateProgressUpdate(progress:float)
+signal VerifyStateProgressUpdate(progress:float)
 
 var stateMachine : StateMachine
 
@@ -40,17 +46,6 @@ func GoIdle():
 	stateMachine.transition_to("IdleState")
 
 
-
-#so certain states update the green thing
-
-func UpdateRecordStateProgress(progress):
-	radialUI.SetRecordStateProgressRadial(progress)
-
-func UpdateVerifyStateProgress(progress):
-	radialUI.SetVerifyStateProgressRadial(progress)
-
-#maybe we can get like a return enum for what to do with it from here
-#that way logic is still in the plyer?
 func _on_player_input_handler_hit(index) -> void:
 	#so the issue is the time we just hit is actually inaccurate
 	stateMachine.state.HandleHit(index,metronome.timeInBeats) 

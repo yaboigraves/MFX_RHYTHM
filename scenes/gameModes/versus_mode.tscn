@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://i48m18tj8uty"]
+[gd_scene load_steps=24 format=3 uid="uid://b1joqowv2i03a"]
 
 [ext_resource type="Script" path="res://scripts/game_modes/versus_mode/VersusMode.gd" id="1_a7s7d"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_vbi41"]
@@ -17,8 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="16_wj5rw"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="17_j5sis"]
 [ext_resource type="Script" path="res://scripts/game_modes/lab_mode/FreeMode.gd" id="18_wm73p"]
+[ext_resource type="Script" path="res://scripts/game_modes/versus_mode/ListenMode.gd" id="19_0bhwm"]
 [ext_resource type="Resource" uid="uid://dfqo2ywh50y1i" path="res://resources/metronome.tres" id="19_gc8f8"]
-[ext_resource type="Script" path="res://scripts/game_modes/GameModeState.gd" id="20_svynv"]
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="21_ureb2"]
 [ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="22_ft3jc"]
 [ext_resource type="Script" path="res://scripts/audio/BattleAudioManager.gd" id="23_nd2m4"]
@@ -46,7 +46,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer/P1Root" instance=ExtResource("3_jtocp")]
+[node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer/P1Root" node_paths=PackedStringArray("player") instance=ExtResource("3_jtocp")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = -350.0
@@ -54,6 +54,7 @@ offset_top = -350.0
 offset_right = 350.0
 offset_bottom = 350.0
 pivot_offset = Vector2(250, 250)
+player = NodePath("../../../../PlayerManager/Player1")
 
 [node name="CenterConsole" type="Control" parent="RadialUI/RootContainer"]
 layout_mode = 1
@@ -82,13 +83,14 @@ anchor_left = 0.6
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer/P2Root" instance=ExtResource("3_jtocp")]
+[node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer/P2Root" node_paths=PackedStringArray("player") instance=ExtResource("3_jtocp")]
 layout_mode = 1
 offset_left = -350.0
 offset_top = -350.0
 offset_right = 350.0
 offset_bottom = 350.0
 pivot_offset = Vector2(250, 250)
+player = NodePath("../../../../PlayerManager/Player2")
 
 [node name="GameModeHUD" type="CanvasLayer" parent="."]
 script = ExtResource("4_ktixk")
@@ -233,17 +235,17 @@ text = "QUIT"
 
 [node name="VersusModeStateMachine" type="Node" parent="."]
 script = ExtResource("17_j5sis")
-initial_state = NodePath("FreeMode")
+initial_state = NodePath("ListenMode")
 autostart = false
 
-[node name="FreeMode" type="Node" parent="VersusModeStateMachine" node_paths=PackedStringArray("battleAudio")]
-script = ExtResource("18_wm73p")
+[node name="ListenMode" type="Node" parent="VersusModeStateMachine" node_paths=PackedStringArray("battleAudio")]
+script = ExtResource("19_0bhwm")
 metronome = ExtResource("19_gc8f8")
 rules = ExtResource("2_vbi41")
 battleAudio = NodePath("../../BattleAudioManager")
 
-[node name="Pause" type="Node" parent="VersusModeStateMachine" node_paths=PackedStringArray("battleAudio")]
-script = ExtResource("20_svynv")
+[node name="FreeMode" type="Node" parent="VersusModeStateMachine" node_paths=PackedStringArray("battleAudio")]
+script = ExtResource("18_wm73p")
 metronome = ExtResource("19_gc8f8")
 rules = ExtResource("2_vbi41")
 battleAudio = NodePath("../../BattleAudioManager")
@@ -256,17 +258,15 @@ script = ExtResource("21_ureb2")
 radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
 characterHUD = NodePath("../../GameModeHUD")
 
+[node name="Player2" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
+radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
+characterHUD = NodePath("../../GameModeHUD")
+
 [node name="BattleAudioManager" type="Node" parent="."]
 script = ExtResource("23_nd2m4")
 metronome = ExtResource("19_gc8f8")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BattleAudioManager"]
 
-[connection signal="TrackSelected" from="GameModeHUD/Control/PauseUI/Panel/TrackSelect/Tracks" to="VersusModeStateMachine/Pause" method="_on_tracks_track_selected"]
 [connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]
 [connection signal="timeout" from="GameModeHUD/Control/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]
-[connection signal="OnEnter" from="VersusModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_enter"]
-[connection signal="OnExit" from="VersusModeStateMachine/Pause" to="GameModeHUD" method="_on_pause_on_exit"]
-[connection signal="HitProcessed" from="PlayerManager/Player1" to="RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay" method="OnHitProcessed"]
-[connection signal="HitProcessed" from="PlayerManager/Player1" to="GameModeHUD" method="_on_player_1_hit_processed"]
-[connection signal="SpawnMarker" from="PlayerManager/Player1" to="RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay" method="_on_record_state_spawn_marker"]

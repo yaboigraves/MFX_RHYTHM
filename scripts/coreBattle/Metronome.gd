@@ -47,13 +47,8 @@ var updateCallbacks = {}
 #I should branch this so I can rollback
 #but
 
-#basically, the core way we handle timing needs to be around these samples we're playing/unplaying
-#we dont need a total "length" per say because each timing event is a vaccum
-#this should alleviate alot of the like weird sync issues
-#We can hypothetically let stuff loop too if needed
-#but mostly, it seems like we can start and stop stuff at the right(ish times)
-#so yeah!
-
+#dont use comments like this
+#its bad
 
 
 
@@ -81,7 +76,9 @@ func Stop():
 
 
 func calculateTime():
-	# Obtain from ticks.
+	
+	
+	
 	time = (Time.get_ticks_usec() - time_begin) / 1000000.0
 	# Compensate for latency.
 	time -= time_delay

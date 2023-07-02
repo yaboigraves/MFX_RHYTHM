@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://co6l3qww8fqcr" path="res://textures/whiteBox.png" id="25_4ocgc"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="26_f5wts"]
 
-[node name="GameMode" type="Node" node_paths=PackedStringArray("player")]
+[node name="GameMode2" type="Node" node_paths=PackedStringArray("player")]
 script = ExtResource("1_4tw81")
 player = NodePath("PlayerManager/Player1")
 rules = ExtResource("20_ks3v0")

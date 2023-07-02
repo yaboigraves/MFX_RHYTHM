@@ -76,9 +76,6 @@ func Stop():
 
 
 func calculateTime():
-	
-	
-	
 	time = (Time.get_ticks_usec() - time_begin) / 1000000.0
 	# Compensate for latency.
 	time -= time_delay

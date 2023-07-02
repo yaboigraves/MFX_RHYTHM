@@ -12,7 +12,11 @@ var duration
 var overallClock: float 
 var rounds = 0
 
-func _ready():
+
+func _ready() -> void:
+	set_process(false)
+
+func ready():
 	stream = $BackgroundTrack.stream as AudioStreamOggVorbis
 	bps = stream.bpm/60.0
 	duration = beats * bps
@@ -39,10 +43,7 @@ func _process(delta):
 
 	overallClock = time + (rounds * duration)
 	
-	if floorf(timeInBeats + AudioServer.get_output_latency()) > currentBeat:
-		currentBeat = timeInBeats
-		$tick.play()
-	
+
 
 
 #so we want to make sure that all the tracks we're going to play are loaded

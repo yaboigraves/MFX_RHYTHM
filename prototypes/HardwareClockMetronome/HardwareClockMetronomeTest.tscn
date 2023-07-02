@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cesyd0hntyf21"]
+[gd_scene load_steps=5 format=3 uid="uid://cesyd0hntyf21"]
 
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="1_hbfyl"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="2_2j4bv"]
-[ext_resource type="AudioStream" uid="uid://cj08egte3rk66" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-404.wav" id="3_6x11t"]
-[ext_resource type="AudioStream" uid="uid://c4urqdmaj4xjk" path="res://audio/drums/ch4chDrums/hats/cl hat classik.WAV" id="4_o07lq"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/DumbyState1.gd" id="5_bwkj5"]
+[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/DumbyStateMachine.gd" id="5_o5elv"]
 
 [node name="HardwareClockMetronomeTest" type="Node2D"]
 
@@ -14,14 +13,8 @@ script = ExtResource("1_hbfyl")
 [node name="BackgroundTrack" type="AudioStreamPlayer2D" parent="HardwareClockMetronome"]
 stream = ExtResource("2_2j4bv")
 
-[node name="tick" type="AudioStreamPlayer" parent="HardwareClockMetronome"]
-stream = ExtResource("3_6x11t")
-
-[node name="tick2" type="AudioStreamPlayer" parent="HardwareClockMetronome"]
-stream = ExtResource("4_o07lq")
-max_polyphony = 4
-
 [node name="DumbyStateMachine" type="Node" parent="."]
+script = ExtResource("5_o5elv")
 
-[node name="DumbyState1" type="Node" parent="DumbyStateMachine"]
+[node name="ListenState" type="Node" parent="DumbyStateMachine"]
 script = ExtResource("5_bwkj5")

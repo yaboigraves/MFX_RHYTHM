@@ -1,7 +1,5 @@
 class_name RhythmGameStateNode
 extends Node
 
+#i dont actually know if this is needed tbh
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

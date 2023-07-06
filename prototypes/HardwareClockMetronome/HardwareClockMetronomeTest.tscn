@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cesyd0hntyf21"]
+[gd_scene load_steps=8 format=3 uid="uid://cesyd0hntyf21"]
 
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="1_hbfyl"]
+[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareClockMetronomeTest.gd" id="1_y0mda"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="2_2j4bv"]
 [ext_resource type="AudioStream" uid="uid://cj08egte3rk66" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-404.wav" id="3_6x11t"]
 [ext_resource type="AudioStream" uid="uid://c4urqdmaj4xjk" path="res://audio/drums/ch4chDrums/hats/cl hat classik.WAV" id="4_o07lq"]
-[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/DumbyState1.gd" id="5_bwkj5"]
+[ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="5_5n74s"]
+[ext_resource type="Script" path="res://scripts/patterns/RhythmStateMachine/RhythmState.gd" id="6_pxwph"]
 
 [node name="HardwareClockMetronomeTest" type="Node2D"]
+script = ExtResource("1_y0mda")
 
 [node name="HardwareClockMetronome" type="Node" parent="."]
 script = ExtResource("1_hbfyl")
@@ -21,7 +24,53 @@ stream = ExtResource("3_6x11t")
 stream = ExtResource("4_o07lq")
 max_polyphony = 4
 
-[node name="DumbyStateMachine" type="Node" parent="."]
+[node name="Debug" type="Control" parent="HardwareClockMetronome"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="DumbyState1" type="Node" parent="DumbyStateMachine"]
-script = ExtResource("5_bwkj5")
+[node name="TimeDebug" type="VBoxContainer" parent="HardwareClockMetronome/Debug"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HardwareClockMetronome/Debug/TimeDebug"]
+layout_mode = 2
+text = "-Current Buffer-"
+
+[node name="Time" type="Label" parent="HardwareClockMetronome/Debug/TimeDebug"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "asdasdasd"
+
+[node name="Beats" type="Label" parent="HardwareClockMetronome/Debug/TimeDebug"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "asdasdasd"
+
+[node name="Label3" type="Label" parent="HardwareClockMetronome/Debug/TimeDebug"]
+layout_mode = 2
+text = "-Total Time-
+"
+
+[node name="TotalTime" type="Label" parent="HardwareClockMetronome/Debug/TimeDebug"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "asdasdasd"
+
+[node name="TotalBeats" type="Label" parent="HardwareClockMetronome/Debug/TimeDebug"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "asdasdasd"
+
+[node name="RhythmStateMachine" type="Node" parent="."]
+script = ExtResource("5_5n74s")
+initial_state = NodePath("RhythmState")
+autostart = false
+
+[node name="RhythmState" type="Node" parent="RhythmStateMachine"]
+script = ExtResource("6_pxwph")
+stream = ExtResource("2_2j4bv")

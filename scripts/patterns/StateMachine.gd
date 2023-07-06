@@ -29,7 +29,8 @@ func _ready() -> void:
 		set_physics_process(true)
 		set_process_unhandled_input(true)
 
-#this is a unique functionality now too i guess
+
+
 func StartMachine():
 	set_process(true)
 	set_physics_process(true)
@@ -44,7 +45,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	state.update(delta)
-
 
 
 func _physics_process(delta: float) -> void:
@@ -64,39 +64,4 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state)
-	
-
-#this has no place here now
-#and this logic was bad
-
-func iterate_to_next_state() -> void:
-	var currentStateIndex = state.get_index()
-	
-	var nextState = get_child( (currentStateIndex + 1) % get_child_count() )
-	
-	var args = {}
-
-	if nextState.name == "VerifyState":
-		if state.buffer.size() > 0:
-			args["hitBuffer"] = state.buffer
-		
-		if(state.HasAnyHits()):
-			args["hits"] = state.hits
-		else:
-			transition_to(get_child(currentStateIndex).name,args)
-			return
-	if nextState.name == "IdleState":
-		if is_zero_approx(nextState.duration):
-			currentStateIndex = currentStateIndex + 1 % get_child_count()
-	
-	if nextState.name == "RecordState":
-		if state.buffer.size() > 0:
-			args["hitBuffer"] = state.buffer
-	
-	transition_to( get_child( (currentStateIndex + 1) % get_child_count() ).name, args)
-
-
-
-func _on_metronome_beat_update(timeInBeats) -> void:
-	state.progress += 1
 	

@@ -1,6 +1,8 @@
 class_name GameModeState
 extends State
 
+#THIS WILL BE SUPERCEEDED BY THE RHYTHM STATE
+
 @export var metronome: Metronome
 @export var rules:GameModeRules
 @export var battleAudio: BattleAudioManager

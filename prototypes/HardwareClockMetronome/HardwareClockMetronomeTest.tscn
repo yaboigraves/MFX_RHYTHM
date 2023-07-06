@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cesyd0hntyf21"]
 
-[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="1_hbfyl"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareClockMetronomeTest.gd" id="1_y0mda"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="2_2j4bv"]
+[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="2_im6br"]
 [ext_resource type="AudioStream" uid="uid://cj08egte3rk66" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-404.wav" id="3_6x11t"]
 [ext_resource type="AudioStream" uid="uid://c4urqdmaj4xjk" path="res://audio/drums/ch4chDrums/hats/cl hat classik.WAV" id="4_o07lq"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="5_5n74s"]
@@ -12,7 +12,7 @@
 script = ExtResource("1_y0mda")
 
 [node name="HardwareClockMetronome" type="Node" parent="."]
-script = ExtResource("1_hbfyl")
+script = ExtResource("2_im6br")
 
 [node name="BackgroundTrack" type="AudioStreamPlayer2D" parent="HardwareClockMetronome"]
 stream = ExtResource("2_2j4bv")

@@ -35,16 +35,12 @@ var stream:AudioStreamOggVorbis
 
 
 
-#so lets get an overall clock working now
-var overallClock: float 
-var rounds = 0
-
-
-
 func _init() -> void:
 	instance = self
 	
 	
+
+
 
 func _ready():
 	stream = $BackgroundTrack.stream as AudioStreamOggVorbis
@@ -115,13 +111,16 @@ func _process(delta):
 	$Debug/TimeDebug/TotalTime.text = str(totalTime)
 	$Debug/TimeDebug/TotalBeats.text = str(totalTimeBeats)
 	
+
 	#check if we're done with the current state
 	
 	if currentStateInstance.CheckIfDone(totalTimeBeats):
 		$BackgroundTrack.stop()
 		set_process(false)
 		
-		#then we emit a signal?
+
+
+
 
 
 

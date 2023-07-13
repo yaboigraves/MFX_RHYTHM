@@ -1,9 +1,7 @@
 class_name HardwareClockMetronome
 extends Node
 
-#lets clean this up a bit and prepare it for actual use
-#so the tricky bit here is maintaining a consistent internal clock
-#for this game, every game is on a consistent internal clock
+signal CurrentTrackDone
 
 static var instance:HardwareClockMetronome
 
@@ -31,96 +29,47 @@ var duration:float
 var currentBeat: int
 var beats:int = 4
 
-var stream:AudioStreamOggVorbis
 
-
+var audioPlayback : AudioPlaybackTimeline
 
 func _init() -> void:
 	instance = self
 	
-	
-
-
-
 func _ready():
-	stream = $BackgroundTrack.stream as AudioStreamOggVorbis
-	bps = stream.bpm/60.0
-	duration = beats * bps
 	set_process(false)
 
-
 func PlayStream(stream:AudioStreamOggVorbis):
-	if $BackgroundTrack.playing:
-		$BackgroundTrack.stop()
+	if audioPlayback:
+		remove_child(audioPlayback)
 	
-	$BackgroundTrack.stream = stream
-	$BackgroundTrack.play()
+
 	
+	audioPlayback = AudioPlaybackTimeline.new(stream,stream.beat_count * 3)
+	audioPlayback.DurationMet.connect(HandleCurrentPlaybackDurationMet)
+	
+	add_child(audioPlayback)
+	audioPlayback.Start()
 	set_process(true)
 	
-	
 
-
-func SetCurrentStateInstance(stateInstance : RhythmStateInstance):
-	currentStateInstance = stateInstance
-	currentStateInstance.SetTimeData(timingHead)
 
 	
-	#soooo now that the instance is loaded, we now want to basically wait till its time is up based on the core timer
-	#lets start the actual core timer now I suppose
-	#so background audio isn't connected to actual gameplay states keep in mind, but it should always be ticking
 	
-	#lets create a debug dispaly for time really quick
+func _process(delta: float) -> void:
+	$Debug/TimeDebug/Time.text = str(audioPlayback.bufferTime)
+	$Debug/TimeDebug/Beats.text = str(audioPlayback.timeInBeats)
 	
-	
-	#so some states may actually contain an audio thing we start, like listen states.... but that can happen later I think
-	#ok so the state instance is set, we're basically good to start playing audio assuming we have a duration for the state
-	#we dont right now though so lets add that
-	
+	$Debug/TimeDebug/TotalTime.text = str(audioPlayback.totalTime)
+	$Debug/TimeDebug/TotalBeats.text = str(audioPlayback.totalTimeBeats)
 
 
+func HandleCurrentPlaybackDurationMet():
+	audioPlayback.stop()
+	CurrentTrackDone.emit()
 
 
+func GetCurrentPlaybackPositionBeats():
+	return audioPlayback.totalTimeBeats
 
-
-
-#ok so now how do we handle stopping early, 
-#well, we use the head
-
-func _process(delta):
-	var bufferTime = $BackgroundTrack.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
-
-	#loop
-	if( lastTime - bufferTime > 1.0):
-		lastTime = bufferTime
-		timingHead += $BackgroundTrack.stream.get_length()
-	
-	#check for inaccuracy and discard
-	if(bufferTime < lastTime): return
-	
-	
-	lastTime = bufferTime
-	timeInBeats = bufferTime * bps
-	
-	$Debug/TimeDebug/Time.text = str(bufferTime)
-	$Debug/TimeDebug/Beats.text = str(timeInBeats)
-
-	totalTime = timingHead + bufferTime
-	totalTimeBeats = totalTime * bps
-	
-	$Debug/TimeDebug/TotalTime.text = str(totalTime)
-	$Debug/TimeDebug/TotalBeats.text = str(totalTimeBeats)
-	
-
-	#check if we're done with the current state
-	
-	if currentStateInstance.CheckIfDone(totalTimeBeats):
-		$BackgroundTrack.stop()
-		set_process(false)
-		
-
-
-
-
-
-
+func GetCurrentTrackLoopDuration():
+	return audioPlayback.stream.beat_count

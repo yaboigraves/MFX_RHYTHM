@@ -10,25 +10,26 @@ signal transitioned(state)
 
 @export var autostart : bool = true
 
+@export var enabled : bool = true
+
 func _ready() -> void:
 
-	await owner.ready
+#	await owner.ready
 
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
-		
 		child.state_machine = self
-	
-	set_process(false)
-	set_physics_process(false)
-	set_process_unhandled_input(false)
+
 	
 	if autostart:
 		state.enter()
 		set_process(true)
 		set_physics_process(true)
 		set_process_unhandled_input(true)
-
+	else:
+		set_process(false)
+		set_physics_process(false)
+		set_process_unhandled_input(false)
 
 
 func StartMachine():
@@ -36,6 +37,7 @@ func StartMachine():
 	set_physics_process(true)
 	set_process_unhandled_input(true)
 	state.enter()
+	
 
 
 
@@ -44,7 +46,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
 func _process(delta: float) -> void:
-	state.update(delta)
+	if enabled:
+		state.update(delta)
 
 
 func _physics_process(delta: float) -> void:

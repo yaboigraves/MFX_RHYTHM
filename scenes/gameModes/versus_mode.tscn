@@ -102,6 +102,57 @@ offset_bottom = 350.0
 pivot_offset = Vector2(250, 250)
 player = NodePath("../../../../PlayerManager/Player2")
 
+[node name="HardwareClockMetronome" type="Node" parent="."]
+script = ExtResource("22_hx1kf")
+
+[node name="PlayerManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("21_ureb2")
+
+[node name="Player1" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
+radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
+characterHUD = NodePath("../../GameModeHUD")
+
+[node name="Player2" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
+radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
+characterHUD = NodePath("../../GameModeHUD")
+
+[node name="RhythmStateMachine" type="Node" parent="."]
+script = ExtResource("17_j5sis")
+initial_state = NodePath("Listen")
+autostart = false
+
+[node name="Listen" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
+script = ExtResource("23_mcdn6")
+durationBeats = 3.7
+nextState = NodePath("../Record")
+
+[node name="Record" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
+script = ExtResource("23_mcdn6")
+nextState = NodePath("../Verify")
+
+[node name="Verify" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
+script = ExtResource("23_mcdn6")
+durationBeats = 4.3
+nextState = NodePath("../Listen")
+
+[node name="--obselete" type="Node" parent="."]
+
+[node name="VersusModeStateMachine" type="Node" parent="."]
+script = ExtResource("17_j5sis")
+initial_state = NodePath("ListenMode")
+autostart = false
+
+[node name="ListenMode" type="Node" parent="VersusModeStateMachine"]
+script = ExtResource("19_0bhwm")
+metronome = ExtResource("19_gc8f8")
+rules = ExtResource("2_vbi41")
+
+[node name="FreeMode" type="Node" parent="VersusModeStateMachine"]
+script = ExtResource("18_wm73p")
+metronome = ExtResource("19_gc8f8")
+rules = ExtResource("2_vbi41")
+
 [node name="GameModeHUD" type="CanvasLayer" parent="."]
 script = ExtResource("4_ktixk")
 defaultCharIcon = ExtResource("5_mh7fu")
@@ -242,55 +293,6 @@ theme = ExtResource("13_hi3yp")
 text = "QUIT"
 
 [node name="CharResetTimer" type="Timer" parent="GameModeHUD/Control"]
-
-[node name="VersusModeStateMachine" type="Node" parent="."]
-script = ExtResource("17_j5sis")
-initial_state = NodePath("ListenMode")
-autostart = false
-
-[node name="ListenMode" type="Node" parent="VersusModeStateMachine"]
-script = ExtResource("19_0bhwm")
-metronome = ExtResource("19_gc8f8")
-rules = ExtResource("2_vbi41")
-
-[node name="FreeMode" type="Node" parent="VersusModeStateMachine"]
-script = ExtResource("18_wm73p")
-metronome = ExtResource("19_gc8f8")
-rules = ExtResource("2_vbi41")
-
-[node name="PlayerManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("21_ureb2")
-
-[node name="Player1" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
-radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
-characterHUD = NodePath("../../GameModeHUD")
-
-[node name="Player2" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
-radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
-characterHUD = NodePath("../../GameModeHUD")
-
-[node name="HardwareClockMetronome" type="Node" parent="."]
-script = ExtResource("22_hx1kf")
-
-[node name="RhythmStateMachine" type="Node" parent="."]
-script = ExtResource("17_j5sis")
-initial_state = NodePath("Listen")
-autostart = false
-
-[node name="Listen" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
-script = ExtResource("23_mcdn6")
-durationBeats = 3.7
-nextState = NodePath("../Record")
-
-[node name="Record" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
-script = ExtResource("23_mcdn6")
-nextState = NodePath("../Verify")
-
-[node name="Verify" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
-script = ExtResource("23_mcdn6")
-durationBeats = 4.3
-nextState = NodePath("../Listen")
 
 [connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]
 [connection signal="timeout" from="GameModeHUD/Control/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]

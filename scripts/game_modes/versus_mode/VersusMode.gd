@@ -7,34 +7,24 @@ var gameStateHistory : Array[GameState]
 
 var currentGameState : GameState
 
-var stateMachine : StateMachine
+@export var debugStream : AudioStreamOggVorbis
 
-#ok so basically when we start a battle we wanna do a sample lead in
-#present both players with what theyll be drumming to
-#countdown will annoy me though just add it later
-#so the flow is 
+#so lets start by starting the metronome I suppose yeah
+#we kinda just need a script that resolves next state
+#this kinda ought to be the like rules thing
+#but eh its whatever
+#lets just get one basic input phase working
 
-#we start off by showing both players the sample they're playing
-#this is the "listen phase"
-
-#players should basically just be able to make their little dudes fuck around
-
-#I think we ought to like, bake durations into these phases maybe
-#it would be really nice to just be able to plug in a duration
-#then the state just ties in...
-
-#audio should maybe like start and stop too?
-#lets try and fuck around with that here
-#I dont really want to refactor this too much
-#keeping a core clock is probably a bad idea too
-#so, can we do seamlesss audio playback like that?
-
-#
-
+#we gotta rework the UI a bit after this too
+#its code is so stinky
 
 func Start():
-	stateMachine = $VersusModeStateMachine as StateMachine
-	stateMachine.StartMachine()
+	#start the stream
+	HardwareClockMetronome.instance.PlayStream(debugStream)
+	#start the state machine and go into listen mode
+	$RhythmStateMachine.StartMachine()
+
+
 
 func Quit():
 	print("this is where we would quit")

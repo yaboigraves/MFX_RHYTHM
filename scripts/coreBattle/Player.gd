@@ -33,7 +33,7 @@ var stateMachine : StateMachine
 
 func _ready():
 	stateMachine = %PlayerStateMachine as StateMachine
-	stateMachine.StartMachine()
+
 
 
 func StartRecording(gameState: GameState):

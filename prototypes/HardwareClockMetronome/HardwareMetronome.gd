@@ -44,7 +44,7 @@ func PlayStream(stream:AudioStreamOggVorbis):
 	
 
 	
-	audioPlayback = AudioPlaybackTimeline.new(stream,stream.beat_count * 3)
+	audioPlayback = AudioPlaybackTimeline.new(stream)
 	audioPlayback.DurationMet.connect(HandleCurrentPlaybackDurationMet)
 	
 	add_child(audioPlayback)
@@ -55,13 +55,6 @@ func PlayStream(stream:AudioStreamOggVorbis):
 
 	
 	
-func _process(delta: float) -> void:
-	$Debug/TimeDebug/Time.text = str(audioPlayback.bufferTime)
-	$Debug/TimeDebug/Beats.text = str(audioPlayback.timeInBeats)
-	
-	$Debug/TimeDebug/TotalTime.text = str(audioPlayback.totalTime)
-	$Debug/TimeDebug/TotalBeats.text = str(audioPlayback.totalTimeBeats)
-
 
 func HandleCurrentPlaybackDurationMet():
 	audioPlayback.stop()

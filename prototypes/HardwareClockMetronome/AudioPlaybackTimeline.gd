@@ -47,5 +47,5 @@ func _process(delta: float) -> void:
 
 	totalTimeBeats = totalTime * bps
 
-	if totalTimeBeats >= duration:
+	if duration > 0 and totalTimeBeats >= duration:
 		DurationMet.emit()

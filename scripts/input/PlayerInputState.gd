@@ -1,8 +1,12 @@
 class_name PlayerInputState
 extends State
 
-#these I think can actually roughly stay the same, and can be controlled by rhythm states
-#rhyth
+
+
+#we can remove all the duration nonsense from this and just record input
+#we can just ref the times of the metronome when input opens
+#ez pz
+
 
 signal Goodhit(hit:Hit)
 signal BadHit(hit:Hit)
@@ -29,8 +33,7 @@ func enter(args ={}):
 	startTime = metronome.timeInBeats
 	duration = rules.loopBeatSize
 	endTime = startTime + duration
-	print("starting at " ,startTime)
-	print(duration)
+
 	#so when a state gets entered, quue it to end?
 	player.radialUI.HandleStateStart(self)
 	if not metronome.is_connected("Tick",onMetronomeTick):

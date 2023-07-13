@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://i48m18tj8uty"]
+[gd_scene load_steps=27 format=3 uid="uid://i48m18tj8uty"]
 
 [ext_resource type="Script" path="res://scripts/game_modes/versus_mode/VersusMode.gd" id="1_a7s7d"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_vbi41"]
 [ext_resource type="PackedScene" uid="uid://b25q4rbpyn8sc" path="res://scenes/input_windowradial_rhythm_display.tscn" id="3_jtocp"]
+[ext_resource type="Script" path="res://scripts/coreBattle/GameModeRules.gd" id="3_sluik"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="4_ktixk"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="5_mh7fu"]
 [ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="6_tpwaq"]
@@ -21,13 +22,22 @@
 [ext_resource type="Resource" uid="uid://dfqo2ywh50y1i" path="res://resources/metronome.tres" id="19_gc8f8"]
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="21_ureb2"]
 [ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="22_ft3jc"]
-[ext_resource type="Script" path="res://scripts/audio/BattleAudioManager.gd" id="23_nd2m4"]
+[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="22_hx1kf"]
+[ext_resource type="Script" path="res://scripts/patterns/RhythmStateMachine/RhythmState.gd" id="23_mcdn6"]
+
+[sub_resource type="Resource" id="Resource_nvxg8"]
+script = ExtResource("3_sluik")
+windowSize = 0.016
+loopBeatSize = 8.0
+badZoneSize = 0.032
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_27et8"]
 
 [node name="GameMode" type="Node" node_paths=PackedStringArray("player")]
 script = ExtResource("1_a7s7d")
+debugStream = ExtResource("16_wj5rw")
 player = NodePath("PlayerManager/Player1")
+rules = SubResource("Resource_nvxg8")
 
 [node name="RadialUI" type="CanvasLayer" parent="."]
 
@@ -238,17 +248,15 @@ script = ExtResource("17_j5sis")
 initial_state = NodePath("ListenMode")
 autostart = false
 
-[node name="ListenMode" type="Node" parent="VersusModeStateMachine" node_paths=PackedStringArray("battleAudio")]
+[node name="ListenMode" type="Node" parent="VersusModeStateMachine"]
 script = ExtResource("19_0bhwm")
 metronome = ExtResource("19_gc8f8")
 rules = ExtResource("2_vbi41")
-battleAudio = NodePath("../../BattleAudioManager")
 
-[node name="FreeMode" type="Node" parent="VersusModeStateMachine" node_paths=PackedStringArray("battleAudio")]
+[node name="FreeMode" type="Node" parent="VersusModeStateMachine"]
 script = ExtResource("18_wm73p")
 metronome = ExtResource("19_gc8f8")
 rules = ExtResource("2_vbi41")
-battleAudio = NodePath("../../BattleAudioManager")
 
 [node name="PlayerManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -262,11 +270,27 @@ characterHUD = NodePath("../../GameModeHUD")
 radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
 characterHUD = NodePath("../../GameModeHUD")
 
-[node name="BattleAudioManager" type="Node" parent="."]
-script = ExtResource("23_nd2m4")
-metronome = ExtResource("19_gc8f8")
+[node name="HardwareClockMetronome" type="Node" parent="."]
+script = ExtResource("22_hx1kf")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BattleAudioManager"]
+[node name="RhythmStateMachine" type="Node" parent="."]
+script = ExtResource("17_j5sis")
+initial_state = NodePath("Listen")
+autostart = false
+
+[node name="Listen" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
+script = ExtResource("23_mcdn6")
+durationBeats = 3.7
+nextState = NodePath("../Record")
+
+[node name="Record" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
+script = ExtResource("23_mcdn6")
+nextState = NodePath("../Verify")
+
+[node name="Verify" type="Node" parent="RhythmStateMachine" node_paths=PackedStringArray("nextState")]
+script = ExtResource("23_mcdn6")
+durationBeats = 4.3
+nextState = NodePath("../Listen")
 
 [connection signal="pressed" from="GameModeHUD/Control/PauseUI/Panel/QuitButton" to="." method="Quit"]
 [connection signal="timeout" from="GameModeHUD/Control/CharResetTimer" to="GameModeHUD" method="_on_char_reset_timer_timeout"]

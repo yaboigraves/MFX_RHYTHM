@@ -9,10 +9,8 @@ var gameModeDictionary:Dictionary = {
 }
 
 @export var currentGameModeType : GameModeType
-@export var metronome : Metronome
+
 var currentGameMode : GameMode
-
-
 
 func StartGame():
 	LoadGameMode()

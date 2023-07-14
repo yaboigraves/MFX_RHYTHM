@@ -8,6 +8,7 @@ extends State
 #ez pz
 
 
+signal HitPerformed(hit:Hit)
 signal Goodhit(hit:Hit)
 signal BadHit(hit:Hit)
 signal Missedhit(hit:Hit)

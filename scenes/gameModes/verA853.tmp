@@ -133,6 +133,7 @@ durationBeats = 3.7
 
 [node name="Record" type="Node" parent="RhythmStateMachine"]
 script = ExtResource("10_l4nj4")
+durationBeats = null
 
 [node name="Verify" type="Node" parent="RhythmStateMachine"]
 script = ExtResource("11_w3vik")

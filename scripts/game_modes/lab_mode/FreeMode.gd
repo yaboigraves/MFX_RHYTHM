@@ -7,20 +7,20 @@ func enter(_msg := {}) -> void:
 	super.enter()
 	
 	battleAudio.PlayBackgroundTrack()
-	player.StartRecording(currentGameState)
+	player.StartRecording()
 	
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
 
 
 func HandleRecordStateEnd():
-	player.StartVerifying(currentGameState)
+	player.StartVerifying()
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleVerifyStateEnd, true)
 	
 
 func HandleVerifyStateEnd():
 	var nextGameState : GameState = GameState.new(currentGameState.lengthInBeats)
 	currentGameState = nextGameState
-	player.StartRecording(currentGameState)
+	player.StartRecording()
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
 
 

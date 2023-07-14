@@ -8,22 +8,6 @@ extends Node
 @export var metronome : Metronome
 
 
-#so the states can signal stuff needs to happen
-#and then we can call it here directly
-
-#what needs to happen
-#spawn markers
-#clean markers up
-#do stuff with the character hud
-#fill stuff
-#yeah makes sense to me
-#just signal up
-
-#yeah wait I thought I refactored this
-#the player can just have a ref to steer the uis
-#we dont really need to do this with signals at all
-#lets replace all signal areas with direct function calls
-
 signal SpawnMarker(hit:Hit)
 signal HitProcessed(hit: Hit, hitResult : HitResult)
 signal RecordStateProgressUpdate(progress:float)
@@ -36,11 +20,19 @@ func _ready():
 
 
 
-func StartRecording(gameState: GameState):
-	stateMachine.transition_to("RecordState", {"gameState" : gameState})
+func StartRecording():
+	stateMachine.transition_to("RecordState")
 
-func StartVerifying(gameState: GameState):
-	stateMachine.transition_to("VerifyState", {"gameState" : gameState})
+func GetRecordedPattern():
+	return (stateMachine.state as RecordState).recordedHits
+
+
+#so the targets get weird here
+#but actually the timing has fundamentally changed
+#so verify works different but I wanted it dumb simple
+
+func StartVerifying():
+	stateMachine.transition_to("VerifyState")
 
 func GoIdle():
 	stateMachine.transition_to("IdleState")
@@ -49,3 +41,4 @@ func GoIdle():
 func _on_player_input_handler_hit(index) -> void:
 	#so the issue is the time we just hit is actually inaccurate
 	stateMachine.state.HandleHit(index,metronome.timeInBeats) 
+

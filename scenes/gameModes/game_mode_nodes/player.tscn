@@ -21,7 +21,6 @@
 [node name="Player" type="Node"]
 script = ExtResource("1_6p015")
 gameRules = ExtResource("2_crf4l")
-metronome = ExtResource("3_tlaf4")
 
 [node name="PlayerStateMachine" type="Node" parent="."]
 unique_name_in_owner = true

@@ -5,7 +5,6 @@ extends Node
 @export var characterHUD : Node
 
 @export var gameRules:GameModeRules
-@export var metronome : Metronome
 
 
 signal SpawnMarker(hit:Hit)
@@ -19,9 +18,12 @@ func _ready():
 	stateMachine = %PlayerStateMachine as StateMachine
 
 
-
 func StartRecording():
 	stateMachine.transition_to("RecordState")
+	
+	#tell their radial ui to start rotating
+	radialUI.ToggleRotation(true)
+	
 
 func GetRecordedPattern():
 	return (stateMachine.state as RecordState).recordedHits
@@ -40,5 +42,5 @@ func GoIdle():
 
 func _on_player_input_handler_hit(index) -> void:
 	#so the issue is the time we just hit is actually inaccurate
-	stateMachine.state.HandleHit(index,metronome.timeInBeats) 
+	stateMachine.state.HandleHit(index,HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()) 
 

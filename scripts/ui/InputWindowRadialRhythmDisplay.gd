@@ -43,11 +43,26 @@ func _ready():
 	
 	player.HitProcessed.connect(OnHitProcessed)
 	player.SpawnMarker.connect(SpawnMarker)
-#what if states just pass themselves in	
+	set_process(false)
+
+#this has wayyyy too many responsibilities too
+#so a refactor of this is well in order
+#for now lets just get it working again with the new core drivers
+
+
+func ToggleRotation(toggle: bool):
+	set_process(toggle)
+
+
+func _process(delta: float) -> void:
+	var timeBeats = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()
+	
+	for hit in markerHitMap.keys():
+		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
+
+
 
 func HandleStateStart(state):
-#	print(state)
-#	print("eee")
 	phaseView.SetPhase(state)
 
 
@@ -190,7 +205,9 @@ func SpawnMarker(hit:Hit):
 	markers.append(shape)
 	markerHitMap[hit] = shape
 
-	
+
+#so this should be just like, a process function I suppose
+
 func _on_metronome_tick(timeSeconds, timeBeats) -> void:
 #	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
 	

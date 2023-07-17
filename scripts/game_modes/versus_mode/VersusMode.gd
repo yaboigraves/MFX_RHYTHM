@@ -13,14 +13,14 @@ var stateMachine : RhythmStateMachine
 @export var player1 : Player
 @export var player2 : Player
 
-var currentOffensePlayer
 
+var currentRound: Round
 
 func Start():
 
 	stateMachine = $RhythmStateMachine as RhythmStateMachine
 	
-	currentOffensePlayer = player1
+	currentRound = Round.new(player1,player2)
 	
 	HardwareClockMetronome.instance.PlayStream(debugStream)
 	
@@ -76,19 +76,61 @@ func Start():
 #next todo is to code this thing to resolve the next state
 
 
-#TODO: actually implement!!
+#ok lets do this
+#so the first thing we wanna do is track the "offense player"
+
+#this is kinda tricky actually hmmm
+#so state is dependent on like, several things here
+
+#so lets just start with listen state
+#listen state can be going into a record state if the previous player failed
+#listen state initially goes into the record state at the start of a round
+#listen state can also be going to verify state is the previous player suceeded their recording
+#so i suppose what we need is some data for like a "round"
+#a round represents a sequence of states
+#so when a state ends, I suppose we can look at the current rounds status
+#rounds have offense players that record, and defense players
+#we can also track if playes have succeded or failed that way
+#so lets make this like "round" object I suppose
+#more or less it can stamp gamestate kind of
+#each round can contain a sample it uses too I suppose
+
+#can this just like exist in here though?
+#kinda but it would be super awkward
+#ok so now we're kind of gridlocked cause UI has to actually work to test the verify state
+
+#so
+#I suppose now what we do, is have players state machines drive their updates
+#or something
+#no thats bad
+
+#so when a player starts recording, we start the rotation of the UI
+
+
+
 func ResolveNextState():
 	var endingState = stateMachine.state as RhythmState
 	
 	if endingState is ListenRhythmState:
-		stateMachine.transition_to("Record", {"player" : currentOffensePlayer})
+		ListenResolveNextState()
 	elif endingState is RecordRhythmState:
-		pass
+		RecordResolveNextState()
 	elif endingState is VerifyRhythmState:
 		pass
 	
-	
 
+
+
+func ListenResolveNextState():
+	if not currentRound.offensePlayerWent:
+		stateMachine.transition_to("Record", {"player": currentRound.offensePlayer})
+		
+
+func RecordResolveNextState():
+	currentRound.offensePlayerWent = true
+	stateMachine.transition_to("Verify", {"player": currentRound.offensePlayer})
+	
+	
 func Quit():
 	print("this is where we would quit")
 	

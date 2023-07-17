@@ -21,7 +21,7 @@ var totalTimeBeats : float = 0.0
 
 #old stuff I really want to refactor out a different way
 var lastTime :float = 0.0
-var timeInBeats: float
+
 var bps :float
 var duration:float
 

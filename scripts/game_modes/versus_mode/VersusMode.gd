@@ -111,6 +111,12 @@ func Start():
 func ResolveNextState():
 	var endingState = stateMachine.state as RhythmState
 	
+	#once a state ends, we want to update the round state
+	#moreso we we want the round to kind of do this
+	
+	currentRound.UpdateRoundState(endingState)
+	
+	
 	if endingState is ListenRhythmState:
 		ListenResolveNextState()
 	elif endingState is RecordRhythmState:
@@ -123,12 +129,12 @@ func ResolveNextState():
 
 func ListenResolveNextState():
 	if not currentRound.offensePlayerWent:
-		stateMachine.transition_to("Record", {"player": currentRound.offensePlayer})
-		
+		stateMachine.transition_to("Record", {"round": currentRound})
+
+
 
 func RecordResolveNextState():
-	currentRound.offensePlayerWent = true
-	stateMachine.transition_to("Verify", {"player": currentRound.offensePlayer})
+	stateMachine.transition_to("Verify", {"round": currentRound})
 	
 	
 func Quit():

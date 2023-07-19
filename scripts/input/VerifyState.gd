@@ -1,10 +1,11 @@
 class_name VerifyState
 extends PlayerInputState
 
-signal ComboUpdate(combo)
+#ahh we're doing this now lol
+#ok
+#this probably deserves a proper sit down
 
-#processing actually only happens here jk
-#todo: this ought to modify game state with some kind of accuracy results later
+signal ComboUpdate(combo)
 
 var targetHits
 
@@ -19,13 +20,18 @@ func initialize():
 
 func enter(_msg := {}) -> void:
 	super.enter()
+	
+	
+	
 	targetHits = _msg["gameState"].recordedHits
 	combo = 0
-	metronome._on_player_beat_phase_callback(8, EvaluateNextState, true)
-
-
-
 	
+	#so we get the target hits from the gamestate object rn
+	#this isnt that good, we can get this from the round now
+	#so when we enter an input state, we can get context from the round
+	
+	
+
 func EvaluateNextState():
 	player.emit_signal("TurnDone")
 
@@ -74,7 +80,7 @@ func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
 		for hit in targetHits[i]:
-			if(hit.time + rules.loopBeatSize + (rules.windowSize ) <= metronome.timeInBeats):
+			if(hit.time + rules.loopBeatSize + (rules.windowSize ) <= HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()):
 				missedHits.append(hit)
 				emit_signal("Missedhit",hit)
 				

@@ -46,12 +46,10 @@ func HandleHit(index, timeInBeats):
 	var hit = Hit.new(index,timeInBeats,startTime,HitType.RECORD)
 	recordedHits[hit.laneIndex].append(hit)
 	
-	#we ought to have hit emissions for each state?
-	#this part is kinda bad
-	#player should just be listening to a signal for hits in general
-	#in hindsight i dont really love this
-	player.emit_signal("SpawnMarker",hit)
-	emit_signal("Goodhit",hit)
+	
+	player.SpawnMarker.emit(hit)
+	Goodhit.emit(hit)
+
 
 func _on_input_spoofer_spoof_hit(lane, time) -> void:
 	HandleHit(lane,time)

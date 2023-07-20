@@ -20,11 +20,8 @@ func enter(args = {}):
 
 func FigureOutIfOffenseOrDefense():
 	if !round.roundPatternVerified:
-		
-		print(round.recordedPattern)
-		
 		round.recordingPlayer.StartVerifying(round.recordedPattern)
 	
 	elif round.roundPatternVerified:
 		round.defendingPlayer.StartVerifying(round.recordedPattern)
-
+		round.recordingPlayer.GoIdle()

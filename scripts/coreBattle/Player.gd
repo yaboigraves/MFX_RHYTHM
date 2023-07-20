@@ -33,6 +33,7 @@ func EvaluateVerification():
 	return result
 
 func StartVerifying(pattern):
+
 	stateMachine.transition_to("VerifyState", {"pattern" : pattern})
 
 func GoIdle():

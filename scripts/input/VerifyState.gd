@@ -21,14 +21,8 @@ func initialize():
 func enter(_msg := {}) -> void:
 	super.enter()
 	
-	
-	
-	targetHits = _msg["pattern"]
+	targetHits = _msg["pattern"].duplicate(true)
 	combo = 0
-	
-	#so we get the target hits from the gamestate object rn
-	#this isnt that good, we can get this from the round now
-	#so when we enter an input state, we can get context from the round
 	
 	
 
@@ -87,7 +81,7 @@ func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
 		for hit in targetHits[i]:
-			if(hit.time + rules.loopBeatSize + (rules.windowSize ) <= HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()):
+			if(hit.time + (rules.windowSize ) <= HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()):
 				missedHits.append(hit)
 				emit_signal("Missedhit",hit)
 				
@@ -95,8 +89,13 @@ func CheckForMissedHits():
 				combo = 0
 				
 	for hit in missedHits:
+		#ahah so we have discovered the culprit
+		#we were permutating state like a dumby
+		#uhh this is kinda the problem with like, using a globally accessible array i guess
+		#we shouldnt be erasing from it like this
 		targetHits[hit.laneIndex].erase(hit)
-
+		print("erasing a hit?")
+		
 func EvaluateVerification():
 	pass
 	#did the player do good enough to pass?

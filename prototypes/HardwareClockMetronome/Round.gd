@@ -6,18 +6,18 @@ extends RefCounted
 var recordingPlayer: Player
 var defendingPlayer: Player
 
-var roundPatternRecorded: bool
-var roundPatternVerified: bool
-var verificationFailed : bool
+var roundPatternRecorded: bool = false
+var roundPatternVerified: bool = false
+var verificationFailed : bool = false
 
-var defendingPlayerVerified:bool
+var defendingPlayerVerified:bool = false
 
 var recordedPattern:Array = [[],[],[],[]]
 
 func _init(recordingPlayer: Player, defendingPlayer :Player):
 	self.recordingPlayer = recordingPlayer
 	self.defendingPlayer = defendingPlayer
-	
+
 
 
 #wait can we maybe just do this in the exit of states????
@@ -25,16 +25,18 @@ func _init(recordingPlayer: Player, defendingPlayer :Player):
 
 func UpdateRoundState(endingState):
 	if endingState is RecordRhythmState:
-		recordedPattern = endingState.GetRecordedPattern()
+		recordedPattern = endingState.GetRecordedPattern().duplicate(false)
 		roundPatternRecorded = true
+		
 	
-	
-	if endingState is VerifyRhythmState:
-		#so first which player are we looking at
-		#if we havent verified, we're looking at the recording player
+	elif endingState is VerifyRhythmState:
 		if !roundPatternVerified:
+			print(recordedPattern)
 			var results = recordingPlayer.EvaluateVerification()
 			if results:
 				roundPatternVerified = true
 			else:
 				verificationFailed = true
+		
+		elif roundPatternVerified:
+			defendingPlayerVerified = true

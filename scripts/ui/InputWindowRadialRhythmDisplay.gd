@@ -219,7 +219,8 @@ func ClearAllMarkers():
 func _on_player_input_handler_escape() -> void:
 	ClearAllMarkers()
 
-	
+#ahh yeah so we're killing state stuff here
+#which 
 func _on_verify_state_missed_hit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1) -hit.laneIndex) * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
@@ -256,6 +257,7 @@ func onGoodHit(hit) -> void:
 func onDestroyMiss(hit):
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
+	#our handling of all this is bad fix later
 	markerHitMap[hit].queue_free()
 	markers.erase(markerHitMap[hit])
 	markerHitMap.erase(hit)

@@ -105,8 +105,9 @@ func Start():
 
 func ResolveNextState():
 	var endingState = stateMachine.state as RhythmState
-	
+
 	currentRound.UpdateRoundState(endingState)
+
 	
 	if endingState is ListenRhythmState:
 		ListenResolveNextState()
@@ -119,6 +120,7 @@ func ResolveNextState():
 func ListenResolveNextState():
 	if not currentRound.roundPatternRecorded:
 		stateMachine.transition_to("Record", {"round": currentRound})
+	
 
 
 func RecordResolveNextState():
@@ -126,7 +128,7 @@ func RecordResolveNextState():
 
 func VerifyResolveNextState():
 	#so we're for sure going into listen
-	print("resolving next verify state")
+
 	
 	if !currentRound.defendingPlayerVerified and currentRound.roundPatternVerified:
 		#go into a double verify for the defending player
@@ -134,9 +136,10 @@ func VerifyResolveNextState():
 
 	elif currentRound.defendingPlayerVerified or (currentRound.roundPatternRecorded and currentRound.verificationFailed):
 		#we're resetting and going back to listen with the defending player being the offense player now
-		var newRound = Round.new(currentRound.defendingPlayer, currentRound.recordingPlayer)
-		stateMachine.transition_to("Listen", {"round": newRound})
-
+		currentRound = Round.new(currentRound.defendingPlayer, currentRound.recordingPlayer)
+		
+		stateMachine.transition_to("Listen", {"round": currentRound})
+		
 	
 func Quit():
 	print("this is where we would quit")

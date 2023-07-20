@@ -119,7 +119,7 @@ radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythm
 characterHUD = NodePath("../../GameModeHUD")
 
 [node name="Player2" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
-radialUI = NodePath("../../RadialUI/RootContainer/P1Root/InputWindowRadialRhythmDisplay")
+radialUI = NodePath("../../RadialUI/RootContainer/P2Root/InputWindowRadialRhythmDisplay")
 characterHUD = NodePath("../../GameModeHUD")
 
 [node name="RhythmStateMachine" type="Node" parent="."]

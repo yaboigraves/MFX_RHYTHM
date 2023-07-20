@@ -20,6 +20,9 @@ func _init(recordingPlayer: Player, defendingPlayer :Player):
 	
 
 
+#wait can we maybe just do this in the exit of states????
+#lets see....
+
 func UpdateRoundState(endingState):
 	if endingState is RecordRhythmState:
 		recordedPattern = endingState.GetRecordedPattern()

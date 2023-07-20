@@ -196,7 +196,7 @@ func DrawInputWindows():
 		%InputWindows.add_child(inputWindowView.shape)
 	
 
-	
+
 func SpawnMarker(hit:Hit):
 	var indexPos = (numLanes - 1) - hit.laneIndex
 	var shape = CreateArcSection(indexPos, markerColors[indexPos])
@@ -208,11 +208,6 @@ func SpawnMarker(hit:Hit):
 
 #so this should be just like, a process function I suppose
 
-func _on_metronome_tick(timeSeconds, timeBeats) -> void:
-#	%Markers.rotation =  origin.angle() + ((timeBeats * PI)/(beatsPerRotation/2.0))
-	
-	for hit in markerHitMap.keys():
-		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 
 		
 func ClearAllMarkers():

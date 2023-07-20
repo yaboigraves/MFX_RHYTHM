@@ -75,6 +75,7 @@ func CheckHit(hit:Hit):
 	#hmm this might literally work the same
 	#var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize))
 	var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time))
+
 	if hitDifference <= rules.windowSize :
 		return HitResult.GOOD
 	

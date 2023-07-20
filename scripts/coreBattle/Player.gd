@@ -35,13 +35,18 @@ func EvaluateVerification():
 func StartVerifying(pattern):
 	stateMachine.transition_to("VerifyState", {"pattern" : pattern})
 
-
-
-
 func GoIdle():
 	stateMachine.transition_to("IdleState")
 
 
+func PreloadRecordedRhythm(pattern):
+	print(name, " preloading rhythm")
+	#TODO: spawn a marker for each of the values in the pattern
+	for lane in pattern:
+		for hit in lane:
+			radialUI.SpawnMarker(hit)
+	radialUI.ToggleRotation(true)
+	
 func _on_player_input_handler_hit(index) -> void:
 	#so the issue is the time we just hit is actually inaccurate
 	stateMachine.state.HandleHit(index,HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()) 

@@ -105,7 +105,7 @@ func Start():
 
 func ResolveNextState():
 	var endingState = stateMachine.state as RhythmState
-
+	
 	currentRound.UpdateRoundState(endingState)
 	
 	if endingState is ListenRhythmState:

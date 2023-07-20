@@ -12,18 +12,19 @@ func enter(args = {}):
 	super.enter()
 	
 	round = args.round
+	
+	
 	FigureOutIfOffenseOrDefense()
 	
 
 
 func FigureOutIfOffenseOrDefense():
 	if !round.roundPatternVerified:
+		
 		print(round.recordedPattern)
+		
 		round.recordingPlayer.StartVerifying(round.recordedPattern)
 	
-	if round.roundPatternVerified:
+	elif round.roundPatternVerified:
 		round.defendingPlayer.StartVerifying(round.recordedPattern)
 
-	
-
-	

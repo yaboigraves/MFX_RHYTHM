@@ -28,13 +28,15 @@ func StartRecording():
 func GetRecordedPattern():
 	return (stateMachine.state as RecordState).recordedHits
 
+func EvaluateVerification():
+	var result = (stateMachine.state as VerifyState).EvaluateVerification()
+	return result
 
-#so the targets get weird here
-#but actually the timing has fundamentally changed
-#so verify works different but I wanted it dumb simple
+func StartVerifying(pattern):
+	stateMachine.transition_to("VerifyState", {"pattern" : pattern})
 
-func StartVerifying():
-	stateMachine.transition_to("VerifyState")
+
+
 
 func GoIdle():
 	stateMachine.transition_to("IdleState")
@@ -42,5 +44,5 @@ func GoIdle():
 
 func _on_player_input_handler_hit(index) -> void:
 	#so the issue is the time we just hit is actually inaccurate
-	stateMachine.state.HandleHit(index,HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()) 
+	stateMachine.state.HandleHit(index,HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()) 
 

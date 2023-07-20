@@ -60,6 +60,8 @@ func HandleCurrentPlaybackDurationMet():
 	audioPlayback.stop()
 	CurrentTrackDone.emit()
 
+func GetCurrentBufferPlaybackPositionBeats():
+	return audioPlayback.timeInBeats
 
 func GetCurrentPlaybackPositionBeats():
 	return audioPlayback.totalTimeBeats

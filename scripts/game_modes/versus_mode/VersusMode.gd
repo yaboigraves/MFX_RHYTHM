@@ -1,7 +1,6 @@
 class_name VersusMode
 extends GameMode
 
-
 var gameStateHistory : Array[GameState]
 
 var currentGameState : GameState
@@ -13,13 +12,11 @@ var stateMachine : RhythmStateMachine
 @export var player1 : Player
 @export var player2 : Player
 
-
 var currentRound: Round
 
 func Start():
 
 	stateMachine = $RhythmStateMachine as RhythmStateMachine
-	
 	currentRound = Round.new(player1,player2)
 	
 	HardwareClockMetronome.instance.PlayStream(debugStream)
@@ -104,38 +101,42 @@ func Start():
 #or something
 #no thats bad
 
-#so when a player starts recording, we start the rotation of the UI
-
-
+#so when a player starts recording, we start the rotation of the U
 
 func ResolveNextState():
 	var endingState = stateMachine.state as RhythmState
-	
-	#once a state ends, we want to update the round state
-	#moreso we we want the round to kind of do this
-	
+
 	currentRound.UpdateRoundState(endingState)
-	
 	
 	if endingState is ListenRhythmState:
 		ListenResolveNextState()
 	elif endingState is RecordRhythmState:
 		RecordResolveNextState()
 	elif endingState is VerifyRhythmState:
-		pass
-	
-
+		VerifyResolveNextState()
 
 
 func ListenResolveNextState():
-	if not currentRound.offensePlayerWent:
+	if not currentRound.roundPatternRecorded:
 		stateMachine.transition_to("Record", {"round": currentRound})
-
 
 
 func RecordResolveNextState():
 	stateMachine.transition_to("Verify", {"round": currentRound})
+
+func VerifyResolveNextState():
+	#so we're for sure going into listen
+	print("resolving next verify state")
 	
+	if !currentRound.defendingPlayerVerified and currentRound.roundPatternVerified:
+		#go into a double verify for the defending player
+		stateMachine.transition_to("Verify", {"round" : currentRound})
+
+	elif currentRound.defendingPlayerVerified or (currentRound.roundPatternRecorded and currentRound.verificationFailed):
+		#we're resetting and going back to listen with the defending player being the offense player now
+		var newRound = Round.new(currentRound.defendingPlayer, currentRound.recordingPlayer)
+		stateMachine.transition_to("Listen", {"round": newRound})
+
 	
 func Quit():
 	print("this is where we would quit")

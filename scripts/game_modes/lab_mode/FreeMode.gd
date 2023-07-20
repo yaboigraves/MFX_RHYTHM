@@ -13,7 +13,7 @@ func enter(_msg := {}) -> void:
 
 
 func HandleRecordStateEnd():
-	player.StartVerifying()
+	#player.StartVerifying()
 	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleVerifyStateEnd, true)
 	
 

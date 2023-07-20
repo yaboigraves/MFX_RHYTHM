@@ -2,7 +2,6 @@ class_name PlayerInputState
 extends State
 
 
-#TODO: refactor all of this out, because all of the timing info is contained in the greater states now
 
 
 signal HitPerformed(hit:Hit)

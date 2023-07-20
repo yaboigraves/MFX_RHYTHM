@@ -8,7 +8,7 @@ var player : Player
 func enter(args = {}):
 	super.enter()
 	round = args.round
-	player = round.offensePlayer
+	player = round.recordingPlayer
 	player.StartRecording()
 
 

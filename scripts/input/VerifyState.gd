@@ -23,7 +23,7 @@ func enter(_msg := {}) -> void:
 	
 	
 	
-	targetHits = _msg["gameState"].recordedHits
+	targetHits = _msg["pattern"]
 	combo = 0
 	
 	#so we get the target hits from the gamestate object rn
@@ -42,7 +42,10 @@ func exit():
 	
 func update(_delta: float):
 	super.update(_delta)
-	CheckForMissedHits()
+	
+	#disabled temporarily
+	#CheckForMissedHits()
+	
 	player.VerifyStateProgressUpdate.emit(progress)
 	#player.UpdateVerifyStateProgress(progress)
 
@@ -68,7 +71,10 @@ func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):
 		return HitResult.MISS
 
-	var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize))
+	#sooo
+	#hmm this might literally work the same
+	#var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize))
+	var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time))
 	if hitDifference <= rules.windowSize :
 		return HitResult.GOOD
 	
@@ -89,3 +95,8 @@ func CheckForMissedHits():
 				
 	for hit in missedHits:
 		targetHits[hit.laneIndex].erase(hit)
+
+func EvaluateVerification():
+	pass
+	#did the player do good enough to pass?
+	return true

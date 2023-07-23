@@ -207,12 +207,13 @@ func DrawInputWindows():
 
 #so maybe what this does instead is spawns an unoutline alpha faded version
 func SpawnMarker(hit:Hit):
+	
 	var indexPos = (numLanes - 1) - hit.laneIndex
-
+	inputWindowViews[3-hit.laneIndex].HandleGoodHit()
 	var a = 0.1
 	if hit.state is VerifyState:
 		a = 1
-		print("bingis")
+	
 		
 	var shape = CreateArcSection(indexPos, markerColors[indexPos],6,a)
 	%Markers.add_child(shape)
@@ -275,16 +276,13 @@ func onBadHit(hit) -> void:
 
 func onGoodHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
-	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
+	#%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
 
 	SpawnMarker(hit)
 
 	inputWindowViews[3 - hit.laneIndex].particleSystem.restart()
-	inputWindowViews[3-hit.laneIndex].HandleGoodHit()
 
-#fix this rn then we can be done
-#ok so when you like MISS MISS
-#so verify hits ought to come packed with the hit they're attempting to verify
+
 
 
 #so this is less of a destroy miss
@@ -292,6 +290,8 @@ func onGoodHit(hit) -> void:
 #TODO of course
 func onDestroyMiss(hit):
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
+	
+
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
 	#our handling of all this is bad fix later
 	markerHitMap[hit].queue_free()

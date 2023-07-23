@@ -1,13 +1,19 @@
 class_name VerifyState
 extends PlayerInputState
 
-#ahh we're doing this now lol
-#ok
-#this probably deserves a proper sit down
 
 signal ComboUpdate(combo)
 
 var targetHits
+var recordedHits = [[],[],[],[]]
+
+var targetHitQueue
+
+#so i want to add in a record of all the hits made in this state too
+#so we can compare
+#we also want to store a solid copy of the target hits
+
+
 
 var combo = 0 :
 	set(value):
@@ -22,6 +28,8 @@ func enter(_msg := {}) -> void:
 	super.enter()
 	
 	targetHits = _msg["pattern"].duplicate(true)
+	targetHitQueue = targetHits.duplicate(true)
+	recordedHits = [[],[],[],[]]
 	combo = 0
 	
 	
@@ -46,12 +54,7 @@ func update(_delta: float):
 func HandleHit(index, timeInBeats):
 	var hit = Hit.new(index,timeInBeats, 0, HitType.VERIFY,self)
 
-	#so this is an issue
-	#when we emit that a hit has been processed
-	#we emit the recorded hit
-	#which we should no longer do...
-	#reason being, we dont use that hit to remove anything anymore
-	#with this new approach
+	recordedHits[index].append(hit)
 	
 	
 	var hitResult = CheckHit(hit)
@@ -67,7 +70,6 @@ func HandleHit(index, timeInBeats):
 			emit_signal("Missedhit",hit)	
 		HitResult.DESTROY_MISS:
 			combo = 0
-			
 			player.emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
 			emit_signal("BadHit",hit)
 
@@ -106,8 +108,12 @@ func CheckForMissedHits():
 		#we shouldnt be erasing from it like this
 		targetHits[hit.laneIndex].erase(hit)
 
-		
+
+#this is probably best tracked per each hit...
 func EvaluateVerification():
-	pass
-	#did the player do good enough to pass?
+	for hit in recordedHits:
+		pass
+	
+
+	
 	return true

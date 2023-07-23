@@ -17,3 +17,4 @@ func _init(laneIndex,time, roundStartTime, hitType, state) -> void:
 	self.roundStartTime = roundStartTime
 	self.hitType = hitType
 	self.state = state
+

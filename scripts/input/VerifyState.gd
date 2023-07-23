@@ -45,11 +45,21 @@ func update(_delta: float):
 
 func HandleHit(index, timeInBeats):
 	var hit = Hit.new(index,timeInBeats, 0, HitType.VERIFY,self)
+
+	#so this is an issue
+	#when we emit that a hit has been processed
+	#we emit the recorded hit
+	#which we should no longer do...
+	#reason being, we dont use that hit to remove anything anymore
+	#with this new approach
+	
+	
 	var hitResult = CheckHit(hit)
 	match hitResult:
 		HitResult.GOOD:
 			combo += 1
-			player.emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
+			targetHits[hit.laneIndex].pop_front()
+			player.emit_signal("HitProcessed", hit, hitResult)			
 			emit_signal("Goodhit",hit)
 		HitResult.MISS:
 			combo = 0
@@ -57,6 +67,7 @@ func HandleHit(index, timeInBeats):
 			emit_signal("Missedhit",hit)	
 		HitResult.DESTROY_MISS:
 			combo = 0
+			
 			player.emit_signal("HitProcessed", targetHits[hit.laneIndex].pop_front(), hitResult)			
 			emit_signal("BadHit",hit)
 

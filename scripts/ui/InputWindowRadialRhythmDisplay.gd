@@ -106,7 +106,16 @@ func SetVerifyStateProgressRadial(progress):
 
 
 
-#this maybe ought to be seperated to like an autoload utilities func or something
+#TODO: make it so we can draw just on the top and bottom too
+#thats actually really smarttt
+
+#ok so lets first just get them overlapping at all
+#then make it so we can control the sides that the outlines get put on
+#that way we c an have you record with just like, sideways ones
+#also we can use like ++, + , o, -, -- and stamp that inside too
+#doesnt have to be NICE
+#less localization
+
 func CreateArcSection(index = 1, color = Color.DARK_GOLDENROD, outlineWidth = 10, alpha = 0.5):
 	
 	var poly = OutlinedPolygon2D.new()
@@ -196,10 +205,16 @@ func DrawInputWindows():
 		%InputWindows.add_child(inputWindowView.shape)
 	
 
-
+#so maybe what this does instead is spawns an unoutline alpha faded version
 func SpawnMarker(hit:Hit):
 	var indexPos = (numLanes - 1) - hit.laneIndex
-	var shape = CreateArcSection(indexPos, markerColors[indexPos])
+
+	var a = 0.1
+	if hit.state is VerifyState:
+		a = 1
+		print("bingis")
+		
+	var shape = CreateArcSection(indexPos, markerColors[indexPos],6,a)
 	%Markers.add_child(shape)
 	
 	markers.append(shape)
@@ -235,6 +250,7 @@ func _on_verify_state_missed_hit(hit) -> void:
 
 
 func OnHitProcessed(hit, hitResult) -> void:
+	print("Hit processed")
 	match hitResult:
 		HitResult.GOOD:
 			onGoodHit(hit)
@@ -250,15 +266,30 @@ func onBadHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"oops")
 
+
+#ok lets change this up
+#so instead of destroying a hit
+#so if you miss one I guess we can make it a miss color
+#like black or something
+
+
 func onGoodHit(hit) -> void:
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"nice")
-	markerHitMap[hit].queue_free()
-	markers.erase(markerHitMap[hit])
-	markerHitMap.erase(hit)
+
+	SpawnMarker(hit)
+
 	inputWindowViews[3 - hit.laneIndex].particleSystem.restart()
 	inputWindowViews[3-hit.laneIndex].HandleGoodHit()
 
+#fix this rn then we can be done
+#ok so when you like MISS MISS
+#so verify hits ought to come packed with the hit they're attempting to verify
+
+
+#so this is less of a destroy miss
+#lets just like, put a red x over it
+#TODO of course
 func onDestroyMiss(hit):
 	var pivotPos =  %InputWindows.global_position +  (Vector2((startDist + (laneSize * 0.5) + (((numLanes -1)- hit.laneIndex)  * laneSize )),0)).rotated(origin.angle())
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")

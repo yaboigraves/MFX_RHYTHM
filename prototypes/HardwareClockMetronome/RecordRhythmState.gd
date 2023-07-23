@@ -16,3 +16,4 @@ func GetRecordedPattern():
 func exit():
 	super.exit()
 	round.defendingPlayer.PreloadRecordedRhythm(player.GetRecordedPattern())
+	

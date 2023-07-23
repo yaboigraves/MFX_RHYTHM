@@ -1,13 +1,14 @@
 class_name InputSpoofProfile
 extends Resource
 
-#resource based way of doing spoofing
+#ok so this is really annoying
+#I want to be able to re-use patterns
+#soo
+#I think i really want to have a public dictionary
+#yeah so what I really want is patterns I can re-use
+#and then I want to be able to bind those to states
 
-#the idea is we bind states to input spoofs
-#the spoofer can store multiple profiles
-#this way testing can be more accurately done
 
-@export var stateName : String
 
 @export var lane1Inputs: Array[float]
 @export var lane2Inputs: Array[float]

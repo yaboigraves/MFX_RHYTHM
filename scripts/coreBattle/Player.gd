@@ -6,7 +6,6 @@ extends Node
 
 @export var gameRules:GameModeRules
 
-
 signal SpawnMarker(hit:Hit)
 signal HitProcessed(hit: Hit, hitResult : HitResult)
 signal RecordStateProgressUpdate(progress:float)
@@ -47,6 +46,11 @@ func PreloadRecordedRhythm(pattern):
 		for hit in lane:
 			radialUI.SpawnMarker(hit)
 	radialUI.ToggleRotation(true)
+
+#clears us and resets us back to a listen state
+
+func ResetUI():
+	radialUI.ClearAllMarkers()
 	
 func _on_player_input_handler_hit(index) -> void:
 	#so the issue is the time we just hit is actually inaccurate

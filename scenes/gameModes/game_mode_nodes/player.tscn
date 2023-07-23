@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp5cbgcpms5fw"]
+[gd_scene load_steps=15 format=3 uid="uid://bp5cbgcpms5fw"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/Player.gd" id="1_6p015"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_crf4l"]
@@ -8,14 +8,12 @@
 [ext_resource type="Script" path="res://scripts/input/VerifyState.gd" id="6_7mxss"]
 [ext_resource type="Script" path="res://scripts/input/PlayerInputHandler.gd" id="7_s8ace"]
 [ext_resource type="Script" path="res://scripts/testing/InputSpoofer.gd" id="8_1xwqu"]
-[ext_resource type="Resource" uid="uid://ejolia4q0ylc" path="res://scripts/testing/RecordInputStateProfile.tres" id="9_bbosl"]
-[ext_resource type="Resource" uid="uid://bbl10oiwp1iwv" path="res://scripts/testing/verifyInputState.tres" id="10_d8jmm"]
-[ext_resource type="Resource" uid="uid://csq1wtf3q5esm" path="res://scripts/testing/idleInputState.tres" id="11_77tmj"]
+[ext_resource type="Resource" uid="uid://ejolia4q0ylc" path="res://scripts/testing/BootsAndCats.tres" id="9_olxip"]
 [ext_resource type="Script" path="res://scripts/audio/PlayerAudioDirector.gd" id="12_u36qw"]
-[ext_resource type="AudioStream" uid="uid://dm31vd4bb70sl" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Kicks/kick-eav.wav" id="13_v2q6p"]
-[ext_resource type="AudioStream" uid="uid://q5wdu1wk63e8" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Hi-Hats/hat-curry.wav" id="14_53gdw"]
-[ext_resource type="AudioStream" uid="uid://cfull8txyvmx3" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Snares/snare-am pm .wav" id="15_nu05v"]
-[ext_resource type="AudioStream" uid="uid://cs5bpm2t21tiv" path="res://audio/drums/TUAMIE- Ani Vol.1 Drumkit/Perc/perc-l.wav" id="16_k24f6"]
+[ext_resource type="AudioStream" uid="uid://bpxcxgaq0pyr" path="res://audio/drums/cuntyDrums/one shots/kick loud.wav" id="13_etu4j"]
+[ext_resource type="AudioStream" uid="uid://b6btdhfahnc1" path="res://audio/drums/cuntyDrums/one shots/hat loud.wav" id="14_pw8yg"]
+[ext_resource type="AudioStream" uid="uid://o4djfuceie68" path="res://audio/drums/cuntyDrums/one shots/snare loud.wav" id="15_hv7e0"]
+[ext_resource type="AudioStream" uid="uid://c3f4vsyasoki1" path="res://audio/drums/cuntyDrums/one shots/oh full.wav" id="16_5fljo"]
 
 [node name="Player" type="Node"]
 script = ExtResource("1_6p015")
@@ -45,9 +43,12 @@ player = NodePath("../..")
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("7_s8ace")
 
-[node name="InputSpoofer" type="Node" parent="PlayerInputHandler"]
+[node name="InputSpoofer" type="Node" parent="PlayerInputHandler" node_paths=PackedStringArray("playerStateMachine")]
 script = ExtResource("8_1xwqu")
-inputSpoofProfiles = Array[Resource("res://scripts/testing/InputSpoofProfile.gd")]([ExtResource("9_bbosl"), ExtResource("10_d8jmm"), ExtResource("11_77tmj")])
+playerStateMachine = NodePath("../../PlayerStateMachine")
+recordingSpoofProfile = ExtResource("9_olxip")
+verifySpoofProfile = ExtResource("9_olxip")
+spoofInput = true
 
 [node name="PlayerAudioDirector" type="Node" parent="."]
 script = ExtResource("12_u36qw")
@@ -55,30 +56,29 @@ script = ExtResource("12_u36qw")
 [node name="DrumsAudio" type="Node" parent="PlayerAudioDirector"]
 
 [node name="DrumPlayer1" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("13_v2q6p")
+stream = ExtResource("13_etu4j")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"
 
 [node name="DrumPlayer2" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("14_53gdw")
+stream = ExtResource("14_pw8yg")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"
 
 [node name="DrumPlayer3" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("15_nu05v")
+stream = ExtResource("15_hv7e0")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"
 
 [node name="DrumPlayer4" type="AudioStreamPlayer" parent="PlayerAudioDirector/DrumsAudio"]
-stream = ExtResource("16_k24f6")
+stream = ExtResource("16_5fljo")
 mix_target = 2
 max_polyphony = 4
 bus = &"drums"
 
-[connection signal="transitioned" from="PlayerStateMachine" to="PlayerInputHandler/InputSpoofer" method="_on_player_state_machine_transitioned"]
 [connection signal="Goodhit" from="PlayerStateMachine/RecordState" to="PlayerAudioDirector" method="_on_record_state_goodhit"]
 [connection signal="Goodhit" from="PlayerStateMachine/VerifyState" to="PlayerAudioDirector" method="_on_verify_state_goodhit"]
 [connection signal="Hit" from="PlayerInputHandler" to="." method="_on_player_input_handler_hit"]

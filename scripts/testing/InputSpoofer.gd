@@ -1,11 +1,10 @@
 class_name InputSpoofer
 extends Node
 
-#this is literally broken
-#so it might be good to add this to lab mode as a ui you can queue up
-#thats maybe like "training mode actually"
+@export var playerStateMachine : StateMachine
 
-@export var inputSpoofProfiles: Array[InputSpoofProfile]
+@export var recordingSpoofProfile: InputSpoofProfile
+@export var verifySpoofProfile : InputSpoofProfile
 
 @export var spoofInput = false
 
@@ -15,35 +14,29 @@ var currentState : PlayerInputState
 var roundHits = {}
 
 func _ready() -> void:
+	playerStateMachine.transitioned.connect(HandleStateMachineTransition)
 	set_process(false)
 
 
 func _process(delta: float) -> void:
 	for i in range(4):
 		var hitSpoofs = roundHits[i]
-		if hitSpoofs.size() > 0 and hitSpoofs[0] <= %Metronome.timeInBeats:
-			emit_signal("SpoofHit",i+ 1,hitSpoofs[0])
-			print("spootinf a hit at ", hitSpoofs[0])
-			hitSpoofs.pop_front()
+		if hitSpoofs.size() > 0 and hitSpoofs[0] <= HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats():
+			SpoofHit.emit(i,hitSpoofs.pop_front())
 
-
-func _on_verify_state_on_exit() -> void:
-	set_process(false)
 
 
 func FindProfileByStateName(stateName:  String):
-	for profile in inputSpoofProfiles:
-		if profile.stateName == stateName:
-			return profile
+	match stateName:
+		"RecordState":
+			return recordingSpoofProfile
+		"VerifyState":
+			return verifySpoofProfile
 
-#this is broken
-func _on_player_state_machine_transitioned(state) -> void:
-
+func HandleStateMachineTransition(state) -> void:
 	if spoofInput == false: 
 		return
 		
-		
-	
 	var profile = FindProfileByStateName(state.name)
 	
 	if profile:

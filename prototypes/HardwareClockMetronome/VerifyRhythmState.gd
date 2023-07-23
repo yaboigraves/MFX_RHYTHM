@@ -25,3 +25,8 @@ func FigureOutIfOffenseOrDefense():
 	elif round.roundPatternVerified:
 		round.defendingPlayer.StartVerifying(round.recordedPattern)
 		round.recordingPlayer.GoIdle()
+
+func exit():
+	super.exit()
+
+	

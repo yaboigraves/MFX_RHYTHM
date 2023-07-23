@@ -38,7 +38,7 @@ func update(_delta: float):
 	super.update(_delta)
 	
 	#disabled temporarily
-	#CheckForMissedHits()
+	CheckForMissedHits()
 	
 	player.VerifyStateProgressUpdate.emit(progress)
 	#player.UpdateVerifyStateProgress(progress)
@@ -94,7 +94,7 @@ func CheckForMissedHits():
 		#uhh this is kinda the problem with like, using a globally accessible array i guess
 		#we shouldnt be erasing from it like this
 		targetHits[hit.laneIndex].erase(hit)
-		print("erasing a hit?")
+
 		
 func EvaluateVerification():
 	pass

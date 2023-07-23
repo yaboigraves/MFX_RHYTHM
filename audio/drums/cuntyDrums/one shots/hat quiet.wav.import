@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6x57uh13mt7b"
+path="res://.godot/imported/hat quiet.wav-3b52186e03bdf8b06ecb44248b20280b.sample"
+
+[deps]
+
+source_file="res://audio/drums/cuntyDrums/one shots/hat quiet.wav"
+dest_files=["res://.godot/imported/hat quiet.wav-3b52186e03bdf8b06ecb44248b20280b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

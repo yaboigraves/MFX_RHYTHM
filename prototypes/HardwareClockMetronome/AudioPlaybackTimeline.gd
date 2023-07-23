@@ -33,15 +33,17 @@ func Start():
 
 func _process(delta: float) -> void:
 	bufferTime = get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+
 	
-	if( lastTime - bufferTime > 2.0):
+	if(lastTime - bufferTime > 2.0):
 		lastTime = bufferTime
 		timingHead += stream.beat_count * spb
 		
-	if(bufferTime < lastTime): return
+	if(bufferTime < lastTime or bufferTime > stream.get_length()): return
 
 	lastTime = bufferTime
 	timeInBeats = bufferTime * bps
+
 
 	totalTime = timingHead + bufferTime
 

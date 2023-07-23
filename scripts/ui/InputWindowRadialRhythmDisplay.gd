@@ -42,7 +42,7 @@ func _ready():
 	player.VerifyStateProgressUpdate.connect(SetVerifyStateProgressRadial)
 	
 	player.HitProcessed.connect(OnHitProcessed)
-	player.SpawnMarker.connect(SpawnMarker)
+	player.HitRecorded.connect(SpawnMarker)
 	set_process(false)
 
 #this has wayyyy too many responsibilities too
@@ -227,6 +227,11 @@ func _on_verify_state_missed_hit(hit) -> void:
 	markerHitMap[hit].queue_free()
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
 	markerHitMap.erase(hit)
+
+#this is kinda awkward
+
+#sooo 
+#record hits are there own thing
 
 
 func OnHitProcessed(hit, hitResult) -> void:

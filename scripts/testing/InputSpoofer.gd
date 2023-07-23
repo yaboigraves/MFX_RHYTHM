@@ -19,11 +19,18 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	
+	if  HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats() > 8:
+		print("OVERFLOW!!")
 	for i in range(4):
 		var hitSpoofs = roundHits[i]
 		if hitSpoofs.size() > 0 and hitSpoofs[0] <= HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats():
+			print("spoofin")
+			print(HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats())
+			print(hitSpoofs[0])
 			SpoofHit.emit(i,hitSpoofs.pop_front())
-
+		
+			HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()
 
 
 func FindProfileByStateName(stateName:  String):
@@ -42,10 +49,6 @@ func HandleStateMachineTransition(state) -> void:
 	if profile:
 		roundHits = [[] + profile.lane1Inputs, [] + profile.lane2Inputs, [] + profile.lane3Inputs, [] + profile.lane4Inputs]
 		currentState = state
-		
-		for setOfRoundHits in roundHits:
-			for i in range (setOfRoundHits.size()):
-				setOfRoundHits[i] += currentState.startTime
 				
 		set_process(true)
 	else:

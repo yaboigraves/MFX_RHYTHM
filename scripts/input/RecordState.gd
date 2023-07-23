@@ -39,15 +39,15 @@ func HasAnyHits():
 
 func update(_delta):
 	super.update(_delta)
-	#player.UpdateRecordStateProgress(progress)
-	player.RecordStateProgressUpdate.emit(progress)
+
+
 
 func HandleHit(index, timeInBeats):
-	var hit = Hit.new(index,timeInBeats,startTime,HitType.RECORD)
+	var hit = Hit.new(index,timeInBeats,0,HitType.RECORD,self)
 	recordedHits[hit.laneIndex].append(hit)
 	
 	
-	player.SpawnMarker.emit(hit)
+	player.HitRecorded.emit(hit)
 	Goodhit.emit(hit)
 
 

@@ -42,15 +42,13 @@ func PlayStream(stream:AudioStreamOggVorbis):
 	if audioPlayback:
 		remove_child(audioPlayback)
 	
-
-	
 	audioPlayback = AudioPlaybackTimeline.new(stream)
 	audioPlayback.DurationMet.connect(HandleCurrentPlaybackDurationMet)
 	
 	add_child(audioPlayback)
 	audioPlayback.Start()
 	set_process(true)
-	
+	print("STARTED A TRACK")
 
 
 	

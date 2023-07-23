@@ -16,7 +16,7 @@ var combo = 0 :
 	
 func initialize():
 	super.initialize()
-	duration = rules.loopBeatSize
+
 
 func enter(_msg := {}) -> void:
 	super.enter()
@@ -40,11 +40,11 @@ func update(_delta: float):
 	#disabled temporarily
 	CheckForMissedHits()
 	
-	player.VerifyStateProgressUpdate.emit(progress)
+	#player.VerifyStateProgressUpdate.emit(progress)
 	#player.UpdateVerifyStateProgress(progress)
 
 func HandleHit(index, timeInBeats):
-	var hit = Hit.new(index,timeInBeats, startTime, HitType.VERIFY)
+	var hit = Hit.new(index,timeInBeats, 0, HitType.VERIFY,self)
 	var hitResult = CheckHit(hit)
 	match hitResult:
 		HitResult.GOOD:

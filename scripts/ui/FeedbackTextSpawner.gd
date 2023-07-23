@@ -26,7 +26,7 @@ extends Node
 }
 
 
-
+#ok yeah this arg is confusingly named
 func SpawnHit(targetPos,hitType):
 	var textureRect = TextureRect.new()
 	textureRect.z_index = 6
@@ -36,5 +36,7 @@ func SpawnHit(targetPos,hitType):
 
 	var tween = get_tree().create_tween()
 	tween.tween_property(textureRect,"position",textureRect.position + Vector2.UP * 200,1)
+	
 	tween.tween_callback(textureRect.queue_free)
+	
 	add_child(textureRect)

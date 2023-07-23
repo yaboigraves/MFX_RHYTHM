@@ -1,22 +1,16 @@
 class_name PlayerInputState
 extends State
 
-
-
-
 signal HitPerformed(hit:Hit)
 signal Goodhit(hit:Hit)
 signal BadHit(hit:Hit)
 signal Missedhit(hit:Hit)
 
 @export var rules : GameModeRules
-@export var duration: float = 4.0
 @export var player : Node
 #@export var metronome: Metronome
 
-var progress : float
-var startTime: float
-var endTime: float
+
 
 func initialize():
 	super.initialize()
@@ -25,11 +19,10 @@ func initialize():
 
 func enter(args ={}):
 	super.enter()
-	progress = 0.0
 
-#	startTime = metronome.timeInBeats
-	duration = rules.loopBeatSize
-	endTime = startTime + duration
+
+
+
 
 	#so when a state gets entered, quue it to end?
 	player.radialUI.HandleStateStart(self)
@@ -40,8 +33,6 @@ func exit():
 	super.exit()
 #	metronome.Tick.disconnect(onMetronomeTick)
 
-func onMetronomeTick(timeSeconds,timeBeats):
-	progress = (timeBeats - startTime)/duration
 
 
 #
@@ -53,6 +44,3 @@ func HandleHit(index, time):
 
 
 	
-func CheckIfInBufferZone(hitTime):
-	if startTime + duration - hitTime < rules.windowSize * 10:
-		return true

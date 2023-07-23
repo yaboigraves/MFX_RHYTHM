@@ -27,6 +27,7 @@ initial_state = NodePath("IdleState")
 [node name="IdleState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("4_ktfkr")
 rules = ExtResource("2_crf4l")
+duration = null
 player = NodePath("../..")
 
 [node name="RecordState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
@@ -37,7 +38,6 @@ player = NodePath("../..")
 [node name="VerifyState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_7mxss")
 rules = ExtResource("2_crf4l")
-duration = -1.0
 player = NodePath("../..")
 
 [node name="PlayerInputHandler" type="Node" parent="."]

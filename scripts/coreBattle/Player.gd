@@ -6,7 +6,7 @@ extends Node
 
 @export var gameRules:GameModeRules
 
-signal SpawnMarker(hit:Hit)
+signal HitRecorded(hit:Hit)
 signal HitProcessed(hit: Hit, hitResult : HitResult)
 signal RecordStateProgressUpdate(progress:float)
 signal VerifyStateProgressUpdate(progress:float)

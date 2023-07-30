@@ -1,5 +1,5 @@
 class_name HitType
 
-#TODO: possibly obselete due to 
+#TODO: possibly obselete
 
 enum {RECORD, VERIFY}

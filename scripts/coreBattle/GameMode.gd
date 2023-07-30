@@ -2,10 +2,11 @@ class_name GameMode
 extends RhythmGameStateNode
 
 @export var player: Player
+
+
 @export var rules : GameModeRules
 
-#so all this is used for is to load in the actual game mode object, this is a chasis
-#idk actually stew on this
+
 
 func Start():
 	pass

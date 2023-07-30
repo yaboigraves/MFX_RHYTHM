@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://b8m5s2ivuj41y"]
 
-[ext_resource type="Texture2D" uid="uid://b83tu8nn8mt8a" path="res://textures/dot.png" id="1_skvxc"]
 [ext_resource type="Script" path="res://scripts/ui/RadialMetronomeDot.gd" id="2_dxaqa"]
 
 [node name="RadialMetronomeDot" type="TextureRect"]
@@ -15,6 +14,5 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_skvxc")
 expand_mode = 1
 script = ExtResource("2_dxaqa")

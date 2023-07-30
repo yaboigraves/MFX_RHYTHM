@@ -27,7 +27,6 @@ initial_state = NodePath("IdleState")
 [node name="IdleState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("4_ktfkr")
 rules = ExtResource("2_crf4l")
-duration = null
 player = NodePath("../..")
 
 [node name="RecordState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
@@ -48,7 +47,6 @@ script = ExtResource("8_1xwqu")
 playerStateMachine = NodePath("../../PlayerStateMachine")
 recordingSpoofProfile = ExtResource("9_olxip")
 verifySpoofProfile = ExtResource("9_olxip")
-spoofInput = true
 
 [node name="PlayerAudioDirector" type="Node" parent="."]
 script = ExtResource("12_u36qw")

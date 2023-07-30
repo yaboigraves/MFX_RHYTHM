@@ -1,7 +1,7 @@
 class_name GameModeRules
 extends Resource
 
-#so we want to make a custom one of these for each mode
+#TODO: rename this, its more of a gamemodesettings value
 
 @export var windowSize : float = 0.016
 @export var loopBeatSize : float = 8.0

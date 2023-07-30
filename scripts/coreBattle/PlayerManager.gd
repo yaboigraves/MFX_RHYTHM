@@ -1,6 +1,5 @@
 
-#i actually dont think we neeed a player manager
-#like, can the versus mode just store this?
+#obselete I think
 
 extends Node
 

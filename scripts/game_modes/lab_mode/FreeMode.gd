@@ -6,23 +6,24 @@ extends GameModeState
 func enter(_msg := {}) -> void:
 	super.enter()
 	
-	battleAudio.PlayBackgroundTrack()
+#	battleAudio.PlayBackgroundTrack()
 	player.StartRecording()
 	
-	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
+#	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
 
 
 func HandleRecordStateEnd():
 	#player.StartVerifying()
-	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleVerifyStateEnd, true)
-	
+#	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleVerifyStateEnd, true)
+	pass
 
 func HandleVerifyStateEnd():
-	var nextGameState : GameState = GameState.new(currentGameState.lengthInBeats)
-	currentGameState = nextGameState
-	player.StartRecording()
-	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
-
+	pass
+#	var nextGameState : GameState = GameState.new(currentGameState.lengthInBeats)
+#	currentGameState = nextGameState
+#	player.StartRecording()
+#	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
+#
 
 func exit():
 	metronome.Stop()

@@ -7,10 +7,7 @@ static var instance:HardwareClockMetronome
 
 var currentStateInstance : RhythmStateInstance
 
-#new state based variables that are core
 
-#this is when the next state ought to start after this one
-#STATE
 var nextStateTime : float = 0.0
 
 #this is for audio timing
@@ -49,9 +46,6 @@ func PlayStream(stream:AudioStreamOggVorbis):
 	audioPlayback.Start()
 	set_process(true)
 	print("STARTED A TRACK")
-
-
-	
 	
 
 func HandleCurrentPlaybackDurationMet():

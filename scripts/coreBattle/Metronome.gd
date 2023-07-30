@@ -1,7 +1,8 @@
 class_name Metronome
 extends Resource
 
-#make this a resource, yada yada
+#OBSELETE!!!
+
 
 signal StreamStarting
 

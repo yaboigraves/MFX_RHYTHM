@@ -1,6 +1,11 @@
 class_name Hit
 extends RefCounted
 
+#TODO: figure out how to handle these actually for real for real
+#I think they ought to just snapshot an actual hit
+#they ought to be stamped with some context info I think too
+
+
 var laneIndex : int 
 var time : float
 var roundStartTime : float
@@ -21,7 +26,7 @@ func _init(laneIndex,time, roundStartTime, hitType, state) -> void:
 	self.hitType = hitType
 	self.state = state
 
-#LEFT OFF HERE
+#In progress
 func SetTargetHit(targetHit: Hit):
 	if not state is VerifyState:
 		printerr("CANT SET TARGET TO HIT OF STATE ", state)

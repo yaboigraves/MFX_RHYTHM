@@ -1,19 +1,12 @@
 class_name VerifyState
 extends PlayerInputState
 
-
 signal ComboUpdate(combo)
 
 var targetHits
 var recordedHits = [[],[],[],[]]
 
 var targetHitQueue
-
-#so i want to add in a record of all the hits made in this state too
-#so we can compare
-#we also want to store a solid copy of the target hits
-
-
 
 var combo = 0 :
 	set(value):
@@ -102,10 +95,6 @@ func CheckForMissedHits():
 				combo = 0
 				
 	for hit in missedHits:
-		#ahah so we have discovered the culprit
-		#we were permutating state like a dumby
-		#uhh this is kinda the problem with like, using a globally accessible array i guess
-		#we shouldnt be erasing from it like this
 		targetHits[hit.laneIndex].erase(hit)
 
 
@@ -113,7 +102,5 @@ func CheckForMissedHits():
 func EvaluateVerification():
 	for hit in recordedHits:
 		pass
-	
 
-	
 	return true

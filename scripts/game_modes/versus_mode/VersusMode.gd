@@ -1,9 +1,6 @@
 class_name VersusMode
 extends GameMode
 
-var gameStateHistory : Array[GameState]
-
-var currentGameState : GameState
 
 var stateMachine : RhythmStateMachine
 
@@ -29,7 +26,6 @@ func ResolveNextState():
 	var endingState = stateMachine.state as RhythmState
 
 	currentRound.UpdateRoundState(endingState)
-
 	
 	if endingState is ListenRhythmState:
 		ListenResolveNextState()

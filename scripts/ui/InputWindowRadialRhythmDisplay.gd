@@ -6,7 +6,7 @@ extends RadialRhythmDisplay
 
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
-@export var radialMetronomeDot : PackedScene
+
 @export var hitParticleSystem : PackedScene
 @export var currentPhaseProgressVar : FloatVariable
 
@@ -14,7 +14,6 @@ extends RadialRhythmDisplay
 @export var player:Player
 
 var phaseView : PhaseView
-var metronomeDots = []
 var inputWindowViews:Array[InputWindowView] = [] 
 
 #obselete in a moment
@@ -244,14 +243,7 @@ func _on_verify_state_missed_hit(hit) -> void:
 	markerHitMap[hit].modulate = Color(1,1,1,0.25)
 	markerHitMap.erase(hit)
 
-#this is kinda awkward
-
-#sooo 
-#record hits are there own thing
-
-
 func OnHitProcessed(hit, hitResult) -> void:
-	print("Hit processed")
 	match hitResult:
 		HitResult.GOOD:
 			onGoodHit(hit)

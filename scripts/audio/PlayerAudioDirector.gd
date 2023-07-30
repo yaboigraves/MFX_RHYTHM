@@ -4,7 +4,7 @@ extends Node
 
 func _on_record_state_hit_processed(hit:Hit, hitResult) -> void:
 	$DrumsAudio.get_child(hit.laneIndex).play()
-
+	
 #we should make some cringe audio at some point
 func _on_verify_state_hit_processed(hit, hitResult) -> void:
 	match hitResult:

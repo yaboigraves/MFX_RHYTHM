@@ -1,16 +1,12 @@
 extends Node
 
+#TODO: possibly obselete, if not completly
+
 @export var defaultCharIcon : Texture
 @export var goodCharIcon :Texture
 @export var missCharIcon : Texture 
 @export var badCharIcon : Texture
 
-#idk actually its probably bettter if we keep all the hud shit in here
-#just control it better
-
-#we ought to move the player huds into the player objects, makes more sense logically
-
-#yeah we ought to use this controller more?
 
 func _on_metronome_beat_update(timeInBeats) -> void:
 	var tween =create_tween()

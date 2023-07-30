@@ -1,40 +1,37 @@
-[gd_scene load_steps=30 format=3 uid="uid://i48m18tj8uty"]
+[gd_scene load_steps=25 format=3 uid="uid://i48m18tj8uty"]
 
 [ext_resource type="Script" path="res://scripts/game_modes/versus_mode/VersusMode.gd" id="1_a7s7d"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_vbi41"]
 [ext_resource type="PackedScene" uid="uid://b25q4rbpyn8sc" path="res://scenes/input_windowradial_rhythm_display.tscn" id="3_jtocp"]
-[ext_resource type="Script" path="res://scripts/coreBattle/GameModeRules.gd" id="3_sluik"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeHUd.gd" id="4_ktixk"]
-[ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="5_mh7fu"]
-[ext_resource type="Texture2D" uid="uid://dkosgpfwq1806" path="res://textures/head_3.png" id="6_tpwaq"]
-[ext_resource type="Texture2D" uid="uid://268aaigifjv2" path="res://textures/bitMiss.png" id="7_h7xgh"]
-[ext_resource type="Texture2D" uid="uid://d01k4usq0yrmr" path="res://textures/head_2.png" id="8_8g1ek"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/RhythmStateMachine.gd" id="8_ev71k"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/ListenRhythmState.gd" id="9_76esp"]
-[ext_resource type="Texture2D" uid="uid://b8inpnidhdpir" path="res://textures/dojo1.png" id="9_80684"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/RecordRhythmState.gd" id="10_l4nj4"]
-[ext_resource type="Texture2D" uid="uid://drfwxbcyacw0r" path="res://textures/p1I.png" id="10_rjvlo"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/VerifyRhythmState.gd" id="11_w3vik"]
 [ext_resource type="FontFile" uid="uid://blg7yt51sptg8" path="res://UI/FohrScore.otf" id="12_t1sbx"]
 [ext_resource type="Theme" uid="uid://ca0e8s1qmw04e" path="res://UI/mf_menu_theme.tres" id="13_hi3yp"]
 [ext_resource type="Script" path="res://scripts/ui/TrackSelectLoader.gd" id="14_44vpt"]
+[ext_resource type="Resource" uid="uid://c26j51fe8gdv1" path="res://variables/CurrentPhaseProgress.tres" id="14_s6dsv"]
 [ext_resource type="AudioStream" uid="uid://b7eodu36uenmq" path="res://audio/tracks/Omari-cyclin-loop-83-BPM.ogg" id="15_q0uap"]
+[ext_resource type="Script" path="res://scripts/coreBattle/Metronome.gd" id="16_pnbf6"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="16_wj5rw"]
+[ext_resource type="AudioStream" uid="uid://r2s0eoif2lis" path="res://audio/devonwho-purple-91bpm.ogg" id="17_bfvup"]
 [ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="17_j5sis"]
 [ext_resource type="Script" path="res://scripts/game_modes/lab_mode/FreeMode.gd" id="18_wm73p"]
 [ext_resource type="Script" path="res://scripts/game_modes/versus_mode/ListenMode.gd" id="19_0bhwm"]
-[ext_resource type="Resource" uid="uid://dfqo2ywh50y1i" path="res://resources/metronome.tres" id="19_gc8f8"]
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="21_ureb2"]
 [ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="22_ft3jc"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="22_hx1kf"]
 
-[sub_resource type="Resource" id="Resource_nvxg8"]
-script = ExtResource("3_sluik")
-windowSize = 0.016
-loopBeatSize = 8.0
-badZoneSize = 0.032
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_27et8"]
+
+[sub_resource type="Resource" id="Resource_et5d1"]
+script = ExtResource("16_pnbf6")
+stream = ExtResource("17_bfvup")
+syncUpdateRate = 1.0
+phaseSwitchRate = 8.0
+rules = ExtResource("2_vbi41")
+currentPhaseProgressVar = ExtResource("14_s6dsv")
 
 [node name="GameMode" type="Node" node_paths=PackedStringArray("player1", "player2", "player")]
 script = ExtResource("1_a7s7d")
@@ -42,7 +39,7 @@ debugStream = ExtResource("16_wj5rw")
 player1 = NodePath("PlayerManager/Player1")
 player2 = NodePath("PlayerManager/Player2")
 player = NodePath("PlayerManager/Player1")
-rules = SubResource("Resource_nvxg8")
+rules = ExtResource("2_vbi41")
 
 [node name="RadialUI" type="CanvasLayer" parent="."]
 
@@ -147,20 +144,16 @@ autostart = false
 
 [node name="ListenMode" type="Node" parent="VersusModeStateMachine"]
 script = ExtResource("19_0bhwm")
-metronome = ExtResource("19_gc8f8")
+metronome = SubResource("Resource_et5d1")
 rules = ExtResource("2_vbi41")
 
 [node name="FreeMode" type="Node" parent="VersusModeStateMachine"]
 script = ExtResource("18_wm73p")
-metronome = ExtResource("19_gc8f8")
+metronome = SubResource("Resource_et5d1")
 rules = ExtResource("2_vbi41")
 
 [node name="GameModeHUD" type="CanvasLayer" parent="."]
 script = ExtResource("4_ktixk")
-defaultCharIcon = ExtResource("5_mh7fu")
-goodCharIcon = ExtResource("6_tpwaq")
-missCharIcon = ExtResource("7_h7xgh")
-badCharIcon = ExtResource("8_8g1ek")
 
 [node name="Control" type="Control" parent="GameModeHUD"]
 layout_mode = 3
@@ -175,7 +168,6 @@ visible = false
 layout_mode = 2
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("9_80684")
 
 [node name="PlayerContainer" type="VBoxContainer" parent="GameModeHUD/Control"]
 visible = false
@@ -212,7 +204,6 @@ grow_vertical = 2
 pivot_offset = Vector2(150, 150)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("5_mh7fu")
 expand_mode = 5
 
 [node name="PlayerIcon" type="TextureRect" parent="GameModeHUD/Control/PlayerContainer"]
@@ -221,7 +212,6 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("10_rjvlo")
 expand_mode = 5
 
 [node name="ComboText" type="RichTextLabel" parent="GameModeHUD/Control"]

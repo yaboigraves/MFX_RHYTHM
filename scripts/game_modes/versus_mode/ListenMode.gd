@@ -16,14 +16,14 @@ extends GameModeState
 func enter(_msg := {}) -> void:
 	super.enter()
 			
-	battleAudio.PlayBackgroundTrack()
+	#battleAudio.PlayBackgroundTrack()
 	PlayTrackLoop()
 
 func PlayTrackLoop():
 
 	#player.StartRecording(currentGameState)
 	
-	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, PlayTrackLoop, true)
+	#metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, PlayTrackLoop, true)
 	print("Etnered state")
 
 

@@ -6,7 +6,7 @@ signal ComboUpdate(combo)
 var targetHits
 var recordedHits = [[],[],[],[]]
 
-var targetHitQueue
+
 
 var combo = 0 :
 	set(value):
@@ -20,8 +20,7 @@ func initialize():
 func enter(_msg := {}) -> void:
 	super.enter()
 	
-	targetHits = _msg["pattern"].duplicate(true)
-	targetHitQueue = targetHits.duplicate(true)
+	targetHits = Blackboard.Instance.recordedPattern.duplicate(true)
 	recordedHits = [[],[],[],[]]
 	combo = 0
 	

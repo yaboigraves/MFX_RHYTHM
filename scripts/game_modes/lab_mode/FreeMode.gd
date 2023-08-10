@@ -1,13 +1,13 @@
 class_name FreeMode
 extends GameModeState
 
-@onready var player : Player = %PlayerManager.GetPlayer(0) as Player
+#@onready var player : Player = %PlayerManager.GetPlayer(0) as Player
 
 func enter(_msg := {}) -> void:
 	super.enter()
 	
 #	battleAudio.PlayBackgroundTrack()
-	player.StartRecording()
+#	player.StartRecording()
 	
 #	metronome._on_player_beat_phase_callback(currentGameState.lengthInBeats, HandleRecordStateEnd, true)
 
@@ -27,7 +27,7 @@ func HandleVerifyStateEnd():
 
 func exit():
 	metronome.Stop()
-	player.GoIdle()
+	#player.GoIdle()
 	%InputWindowRadialRhythmDisplay.ClearAllMarkers()
 
 

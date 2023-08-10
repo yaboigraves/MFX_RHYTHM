@@ -1,7 +1,7 @@
 class_name ListenMode
 extends GameModeState
 
-@onready var player : Player = %PlayerManager.GetPlayer(0) as Player
+
 
 
 #so this has illuminated a flaw in the metronome

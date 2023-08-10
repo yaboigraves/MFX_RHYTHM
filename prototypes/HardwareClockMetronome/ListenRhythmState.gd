@@ -8,6 +8,10 @@ func enter(args = {}):
 	for player in PlayerManager.Instance.GetAllPlayers():
 		player.GoIdle()
 
+func ResolveNextState():
+	if not Blackboard.Instance.roundPatternRecorded:
+		state_machine.transition_to("Record")
+
 
 	
 	

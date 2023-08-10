@@ -24,9 +24,6 @@ func StartRecording():
 	radialUI.ToggleRotation(true)
 	
 
-func GetRecordedPattern():
-	return (stateMachine.state as RecordState).recordedHits
-
 func EvaluateVerification():
 	var result = (stateMachine.state as VerifyState).EvaluateVerification()
 	return result

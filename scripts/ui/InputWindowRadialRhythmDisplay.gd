@@ -1,8 +1,7 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
-#so lets go forward with reffing the player
-#and then just listening for stuffs
+#super fugly, needs to be re-worked
 
 @export var rules: GameModeRules
 @export var markerColors: Array[Color]
@@ -286,8 +285,9 @@ func onDestroyMiss(hit):
 
 	%FeedbackTextSpawner.SpawnHit(pivotPos,"miss")
 	#our handling of all this is bad fix later
-	markerHitMap[hit].queue_free()
-	markers.erase(markerHitMap[hit])
-	markerHitMap.erase(hit)
+	if markerHitMap.has(hit):
+		markerHitMap[hit].queue_free()
+		markers.erase(markerHitMap[hit])
+		markerHitMap.erase(hit)
 
 

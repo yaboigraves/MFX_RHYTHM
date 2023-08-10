@@ -29,9 +29,15 @@ func update(delta):
 	if HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() >= endingTimeBeats:
 		OnTimeFinished()
 
+func ResolveNextState():
+	pass
 
+#when the states time is finished, resolve the next state
 func OnTimeFinished():
 	TimeFinished.emit()
+	
+	ResolveNextState()
+	
 	if nextState:
 		state_machine.transition_to(nextState.name)
 		

@@ -10,7 +10,7 @@ func _init() -> void:
 func _ready() -> void:
 	currentOffensePlayer = $Player1 as Player
 
-func GetAllPlayers() -> Array[Player]:
+func GetAllPlayers() -> Array:
 	return get_children() as Array[Player]
 
 func GetPlayer(playerIndex : int) -> Player:

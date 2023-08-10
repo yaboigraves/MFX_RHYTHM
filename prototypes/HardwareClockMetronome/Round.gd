@@ -22,10 +22,10 @@ func _init(recordingPlayer: Player, defendingPlayer :Player):
 
 #TODO: this is all handled in blackboard now!!
 
-#come back to this, left off on verify state
+
 
 func UpdateRoundState(endingState):
-	
+	pass
 #	if endingState is RecordRhythmState:
 #		recordedPattern = endingState.GetRecordedPattern().duplicate(false)
 #		roundPatternRecorded = true
@@ -36,14 +36,14 @@ func UpdateRoundState(endingState):
 	#but I guess for player inputs sake we dont care about that
 	#its more like, the versus mode actually needs one more state
 	
-	if endingState is VerifyRhythmState:
-		if !roundPatternVerified:
-			print(recordedPattern)
-			var results = recordingPlayer.EvaluateVerification()
-			if results:
-				roundPatternVerified = true
-			else:
-				verificationFailed = true
-		
-		elif roundPatternVerified:
-			defendingPlayerVerified = true
+#	if endingState is VerifyRhythmState:
+#		if !roundPatternVerified:
+#			print(recordedPattern)
+#			var results = recordingPlayer.EvaluateVerification()
+#			if results:
+#				roundPatternVerified = true
+#			else:
+#				verificationFailed = true
+#
+#		elif roundPatternVerified:
+#			defendingPlayerVerified = true

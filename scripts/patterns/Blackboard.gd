@@ -7,7 +7,7 @@ extends RefCounted
 
 #so lets start off by moving some of the round stuff into here
 
-static var Instance
+static var Instance : Blackboard
 
 var offensePlayer : Player
 var defensePlayer : Player
@@ -22,3 +22,19 @@ var recordedPattern:Array = [[],[],[],[]]
 
 func _init() -> void:
 	Instance = self
+	
+
+func SwapOffensePlayer():
+	var temp = offensePlayer
+	
+	offensePlayer = defensePlayer
+	defensePlayer = temp
+	
+	
+func Reset():
+
+	roundPatternRecorded = false
+	roundPatternVerified = false 
+	verificationFailed = false 
+	defendingPlayerVerified = false
+	recordedPattern = [[],[],[],[]]

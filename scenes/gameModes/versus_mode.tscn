@@ -108,7 +108,6 @@ player = NodePath("../../../../PlayerManager/Player2")
 script = ExtResource("22_hx1kf")
 
 [node name="PlayerManager" type="Node" parent="."]
-unique_name_in_owner = true
 script = ExtResource("21_ureb2")
 
 [node name="Player1" parent="PlayerManager" node_paths=PackedStringArray("radialUI", "characterHUD") instance=ExtResource("22_ft3jc")]
@@ -126,14 +125,12 @@ autostart = false
 
 [node name="Listen" type="Node" parent="RhythmStateMachine"]
 script = ExtResource("9_76esp")
-durationBeats = 3.7
 
 [node name="Record" type="Node" parent="RhythmStateMachine"]
 script = ExtResource("10_l4nj4")
 
 [node name="Verify" type="Node" parent="RhythmStateMachine"]
 script = ExtResource("11_w3vik")
-durationBeats = 4.3
 
 [node name="--obselete" type="Node" parent="."]
 

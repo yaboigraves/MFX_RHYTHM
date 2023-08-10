@@ -38,8 +38,8 @@ func GoIdle():
 	stateMachine.transition_to("IdleState")
 
 
-func PreloadRecordedRhythm(pattern):
-	print(name, " preloading rhythm")
+func PreloadRecordedRhythm():
+	var pattern = Blackboard.Instance.recordedPattern
 	#TODO: spawn a marker for each of the values in the pattern
 	for lane in pattern:
 		for hit in lane:

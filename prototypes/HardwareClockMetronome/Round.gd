@@ -9,10 +9,10 @@ var defendingPlayer: Player
 var roundPatternRecorded: bool = false
 var roundPatternVerified: bool = false
 var verificationFailed : bool = false
-
 var defendingPlayerVerified:bool = false
 
 var recordedPattern:Array = [[],[],[],[]]
+
 
 func _init(recordingPlayer: Player, defendingPlayer :Player):
 	self.recordingPlayer = recordingPlayer
@@ -20,16 +20,23 @@ func _init(recordingPlayer: Player, defendingPlayer :Player):
 
 
 
-#wait can we maybe just do this in the exit of states????
-#lets see....
+#TODO: this is all handled in blackboard now!!
+
+#come back to this, left off on verify state
 
 func UpdateRoundState(endingState):
-	if endingState is RecordRhythmState:
-		recordedPattern = endingState.GetRecordedPattern().duplicate(false)
-		roundPatternRecorded = true
+	
+#	if endingState is RecordRhythmState:
+#		recordedPattern = endingState.GetRecordedPattern().duplicate(false)
+#		roundPatternRecorded = true
 		
 	
-	elif endingState is VerifyRhythmState:
+	#there's really a totally different state type for defense, that's very similar to verify
+	#but does something different with the results
+	#but I guess for player inputs sake we dont care about that
+	#its more like, the versus mode actually needs one more state
+	
+	if endingState is VerifyRhythmState:
 		if !roundPatternVerified:
 			print(recordedPattern)
 			var results = recordingPlayer.EvaluateVerification()

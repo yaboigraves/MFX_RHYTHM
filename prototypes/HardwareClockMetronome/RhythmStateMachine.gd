@@ -3,7 +3,6 @@ extends StateMachine
 
 
 
-
 func GetStates():
 	return get_children() as Array[RhythmState]
 

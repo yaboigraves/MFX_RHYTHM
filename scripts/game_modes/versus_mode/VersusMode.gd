@@ -16,10 +16,21 @@ func Start():
 	stateMachine = $RhythmStateMachine as RhythmStateMachine
 	currentRound = Round.new(player1,player2)
 	
-	HardwareClockMetronome.instance.PlayStream(debugStream)
+	#set the offense player, all other players are defense
+	#we really want to like, have starting a new bout be a function I think though
+	#just do it here for now
 	
-	stateMachine.transition_to("Listen", {"round" : currentRound})
+	StartBout(player1,player2)
+	
+	
 	stateMachine.AddStateResolutionListener(ResolveNextState)
+
+
+func StartBout(offensePlayer,defensePlayer):
+	blackboard.offensePlayer = offensePlayer
+	blackboard.defensePlayer = defensePlayer
+	HardwareClockMetronome.instance.PlayStream(debugStream)
+	stateMachine.transition_to("Listen")
 
 
 func ResolveNextState():

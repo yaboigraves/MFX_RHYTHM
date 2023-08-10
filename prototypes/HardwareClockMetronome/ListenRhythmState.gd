@@ -1,10 +1,13 @@
 class_name ListenRhythmState
 extends RhythmState
-var round : Round
+
 
 func enter(args = {}):
 	super.enter()
+
+	for player in PlayerManager.Instance.GetAllPlayers():
+		player.GoIdle()
+
+
 	
-	round = args.round
-	round.recordingPlayer.GoIdle()
-	round.defendingPlayer.GoIdle()
+	

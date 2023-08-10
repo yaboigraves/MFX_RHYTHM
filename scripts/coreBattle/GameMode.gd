@@ -1,11 +1,12 @@
 class_name GameMode
 extends RhythmGameStateNode
 
+#TODO: obselete? this can get refactored out
 @export var player: Player
 
-
 @export var rules : GameModeRules
-
+#i think this can probably be made in onready?
+@onready var blackboard : Blackboard = Blackboard.new()
 
 
 func Start():

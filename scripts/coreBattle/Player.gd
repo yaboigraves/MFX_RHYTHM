@@ -19,10 +19,7 @@ func _ready():
 
 func StartRecording():
 	stateMachine.transition_to("RecordState")
-	
-	#tell their radial ui to start rotating
 	radialUI.ToggleRotation(true)
-	
 
 func EvaluateVerification():
 	var result = (stateMachine.state as VerifyState).EvaluateVerification()
@@ -34,21 +31,16 @@ func StartVerifying(pattern):
 func GoIdle():
 	stateMachine.transition_to("IdleState")
 
-
 func PreloadRecordedRhythm():
 	var pattern = Blackboard.Instance.recordedPattern
-	#TODO: spawn a marker for each of the values in the pattern
 	for lane in pattern:
 		for hit in lane:
 			radialUI.SpawnMarker(hit)
 	radialUI.ToggleRotation(true)
 
-#clears us and resets us back to a listen state
-
 func ResetUI():
 	radialUI.ClearAllMarkers()
 	
 func _on_player_input_handler_hit(index) -> void:
-	#so the issue is the time we just hit is actually inaccurate
 	stateMachine.state.HandleHit(index,HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()) 
 

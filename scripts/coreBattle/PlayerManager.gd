@@ -3,7 +3,6 @@ extends Node
 static var Instance 
 var currentOffensePlayer : Player
 
-
 func _init() -> void:
 	Instance = self
 

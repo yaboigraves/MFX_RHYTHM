@@ -6,8 +6,6 @@ signal ComboUpdate(combo)
 var targetHits
 var recordedHits = [[],[],[],[]]
 
-
-
 var combo = 0 :
 	set(value):
 		combo = value
@@ -16,14 +14,12 @@ var combo = 0 :
 func initialize():
 	super.initialize()
 
-
 func enter(_msg := {}) -> void:
 	super.enter()
 	
 	targetHits = Blackboard.Instance.recordedPattern.duplicate(true)
 	recordedHits = [[],[],[],[]]
 	combo = 0
-	
 	
 
 func EvaluateNextState():
@@ -37,17 +33,13 @@ func exit():
 func update(_delta: float):
 	super.update(_delta)
 	
-	#disabled temporarily
 	CheckForMissedHits()
-	
-	#player.VerifyStateProgressUpdate.emit(progress)
-	#player.UpdateVerifyStateProgress(progress)
+
 
 func HandleHit(index, timeInBeats):
 	var hit = Hit.new(index,timeInBeats, 0, HitType.VERIFY,self)
 
 	recordedHits[index].append(hit)
-	
 	
 	var hitResult = CheckHit(hit)
 	match hitResult:
@@ -70,9 +62,6 @@ func CheckHit(hit:Hit):
 	if(targetHits[hit.laneIndex].size() < 1):
 		return HitResult.MISS
 
-	#sooo
-	#hmm this might literally work the same
-	#var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time + rules.loopBeatSize))
 	var hitDifference = abs(hit.time - (targetHits[hit.laneIndex][0].time))
 
 	if hitDifference <= rules.windowSize :
@@ -97,7 +86,7 @@ func CheckForMissedHits():
 		targetHits[hit.laneIndex].erase(hit)
 
 
-#this is probably best tracked per each hit...
+
 func EvaluateVerification():
 	for hit in recordedHits:
 		pass

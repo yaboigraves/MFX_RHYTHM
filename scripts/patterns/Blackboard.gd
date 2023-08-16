@@ -3,6 +3,8 @@ extends RefCounted
 
 static var Instance : Blackboard
 
+var currentRhythmState : RhythmState
+
 var offensePlayer : Player
 var defensePlayer : Player
 

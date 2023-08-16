@@ -52,11 +52,16 @@ func ToggleRotation(toggle: bool):
 	set_process(toggle)
 
 
+#so this rotation is fucked up
+#technically, i think we're working
+#come back to this we're gonna refactor it anyways
 func _process(delta: float) -> void:
 	var timeBeats = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()
 	
-	for hit in markerHitMap.keys():
-		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
+	$CenterPivot/Markers.rotation = ( fposmod(HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats(), 8.0))  * (PI/ 4.0) 
+	
+#	for hit in markerHitMap.keys():
+#		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 
 
 
@@ -217,6 +222,8 @@ func SpawnMarker(hit:Hit):
 	%Markers.add_child(shape)
 	
 	markers.append(shape)
+	
+	shape.rotation -= (hit.time) * (PI/4.0)
 	markerHitMap[hit] = shape
 
 

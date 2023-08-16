@@ -8,7 +8,7 @@ signal transitioned(state)
 # The current active state. At the start of the game, we get the `initial_state`.
 var lastState : State
 
-@onready var state: State = get_node(initial_state) as State
+@onready var state: State 
 
 @export var autostart : bool = true
 
@@ -65,8 +65,8 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 		set_physics_process(true)
 		set_process_unhandled_input(true)
 
-
-	state.exit()
+	if state:
+		state.exit()
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state)

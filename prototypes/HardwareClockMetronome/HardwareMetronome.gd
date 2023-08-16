@@ -8,8 +8,6 @@ static var instance:HardwareClockMetronome
 var currentStateInstance : RhythmStateInstance
 
 
-var nextStateTime : float = 0.0
-
 #this is for audio timing
 var timingHead : float = 0.0
 
@@ -60,3 +58,5 @@ func GetCurrentPlaybackPositionBeats():
 
 func GetCurrentTrackLoopDuration():
 	return audioPlayback.stream.beat_count
+
+

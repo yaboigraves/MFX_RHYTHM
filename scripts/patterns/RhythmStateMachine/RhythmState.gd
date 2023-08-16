@@ -9,11 +9,19 @@ signal TimeFinished
 var startingTimeBeats : float
 var endingTimeBeats : float
 
-
+#yeah so theoretically this can accept an arg of a duration...
+#so what if when we do state transitions we specify a duration seems easy
 func enter(args := {}) -> void:
-	super.enter()
+	super.enter(args)
 	
-	durationBeats = HardwareClockMetronome.instance.GetCurrentTrackLoopDuration()
+	
+	if args.has("duration"):
+		durationBeats = args.duration
+	else:
+		durationBeats = HardwareClockMetronome.instance.GetCurrentTrackLoopDuration()
+	
+	print("State starting with duration ", durationBeats)
+	
 	
 	if(state_machine.lastState):
 		startingTimeBeats = state_machine.lastState.endingTimeBeats

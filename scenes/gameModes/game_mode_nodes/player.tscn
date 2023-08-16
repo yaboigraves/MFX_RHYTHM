@@ -23,6 +23,7 @@ gameRules = ExtResource("2_crf4l")
 unique_name_in_owner = true
 script = ExtResource("3_ssxma")
 initial_state = NodePath("IdleState")
+autostart = false
 
 [node name="IdleState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("4_ktfkr")

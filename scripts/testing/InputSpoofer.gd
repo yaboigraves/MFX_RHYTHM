@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 
 	for i in range(4):
 		var hitSpoofs = roundHits[i]
-		if hitSpoofs.size() > 0 and hitSpoofs[0] <= HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats():
+		if hitSpoofs.size() > 0 and hitSpoofs[0] <= HardwareClockMetronome.instance.Getcurrent():
 #			print("spoofin")
 #			print(HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats())
 #			print(hitSpoofs[0])

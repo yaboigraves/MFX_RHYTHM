@@ -9,6 +9,7 @@ signal Missedhit(hit:Hit)
 @export var rules : GameModeRules
 @export var player : Node
 
+var startTime
 
 func initialize():
 	super.initialize()
@@ -16,7 +17,9 @@ func initialize():
 func enter(args ={}):
 	super.enter()
 	player.radialUI.HandleStateStart(self)
+	startTime = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()
 
+	
 func HandleHit(index, time):
 	pass
 

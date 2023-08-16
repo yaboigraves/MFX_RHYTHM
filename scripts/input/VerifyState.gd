@@ -71,11 +71,12 @@ func CheckHit(hit:Hit):
 		return HitResult.DESTROY_MISS
 	
 
+
 func CheckForMissedHits():
 	var missedHits = []
 	for i in range(4):
 		for hit in targetHits[i]:
-			if(hit.time + (rules.windowSize ) <= HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()):
+			if(hit.time + (rules.windowSize ) <= HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() - startTime):
 				missedHits.append(hit)
 				emit_signal("Missedhit",hit)
 				

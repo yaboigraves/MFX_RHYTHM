@@ -40,7 +40,14 @@ func PreloadRecordedRhythm():
 
 func ResetUI():
 	radialUI.ClearAllMarkers()
-	
+
+#so we ought to use the time that the current state started as the offset
+#so lets think about the implications of a 7.9 hit really quick
+#i dont think there ought to be a problem with using state time?
+
+#so we want the time relative to the current game mode state
+
 func _on_player_input_handler_hit(index) -> void:
-	stateMachine.state.HandleHit(index,HardwareClockMetronome.instance.GetCurrentBufferPlaybackPositionBeats()) 
+	var time = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() - stateMachine.state.startTime
+	stateMachine.state.HandleHit(index,time) 
 

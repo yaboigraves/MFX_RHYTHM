@@ -5,6 +5,13 @@ extends GameMode
 #that might be way smarter
 #like offenseRecord,offenseVerify,defense
 #lets make another one called defense
+#nahhhh this is still broken
+#FUCK
+#i really just need to rethink this a bit
+
+#lowkey I think the rhythm state machine is a bit of a failed experiment
+#input might just always be open
+
 
 
 var stateMachine : RhythmStateMachine
@@ -23,8 +30,6 @@ func StartBout(offensePlayer,defensePlayer):
 	blackboard.offensePlayer = offensePlayer
 	blackboard.defensePlayer = defensePlayer
 	HardwareClockMetronome.instance.PlayStream(debugStream)
-	
-
 	
 	stateMachine.transition_to("Record", {"duration": 15.84})
 	

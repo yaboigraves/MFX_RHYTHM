@@ -58,8 +58,10 @@ func ToggleRotation(toggle: bool):
 func _process(delta: float) -> void:
 	var timeBeats = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats()
 	
+	#new
 	$CenterPivot/Markers.rotation = ( fposmod(HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats(), 8.0))  * (PI/ 4.0) 
 	
+	#old
 #	for hit in markerHitMap.keys():
 #		markerHitMap[hit].rotation = ((timeBeats - hit.time )/ beatsPerRotation) * 2 * PI
 

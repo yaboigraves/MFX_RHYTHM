@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://6q2v75ghw0eb"]
+[gd_scene load_steps=3 format=3 uid="uid://wdl45rmdyawi"]
 
 [ext_resource type="Texture2D" uid="uid://4fj2j37n7lwi" path="res://scenes/White_Circle.svg.png" id="1_qqjmg"]
 [ext_resource type="Texture2D" uid="uid://ctn2db648ywa5" path="res://textures/bitDefault.png" id="2_qhy2e"]
@@ -27,6 +27,111 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.247059)
+
+[node name="ColorRect3" type="ColorRect" parent="90_/ColorRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -466.0
+offset_right = 740.0
+offset_bottom = 466.0
+grow_vertical = 2
+
+[node name="TextureRect3" type="TextureRect" parent="90_/ColorRect/ColorRect3"]
+modulate = Color(0.262745, 0.262745, 0.262745, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -745.0
+offset_right = 362.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_qqjmg")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="90_/ColorRect/ColorRect3"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -745.0
+offset_right = 362.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_qqjmg")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="90_/ColorRect/ColorRect3"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3/HBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0, 0.54902, 0.54902, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="90_/ColorRect/ColorRect3/HBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0, 0.54902, 0.54902, 1)
+
+[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -288.0
+offset_bottom = 75.0
+grow_horizontal = 0
+color = Color(0.482353, 0.168627, 0.235294, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="90_/ColorRect/ColorRect3"]
+modulate = Color(0.317647, 0.317647, 0.317647, 1)
+layout_mode = 0
+offset_left = 29.0
+offset_top = 28.0
+offset_right = 199.0
+offset_bottom = 204.0
+texture = ExtResource("1_qqjmg")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3/TextureRect2"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 79.0
+offset_right = 485.0
+offset_bottom = 95.0
+
+[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3/TextureRect2/ColorRect"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = -7.0
+offset_right = 508.0
+offset_bottom = 9.0
+rotation = 0.695003
 
 [node name="ColorRect2" type="ColorRect" parent="90_/ColorRect"]
 layout_mode = 1
@@ -120,6 +225,7 @@ color = Color(0.482353, 0.168627, 0.235294, 1)
 
 [node name="TextureRect2" type="TextureRect" parent="90_/ColorRect/ColorRect2"]
 modulate = Color(0.317647, 0.317647, 0.317647, 1)
+layout_mode = 0
 offset_left = 29.0
 offset_top = 28.0
 offset_right = 199.0
@@ -136,93 +242,7 @@ offset_right = 485.0
 offset_bottom = 95.0
 
 [node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect2/TextureRect2/ColorRect"]
-offset_left = 370.0
-offset_top = -7.0
-offset_right = 508.0
-offset_bottom = 9.0
-rotation = 0.695003
-
-[node name="ColorRect3" type="ColorRect" parent="90_/ColorRect"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -466.0
-offset_right = 740.0
-offset_bottom = 466.0
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="90_/ColorRect/ColorRect3"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -360.0
-offset_top = -745.0
-offset_right = 362.0
-offset_bottom = -23.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("1_qqjmg")
-expand_mode = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="90_/ColorRect/ColorRect3"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -173.0
-offset_top = -100.0
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3/HBoxContainer"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-size_flags_vertical = 4
-color = Color(0, 0.54902, 0.54902, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="90_/ColorRect/ColorRect3/HBoxContainer"]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-size_flags_vertical = 4
-color = Color(0, 0.54902, 0.54902, 1)
-
-[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -288.0
-offset_bottom = 75.0
-grow_horizontal = 0
-color = Color(0.482353, 0.168627, 0.235294, 1)
-
-[node name="TextureRect2" type="TextureRect" parent="90_/ColorRect/ColorRect3"]
-modulate = Color(0.317647, 0.317647, 0.317647, 1)
 layout_mode = 0
-offset_left = 29.0
-offset_top = 28.0
-offset_right = 199.0
-offset_bottom = 204.0
-texture = ExtResource("1_qqjmg")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3/TextureRect2"]
-layout_mode = 0
-offset_left = 97.0
-offset_top = 79.0
-offset_right = 485.0
-offset_bottom = 95.0
-
-[node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3/TextureRect2/ColorRect"]
 offset_left = 370.0
 offset_top = -7.0
 offset_right = 508.0
@@ -343,6 +363,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="ColorRect2" type="ColorRect" parent="90_/TextureRect/VBoxContainer/VibeSupers"]
+visible = false
 custom_minimum_size = Vector2(40, 2.08165e-12)
 layout_mode = 2
 color = Color(0.360784, 0.360784, 0.360784, 1)
@@ -355,6 +376,7 @@ expand_mode = 2
 stretch_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/VibeSupers"]
+visible = false
 custom_minimum_size = Vector2(40, 2.08165e-12)
 layout_mode = 2
 color = Color(0.360784, 0.360784, 0.360784, 1)
@@ -391,3 +413,4 @@ size_flags_vertical = 8
 texture = ExtResource("2_qhy2e")
 expand_mode = 5
 stretch_mode = 5
+flip_h = true

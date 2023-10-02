@@ -47,7 +47,9 @@ func ResetUI():
 
 #so we want the time relative to the current game mode state
 
+
 func _on_player_input_handler_hit(index) -> void:
-	var time = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() - stateMachine.state.startTime
-	stateMachine.state.HandleHit(index,time) 
+	var time = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() 
+	if stateMachine.state:
+		stateMachine.state.HandleHit(index,time) 
 

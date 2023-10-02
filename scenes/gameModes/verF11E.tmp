@@ -23,6 +23,7 @@ player = NodePath("PlayerManager/Player1")
 rules = ExtResource("2_vbi41")
 
 [node name="RadialUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="RootContainer" type="Control" parent="RadialUI"]
 layout_mode = 3

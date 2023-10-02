@@ -1,5 +1,5 @@
 class_name VerifyRhythmState
-extends RhythmState
+extends State
 
 func enter(args = {}):
 	super.enter(args)

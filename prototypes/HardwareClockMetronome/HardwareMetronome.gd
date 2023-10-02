@@ -24,14 +24,42 @@ var duration:float
 var currentBeat: int
 var beats:int = 4
 
-
 var audioPlayback : AudioPlaybackTimeline
+
+
+
+#callback scheduling stuff
+#so basically we use a pair of timings with functions
+#callback
+
+var callbacks_queue : Array[CallbackTimeMarker]
+
+
+
 
 func _init() -> void:
 	instance = self
 	
 func _ready():
 	set_process(false)
+
+func _process(delta):
+	
+	var called_callbacks: Array[CallbackTimeMarker]
+	
+	for callback in callbacks_queue:
+		if callback.time <= GetCurrentPlaybackPositionBeats():
+			callback.callback.call()
+			called_callbacks.append(callback)
+			
+	for callback in called_callbacks:
+		callbacks_queue.erase(callback)
+		
+	
+func AddCallback(callable:Callable, time: float):
+	callbacks_queue.append(CallbackTimeMarker.new(callable,time))
+	#sort
+	
 
 func PlayStream(stream:AudioStreamOggVorbis):
 	if audioPlayback:

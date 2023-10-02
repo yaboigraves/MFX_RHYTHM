@@ -1,5 +1,5 @@
 class_name DefenseState
-extends RhythmState
+extends State
 
 func enter(args ={}):
 	super.enter(args)

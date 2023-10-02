@@ -1,10 +1,10 @@
 class_name RecordRhythmState
-extends RhythmState
+extends State
 
 @export var rules: GameModeRules
 #so now we can just kinda like, assign players or grab from blackboard
 
-var inputOpened
+#var inputOpened
 
 func enter(args = {}):
 	super.enter(args)
@@ -12,14 +12,14 @@ func enter(args = {}):
 	for player in PlayerManager.Instance.GetAllPlayers():
 		player.GoIdle()
 
-	inputOpened = false
+#	inputOpened = false
 	
 func update(delta):
 	super.update(delta)
 	
-	if not inputOpened and HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() >= (startingTimeBeats + 7.84):
-		inputOpened = true
-		Blackboard.Instance.offensePlayer.StartRecording()
+#	if not inputOpened and HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() >= (startingTimeBeats + 7.84):
+#		inputOpened = true
+#		Blackboard.Instance.offensePlayer.StartRecording()
 
 
 func ResolveNextState():

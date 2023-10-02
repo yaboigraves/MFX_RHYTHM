@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c02j68k2slajh"]
+
+[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/HardwareMetronome.gd" id="1_y2sst"]
+
+[node name="HardwareClockMetronome" type="Node"]
+script = ExtResource("1_y2sst")

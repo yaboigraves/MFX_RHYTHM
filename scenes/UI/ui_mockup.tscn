@@ -89,13 +89,13 @@ alignment = 1
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_vertical = 4
-color = Color(0, 0.54902, 0.54902, 1)
+color = Color(0.968627, 0, 0.0470588, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="90_/ColorRect/ColorRect3/HBoxContainer"]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_vertical = 4
-color = Color(0, 0.54902, 0.54902, 1)
+color = Color(0.109804, 0.54902, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect3"]
 layout_mode = 1
@@ -205,13 +205,13 @@ alignment = 1
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_vertical = 4
-color = Color(0, 0.54902, 0.54902, 1)
+color = Color(0.968627, 0, 0.0470588, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="90_/ColorRect/ColorRect2/HBoxContainer2"]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_vertical = 4
-color = Color(0, 0.54902, 0.54902, 1)
+color = Color(0.109804, 0.54902, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="90_/ColorRect/ColorRect2"]
 layout_mode = 1
@@ -251,13 +251,17 @@ rotation = 0.695003
 
 [node name="TextureRect" type="ColorRect" parent="90_"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -200.0
+offset_top = -466.0
 offset_right = 200.0
-offset_bottom = 972.0
+offset_bottom = 466.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="90_/TextureRect"]
 layout_mode = 1
@@ -278,7 +282,7 @@ theme_override_constants/separation = 50
 [node name="DDisplays" type="VBoxContainer" parent="90_/TextureRect/VBoxContainer/Verification"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
+theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays"]
 layout_mode = 2
@@ -287,77 +291,91 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer"]
 modulate = Color(0.270588, 1, 1, 1)
+self_modulate = Color(0.72549, 0.321569, 0.631373, 1)
+clip_children = 2
+custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("1_qqjmg")
-expand_mode = 3
+expand_mode = 5
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer/TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 72
+bbcode_enabled = true
+text = "[center] GO [/center]"
+fit_content = true
+
+[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer/TextureRect/RichTextLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays"]
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="DDisplays2" type="VBoxContainer" parent="90_/TextureRect/VBoxContainer/Verification"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2"]
 modulate = Color(0.270588, 1, 1, 1)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 texture = ExtResource("1_qqjmg")
-expand_mode = 3
+expand_mode = 5
+stretch_mode = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2"]
+[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 1.5
+offset_right = 20.0
+offset_bottom = 41.5
+grow_horizontal = 2
+
+[node name="TextureRect2" type="TextureRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays/HBoxContainer2"]
+modulate = Color(0.270588, 1, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("1_qqjmg")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays"]
+modulate = Color(0.376471, 0.376471, 0.376471, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_qqjmg")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="90_/TextureRect/VBoxContainer/Verification/DDisplays2/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.447059, 0.780392, 0.490196, 1)
+color = Color(0.568627, 0.568627, 0.568627, 1)
 
 [node name="VibeSupers" type="HBoxContainer" parent="90_/TextureRect/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
@@ -370,7 +388,9 @@ color = Color(0.360784, 0.360784, 0.360784, 1)
 
 [node name="TextureRect" type="TextureRect" parent="90_/TextureRect/VBoxContainer/VibeSupers"]
 modulate = Color(0.376471, 0.376471, 0.376471, 1)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("1_qqjmg")
 expand_mode = 2
 stretch_mode = 4
@@ -385,12 +405,6 @@ color = Color(0.360784, 0.360784, 0.360784, 1)
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
-
-[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/IconsTurn"]
-custom_minimum_size = Vector2(2.08165e-12, 50)
-layout_mode = 2
-size_flags_vertical = 4
-color = Color(0.466667, 0.466667, 0.466667, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="90_/TextureRect/VBoxContainer/IconsTurn"]
 layout_mode = 2
@@ -414,3 +428,9 @@ texture = ExtResource("2_qhy2e")
 expand_mode = 5
 stretch_mode = 5
 flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="90_/TextureRect/VBoxContainer/IconsTurn"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.466667, 0.466667, 0.466667, 1)

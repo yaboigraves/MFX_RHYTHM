@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b25q4rbpyn8sc"]
+[gd_scene load_steps=17 format=3 uid="uid://b25q4rbpyn8sc"]
 
 [ext_resource type="Script" path="res://scripts/ui/InputWindowRadialRhythmDisplay.gd" id="1_ifxlp"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_v678g"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d4aekeujla227" path="res://UI/dice_shield.png" id="7_mwp0w"]
 [ext_resource type="Script" path="res://scripts/ui/PhaseView.gd" id="7_seoqe"]
 [ext_resource type="Texture2D" uid="uid://b2gi1amudlerk" path="res://UI/dice_sword.png" id="8_4r8rx"]
+[ext_resource type="Texture2D" uid="uid://b71ibujt4hvnt" path="res://textures/record.png" id="11_tp8ty"]
 
 [sub_resource type="Resource" id="Resource_et5d1"]
 script = ExtResource("5_yb7bt")
@@ -51,7 +52,7 @@ laneMargins = 15
 beatDivisonColors = Color(0, 0.921569, 0.843137, 1)
 beatsPerRotation = 4
 laneLineResolution = 90
-laneColors = Array[Color]([Color(0.313726, 0.313726, 0.313726, 1)])
+laneColors = Array[Color]([Color(0.313726, 0.313726, 0.313726, 0)])
 backgroundColor = Color(0.603922, 0.603922, 0.603922, 1)
 
 [node name="Backplate" type="Control" parent="."]
@@ -138,7 +139,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_jofdi")
+texture = ExtResource("11_tp8ty")
 expand_mode = 1
 
 [node name="CenterPivot" type="Control" parent="."]
@@ -158,6 +159,7 @@ grow_vertical = 2
 
 [node name="LineRenderers" type="Control" parent="CenterPivot"]
 unique_name_in_owner = true
+visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = 8
@@ -193,6 +195,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RecordCenterLabel" type="TextureRect" parent="CenterPivot"]
+visible = false
 z_index = 3
 layout_mode = 0
 offset_right = 75.0

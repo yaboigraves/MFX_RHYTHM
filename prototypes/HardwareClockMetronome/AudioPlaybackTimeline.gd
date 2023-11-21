@@ -19,7 +19,7 @@ var currentBeat: int
 
 
 func _init(stream : AudioStreamOggVorbis, duration = -1):
-	super._init()
+	#super._init()
 	set_process(false)
 	
 	self.stream = stream

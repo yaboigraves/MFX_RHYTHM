@@ -27,7 +27,6 @@ var stateTextMap = {
 }
 
 func _ready():
-
 	beatsPerRotation = rules.loopBeatSize
 	super._ready()	
 	DrawInputWindows()

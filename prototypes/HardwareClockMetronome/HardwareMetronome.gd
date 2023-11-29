@@ -48,7 +48,7 @@ func _process(delta):
 	var called_callbacks: Array[CallbackTimeMarker]
 	
 	for callback in callbacks_queue:
-		if callback.time <= GetCurrentPlaybackPositionBeats():
+		if callback.time <= GetCurrentPlaybackPositionBeats() + 1.0/60.0:
 			callback.callback.call()
 			called_callbacks.append(callback)
 			

@@ -21,9 +21,17 @@ func StartRecording():
 	stateMachine.transition_to("RecordState")
 	radialUI.ToggleRotation(true)
 
+
 func EvaluateVerification():
+	print("REMEMBER EVAULATE VERIFICATION ALWAYS IS FALSE RIGHT NOW")
+	return false
 	var result = (stateMachine.state as VerifyState).EvaluateVerification()
 	return result
+
+#TODO: let the player just hold the pattern that they're verifying
+
+func StartDefending():
+	pass
 
 func StartVerifying(pattern):
 	stateMachine.transition_to("VerifyState", {"pattern" : pattern})
@@ -40,12 +48,6 @@ func PreloadRecordedRhythm():
 
 func ResetUI():
 	radialUI.ClearAllMarkers()
-
-#so we ought to use the time that the current state started as the offset
-#so lets think about the implications of a 7.9 hit really quick
-#i dont think there ought to be a problem with using state time?
-
-#so we want the time relative to the current game mode state
 
 
 func _on_player_input_handler_hit(index) -> void:

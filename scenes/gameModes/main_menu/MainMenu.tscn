@@ -206,7 +206,7 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_udksv")
 theme_override_font_sizes/font_size = 52
 theme_override_styles/normal = SubResource("StyleBoxFlat_eavrh")
-text = "OPTIONS"
+text = "VERSUS"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 layout_mode = 2

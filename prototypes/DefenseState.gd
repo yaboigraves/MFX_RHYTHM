@@ -4,7 +4,7 @@ extends State
 func enter(args ={}):
 	super.enter(args)
 	
-	Blackboard.Instance.defensePlayer.StartVerifying(Blackboard.Instance.recordedPattern)
+	Blackboard.Instance.defensePlayer.StartVerifying()
 	
 	Blackboard.Instance.offensePlayer.GoIdle()
 

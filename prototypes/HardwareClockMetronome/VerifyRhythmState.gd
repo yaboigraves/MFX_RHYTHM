@@ -3,7 +3,7 @@ extends State
 
 func enter(args = {}):
 	super.enter(args)
-	Blackboard.Instance.offensePlayer.StartVerifying(Blackboard.Instance.recordedPattern)
+	Blackboard.Instance.offensePlayer.StartVerifying()
 
 
 func ResolveNextState():

@@ -33,8 +33,8 @@ func EvaluateVerification():
 func StartDefending():
 	pass
 
-func StartVerifying(pattern):
-	stateMachine.transition_to("VerifyState", {"pattern" : pattern})
+func StartVerifying():
+	stateMachine.transition_to("VerifyState")
 
 func GoIdle():
 	stateMachine.transition_to("IdleState")

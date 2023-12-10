@@ -1,12 +1,6 @@
 class_name Round
 extends RefCounted
 
-#so as far as verification goes, we can let the round handle that imo
-#we always let the player finish the round then decide what happens
-#it should be possible for a player to mess up so bad it just falls apart though
-#so actually by the end of verification we know how good they did
-
-
 signal RoundStarted
 signal ListenEnded
 signal RecordingStarted
@@ -51,7 +45,7 @@ func HandleListenEnd():
 	
 func HandleRecordEnd():
 	print("recording ended")
-	recordingPlayer.StartVerifying([])
+	recordingPlayer.StartVerifying()
 
 func HandleVerifyEnd():
 	#if the player fucked up, round is over
@@ -67,7 +61,3 @@ func HandleVerifyEnd():
 
 func HandleDefenseEnd():
 	RoundEnded.emit()
-
-
-func _process(delta):
-	pass

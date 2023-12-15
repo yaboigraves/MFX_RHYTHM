@@ -1,5 +1,7 @@
+## @deprecated
 class_name RhythmState
 extends State
+
 
 signal TimeFinished
 

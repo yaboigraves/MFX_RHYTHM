@@ -1,5 +1,5 @@
 class_name State
-extends RhythmGameStateNode
+extends Node
 
 signal OnEnter()
 signal OnExit()

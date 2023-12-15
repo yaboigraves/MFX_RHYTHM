@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://i48m18tj8uty"]
+[gd_scene load_steps=19 format=3 uid="uid://i48m18tj8uty"]
 
 [ext_resource type="Script" path="res://scripts/game_modes/versus_mode/VersusMode.gd" id="1_a7s7d"]
 [ext_resource type="Resource" uid="uid://02paobwunyg1" path="res://resources/LabGameModeRules.tres" id="2_vbi41"]
@@ -8,7 +8,13 @@
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/RecordRhythmState.gd" id="10_l4nj4"]
 [ext_resource type="Script" path="res://prototypes/DefenseState.gd" id="11_grqky"]
 [ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/VerifyRhythmState.gd" id="11_w3vik"]
+[ext_resource type="Script" path="res://scripts/coreBattle/states/Intro/Intro.gd" id="12_13fdy"]
+[ext_resource type="Script" path="res://scripts/coreBattle/states/Intro/IntroUI.gd" id="13_7f83f"]
+[ext_resource type="Script" path="res://scripts/coreBattle/states/BattleRound/BattleRoundState.gd" id="14_rn1yl"]
+[ext_resource type="Resource" uid="uid://danaxxrwhetue" path="res://scripts/coreBattle/Resources/RoundData.tres" id="15_vqjp1"]
+[ext_resource type="Script" path="res://scripts/patterns/StateMachine.gd" id="16_6b2m1"]
 [ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="16_wj5rw"]
+[ext_resource type="Script" path="res://prototypes/HardwareClockMetronome/ListenRhythmState.gd" id="17_ug4kp"]
 [ext_resource type="Script" path="res://scripts/coreBattle/PlayerManager.gd" id="21_ureb2"]
 [ext_resource type="PackedScene" uid="uid://bp5cbgcpms5fw" path="res://scenes/gameModes/game_mode_nodes/player.tscn" id="22_ft3jc"]
 
@@ -40,7 +46,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="InputWindowRadialRhythmDisplay" parent="RadialUI/RootContainer/P1Root" node_paths=PackedStringArray("player") instance=ExtResource("3_jtocp")]
-unique_name_in_owner = true
 layout_mode = 1
 offset_left = -350.0
 offset_top = -350.0
@@ -102,10 +107,39 @@ autostart = false
 
 [node name="Record" type="Node" parent="GameModeStateMachine"]
 script = ExtResource("10_l4nj4")
-rules = ExtResource("2_vbi41")
 
 [node name="Verify" type="Node" parent="GameModeStateMachine"]
 script = ExtResource("11_w3vik")
 
 [node name="Defense" type="Node" parent="GameModeStateMachine"]
 script = ExtResource("11_grqky")
+
+[node name="Intro" type="Node" parent="GameModeStateMachine"]
+script = ExtResource("12_13fdy")
+
+[node name="UI" type="CanvasLayer" parent="GameModeStateMachine/Intro"]
+layer = 2
+visible = false
+script = ExtResource("13_7f83f")
+
+[node name="ColorRect" type="ColorRect" parent="GameModeStateMachine/Intro/UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DebugTimer" type="Timer" parent="GameModeStateMachine/Intro"]
+
+[node name="BattleRound" type="Node" parent="GameModeStateMachine"]
+script = ExtResource("14_rn1yl")
+roundData = ExtResource("15_vqjp1")
+
+[node name="StateMachine" type="Node" parent="GameModeStateMachine/BattleRound"]
+script = ExtResource("16_6b2m1")
+autostart = false
+enabled = false
+
+[node name="Listen" type="Node" parent="GameModeStateMachine/BattleRound/StateMachine"]
+script = ExtResource("17_ug4kp")

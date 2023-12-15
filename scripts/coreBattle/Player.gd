@@ -51,7 +51,13 @@ func ResetUI():
 
 
 func _on_player_input_handler_hit(index) -> void:
+	
+	#so this is total current playback position
+	#we dont wanna use this, we want to use relative distance from the start of the round
+	#the buffered inputs will be added in later
+	#just make a function to find the distance between hits thats within a hit
 	var time = HardwareClockMetronome.instance.GetCurrentPlaybackPositionBeats() 
+	
 	if stateMachine.state:
 		stateMachine.state.HandleHit(index,time) 
 

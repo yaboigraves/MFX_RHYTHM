@@ -58,7 +58,7 @@ func _process(delta):
 	
 func AddCallback(callable:Callable, time: float):
 	callbacks_queue.append(CallbackTimeMarker.new(callable,time))
-	#sort
+
 	
 
 func PlayStream(stream:AudioStreamOggVorbis):

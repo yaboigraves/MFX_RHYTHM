@@ -1,7 +1,7 @@
 class_name RecordRhythmState
 extends State
 
-@export var rules: GameModeRules
+
 
 
 func enter(args = {}):
@@ -9,6 +9,11 @@ func enter(args = {}):
 	
 	for player in PlayerManager.Instance.GetAllPlayers():
 		player.GoIdle()
+	
+	
+	
+
+
 
 	
 func update(delta):

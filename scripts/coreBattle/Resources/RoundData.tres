@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RoundData" load_steps=3 format=3 uid="uid://danaxxrwhetue"]
+
+[ext_resource type="Script" path="res://scripts/coreBattle/Resources/RoundData.gd" id="1_b21ln"]
+[ext_resource type="AudioStream" uid="uid://br44a2m65rmf6" path="res://audio/tracks/mfrh.ogg" id="2_gm0ad"]
+
+[resource]
+script = ExtResource("1_b21ln")
+stream = ExtResource("2_gm0ad")

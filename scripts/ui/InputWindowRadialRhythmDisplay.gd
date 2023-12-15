@@ -1,6 +1,14 @@
 class_name InputWidnowRadialRhythmDisplay
 extends RadialRhythmDisplay
 
+#lets tackle this rework from the ground up
+#so we still want our dynamically drawn lanes thing
+#we want to be able to construct it better though
+#lets go for a vector art style thing for now, try some stuff a bit later
+#i gotta just doodle this out or something or box it out
+
+
+
 #super fugly, needs to be re-worked
 
 @export var rules: GameModeRules

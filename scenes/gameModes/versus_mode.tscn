@@ -35,8 +35,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 301.0
+offset_bottom = 91.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1, 0.9)
 
 [node name="P1Root" type="Control" parent="RadialUI/RootContainer"]
 layout_mode = 1
@@ -74,6 +77,55 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_27et8")
+
+[node name="HSlider" type="HSlider" parent="RadialUI/RootContainer/CenterConsole/PlaceholderCenterConsole"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -102.0
+offset_right = -30.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="RadialUI/RootContainer/CenterConsole/PlaceholderCenterConsole"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_top = 9.0
+offset_right = 61.0
+offset_bottom = 131.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="RadialUI/RootContainer/CenterConsole/PlaceholderCenterConsole"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 44.0
+offset_right = -84.0
+offset_bottom = 122.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="RadialUI/RootContainer/CenterConsole/PlaceholderCenterConsole"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 85.0
+offset_top = 42.0
+offset_right = 161.0
+offset_bottom = 120.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
 
 [node name="P2Root" type="Control" parent="RadialUI/RootContainer"]
 layout_mode = 1
@@ -142,4 +194,13 @@ autostart = false
 enabled = false
 
 [node name="Listen" type="Node" parent="GameModeStateMachine/BattleRound/StateMachine"]
+script = ExtResource("17_ug4kp")
+
+[node name="Record" type="Node" parent="GameModeStateMachine/BattleRound/StateMachine"]
+script = ExtResource("17_ug4kp")
+
+[node name="Verify" type="Node" parent="GameModeStateMachine/BattleRound/StateMachine"]
+script = ExtResource("17_ug4kp")
+
+[node name="Defense" type="Node" parent="GameModeStateMachine/BattleRound/StateMachine"]
 script = ExtResource("17_ug4kp")

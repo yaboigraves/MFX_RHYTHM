@@ -1,5 +1,5 @@
 class_name ListenRhythmState
-extends RhythmState
+extends State
 
 
 func enter(args = {}):

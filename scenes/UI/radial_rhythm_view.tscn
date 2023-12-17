@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbcaclryx3aqe"]
+
+[ext_resource type="Script" path="res://scripts/ui/RhythmView/RadialRhythmView.gd" id="1_ak06q"]
+[ext_resource type="Texture2D" uid="uid://kh1n6yfmaqy4" path="res://textures/record_mirror.png" id="2_baclk"]
+
+[node name="RadialRhythmView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -840.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ak06q")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(539, 552)
+texture = ExtResource("2_baclk")

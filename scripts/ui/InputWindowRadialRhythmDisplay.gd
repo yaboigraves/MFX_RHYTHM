@@ -7,6 +7,15 @@ extends RadialRhythmDisplay
 #lets go for a vector art style thing for now, try some stuff a bit later
 #i gotta just doodle this out or something or box it out
 
+#SO 
+#I want to draw this in individual component layers more
+#I want to add the sticker outlines onto the base
+#So I should be able to use my base functions for this?
+#I wanna just straight up make the sticker manager bit to start though
+#it is all kind of linked together though...
+#in reality I just wanna remake this from scratch basically
+
+
 
 
 #super fugly, needs to be re-worked

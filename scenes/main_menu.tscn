@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4fk7s6w0s1cs" path="res://textures/menutitle.png" id="4_cg5j4"]
 [ext_resource type="Script" path="res://scripts/menus/MainButtonsNavigationController.gd" id="4_yh2v0"]
 [ext_resource type="PackedScene" path="res://scenes/menu_root_button.tscn" id="5_fy7vr"]
-[ext_resource type="Theme" path="res://UI/mf_menu_theme.tres" id="7_ut20a"]
+[ext_resource type="Theme" uid="uid://ca0e8s1qmw04e" path="res://UI/mf_menu_theme.tres" id="7_ut20a"]
 [ext_resource type="Texture2D" uid="uid://bt80bw1fi544g" path="res://textures/2p.png" id="8_aprjs"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("firstSelected")]

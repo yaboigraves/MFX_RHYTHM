@@ -1,8 +1,12 @@
-extends Node
+extends Control
 
 signal LogoDropDone
 
 func _ready() -> void:
+	visible = false
+	
+func DoFade():
+	visible = true
 	$RichTextLabel.modulate = Color.TRANSPARENT
 	
 	var tween = create_tween()
@@ -18,4 +22,3 @@ func _ready() -> void:
 
 	
 	LogoDropDone.emit()
-	

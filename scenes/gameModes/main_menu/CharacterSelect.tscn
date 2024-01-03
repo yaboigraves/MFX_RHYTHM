@@ -1,0 +1,133 @@
+[gd_scene load_steps=6 format=3 uid="uid://byk4hxu6h572p"]
+
+[ext_resource type="Script" path="res://scenes/gameModes/main_menu/CharacterSelect.gd" id="1_oo6qe"]
+[ext_resource type="Texture2D" uid="uid://b3ywnn4t80crt" path="res://mausRender.png" id="1_xd1ms"]
+[ext_resource type="Texture2D" uid="uid://cqv1wwsx23b6h" path="res://BitRender.png" id="2_83rrs"]
+[ext_resource type="Texture2D" uid="uid://b4sp1mnatvfd8" path="res://rendertenguu.png" id="3_t6c40"]
+[ext_resource type="FontFile" uid="uid://ct2bvl1xh4q2k" path="res://scenes/gameModes/main_menu/TheNeue-Black.ttf" id="4_qmyxh"]
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oo6qe")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.0784314, 0.317647, 0.517647, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -452.0
+offset_right = 452.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xd1ms")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ColorRect2" type="ColorRect" parent="Control/HBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.113725, 0.666667, 0.168627, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/ColorRect2"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -452.0
+offset_right = 452.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_83rrs")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ColorRect3" type="ColorRect" parent="Control/HBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.6, 0.00392157, 0.0392157, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/ColorRect3"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -452.0
+offset_right = 452.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_t6c40")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.914815
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.62125e-05
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_qmyxh")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]CHARACTER SELECT"
+fit_content = true

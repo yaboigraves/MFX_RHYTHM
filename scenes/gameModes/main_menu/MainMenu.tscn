@@ -1,25 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://5vh6cmaehqym"]
 
-[ext_resource type="Texture2D" uid="uid://dpnhatwxixika" path="res://textures/recstore2.png" id="1_jsxtk"]
 [ext_resource type="Script" path="res://scenes/gameModes/main_menu/MainMenu.gd" id="1_k201g"]
 [ext_resource type="Texture2D" uid="uid://b4fk7s6w0s1cs" path="res://textures/menutitle.png" id="1_ncetk"]
 [ext_resource type="Texture2D" uid="uid://b71ibujt4hvnt" path="res://textures/record.png" id="3_d4b84"]
 [ext_resource type="FontFile" uid="uid://ct2bvl1xh4q2k" path="res://scenes/gameModes/main_menu/TheNeue-Black.ttf" id="3_udksv"]
 [ext_resource type="Script" path="res://scenes/gameModes/main_menu/RotationalLayoutGroup.gd" id="3_y2dnm"]
+[ext_resource type="StyleBox" uid="uid://do1nx04e36v5n" path="res://scenes/gameModes/main_menu/mainMenubutton.tres" id="4_6ko3e"]
 [ext_resource type="AudioStream" uid="uid://crrs4ffoxonug" path="res://audio/tracks/bastrd/bastrd - Anthology - 14 90- off.ogg" id="7_l8muh"]
 [ext_resource type="Texture2D" uid="uid://b3ywnn4t80crt" path="res://mausRender.png" id="8_obyt7"]
+[ext_resource type="Script" path="res://scripts/ui/MainMenu/MainMenuButton.gd" id="8_yt3np"]
 [ext_resource type="Texture2D" uid="uid://cqv1wwsx23b6h" path="res://BitRender.png" id="9_mpvkq"]
 [ext_resource type="Texture2D" uid="uid://b4sp1mnatvfd8" path="res://rendertenguu.png" id="10_pa6k4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eavrh"]
-bg_color = Color(0, 0, 0, 1)
-skew = Vector2(0.4, 2.08165e-12)
-border_width_right = 10
-border_color = Color(0.839216, 0.301961, 0.239216, 1)
-corner_radius_bottom_right = 20
-shadow_color = Color(0, 0, 0, 0.772549)
-shadow_size = 1
-shadow_offset = Vector2(15, 15)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys0a4"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,6 +41,43 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k201g")
 
+[node name="ColorRect4" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -635.0
+offset_top = -102.0
+offset_right = 2456.0
+offset_bottom = 1970.0
+rotation = -0.249092
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -508.0
+offset_top = 396.0
+offset_right = 2583.0
+offset_bottom = 1562.0
+rotation = -0.249092
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 206.0
+offset_top = -300.0
+offset_right = -535.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.54902, 0.54902, 0.54902, 0.247059)
+theme_override_fonts/normal_font = ExtResource("3_udksv")
+theme_override_font_sizes/normal_font_size = 550
+bbcode_enabled = true
+text = "[center]menu"
+fit_content = true
+autowrap_mode = 2
+
 [node name="TextureRect2" type="TextureRect" parent="."]
 modulate = Color(0.439216, 0.439216, 0.439216, 1)
 layout_mode = 1
@@ -62,7 +90,6 @@ offset_right = 501.0
 offset_bottom = 279.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jsxtk")
 expand_mode = 2
 
 [node name="RotationalLayoutGroup" type="Control" parent="."]
@@ -94,7 +121,7 @@ rotation = 0.507137
 pivot_offset = Vector2(2.08165e-12, 100)
 theme_override_fonts/font = ExtResource("3_udksv")
 theme_override_font_sizes/font_size = 52
-theme_override_styles/normal = SubResource("StyleBoxFlat_eavrh")
+theme_override_styles/normal = ExtResource("4_6ko3e")
 text = "OPTIONS"
 
 [node name="Button2" type="Button" parent="RotationalLayoutGroup"]
@@ -108,7 +135,7 @@ grow_vertical = 0
 pivot_offset = Vector2(2.08165e-12, 100)
 theme_override_fonts/font = ExtResource("3_udksv")
 theme_override_font_sizes/font_size = 52
-theme_override_styles/normal = SubResource("StyleBoxFlat_eavrh")
+theme_override_styles/normal = ExtResource("4_6ko3e")
 text = "VERSUS MODE"
 icon_alignment = 1
 
@@ -131,7 +158,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -57.0
 offset_top = -83.0
-offset_right = 149.237
+offset_right = 154.519
 offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -141,6 +168,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="RecordPivot" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -181,17 +209,45 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jbrla")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -608.0
+[node name="VersusButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = -103.0
+offset_top = 468.0
+offset_right = 664.0
+offset_bottom = 648.0
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_udksv")
+theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = ExtResource("4_6ko3e")
+theme_override_styles/hover = ExtResource("4_6ko3e")
+theme_override_styles/pressed = ExtResource("4_6ko3e")
+theme_override_styles/disabled = ExtResource("4_6ko3e")
+theme_override_styles/focus = ExtResource("4_6ko3e")
+text = "VERSUS"
+text_overrun_behavior = 1
+script = ExtResource("8_yt3np")
+
+[node name="OptionsButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = -103.0
 offset_top = 698.0
-offset_right = 2483.0
-offset_bottom = 1708.0
-rotation = 0.0980086
-color = Color(0, 0, 0, 1)
+offset_right = 664.0
+offset_bottom = 879.0
+size_flags_vertical = 3
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_udksv")
+theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = ExtResource("4_6ko3e")
+theme_override_styles/hover = ExtResource("4_6ko3e")
+theme_override_styles/pressed = ExtResource("4_6ko3e")
+theme_override_styles/disabled = ExtResource("4_6ko3e")
+theme_override_styles/focus = ExtResource("4_6ko3e")
+text = "OPTIONS"
+script = ExtResource("8_yt3np")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -204,33 +260,19 @@ grow_vertical = 0
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("3_udksv")
-theme_override_font_sizes/font_size = 52
-theme_override_styles/normal = SubResource("StyleBoxFlat_eavrh")
-text = "VERSUS"
-
-[node name="Button2" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("3_udksv")
-theme_override_font_sizes/font_size = 52
-theme_override_styles/normal = SubResource("StyleBoxFlat_eavrh")
-text = "OPTIONS"
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_l8muh")
 autoplay = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 3628.0
 offset_bottom = 75.0
 color = Color(0, 0, 0, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -35.0
 offset_top = 1034.0
@@ -238,20 +280,17 @@ offset_right = 3593.0
 offset_bottom = 1109.0
 color = Color(0, 0, 0, 1)
 
+[node name="Rendertenguu" type="Sprite2D" parent="."]
+position = Vector2(1420.37, 419)
+scale = Vector2(0.28667, 0.28667)
+texture = ExtResource("10_pa6k4")
+
 [node name="MausRender" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(1618, 393)
-scale = Vector2(0.246582, 0.246582)
+position = Vector2(1644, 679)
+scale = Vector2(0.317871, 0.317871)
 texture = ExtResource("8_obyt7")
 
 [node name="BitRender" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(1130, 417)
-scale = Vector2(0.668067, 0.668067)
+position = Vector2(1092.37, 647)
+scale = Vector2(0.986134, 0.986134)
 texture = ExtResource("9_mpvkq")
-
-[node name="Rendertenguu" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(875, 841)
-scale = Vector2(0.187731, 0.187731)
-texture = ExtResource("10_pa6k4")

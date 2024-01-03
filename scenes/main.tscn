@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkl56ty0kexdc"]
+[gd_scene load_steps=6 format=3 uid="uid://bkl56ty0kexdc"]
 
 [ext_resource type="Script" path="res://scripts/coreBattle/GameManager.gd" id="1_ypkpa"]
+[ext_resource type="PackedScene" uid="uid://c3nbfebl0akll" path="res://prototypes/MFXLogoDrop/MFXLogo.tscn" id="3_lorlo"]
+[ext_resource type="PackedScene" uid="uid://5vh6cmaehqym" path="res://scenes/gameModes/main_menu/MainMenu.tscn" id="4_0ujrr"]
+[ext_resource type="PackedScene" uid="uid://byk4hxu6h572p" path="res://scenes/gameModes/main_menu/CharacterSelect.tscn" id="5_xatv1"]
 [ext_resource type="Script" path="res://scripts/coreBattle/GameModeManager.gd" id="34_nc3vs"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_ypkpa")
+launchDebugBattle = false
 
 [node name="GameModeManager" type="Node" parent="."]
 script = ExtResource("34_nc3vs")
 currentGameModeType = 2
+
+[node name="MfxLogo" parent="." instance=ExtResource("3_lorlo")]
+
+[node name="MainMenu" parent="." instance=ExtResource("4_0ujrr")]
+
+[node name="CharacterSelect" parent="." instance=ExtResource("5_xatv1")]
